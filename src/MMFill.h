@@ -6,32 +6,32 @@
 void PixTest(){
   for(int i = 0; i < M_ROW; ++i) { // 将所有颜色清空
     for(int j = 0; j < M_COL; ++j) {
-      matrix.drawPixel(j,i, matrix.Color(255,255, 255));
-      matrix.show();
-      matrix.clear();
+      mmfunc.MSetPixel(j,i, 255,255, 255);
+      mmfunc.MUpdate();
+      mmfunc.MSetEmpty();
     }
   }
   delay(100);
-  mmfunc.MSetEmpty();
+  mmfunc.MClear();
 }
 
 // 行填充
 void RowFill() {
   for(int i = 0; i < M_ROW; ++i) { // 将所有颜色清空
     for(int j = 0; j < M_COL; ++j) {
-      matrix.drawPixel(j,i, matrix.Color(255, (i * 255 / M_COL), 0));
+      mmfunc.MSetPixel(j,i, 255, (i * 255 / M_COL), 0);
     }
     delay(100);
     mmfunc.MUpdate();
   }
-  mmfunc.MSetEmpty();
+  mmfunc.MClear();
 }
 
 // 列填充
 void ColFill() {
   for(int j = 0; j < M_COL; ++j) {
     for(int i = 0; i < M_ROW; ++i) { 
-      matrix.drawPixel(j,i, matrix.Color(255, (i * 255 / M_COL), 0));
+      mmfunc.MSetPixel(j,i, 255, (i * 255 / M_COL), 0);
     }
     delay(100);
   mmfunc.MUpdate();
@@ -44,16 +44,16 @@ void DiagFill() {
   for(int i = 0; i < M_COL; ++i) {
     int r = i, c = i;
     while(r < M_ROW && c >= 0) {
-      matrix.drawPixel(c,r, matrix.Color(255, (i * 255 / M_COL), 0));      
+      mmfunc.MSetPixel(c,r, 255, (i * 255 / M_COL), 0); 
       ++r, --c;       
     }
     r = i, c = i;
     while(r >= 0 && c < M_COL) {
-      matrix.drawPixel(c,r, matrix.Color(255, (i * 255 / M_COL), 0));  
+      mmfunc.MSetPixel(c,r, 255, (i * 255 / M_COL), 0);
       --r, ++c;       
     }
     delay(100);
-    matrix.show();
+    mmfunc.MUpdate();
   }
   mmfunc.MSetEmpty();
   
@@ -64,7 +64,7 @@ void DiagFill_1(){
   for(int i = 0; i < M_ROW; ++i) {
     int r = i, c = 0;
     while (r >= 0) {
-      matrix.drawPixel(c,r, matrix.Color(255, (r * 255 / M_ROW), (c * 255 / M_COL)));        
+      mmfunc.MSetPixel(c,r, 255, (r * 255 / M_ROW), (c * 255 / M_COL));
       --r, ++c;
     }
     delay(50);
@@ -74,7 +74,7 @@ void DiagFill_1(){
   for(int i = 0; i < M_COL; ++i) {
     int r = M_ROW, c = i;
     while (c < M_COL) {
-      matrix.drawPixel(c,r, matrix.Color(255, (r * 255 / M_ROW), (c * 255 / M_COL)));    
+      mmfunc.MSetPixel(c,r, 255, (r * 255 / M_ROW), (c * 255 / M_COL));
       --r, ++c;
     }
     delay(50);
@@ -88,14 +88,14 @@ void SnakeFill() {
   for (int i = 0; i < M_ROW; ++i) { // 行循环
     if (i % 2) 
       for(int j = M_COL - 1; j >= 0; --j) {
-        matrix.drawPixel(j,i, matrix.Color(255, (i * 255 / M_ROW), (j * 255 / M_COL)));
+        mmfunc.MSetPixel(j,i, 255, (i * 255 / M_ROW), (j * 255 / M_COL));
         mmfunc.MUpdate();
         delay(10);
       }    
     else 
       for(int j = 0; j < M_COL; ++j) {
-        matrix.drawPixel(j,i, matrix.Color(255, (i * 255 / M_ROW), (j * 255 / M_COL)));
-        matrix.show();
+        mmfunc.MSetPixel(j,i, 255, (i * 255 / M_ROW), (j * 255 / M_COL));
+        mmfunc.MUpdate();
         delay(10);
       }
   }
@@ -106,14 +106,14 @@ void SnakeFill() {
 void RectFill() {
   for (int i = 0; i < M_ROW / 2; ++i) {
     for (int j = i; j < M_COL - i; ++j) 
-      matrix.drawPixel(j,i, matrix.Color(255, (i * 255 / M_ROW), (j * 255 / M_COL)));
+      mmfunc.MSetPixel(j,i, 255, (i * 255 / M_ROW), (j * 255 / M_COL));
     for (int j = i; j < M_ROW - i; ++j) 
-      matrix.drawPixel(i,j, matrix.Color(255, (i * 255 / M_ROW), (j * 255 / M_COL)));
+      mmfunc.MSetPixel(i,j, 255, (i * 255 / M_ROW), (j * 255 / M_COL));
     for (int j = (M_COL - i - 1); j >= i; --j) 
-      matrix.drawPixel(j,M_ROW - i - 1, matrix.Color(255, (i * 255 / M_ROW), (j * 255 / M_COL)));
+      mmfunc.MSetPixel(j,M_ROW - i - 1, 255, (i * 255 / M_ROW), (j * 255 / M_COL));
     for (int j = (M_ROW - i - 1); j >= i; --j) 
-      matrix.drawPixel(M_ROW - i - 1,j, matrix.Color(255, (i * 255 / M_ROW), (j * 255 / M_COL)));
-    matrix.show();
+      mmfunc.MSetPixel(M_ROW - i - 1,j, 255, (i * 255 / M_ROW), (j * 255 / M_COL));
+    mmfunc.MUpdate();
     delay(200);
   }
   matrix.clear();
@@ -132,16 +132,16 @@ void Fill(uint8_t R, uint8_t G, uint8_t B) {
 // 测试矩阵
 void MatrixTest() {
   Fill(255, 0, 0);
-  matrix.show();
+  mmfunc.MUpdate();
   delay(500);
   Fill(0, 255, 0);
-  matrix.show();
+  mmfunc.MUpdate();
   delay(500);
   Fill(0, 0, 255);
-  matrix.show();
+  mmfunc.MUpdate();
   delay(500);
   matrix.clear();
-  matrix.show();  
+  mmfunc.MUpdate();  
 }
 
 // 警灯闪烁
@@ -149,10 +149,10 @@ void AlarmLamp() {
   for(uint8_t i = 0; i < 10; ++i) {
 
     Fill(255, 0, 0);
-    matrix.show();
+    mmfunc.MUpdate();
     delay(100);
     Fill(0, 0, 255);
-    matrix.show();
+    mmfunc.MUpdate();
     delay(100);    
   }
 }
@@ -168,7 +168,7 @@ void AlarmLamp() {
 //   int ct = 0; // 填充过的数量
 //   while(ct < 63) {
 //     matrix.drawPixel(c,r, matrix.Color(255,(c * 255 / M_COL), (r * 255 / M_ROW)));
-//     matrix.show(); 
+//     mmfunc.MUpdate(); 
 //     delay(10);
 //     switch (dir) { // 根据当前方向确定下一步
 //       case D_R: if (c < (M_COL - 1) && matrix.getPixel(c + 1,r) == 0) ++c, ++ct; // 如果向右可以移动
@@ -186,7 +186,7 @@ void AlarmLamp() {
 //     }
 //   }
 //   matrix.drawPixel(c,r, matrix.Color(255,(c * 255 / M_COL), (r * 255 / M_ROW));
-//   matrix.show();   
+//   mmfunc.MUpdate();   
 //   delay(10);
 // }
 
