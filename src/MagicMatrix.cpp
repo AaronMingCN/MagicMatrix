@@ -8,7 +8,7 @@ void setup() {
   // // matrix.setTextWrap(false);
   matrix.setBrightness(M_BRIGHT); // 设置矩阵屏幕亮度0~255
   
-  MatrixTest();
+  mmfill.MatrixTest();
 
   Serial.begin(9600); // 打开串口通信
   for (uint8_t i = 0; i < 100; ++i) { // 等待串口连接成功，防止RTOS崩溃
@@ -28,24 +28,24 @@ void setup() {
 void loop() {
 
   #ifdef MMDEBUG
-    // mmdebug.TestRTC();
-    mmdebug.TestSD();
+    mmdebug.TestRTC();
+    // mmdebug.TestSD();
   #endif
   
-  // if (irrecv.decode()) { // 如果红外线读取到数据
-  //   Serial.println(irrecv.decodedIRData.command); // 向串口打印
-  //   switch (irrecv.decodedIRData.command) {
-  //     case IRK_0: PixTest(); break;
-  //     case IRK_1: RowFill(); break;
-  //     case IRK_2: ColFill(); break;
-  //     case IRK_3: DiagFill_1(); break;
-  //     case IRK_4: SnakeFill(); break;
-  //     case IRK_5: RectFill(); break;
-  //     case IRK_6: AlarmLamp(); break;
-  //     // case IRK_6: RectSnakeFill(); break;
-  //     // case K_7: Rain(); break;
-  //   }
-  //   irrecv.resume(); // 恢复读取
-  // }
+  if (irrecv.decode()) { // 如果红外线读取到数据
+    Serial.println(irrecv.decodedIRData.command); // 向串口打印
+    switch (irrecv.decodedIRData.command) {
+      case IRK_0: mmfill.PixTest(); break;
+      case IRK_1: mmfill.RowFill(); break;
+      case IRK_2: mmfill.ColFill(); break;
+      case IRK_3: mmfill.DiagFill_1(); break;
+      case IRK_4: mmfill.SnakeFill(); break;
+      case IRK_5: mmfill.RectFill(); break;
+      case IRK_6: mmfill.AlarmLamp(); break;
+      // case IRK_6: RectSnakeFill(); break;
+      // case K_7: Rain(); break;
+    }
+    irrecv.resume(); // 恢复读取
+  }
   delay(1000);
 }

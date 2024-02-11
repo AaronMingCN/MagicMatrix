@@ -1,5 +1,5 @@
 #include "MMDefine.h"
-#include "MMFunc.h"
+#include "MMScr.h"
 
 #ifdef MMDEBUG // 如果打开调试
 
@@ -77,10 +77,10 @@ public:
         Serial.println("===============");
 
         // read from the file until there's nothing else in it:
-        while (myFile.available()) 
-        {
+        // while (myFile.available()) 
+        // {
         Serial.write(myFile.read());
-        }
+        // }
 
         // close the file:
         myFile.close();

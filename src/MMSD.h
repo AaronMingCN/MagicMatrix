@@ -1,5 +1,5 @@
 #include "MMDefine.h"
-
+#include "MMScr.h"
 /*
   SD card connection
 
@@ -19,9 +19,16 @@
    ** SCK  - pin 2
 */
 
-
+#ifndef MMSD 
+#define MMSD 
 
 class MMSD{
 public:
+  // 将文件位图读取到矩阵
+  void DrawBitmap(String FName) {
+
+  }
 
 } mmsd;
+
+#endif

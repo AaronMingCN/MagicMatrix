@@ -25,11 +25,17 @@
 
     #define PIN_SD_CS PIN_SPI0_CS // sd卡使能引脚
 
-    #if !defined(ARDUINO_ARCH_RP2040) // 定义SD访问相关的引脚
+    // 定义SD访问相关的引脚
+    #if !defined(ARDUINO_ARCH_RP2040) 
       #error For RP2040 only
     #endif
+    
+    // SS = 17
+    // SCK = 18
+    // MOSI = 19
+    // MISO = 16
 
-    #if defined(ARDUINO_ARCH_MBED)
+    #if defined(ARDUINO_ARCH_MBED) 
       
       #define PIN_SD_MOSI       PIN_SPI_MOSI
       #define PIN_SD_MISO       PIN_SPI_MISO
@@ -44,10 +50,7 @@
       #define PIN_SD_SS         PIN_SPI0_SS
       
     #endif
-    // SS = 17
-    // SCK = 18
-    // MOSI = 19
-    // MISO = 16
+
     #define _RP2040_SD_LOGLEVEL_       4
 
     #include <SPI.h>
@@ -55,16 +58,29 @@
 
   #endif
 
-#define M_ROW (16) // 定义矩阵屏幕行数 
-#define M_COL (16) // 定义矩阵屏幕列数
+#define M_8x8
+
+#ifdef M_8x8
+  #define M_ROW (8) // 定义矩阵屏幕行数 
+  #define M_COL (8) // 定义矩阵屏幕列数
+    // 定义RGB矩阵
+  Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(M_COL, M_ROW, PIN_M,
+    NEO_MATRIX_TOP     + NEO_MATRIX_LEFT +
+    NEO_MATRIX_COLUMNS + NEO_MATRIX_PROGRESSIVE,
+    NEO_GRB            + NEO_KHZ800);
+#else
+  #define M_ROW (16) // 定义矩阵屏幕行数 
+  #define M_COL (16) // 定义矩阵屏幕列数
+    // 定义RGB矩阵
+  Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(M_ROW, M_COL, PIN_M,
+    NEO_MATRIX_TOP     + NEO_MATRIX_LEFT +
+    NEO_MATRIX_COLUMNS + NEO_MATRIX_ZIGZAG,
+    NEO_GRB            + NEO_KHZ800);  
+#endif
+
 #define M_PIXS (M_ROW * M_COL) // 定义矩阵像素数
 #define M_BRIGHT (30) // 屏幕亮度0~255
 
-// 定义RGB矩阵
-Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(M_ROW, M_COL, PIN_M,
-  NEO_MATRIX_TOP     + NEO_MATRIX_LEFT +
-  NEO_MATRIX_COLUMNS + NEO_MATRIX_ZIGZAG,
-  NEO_GRB            + NEO_KHZ800);
 
 // 定义红外接收对象
 IRrecv irrecv(PIN_IRR);
