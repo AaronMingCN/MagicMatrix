@@ -5,11 +5,12 @@
 #include <Adafruit_NeoPixel.h>
 #include <IRremote.hpp>
 #include <RtcDS1302.h>
-#include <SPI.h>
-#include <SD.h>
+
 
 #ifndef MMDEF
 #define MMDEF // Make Arduino Due happy
+
+  #define MMDEBUG // 定义调试宏用于控制调试输出
 
   #define C_RP2040 // 定义使用的芯片类型
 
@@ -22,11 +23,36 @@
 
     #define PIN_DS1302_CS (6) // DS1302选择引脚 
 
-    // #define PIN_SD_CS (5) // sd卡使能引脚
+    #define PIN_SD_CS PIN_SPI0_CS // sd卡使能引脚
 
-    // #define PIN_SPI_CLK (10) // spi时钟引脚
-    // #define PIN_SPI_MOSI (11) // 
-    // #define PIN_SPI_MISO (12) // 
+    #if !defined(ARDUINO_ARCH_RP2040) // 定义SD访问相关的引脚
+      #error For RP2040 only
+    #endif
+
+    #if defined(ARDUINO_ARCH_MBED)
+      
+      #define PIN_SD_MOSI       PIN_SPI_MOSI
+      #define PIN_SD_MISO       PIN_SPI_MISO
+      #define PIN_SD_SCK        PIN_SPI_SCK
+      #define PIN_SD_SS         PIN_SPI_SS
+
+    #else
+
+      #define PIN_SD_MOSI       PIN_SPI0_MOSI
+      #define PIN_SD_MISO       PIN_SPI0_MISO
+      #define PIN_SD_SCK        PIN_SPI0_SCK
+      #define PIN_SD_SS         PIN_SPI0_SS
+      
+    #endif
+    // SS = 17
+    // SCK = 18
+    // MOSI = 19
+    // MISO = 16
+    #define _RP2040_SD_LOGLEVEL_       4
+
+    #include <SPI.h>
+    #include <RP2040_SD.h>
+
   #endif
 
 #define M_ROW (16) // 定义矩阵屏幕行数 
