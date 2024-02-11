@@ -89,9 +89,6 @@ IRrecv irrecv(PIN_IRR);
 ThreeWire myWire(PIN_I2C0_DAT ,PIN_I2C0_CLK, PIN_DS1302_CS); // IO, SCLK, CE
 RtcDS1302<ThreeWire> Rtc(myWire);
 
-//SD卡文件对象
-File myFile;
-
 // 定义红外遥控器的按键
 #define IRK_CH_MINUS (69)
 #define IRK_CH (70)
@@ -130,5 +127,8 @@ struct RGB {
     return matrix.Color(R,G,B);
   }  
 };
+
+
+
 
 #endif

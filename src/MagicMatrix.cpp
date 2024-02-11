@@ -2,6 +2,7 @@
 #include "MMFill.h"
 #include "MMGrap.h"
 #include "MMDebug.h"
+#include "MMSD.h"
 
 void setup() {
   matrix.begin();
@@ -28,7 +29,7 @@ void setup() {
 void loop() {
 
   #ifdef MMDEBUG
-    mmdebug.TestRTC();
+    // mmdebug.TestRTC();
     // mmdebug.TestSD();
   #endif
   
@@ -47,5 +48,7 @@ void loop() {
     }
     irrecv.resume(); // 恢复读取
   }
-  delay(1000);
+  mmsd.DrawBitmap("1.bmp");
+  // mmfill.Rainbow();
+  delay(100);
 }

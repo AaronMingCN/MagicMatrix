@@ -125,7 +125,11 @@ public:
     
   }
 
-
+  //彩虹
+  void Rainbow(){
+    matrix.rainbow();
+    matrix.show();
+  }
 
   // 测试矩阵
   void MatrixTest() {
@@ -145,7 +149,6 @@ public:
   // 警灯闪烁
   void AlarmLamp() {
     for(uint8_t i = 0; i < 10; ++i) {
-
       mmscr.Fill(255, 0, 0);
       mmscr.Update();
       delay(100);

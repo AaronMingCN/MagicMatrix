@@ -19,7 +19,7 @@ public:
     matrix.show();
   }
 
-  // 清空矩阵
+  // 清空矩阵，并立刻显示
   void Clear() {
     SetEmpty();
     Update();  

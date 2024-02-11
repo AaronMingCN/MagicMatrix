@@ -5,28 +5,26 @@
 
 class MMDebug {
 public:
+
     // 测试RTC显示时间
     void TestRTC() {
+        char buff[20] = {};
         RtcDateTime now = Rtc.GetDateTime();
-        Serial.println(
-        String(now.Year()) + '-' +
-        String(now.Month()) + '-' +
-        String(now.Day()) + ' ' +
-        String(now.Hour()) + ':' +
-        String(now.Minute()) + ':' +
-        String(now.Second())
-        );
+        sprintf(buff, "%04d-%02d-%02d %02d:%02d:%02d", 
+            now.Year(), now.Month(), now.Day(),
+            now.Hour(), now.Minute(), now.Second());
+        Serial.println(buff);
     }
-
-
-  // 测试文件访问
+    
+  // 测试SD卡文件访问
   void TestSD() {
     #if defined(ARDUINO_ARCH_MBED)
     Serial.print("Starting SD Card ReadWrite on MBED ");
     #else
     Serial.print("Starting SD Card ReadWrite on ");
     #endif
-    
+    //SD卡文件对象
+    File myFile;
     Serial.println(BOARD_NAME);
     Serial.println(RP2040_SD_VERSION);
     
