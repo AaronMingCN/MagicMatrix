@@ -120,27 +120,20 @@ void RectFill() {
   
 }
 
-// 填充整个屏幕
-void Fill(uint8_t R, uint8_t G, uint8_t B) {
-  for(uint8_t r = 0; r < M_ROW; ++r) { // 将所有颜色清空
-    for(uint8_t c = 0; c < M_COL; ++c) {
-      matrix.drawPixel(c,r, matrix.Color(R, G, B));
-    }
-  }
-}
+
 
 // 测试矩阵
 void MatrixTest() {
-  Fill(255, 0, 0);
+  mmfunc.MFill(255, 0, 0);
   mmfunc.MUpdate();
   delay(500);
-  Fill(0, 255, 0);
+  mmfunc.MFill(0, 255, 0);
   mmfunc.MUpdate();
   delay(500);
-  Fill(0, 0, 255);
+  mmfunc.MFill(0, 0, 255);
   mmfunc.MUpdate();
   delay(500);
-  matrix.clear();
+  mmfunc.MSetEmpty();
   mmfunc.MUpdate();  
 }
 
@@ -148,10 +141,10 @@ void MatrixTest() {
 void AlarmLamp() {
   for(uint8_t i = 0; i < 10; ++i) {
 
-    Fill(255, 0, 0);
+    mmfunc.MFill(255, 0, 0);
     mmfunc.MUpdate();
     delay(100);
-    Fill(0, 0, 255);
+    mmfunc.MFill(0, 0, 255);
     mmfunc.MUpdate();
     delay(100);    
   }

@@ -27,4 +27,13 @@ public:
     matrix.drawPixel(x, y, matrix.Color(R, G, B));
   }
 
+// 填充整个屏幕
+void MFill(uint8_t R, uint8_t G, uint8_t B) {
+  for(uint8_t r = 0; r < M_ROW; ++r) { // 将所有颜色清空
+    for(uint8_t c = 0; c < M_COL; ++c) {
+      matrix.drawPixel(c,r, matrix.Color(R, G, B));
+    }
+  }
+}
+
 } mmfunc;
