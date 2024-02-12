@@ -8,7 +8,7 @@ public:
 
     // 测试RTC显示时间
     void TestRTC() {
-        char buff[20] = {};
+        char buff[26] = {};
         RtcDateTime now = Rtc.GetDateTime();
         sprintf(buff, "%04d-%02d-%02d %02d:%02d:%02d", 
             now.Year(), now.Month(), now.Day(),
