@@ -14,7 +14,7 @@
 #include "MMRamBmp.h"
 
 void setup() {
-  MMRamBmp rb;
+
   matrix.begin();
   // // matrix.setTextWrap(false);
   matrix.setBrightness(M_BRIGHT); // 设置矩阵屏幕亮度0~255

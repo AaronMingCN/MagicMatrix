@@ -12,16 +12,40 @@
 // 内存bmp图片
 class MMRamBmp{
 public:
+  uint16_t width = 0;
+  uint16_t height = 0;
+  
   RGB *bmp = NULL; // 定义一个RGB数组
+  // 构造函数
   MMRamBmp(uint16_t Width = M_WIDTH, uint16_t Height = M_HEIGHT) {
-    bmp = new RGB[Height * Width]; // 根据宽和高创建RGB数组
+    this->width = Width;
+    this->height = Height;
+    this->bmp = new RGB[Width * Height]; // 根据宽和高创建RGB数组
   };
+
+  // 析构函数
   ~MMRamBmp() {
-    delete[] bmp; // 析构是释放RBG数组
+    delete[] bmp; // 析构释放RBG数组
   };
+
+  // 获得RGB值设置像素
+  void GetPixcel(uint16_t x, uint16_t y, RGB &Pix) {
+    Pix = this->bmp[y * width + x];
+  }
+
+  // 根据设置像素RGB值
+  void SetPixcel(uint16_t x, uint16_t y, uint8_t R, uint8_t G, uint8_t B) {
+    this->bmp[y * width + x].R = R;
+    this->bmp[y * width + x].G = G;
+    this->bmp[y * width + x].B = B;
+  }
+  
+  // 根据RGB结构设置
+  void SetPixcel(uint16_t x, uint16_t y, RGB &Pix) {
+    this->SetPixcel(x, y, Pix.R, Pix.G, Pix.B);
+  }
+
 };
-
-
 
 
 #endif

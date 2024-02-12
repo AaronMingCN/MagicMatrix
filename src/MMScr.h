@@ -8,7 +8,7 @@
 #define _MMSCR_H
 
 #include "MMDefine.h"
-
+#include "MMRamBmp.h"
 
 class MMScr {
 public:
@@ -40,6 +40,16 @@ public:
         matrix.drawPixel(c,r, matrix.Color(R, G, B));
       }
     }
+  }
+
+  // 将RamBmp绘制到屏幕
+  void DrawRamBmp(MMRamBmp &rb){
+    for(uint8_t r = 0; r < M_HEIGHT; ++r) { // 将所有颜色清空
+      for(uint8_t c = 0; c < M_WIDTH; ++c) {
+        RGB t; rb.GetPixcel(c,r, t); // 定义临时像素并从RamBmp读取
+        matrix.drawPixel(c,r, t.Color()); // 将像素绘制到矩阵屏幕
+      }
+    }    
   }
 
 } mmscr;
