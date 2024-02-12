@@ -48,7 +48,9 @@ void loop() {
     }
     irrecv.resume(); // 恢复读取
   }
-  mmsd.DrawBitmap("1.bmp");
+  digitalWrite(PIN_LED_BUILTIN, HIGH);
+  mmsd.DrawBitmap("4.bmp");
+  digitalWrite(PIN_LED_BUILTIN, LOW);
   // mmfill.Rainbow();
-  delay(100);
+  delay(2000);
 }

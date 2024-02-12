@@ -6,6 +6,8 @@
 #include <IRremote.hpp>
 #include <RtcDS1302.h>
 
+#include <pins_arduino.h>
+
 
 #ifndef MMDEF
 #define MMDEF // Make Arduino Due happy
@@ -15,15 +17,15 @@
   #define C_RP2040 // 定义使用的芯片类型
 
   #ifdef C_RP2040
-    #define PIN_M (2) // 定义矩阵屏幕引脚
-    #define PIN_IRR (22) // 定义红外线接收引脚
+    #define PIN_M (2u) // 定义矩阵屏幕引脚
+    #define PIN_IRR (22u) // 定义红外线接收引脚
 
-    #define PIN_I2C0_DAT (4) // I2C数据引脚
-    #define PIN_I2C0_CLK (5) // I2C时钟引脚
+    #define PIN_I2C_DAT PIN_WIRE_SDA // I2C数据引脚, 4
+    #define PIN_I2C_CLK PIN_WIRE_SCL // I2C时钟引脚, 5
 
-    #define PIN_DS1302_CS (6) // DS1302选择引脚 
+    #define PIN_DS1302_CS (6u) // DS1302选择引脚 
 
-    #define PIN_SD_CS PIN_SPI0_CS // sd卡使能引脚
+    #define PIN_LED_BUILTIN LED_BUILTIN // 板载LED引脚, 25
 
     // 定义SD访问相关的引脚
     #if !defined(ARDUINO_ARCH_RP2040) 
@@ -50,8 +52,6 @@
       #define PIN_SD_SS         PIN_SPI0_SS
       
     #endif
-
-    #define _RP2040_SD_LOGLEVEL_       4
 
     #include <SPI.h>
     #include <RP2040_SD.h>
@@ -86,7 +86,7 @@
 IRrecv irrecv(PIN_IRR);
 
 // 定义时钟引脚
-ThreeWire myWire(PIN_I2C0_DAT ,PIN_I2C0_CLK, PIN_DS1302_CS); // IO, SCLK, CE
+ThreeWire myWire(PIN_I2C_DAT ,PIN_I2C_CLK, PIN_DS1302_CS); // IO, SCLK, CE
 RtcDS1302<ThreeWire> Rtc(myWire);
 
 // 定义红外遥控器的按键
