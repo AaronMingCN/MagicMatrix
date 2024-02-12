@@ -6,6 +6,10 @@
 #include <IRremote.hpp>
 #include <RtcDS1302.h>
 
+#include <Adafruit_Sensor.h>
+#include <DHT.h>
+#include <DHT_U.h>
+
 #include <pins_arduino.h>
 
 
@@ -24,6 +28,8 @@
     #define PIN_I2C_CLK PIN_WIRE_SCL // I2C时钟引脚, 5
 
     #define PIN_DS1302_CS (6u) // DS1302选择引脚 
+
+    #define PIN_DHT (21u) // 定义DHT温湿度传感器引脚
 
     #define PIN_LED_BUILTIN LED_BUILTIN // 板载LED引脚, 25
 
@@ -58,7 +64,9 @@
 
   #endif
 
-#define M_8x8
+DHT_Unified dht(PIN_DHT, DHT11);
+
+// #define M_8x8
 
 #ifdef M_8x8
   #define M_ROW (8) // 定义矩阵屏幕行数 

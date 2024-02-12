@@ -22,34 +22,38 @@
 #ifndef MMSD 
 #define MMSD 
 
+// 将图片保存在flash中不占用ram空间
+// PROGMEM prog_uint32_t m[0xFFF] = {};
+
 class MMSD{
 public:
-
-
   // 将文件位图读取到矩阵
   void DrawBitmap(String FName) {
+
     if (!SD.begin(PIN_SD_SS)) { // 打开SD
         Serial.println("Initialization failed!");
         return;
     } 
     //SD卡文件对象
-    mmscr.Clear();
     File myFile = SD.open(FName, FILE_READ); 
     myFile.seek(54); // 跳过bmp文件的头部信息
-    RGB t = {}; // 颜色值的临时变量
-    for (uint16_t i = 0; i < M_ROW && myFile.available(); ++i) {
+    uint8_t t[3]; // 颜色值的临时变量
+    for (uint16_t i = 1; i <= M_ROW && myFile.available(); ++i) {
       for (uint16_t j = 0; j < M_COL && myFile.available(); ++j) {
         // myFile.read(&t, sizeof(t)); // 读取一个像素的颜色值
-        myFile.read(&(t.B), 1);
-        myFile.read(&(t.G), 1);
-        myFile.read(&(t.R), 1);
+        myFile.read(&t, 3);
+        // myFile.read(&(t.B), 1);
+        // myFile.read(&(t.G), 1);
+        // myFile.read(&(t.R), 1);
         
-        Serial.println(String(t.R) + ',' + String(t.G) + ',' + String(t.B) + ' ');
-        mmscr.SetPixel(j,i, t.R, t.G, t.B);
+        // Serial.println(String(t.R) + ',' + String(t.G) + ',' + String(t.B) + ' ');
+        mmscr.SetPixel(j, M_ROW - i, t[2], t[1], t[1]);
         mmscr.Update();
+
       }
-      Serial.println("");
+      // Serial.println("");
     }
+
     myFile.close();
     SD.end();
   }

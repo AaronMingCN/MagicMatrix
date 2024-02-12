@@ -5,6 +5,7 @@
 #ifndef MMFILL 
 #define MMFILL 
 
+
 class MMFill {
 public:
   // 测试每一个像素点
@@ -157,6 +158,7 @@ public:
       delay(100);    
     }
   }
-} mmfill;
+
+}  mmfill;
 
 #endif
