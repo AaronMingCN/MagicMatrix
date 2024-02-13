@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "MagicMatrix")(type "KiCad")(uri "${KIPRJMOD}/MagicMatrix.pretty")(options "")(descr ""))
+)
