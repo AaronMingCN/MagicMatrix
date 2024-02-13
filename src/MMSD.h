@@ -50,18 +50,13 @@ public:
       for (uint16_t j = 0; j < M_WIDTH && myFile.available(); ++j) {
         // myFile.read(&t, sizeof(t)); // 读取一个像素的颜色值
         myFile.read(&t, 3);
-        // myFile.read(&(t.B), 1);
-        // myFile.read(&(t.G), 1);
-        // myFile.read(&(t.R), 1);
-        
+       
         // Serial.println(String(t.R) + ',' + String(t.G) + ',' + String(t.B) + ' ');
         mmscr.SetPixel(j, M_HEIGHT - i, t[2], t[1], t[1]);
-        mmscr.Update();
-
       }
       // Serial.println("");
     }
-
+    // mmscr.Update();
     myFile.close();
     SD.end();
   }

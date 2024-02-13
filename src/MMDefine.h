@@ -39,6 +39,10 @@
 
     #define PIN_LED_BUILTIN LED_BUILTIN // 板载LED引脚, 25
 
+    #define PIN_BEEPER (20u) // 蜂鸣器引脚
+
+    #define PIN_SR (7u) // 人体红外传感器引脚
+
     // 定义SD访问相关的引脚
     #if !defined(ARDUINO_ARCH_RP2040) 
       #error For RP2040 only

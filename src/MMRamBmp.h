@@ -21,12 +21,18 @@ public:
     this->width = Width;
     this->height = Height;
     this->bmp = new RGB[Width * Height]; // 根据宽和高创建RGB数组
+    this->Clear();
   };
 
   // 析构函数
   ~MMRamBmp() {
     delete[] bmp; // 析构释放RBG数组
   };
+
+  // 清空所有像素
+  void Clear(){
+    memset(bmp, 0, height * width * (sizeof(RGB)));
+  }
 
   // 获得RGB值设置像素
   void GetPixcel(uint16_t x, uint16_t y, RGB &Pix) {

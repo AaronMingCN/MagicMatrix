@@ -37,11 +37,14 @@ void setup() {
 }
 
 void loop() {
-
+  pinMode(PIN_SR, INPUT);
+  if (digitalRead(PIN_SR)) matrix.setBrightness(100);
+  else matrix.setBrightness(30);
   #ifdef MMDEBUG
     mmdebug.TestRTC();
     mmdebug.TestDHT();
     // mmdebug.TestSD();
+    // mmdebug.TestMMRamBmp();
   #endif
   
   if (irrecv.decode()) { // 如果红外线读取到数据
@@ -66,7 +69,7 @@ void loop() {
   mmscr.Update();
   delay(1000);
   digitalWrite(PIN_LED_BUILTIN, HIGH);  
-  mmsd.DrawBitmap("pixil0.bmp");
+  mmsd.DrawBitmap("pixil3.bmp");
   digitalWrite(PIN_LED_BUILTIN, LOW);  
   mmscr.Update();
   delay(1000);

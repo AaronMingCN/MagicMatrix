@@ -5,14 +5,15 @@
  * @Desc :  调试相关功能
  */
 
-
-#include "MMDefine.h"
-#include "MMScr.h"
+#ifdef MMDEBUG // 如果打开调试
 
 #ifndef _MMDEBUG_H
 #define _MMDEBUG_H
 
-#ifdef MMDEBUG // 如果打开调试
+#include "MMDefine.h"
+#include "MMScr.h"
+#include "MMRamBmp.h"
+
 
 class MMDebug {
 public:
@@ -151,6 +152,21 @@ public:
     }
 
   }
+
+  // 测试RamBmp使用
+  void TestMMRamBmp() {
+    MMRamBmp rb;
+    
+    for (uint16_t i = 0; i < M_HEIGHT; i++) {
+      for (uint16_t j = 0; j < M_WIDTH; j++) {
+        if (j == i) rb.SetPixcel(j, i, 255,0,0);
+        mmscr.DrawRamBmp(rb);
+      }
+    }
+    mmscr.Update();
+    delay(1000);
+  }
+
 } mmdebug;
 
 
