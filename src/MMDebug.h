@@ -1,5 +1,16 @@
+/*
+ * @File :  MMDebug.h
+ * @Time :  2024/02/13 10:31:50
+ * @Vers :  1.0
+ * @Desc :  调试相关功能
+ */
+
+
 #include "MMDefine.h"
 #include "MMScr.h"
+
+#ifndef _MMDEBUG_H
+#define _MMDEBUG_H
 
 #ifdef MMDEBUG // 如果打开调试
 
@@ -142,5 +153,7 @@ public:
   }
 } mmdebug;
 
+
+#endif
 
 #endif

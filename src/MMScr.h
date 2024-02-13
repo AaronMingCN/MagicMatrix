@@ -1,11 +1,14 @@
-//
-// 矩阵显示功能封装
-// 
+/*
+ * @File :  MMScr.h
+ * @Time :  2024/02/13 10:33:34
+ * @Vers :  1.0
+ * @Desc :  矩阵显示功能封装
+ */
+#ifndef _MMSCR_H
+#define _MMSCR_H
 
 #include "MMDefine.h"
 
-#ifndef MMSCR
-#define MMSCR
 
 class MMScr {
 public:

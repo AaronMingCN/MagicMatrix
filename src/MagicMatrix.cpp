@@ -1,3 +1,11 @@
+/*
+ * @File :  MagicMatrix.cpp
+ * @Time :  2024/02/13 10:32:36
+ * @Vers :  1.0
+ * @Desc :  MagicMatrix魔法矩阵,主程序
+ */
+
+
 #include "MMDefine.h"
 #include "MMFill.h"
 #include "MMGrap.h"

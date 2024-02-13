@@ -1,3 +1,12 @@
+/*
+ * @File :  MMSD.h
+ * @Time :  2024/02/13 10:34:14
+ * @Vers :  1.0
+ * @Desc :  SD卡访问相关的封装
+ */
+#ifndef _MMSD_H 
+#define _MMSD_H 
+
 #include "MMDefine.h"
 #include "MMScr.h"
 /*
@@ -19,8 +28,7 @@
    ** SCK  - pin 2
 */
 
-#ifndef MMSD 
-#define MMSD 
+
 
 // 将图片保存在flash中不占用ram空间
 // PROGMEM prog_uint32_t m[0xFFF] = {};

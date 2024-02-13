@@ -1,9 +1,18 @@
+/*
+ * @File :  MMFill.h
+ * @Time :  2024/02/13 10:35:57
+ * @Vers :  1.0
+ * @Desc :  矩阵屏幕相关的填充功能
+ */
+
+#ifndef _MMFILL_H 
+#define _MMFILL_H 
+
 // 填充相关
 #include "MMDefine.h"
 #include "MMScr.h"
 
-#ifndef MMFILL 
-#define MMFILL 
+
 
 
 class MMFill {

@@ -1,4 +1,11 @@
-// 统一定义
+/*
+ * @File :  MMDefine.h
+ * @Time :  2024/02/13 10:35:10
+ * @Vers :  1.0
+ * @Desc :  相关定义
+ */
+#ifndef _MMDEF_H
+#define _MMDEF_H 
 
 #include <Adafruit_GFX.h>
 #include <Adafruit_NeoMatrix.h>
@@ -13,8 +20,7 @@
 #include <pins_arduino.h>
 
 
-#ifndef MMDEF
-#define MMDEF // Make Arduino Due happy
+
 
   #define MMDEBUG // 定义调试宏用于控制调试输出
 
