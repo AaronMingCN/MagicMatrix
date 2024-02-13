@@ -5,3 +5,5 @@
 .vscode/ipch
 cad/MagicMatrix/~MagicMatrix.kicad_sch.lck
 cad/MagicMatrix/MagicMatrix-backups
+cad/MagicMatrix/~MagicMatrix.kicad_pcb.lck
+cad/MagicMatrix/board2pdf.config.ini
