@@ -46,8 +46,8 @@ public:
     File myFile = SD.open(FName, FILE_READ); 
     myFile.seek(54); // 跳过bmp文件的头部信息
     uint8_t t[3]; // 颜色值的临时变量
-    for (uint16_t i = 1; i <= M_ROW && myFile.available(); ++i) {
-      for (uint16_t j = 0; j < M_COL && myFile.available(); ++j) {
+    for (uint16_t i = 1; i <= M_HEIGHT && myFile.available(); ++i) {
+      for (uint16_t j = 0; j < M_WIDTH && myFile.available(); ++j) {
         // myFile.read(&t, sizeof(t)); // 读取一个像素的颜色值
         myFile.read(&t, 3);
         // myFile.read(&(t.B), 1);
@@ -55,7 +55,7 @@ public:
         // myFile.read(&(t.R), 1);
         
         // Serial.println(String(t.R) + ',' + String(t.G) + ',' + String(t.B) + ' ');
-        mmscr.SetPixel(j, M_ROW - i, t[2], t[1], t[1]);
+        mmscr.SetPixel(j, M_HEIGHT - i, t[2], t[1], t[1]);
         mmscr.Update();
 
       }
