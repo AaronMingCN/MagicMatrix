@@ -19,6 +19,9 @@
 
 #include <pins_arduino.h>
 
+#include "MMFunc/MMFuncPool.hpp"
+
+
 #define MMDEBUG // 定义调试宏用于控制调试输出
 
 #define C_RP2040 // 定义使用的芯片类型
@@ -140,5 +143,8 @@ struct RGB {
         return matrix.Color(R, G, B);
     }
 };
+
+// 定义功能池
+MMFuncPool FPool;
 
 #endif
