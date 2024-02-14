@@ -5,7 +5,7 @@
  * @Desc :  相关定义
  */
 #ifndef _MMDEF_H
-#define _MMDEF_H 
+#define _MMDEF_H
 
 #include <Adafruit_GFX.h>
 #include <Adafruit_NeoMatrix.h>
@@ -19,92 +19,86 @@
 
 #include <pins_arduino.h>
 
+#define MMDEBUG // 定义调试宏用于控制调试输出
 
+#define C_RP2040 // 定义使用的芯片类型
 
+#ifdef C_RP2040
+#define PIN_M (2u) // 定义矩阵屏幕引脚
+#define PIN_IRR (22u) // 定义红外线接收引脚
 
-  #define MMDEBUG // 定义调试宏用于控制调试输出
+#define PIN_I2C_DAT PIN_WIRE_SDA // I2C数据引脚, 4
+#define PIN_I2C_CLK PIN_WIRE_SCL // I2C时钟引脚, 5
 
-  #define C_RP2040 // 定义使用的芯片类型
+#define PIN_DS1302_CS (6u) // DS1302选择引脚
 
-  #ifdef C_RP2040
-    #define PIN_M (2u) // 定义矩阵屏幕引脚
-    #define PIN_IRR (22u) // 定义红外线接收引脚
+#define PIN_DHT (21u) // 定义DHT温湿度传感器引脚
 
-    #define PIN_I2C_DAT PIN_WIRE_SDA // I2C数据引脚, 4
-    #define PIN_I2C_CLK PIN_WIRE_SCL // I2C时钟引脚, 5
+#define PIN_LED_BUILTIN LED_BUILTIN // 板载LED引脚, 25
 
-    #define PIN_DS1302_CS (6u) // DS1302选择引脚 
+#define PIN_BEEPER (20u) // 蜂鸣器引脚
 
-    #define PIN_DHT (21u) // 定义DHT温湿度传感器引脚
+#define PIN_SR (7u) // 人体红外传感器引脚
 
-    #define PIN_LED_BUILTIN LED_BUILTIN // 板载LED引脚, 25
+// 定义SD访问相关的引脚
+#if !defined(ARDUINO_ARCH_RP2040)
+#error For RP2040 only
+#endif
 
-    #define PIN_BEEPER (20u) // 蜂鸣器引脚
+// SS = 17
+// SCK = 18
+// MOSI = 19
+// MISO = 16
 
-    #define PIN_SR (7u) // 人体红外传感器引脚
+#if defined(ARDUINO_ARCH_MBED)
 
-    // 定义SD访问相关的引脚
-    #if !defined(ARDUINO_ARCH_RP2040) 
-      #error For RP2040 only
-    #endif
-    
-    // SS = 17
-    // SCK = 18
-    // MOSI = 19
-    // MISO = 16
+#define PIN_SD_MOSI PIN_SPI_MOSI
+#define PIN_SD_MISO PIN_SPI_MISO
+#define PIN_SD_SCK PIN_SPI_SCK
+#define PIN_SD_SS PIN_SPI_SS
 
-    #if defined(ARDUINO_ARCH_MBED) 
-      
-      #define PIN_SD_MOSI       PIN_SPI_MOSI
-      #define PIN_SD_MISO       PIN_SPI_MISO
-      #define PIN_SD_SCK        PIN_SPI_SCK
-      #define PIN_SD_SS         PIN_SPI_SS
+#else
 
-    #else
+#define PIN_SD_MOSI PIN_SPI0_MOSI
+#define PIN_SD_MISO PIN_SPI0_MISO
+#define PIN_SD_SCK PIN_SPI0_SCK
+#define PIN_SD_SS PIN_SPI0_SS
 
-      #define PIN_SD_MOSI       PIN_SPI0_MOSI
-      #define PIN_SD_MISO       PIN_SPI0_MISO
-      #define PIN_SD_SCK        PIN_SPI0_SCK
-      #define PIN_SD_SS         PIN_SPI0_SS
-      
-    #endif
+#endif
 
-    #include <SPI.h>
-    #include <RP2040_SD.h>
+#include <RP2040_SD.h>
+#include <SPI.h>
 
-  #endif
+#endif
 
 DHT_Unified dht(PIN_DHT, DHT11);
 
 // #define M_8x8
 
 #ifdef M_8x8
-  #define M_HEIGHT (8) // 定义矩阵屏幕行数 
-  #define M_WIDTH (8) // 定义矩阵屏幕列数
-    // 定义RGB矩阵
-  Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(M_WIDTH, M_ROW, PIN_M,
-    NEO_MATRIX_TOP     + NEO_MATRIX_LEFT +
-    NEO_MATRIX_COLUMNS + NEO_MATRIX_PROGRESSIVE,
-    NEO_GRB            + NEO_KHZ800);
+#define M_HEIGHT (8) // 定义矩阵屏幕行数
+#define M_WIDTH (8) // 定义矩阵屏幕列数
+// 定义RGB矩阵
+Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(M_WIDTH, M_ROW, PIN_M,
+    NEO_MATRIX_TOP + NEO_MATRIX_LEFT + NEO_MATRIX_COLUMNS + NEO_MATRIX_PROGRESSIVE,
+    NEO_GRB + NEO_KHZ800);
 #else
-  #define M_HEIGHT (16) // 定义矩阵屏幕行数 
-  #define M_WIDTH (16) // 定义矩阵屏幕列数
-    // 定义RGB矩阵
-  Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(M_HEIGHT, M_WIDTH, PIN_M,
-    NEO_MATRIX_TOP     + NEO_MATRIX_LEFT +
-    NEO_MATRIX_COLUMNS + NEO_MATRIX_ZIGZAG,
-    NEO_GRB            + NEO_KHZ800);  
+#define M_HEIGHT (16) // 定义矩阵屏幕行数
+#define M_WIDTH (16) // 定义矩阵屏幕列数
+// 定义RGB矩阵
+Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(M_HEIGHT, M_WIDTH, PIN_M,
+    NEO_MATRIX_TOP + NEO_MATRIX_LEFT + NEO_MATRIX_COLUMNS + NEO_MATRIX_ZIGZAG,
+    NEO_GRB + NEO_KHZ800);
 #endif
 
 #define M_PIXS (M_HEIGHT * M_WIDTH) // 定义矩阵像素数
 #define M_BRIGHT (30) // 屏幕亮度0~255
 
-
 // 定义红外接收对象
 IRrecv irrecv(PIN_IRR);
 
 // 定义时钟引脚
-ThreeWire myWire(PIN_I2C_DAT ,PIN_I2C_CLK, PIN_DS1302_CS); // IO, SCLK, CE
+ThreeWire myWire(PIN_I2C_DAT, PIN_I2C_CLK, PIN_DS1302_CS); // IO, SCLK, CE
 RtcDS1302<ThreeWire> Rtc(myWire);
 
 // 定义红外遥控器的按键
@@ -138,15 +132,13 @@ RtcDS1302<ThreeWire> Rtc(myWire);
 
 // RGB颜色的结构体
 struct RGB {
-  uint8_t R;
-  uint8_t G;
-  uint8_t B;
-  uint32_t Color() { // 返回由RGB组成的颜色
-    return matrix.Color(R,G,B);
-  }  
+    uint8_t R;
+    uint8_t G;
+    uint8_t B;
+    uint32_t Color()
+    { // 返回由RGB组成的颜色
+        return matrix.Color(R, G, B);
+    }
 };
-
-
-
 
 #endif

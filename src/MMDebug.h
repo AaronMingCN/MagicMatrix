@@ -5,12 +5,15 @@
  * @Desc :  调试相关功能
  */
 
+
+#include "MMDefine.h"
+
 #ifdef MMDEBUG // 如果打开调试
 
 #ifndef _MMDEBUG_H
 #define _MMDEBUG_H
 
-#include "MMDefine.h"
+
 #include "MMScr.h"
 #include "MMRamBmp.h"
 
