@@ -1,13 +1,13 @@
 /*
- * @File :  MMFunc.h
+ * @File :  MMFunc.hpp
  * @Time :  2024/02/14 22:52:50
  * @Auth :  
  * @Vers :  1.0
  * @Desc :  功能块的基础类用于派生功能
  */
 
-#ifndef MMFUNC
-#define MMFUNC
+#ifndef _MMFUNC_HPP
+#define _MMFUNC_HPP
 
 
 // 定义处理的结果默认为两个字节
@@ -17,9 +17,10 @@
 // 功能基础类
 class MMFunc {
 public:
-	uint16_t FID; // 功能块ID
+	uint16_t FID = 0; // 功能块ID
 	uint8_t FType = 0; // 类型，共后期扩展使用
 	// 构造函数
+	MMFunc(){};
 	MMFunc(uint16_t fid) {
 		this->FID = fid;
 	}

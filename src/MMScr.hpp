@@ -1,14 +1,14 @@
 /*
- * @File :  MMScr.h
+ * @File :  MMScr.hpp
  * @Time :  2024/02/13 10:33:34
  * @Vers :  1.0
  * @Desc :  矩阵显示功能封装
  */
-#ifndef _MMSCR_H
-#define _MMSCR_H
+#ifndef _MMSCR_HPP
+#define _MMSCR_HPP
 
-#include "MMDefine.h"
-#include "MMRamBmp.h"
+#include "MMDefine.hpp"
+#include "MMRamBmp.hpp"
 
 class MMScr {
 public:

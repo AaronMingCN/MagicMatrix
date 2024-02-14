@@ -1,11 +1,11 @@
 /*
- * @File :  MMDefine.h
+ * @File :  MMDefine.hpp
  * @Time :  2024/02/13 10:35:10
  * @Vers :  1.0
  * @Desc :  相关定义
  */
-#ifndef _MMDEF_H
-#define _MMDEF_H
+#ifndef _MMDEF_HPP
+#define _MMDEF_HPP
 
 #include <Adafruit_GFX.h>
 #include <Adafruit_NeoMatrix.h>

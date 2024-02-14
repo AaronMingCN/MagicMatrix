@@ -5,19 +5,19 @@
  * @Desc :  MagicMatrix魔法矩阵,主程序
  */
 
-#include "MMDebug.h"
-#include "MMDefine.h"
-#include "MMFill.h"
-#include "MMFuncPool.h"
-#include "MMGrap.h"
-#include "MMRamBmp.h"
-#include "MMSD.h"
+#include "MMDebug.hpp"
+#include "MMDefine.hpp"
+#include "MMFill.hpp"
+#include "MMGrap.hpp"
+#include "MMRamBmp.hpp"
+#include "MMSD.hpp"
 
-MMFuncPool pool;
+#include "MMFPSetup.hpp"
+
 
 void setup()
 {
-    pool.Exec(0);
+
     matrix.begin();
     // // matrix.setTextWrap(false);
     matrix.setBrightness(M_BRIGHT); // 设置矩阵屏幕亮度0~255
@@ -36,14 +36,16 @@ void setup()
     irrecv.enableIRIn(); // 打开红外遥控接收器
     dht.begin(); // 打开dht温湿度传感器
 
-    // tone(12, 3000);
-    // delay(1000);
+    // 调用功能池初始化
+    MMFPSetup();
+    FPool.Exec(MMF_ID_MATRIXTEST);
 }
-
-std::vector<int> v;
 
 void loop()
 {
+
+
+
     pinMode(PIN_SR, INPUT);
     if (digitalRead(PIN_SR))
         matrix.setBrightness(100);

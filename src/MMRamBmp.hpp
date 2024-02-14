@@ -1,13 +1,13 @@
 /*
- * @File :  RamBmp.h
+ * @File :  RamBmp.hpp
  * @Time :  2024/02/13 10:30:27
  * @Vers :  1.0
  * @Desc :  内存bmp位图,将位图文件保存在ram中
  */
-#ifndef _MMRAMBMP_H
-#define _MMRAMBMP_H
+#ifndef _MMRAMBMP_HPP
+#define _MMRAMBMP_HPP
 
-#include "MMDefine.h"
+#include "MMDefine.hpp"
 
 // 内存bmp图片
 class MMRamBmp {

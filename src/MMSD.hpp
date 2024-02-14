@@ -1,14 +1,14 @@
 /*
- * @File :  MMSD.h
+ * @File :  MMSD.hpp
  * @Time :  2024/02/13 10:34:14
  * @Vers :  1.0
  * @Desc :  SD卡访问相关的封装
  */
-#ifndef _MMSD_H
-#define _MMSD_H
+#ifndef _MMSD_HPP
+#define _MMSD_HPP
 
-#include "MMDefine.h"
-#include "MMScr.h"
+#include "MMDefine.hpp"
+#include "MMScr.hpp"
 /*
   SD card connection
 
