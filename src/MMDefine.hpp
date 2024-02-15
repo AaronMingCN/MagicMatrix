@@ -12,10 +12,6 @@
 #include <Adafruit_NeoPixel.h>
 
 
-#include <Adafruit_Sensor.h>
-#include <DHT.h>
-#include <DHT_U.h>
-
 #include <pins_arduino.h>
 
 #include "MMFunc/MMFuncPool.hpp"
@@ -73,7 +69,7 @@
 
 #endif
 
-DHT_Unified dht(PIN_DHT, DHT11);
+
 
 // #define M_8x8
 

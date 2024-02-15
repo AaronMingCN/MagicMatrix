@@ -36,7 +36,7 @@ uint16_t MMInit() {
     // while(!Serial) delay(10); // 等待串口通信成功
 
     // matrix.setTextColor(colors[0]);
-    dht.begin(); // 打开dht温湿度传感器
+    
 
     // 调用功能池初始化
     MMFPSetup();
