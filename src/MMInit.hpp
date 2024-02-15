@@ -36,7 +36,6 @@ uint16_t MMInit() {
     // while(!Serial) delay(10); // 等待串口通信成功
 
     // matrix.setTextColor(colors[0]);
-    irrecv.enableIRIn(); // 打开红外遥控接收器
     dht.begin(); // 打开dht温湿度传感器
 
     // 调用功能池初始化

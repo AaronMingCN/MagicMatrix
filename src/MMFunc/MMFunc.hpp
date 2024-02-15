@@ -19,6 +19,8 @@ class MMFunc {
 public:
 	uint16_t FID = 0; // 功能块ID
 	uint8_t FType = 0; // 类型，共后期扩展使用
+	// 所在功能池，使用方法：((MMFuncPool *)(this->FPool))->Exec(0);
+	void *FPool = NULL;
 	// 构造函数
 	MMFunc(){};
 	MMFunc(uint16_t fid) {

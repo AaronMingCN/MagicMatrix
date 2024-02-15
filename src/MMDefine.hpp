@@ -10,8 +10,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_NeoMatrix.h>
 #include <Adafruit_NeoPixel.h>
-#include <IRremote.hpp>
-#include <RtcDS1302.h>
+
 
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
@@ -44,7 +43,7 @@
 #define PIN_SR (7u) // 人体红外传感器引脚
 
 // 定义SD访问相关的引脚
-#if !defined(ARDUINO_ARCH_RP2040)
+#ifndef ARDUINO_ARCH_RP2040
 #error For RP2040 only
 #endif
 
@@ -97,14 +96,11 @@ Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(M_HEIGHT, M_WIDTH, PIN_M,
 #define M_PIXS (M_HEIGHT * M_WIDTH) // 定义矩阵像素数
 #define M_BRIGHT (30) // 屏幕亮度0~255
 
-// 定义红外接收对象
-IRrecv irrecv(PIN_IRR);
 
-// 定义时钟引脚
-ThreeWire myWire(PIN_I2C_DAT, PIN_I2C_CLK, PIN_DS1302_CS); // IO, SCLK, CE
-RtcDS1302<ThreeWire> Rtc(myWire);
 
 // 定义红外遥控器的按键
+#define IRK_NONE (0)
+
 #define IRK_CH_MINUS (69)
 #define IRK_CH (70)
 #define IRK_CH_PLUS (71)

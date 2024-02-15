@@ -25,6 +25,7 @@ public:
     // 将功能块加入到池中
     void Append(MMFunc* mmf)
     {
+        mmf->FPool = this;
         this->items.push_back(mmf);
     }
 

@@ -8,7 +8,7 @@
 #include "MMDebug.hpp"
 
 #include "MMInit.hpp"
-
+#include "MMHardware.hpp"
 
 void setup()
 {
@@ -30,9 +30,9 @@ void loop()
     // mmdebug.TestMMRamBmp();
 #endif
 
-    if (irrecv.decode()) { // 如果红外线读取到数据
-        Serial.println(irrecv.decodedIRData.command); // 向串口打印
-        switch (irrecv.decodedIRData.command) {
+    if (mmhardware.irrecv.decode()) { // 如果红外线读取到数据
+        Serial.println(mmhardware.irrecv.decodedIRData.command); // 向串口打印
+        switch (mmhardware.irrecv.decodedIRData.command) {
         case IRK_0:
             mmfill.PixTest();
             break;
@@ -57,7 +57,7 @@ void loop()
             // case IRK_6: RectSnakeFill(); break;
             // case K_7: Rain(); break;
         }
-        irrecv.resume(); // 恢复读取
+        mmhardware.irrecv.resume(); // 恢复读取
     }
 
     digitalWrite(PIN_LED_BUILTIN, HIGH);

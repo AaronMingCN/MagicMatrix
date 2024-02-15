@@ -14,6 +14,7 @@
 
 #include "MMRamBmp.hpp"
 #include "MMScr.hpp"
+#include "MMHardware.hpp"
 
 class MMDebug {
 public:
@@ -21,7 +22,7 @@ public:
     void TestRTC()
     {
         char buff[26] = {};
-        RtcDateTime now = Rtc.GetDateTime();
+        RtcDateTime now = mmhardware.Rtc.GetDateTime();
         sprintf(buff, "%04d-%02d-%02d %02d:%02d:%02d",
             now.Year(), now.Month(), now.Day(),
             now.Hour(), now.Minute(), now.Second());
