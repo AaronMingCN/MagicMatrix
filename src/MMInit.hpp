@@ -31,7 +31,7 @@ uint16_t MMInit() {
     MMFPSetup();
     // 执行功能池中的矩阵测试功能
     FPool.Exec(MMF_ID_MATRIXTEST);     
-    delay(1000); 
+
     // 打开人体红外监测模块
     pinMode(PIN_PIR, INPUT);
     return r;  

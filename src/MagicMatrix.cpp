@@ -7,18 +7,18 @@
 
 #include "MMDebug.hpp"
 
-#include "MMInit.hpp"
 #include "MMHardware.hpp"
+#include "MMInit.hpp"
 
 void setup()
 {
+    delay(1000); // 等待一秒bootloader
     MMInit(); // 初始化系统
+    // mmhardware.Rtc.SetDateTime(RtcDateTime(__DATE__, __TIME__));
 }
 
 void loop()
 {
-
-
 
     if (digitalRead(PIN_PIR))
         mmhardware.matrix.setBrightness(50);
@@ -55,7 +55,9 @@ void loop()
         case IRK_6:
             mmfill.AlarmLamp();
             break;
-            // case IRK_6: RectSnakeFill(); break;
+        case IRK_7:
+            FPool.Exec(MMF_ID_DISPTIME_1);
+            break;
             // case K_7: Rain(); break;
         }
         mmhardware.irrecv.resume(); // 恢复读取
