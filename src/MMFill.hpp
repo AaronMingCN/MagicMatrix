@@ -32,7 +32,8 @@ public:
     void PixTestPhysicalOrder()
     {
         for(uint16_t i = 0; i < M_PIXS; ++i) {
-            matrix.setPixelColor(i, 255, 255, 255);
+            mmhardware.matrix.setPixelColor(i, 255, 255, 255);
+            mmscr.Update();
         }
         delay(100);
         mmscr.Clear();
@@ -145,14 +146,14 @@ public:
             mmscr.Update();
             delay(200);
         }
-        matrix.clear();
+        mmhardware.matrix.clear();
     }
 
     // 彩虹
     void Rainbow()
     {
-        matrix.rainbow();
-        matrix.show();
+        mmhardware.matrix.rainbow();
+        mmhardware.matrix.show();
     }
 
     // 测试矩阵

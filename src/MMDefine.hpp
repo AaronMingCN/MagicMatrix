@@ -11,11 +11,9 @@
 #include <Adafruit_NeoMatrix.h>
 #include <Adafruit_NeoPixel.h>
 
-
 #include <pins_arduino.h>
 
 #include "MMFunc/MMFuncPool.hpp"
-
 
 #define MMDEBUG // 定义调试宏用于控制调试输出
 
@@ -36,7 +34,7 @@
 
 #define PIN_BEEPER (20u) // 蜂鸣器引脚
 
-#define PIN_SR (7u) // 人体红外传感器引脚
+#define PIN_PIR (7u) // 人体红外传感器引脚
 
 // 定义SD访问相关的引脚
 #ifndef ARDUINO_ARCH_RP2040
@@ -69,7 +67,6 @@
 
 #endif
 
-
 // #define M_8x8
 
 #ifdef M_8x8
@@ -82,16 +79,15 @@ Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(M_WIDTH, M_ROW, PIN_M,
 #else
 #define M_HEIGHT (16) // 定义矩阵屏幕行数
 #define M_WIDTH (16) // 定义矩阵屏幕列数
-// 定义RGB矩阵
-Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(M_HEIGHT, M_WIDTH, PIN_M,
-    NEO_MATRIX_TOP + NEO_MATRIX_LEFT + NEO_MATRIX_COLUMNS + NEO_MATRIX_ZIGZAG,
-    NEO_GRB + NEO_KHZ800);
+// 定义矩阵屏幕类型
+#define M_MATRIXTYPE (NEO_MATRIX_TOP + NEO_MATRIX_LEFT + NEO_MATRIX_COLUMNS + NEO_MATRIX_ZIGZAG)
+// 定义LED类型
+#define M_LEDTYPE (NEO_GRB + NEO_KHZ800)
+
 #endif
 
 #define M_PIXS (M_HEIGHT * M_WIDTH) // 定义矩阵像素数
 #define M_BRIGHT (30) // 屏幕亮度0~255
-
-
 
 // 定义红外遥控器的按键
 #define IRK_NONE (0)
@@ -129,9 +125,12 @@ struct RGB {
     uint8_t R;
     uint8_t G;
     uint8_t B;
-    uint32_t Color()
+    static uint32_t Color(uint8_t r, uint8_t g, uint8_t b)
     { // 返回由RGB组成的颜色
-        return matrix.Color(R, G, B);
+        return ((uint16_t)(r & 0xF8) << 8) | ((uint16_t)(g & 0xFC) << 3) | (b >> 3);
+    }
+    uint32_t Color() {
+        return Color(R, G, B);
     }
 };
 

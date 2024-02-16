@@ -17,7 +17,7 @@ class MMF_MatrixTest: public MMFunc {
 public:
     MMF_MatrixTest(uint16_t fid): MMFunc(fid) {}
     virtual uint16_t Exec() {
-        mmfill.PixTestLogicalOrder();
+        mmfill.MatrixTest();
         return EXECR_OK;
     }
 };

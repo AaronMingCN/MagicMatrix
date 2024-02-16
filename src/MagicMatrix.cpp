@@ -18,11 +18,12 @@ void setup()
 void loop()
 {
 
-    pinMode(PIN_SR, INPUT);
-    if (digitalRead(PIN_SR))
-        matrix.setBrightness(100);
+
+
+    if (digitalRead(PIN_PIR))
+        mmhardware.matrix.setBrightness(50);
     else
-        matrix.setBrightness(30);
+        mmhardware.matrix.setBrightness(20);
 #ifdef MMDEBUG
     mmdebug.TestRTC();
     mmdebug.TestDHT();

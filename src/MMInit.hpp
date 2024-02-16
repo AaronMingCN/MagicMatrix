@@ -21,29 +21,19 @@
 
 uint16_t MMInit() {
     uint16_t r = 0;
-    mmhardware.Init(); // 执行硬件初始化
-    matrix.begin();
-    // // matrix.setTextWrap(false);
-    matrix.setBrightness(M_BRIGHT); // 设置矩阵屏幕亮度0~255
-
-    mmfill.MatrixTest(); // 测试矩阵
-
-    Serial.begin(9600); // 打开串口通信
-    delay(2000);
-    // for (uint16_t i = 0; i < 10000; ++i) { // 等待串口连接成功，防止RTOS崩溃
-    //     if (Serial)
-    //         break;
-    //     delay(10);
-    // }
-    // while(!Serial) delay(10); // 等待串口通信成功
-
-    // matrix.setTextColor(colors[0]);
+    Serial.begin(19200); // 打开串口通信
     
+
+    mmhardware.Init(); // 执行硬件初始化
+    mmhardware.matrix.setBrightness(M_BRIGHT); // 设置矩阵屏幕亮度0~255
 
     // 调用功能池初始化
     MMFPSetup();
     // 执行功能池中的矩阵测试功能
-    FPool.Exec(MMF_ID_MATRIXTEST); 
+    FPool.Exec(MMF_ID_MATRIXTEST);     
+    delay(1000); 
+    // 打开人体红外监测模块
+    pinMode(PIN_PIR, INPUT);
     return r;  
 }
 
