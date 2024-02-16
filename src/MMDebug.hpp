@@ -22,7 +22,7 @@ public:
     void TestRTC()
     {
         char buff[26] = {};
-        RtcDateTime now = mmhardware.Rtc.GetDateTime();
+        RtcDateTime now = Rtc.GetDateTime();
         sprintf(buff, "%04d-%02d-%02d %02d:%02d:%02d",
             now.Year(), now.Month(), now.Day(),
             now.Hour(), now.Minute(), now.Second());
@@ -113,7 +113,7 @@ public:
         Serial.println(F("DHTxx Unified Sensor Example"));
         // Print temperature sensor details.
         sensor_t sensor;
-        mmhardware.dht.temperature().getSensor(&sensor);
+        dht.temperature().getSensor(&sensor);
         Serial.println(F("------------------------------------"));
         Serial.println(F("Temperature Sensor"));
         Serial.print(F("Sensor Type: "));
@@ -133,7 +133,7 @@ public:
         Serial.println(F("°C"));
         Serial.println(F("------------------------------------"));
         // Print humidity sensor details.
-        mmhardware.dht.humidity().getSensor(&sensor);
+        dht.humidity().getSensor(&sensor);
         Serial.println(F("Humidity Sensor"));
         Serial.print(F("Sensor Type: "));
         Serial.println(sensor.name);
@@ -153,7 +153,7 @@ public:
         Serial.println(F("------------------------------------"));
         // Get temperature event and print its value.
         sensors_event_t event;
-        mmhardware.dht.temperature().getEvent(&event);
+        dht.temperature().getEvent(&event);
         if (isnan(event.temperature)) {
             Serial.println(F("Error reading temperature!"));
         } else {
@@ -162,7 +162,7 @@ public:
             Serial.println(F("°C"));
         }
         // Get humidity event and print its value.
-        mmhardware.dht.humidity().getEvent(&event);
+        dht.humidity().getEvent(&event);
         if (isnan(event.relative_humidity)) {
             Serial.println(F("Error reading humidity!"));
         } else {

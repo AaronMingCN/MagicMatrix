@@ -70,7 +70,6 @@
 #endif
 
 
-
 // #define M_8x8
 
 #ifdef M_8x8

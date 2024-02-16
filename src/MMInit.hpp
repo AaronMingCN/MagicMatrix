@@ -17,10 +17,11 @@
 #include "MMSD.hpp"
 
 #include "MMFPSetup.hpp"
-
+#include "MMHardware.hpp"
 
 uint16_t MMInit() {
     uint16_t r = 0;
+    mmhardware.Init(); // 执行硬件初始化
     matrix.begin();
     // // matrix.setTextWrap(false);
     matrix.setBrightness(M_BRIGHT); // 设置矩阵屏幕亮度0~255
@@ -28,11 +29,12 @@ uint16_t MMInit() {
     mmfill.MatrixTest(); // 测试矩阵
 
     Serial.begin(9600); // 打开串口通信
-    for (uint8_t i = 0; i < 100; ++i) { // 等待串口连接成功，防止RTOS崩溃
-        if (Serial)
-            break;
-        delay(10);
-    }
+    delay(2000);
+    // for (uint16_t i = 0; i < 10000; ++i) { // 等待串口连接成功，防止RTOS崩溃
+    //     if (Serial)
+    //         break;
+    //     delay(10);
+    // }
     // while(!Serial) delay(10); // 等待串口通信成功
 
     // matrix.setTextColor(colors[0]);
