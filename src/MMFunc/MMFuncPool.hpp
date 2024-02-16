@@ -12,10 +12,11 @@
 #include "MMFunc/MMFunc.hpp"
 #include <vector>
 
+// MMFuncPool功能池
 class MMFuncPool {
 private:
+    // 功能块列表
     std::vector<MMFunc*> items;
-
 public:
     // MMFuncPool();
     // 析构,释放功能列表

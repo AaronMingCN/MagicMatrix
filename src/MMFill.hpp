@@ -14,8 +14,8 @@
 
 class MMFill {
 public:
-    // 测试每一个像素点
-    void PixTest()
+    // 根据屏幕逻辑顺序，测试每一个像素点
+    void PixTestLogicalOrder()
     {
         for (int i = 0; i < M_HEIGHT; ++i) { // 将所有颜色清空
             for (int j = 0; j < M_WIDTH; ++j) {
@@ -27,6 +27,17 @@ public:
         delay(100);
         mmscr.Clear();
     }
+
+    // 根据屏幕物理顺序，测试每一个像素点
+    void PixTestPhysicalOrder()
+    {
+        for(uint16_t i = 0; i < M_PIXS; ++i) {
+            matrix.setPixelColor(i, 255, 255, 255);
+        }
+        delay(100);
+        mmscr.Clear();
+    }
+
 
     // 行填充
     void RowFill()

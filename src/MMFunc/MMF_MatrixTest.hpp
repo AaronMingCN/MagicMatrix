@@ -12,12 +12,12 @@
 #include "MMFunc.hpp"
 #include "../MMFill.hpp"
 
-
+// 矩阵屏幕测试类，测试RGB显示
 class MMF_MatrixTest: public MMFunc {
 public:
     MMF_MatrixTest(uint16_t fid): MMFunc(fid) {}
     virtual uint16_t Exec() {
-        mmfill.MatrixTest();
+        mmfill.PixTestLogicalOrder();
         return EXECR_OK;
     }
 };

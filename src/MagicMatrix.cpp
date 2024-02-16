@@ -34,7 +34,7 @@ void loop()
         Serial.println(mmhardware.irrecv.decodedIRData.command); // 向串口打印
         switch (mmhardware.irrecv.decodedIRData.command) {
         case IRK_0:
-            mmfill.PixTest();
+            mmfill.PixTestLogicalOrder();
             break;
         case IRK_1:
             mmfill.RowFill();
