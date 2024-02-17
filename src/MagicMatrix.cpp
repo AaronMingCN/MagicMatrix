@@ -27,8 +27,7 @@ void loop()
 #ifdef MMDEBUG
     mmdebug.TestRTC();
     mmdebug.TestDHT();
-    // mmdebug.TestSD();
-    // mmdebug.TestMMRamBmp();
+    // mmdebug.TestSD();    // mmdebug.TestMMRamBmp();
 #endif
 
     if (mmhardware.irrecv.decode()) { // 如果红外线读取到数据
@@ -68,8 +67,21 @@ void loop()
     digitalWrite(PIN_LED_BUILTIN, LOW);
     mmscr.Update();
     delay(1000);
+
+    digitalWrite(PIN_LED_BUILTIN, HIGH);
+    mmsd.DrawBitmap("pixil2.bmp");
+    digitalWrite(PIN_LED_BUILTIN, LOW);
+    mmscr.Update();
+    delay(1000);    
+
     digitalWrite(PIN_LED_BUILTIN, HIGH);
     mmsd.DrawBitmap("pixil3.bmp");
+    digitalWrite(PIN_LED_BUILTIN, LOW);
+    mmscr.Update();
+    delay(1000);
+
+    digitalWrite(PIN_LED_BUILTIN, HIGH);
+    mmsd.DrawBitmap("pixil4.bmp");
     digitalWrite(PIN_LED_BUILTIN, LOW);
     mmscr.Update();
     delay(1000);
