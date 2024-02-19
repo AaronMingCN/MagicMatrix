@@ -9,12 +9,15 @@
 
 #include "MMHardware.hpp"
 #include "MMInit.hpp"
+#include "MMMenuItem.hpp"
+
 
 void setup()
 {
     delay(1000); // 等待一秒bootloader
     MMInit(); // 初始化系统
     // mmhardware.Rtc.SetDateTime(RtcDateTime(__DATE__, __TIME__));
+    Serial.print(sizeof(arg));
 }
 
 void loop()
