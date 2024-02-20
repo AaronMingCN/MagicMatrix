@@ -52,11 +52,11 @@ public:
         Serial.println(PIN_SD_MISO);
 
         if (!SD.begin(PIN_SD_SS)) {
-            Serial.println("Initialization failed!");
+            Serial.println("SD Initialization failed!");
             return;
         }
 
-        Serial.println("Initialization done.");
+        Serial.println("SD Initialization done.");
 
 #define fileName "newtest0.txt"
         char writeData[] = "Testing writing to " fileName;

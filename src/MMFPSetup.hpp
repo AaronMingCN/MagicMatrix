@@ -13,6 +13,7 @@
 
 #include "MMFunc/MMF_MatrixTest.hpp"
 #include "MMFunc/MMF_DispTime_1.hpp"
+#include "MMFunc/MMFuncPool.hpp"
 
 // 定义功能类型,为后期扩展作准备,目前默认只有0
 #define MMF_TYPE_0 (0x00)
@@ -28,8 +29,8 @@ MMF_DispTime_1 mmf_disptime_1(MMF_ID_DISPTIME_1);
 // 将功能模块加入功能池
 void MMFPSetup()
 {
-    FPool.Append(&mmf_matrixtest);
-    FPool.Append(&mmf_disptime_1);
+    mmfuncpool.Append(&mmf_matrixtest);
+    mmfuncpool.Append(&mmf_disptime_1);
 }
 
 #endif

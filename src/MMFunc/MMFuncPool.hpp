@@ -42,6 +42,6 @@ public:
         }
         return r;
     }
-};
+} mmfuncpool;
 
 #endif

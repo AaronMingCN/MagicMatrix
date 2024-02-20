@@ -45,6 +45,6 @@ public:
         } 
         return r;
     }
-};
+} mmmenu(mmfuncpool);
 
 #endif

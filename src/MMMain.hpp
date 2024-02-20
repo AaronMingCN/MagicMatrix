@@ -9,16 +9,30 @@
 #ifndef _MMMAIN_HPP
 #define _MMMAIN_HPP
 
+
+#include "MMDebug.hpp"
+#include "MMDefine.hpp"
+#include "MMFill.hpp"
+#include "MMGrap.hpp"
+#include "MMRamBmp.hpp"
+#include "MMSD.hpp"
+
+#include "MMFPSetup.hpp"
+#include "MMHardware.hpp"
+#include "MMMenu.hpp"
+
 // MagicMatrix 主程序类
 class MMMain{
 public:
+    // MMMenu menu;
+    MMMenuItem_Key CurrMenuKey; // 当前所在的菜单位置 
     // 构造
     MMMain() {
 
     };
     // 析构
     ~MMMain() {
-
+        this->CurrMenuKey.clear(); // 情况当前所在的菜单位置
     };
 
     // 主循环
@@ -28,7 +42,18 @@ public:
 
     // 执行初始化
     bool Init() {
+        uint16_t r = 0;
+        Serial.begin(19200); // 打开串口通信
 
+        mmhardware.Init(); // 执行硬件初始化
+
+        // 调用功能池初始化
+        MMFPSetup();
+        // 执行功能池中的矩阵测试功能
+        mmfuncpool.ExecFunc(MMF_ID_MATRIXTEST);     
+        // 执行当前菜单
+        mmmenu.ExecItem(this->CurrMenuKey);
+        return r;  
     }
 } mmmain;
 

@@ -36,9 +36,8 @@ public:
     // 将文件位图读取到矩阵
     void DrawBitmap(String FName)
     {
-
         if (!SD.begin(PIN_SD_SS)) { // 打开SD
-            Serial.println("Initialization failed!");
+            Serial.println("SD Initialization failed!");
             return;
         }
         // SD卡文件对象
