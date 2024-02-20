@@ -9,20 +9,24 @@
 
 #include "MMHardware.hpp"
 #include "MMInit.hpp"
-#include "MMMenuItem.hpp"
+#include "MMMenu.hpp"
+#include "MMMain.hpp"
+
 
 
 void setup()
 {
     delay(1000); // 等待一秒bootloader
     MMInit(); // 初始化系统
+    // 系统初始化
+    mmmain.Init();
     // mmhardware.Rtc.SetDateTime(RtcDateTime(__DATE__, __TIME__));
-    Serial.print(sizeof(arg));
 }
 
 void loop()
 {
-
+    // 执行主循环
+    mmmain.MainLoop();
     if (digitalRead(PIN_PIR))
         mmhardware.matrix.setBrightness(50);
     else

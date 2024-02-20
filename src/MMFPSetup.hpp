@@ -21,6 +21,7 @@
 #define MMF_ID_MATRIXTEST (0x0001)
 MMF_MatrixTest mmf_matrixtest(MMF_ID_MATRIXTEST);
 
+// 显示时间
 #define MMF_ID_DISPTIME_1 (0x0002)
 MMF_DispTime_1 mmf_disptime_1(MMF_ID_DISPTIME_1);
 

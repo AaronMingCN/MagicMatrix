@@ -13,26 +13,35 @@
 #define EXECR_OK (0x0000)
 #define EXECR_ERROR (0x0001) // 执行错误
 
+// 定义功能ID类型
+typedef uint16_t MMFID_t;
+
+// 定义功能type类型
+typedef uint8_t MMFType_t;
+
+// 定义功能执行结果类型
+typedef uint16_t MMFExecR_t;
+
 // 功能基础类
 class MMFunc {
 public:
-    uint16_t FID = 0; // 功能块ID
-    uint8_t FType = 0; // 类型，共后期扩展使用
+    MMFID_t FID = 0; // 功能块ID
+    MMFType_t FType = 0; // 类型，共后期扩展使用
     // 所在功能池，使用方法：((MMFuncPool *)(this->FPool))->Exec(0);
     void* FPool = NULL;
     // 构造函数
     MMFunc() {};
-    MMFunc(uint16_t fid)
+    MMFunc(MMFID_t fid)
     {
         this->FID = fid;
     }
-    MMFunc(uint16_t fid, uint16_t ftype)
+    MMFunc(MMFID_t fid, MMFType_t ftype)
     {
         this->FID = fid;
         this->FType = ftype;
     }
     // virtual ~MMFunc(){};
-    virtual uint16_t Exec() { return EXECR_ERROR; }; // 虚函数需要子类实现
+    virtual MMFExecR_t Exec() { return EXECR_ERROR; }; // 虚函数需要子类实现
 };
 
 #endif
