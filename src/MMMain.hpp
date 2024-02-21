@@ -55,6 +55,20 @@ public:
         mmmenu.ExecItem(this->CurrMenuKey);
         return r;  
     }
+
+    // 返回上一级菜单
+    void GoBack() {
+        // 如果当前菜单Key非空则删除最后一个元素
+        if (this->CurrMenuKey.size()) this->CurrMenuKey.pop_back();
+        mmmenu.ExecItem(this->CurrMenuKey);
+    }
+
+    // 返回根菜单
+    void GoHome() {
+        // 清空菜单key
+        this->CurrMenuKey.clear();
+        mmmenu.ExecItem(this->CurrMenuKey);
+    }
 } mmmain;
 
 
