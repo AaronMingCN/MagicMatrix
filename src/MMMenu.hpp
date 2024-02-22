@@ -30,8 +30,8 @@ public:
     std::vector<MMMenuItem> Items;
     MMFuncPool *FPool; // 功能池
     // 构造，根位置的Fid
-    MMMenu(MMFuncPool &fp){
-        FPool = &fp;
+    MMMenu(MMFuncPool *fp){
+        this->FPool = fp;
         LoadItems();
     };
 
@@ -61,10 +61,13 @@ public:
 
     // 载入菜单项
     void LoadItems() {
-        this->Items.push_back({0x00, 0x00, MMF_ID_DISPTIME_1}); // 载入菜单功能
         this->Items.push_back({0x00, 0x00, MMF_ID_MATRIXTEST}); // 载入菜单功能
+        this->Items.push_back({0x00, 0x01, MMF_ID_DISPTIME_1}); // 载入菜单功能
+        this->Items.push_back({0x00, 0x02, MMF_ID_DISPDATE_1}); // 载入菜单功能
+        this->Items.push_back({0x00, 0x03, MMF_ID_DISPDHT_1}); // 载入菜单功能
+        
     }
 
-} mmmenu(mmfuncpool);
+};
 
 #endif

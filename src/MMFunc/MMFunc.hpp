@@ -58,12 +58,13 @@ public:
         this->FType = ftype;
     }
     // virtual ~MMFunc(){};
-    virtual MMFExecR_t Exec(InquireDelay *IDelay)
+    virtual MMFExecR_t Exec(InquireDelay *IDelay)// 虚函数需要子类实现
     {
-        if (IDelay->Inquire())
-            delay(1000);
+        // if (IDelay->Inquire())
+        //     delay(1000);
+        //Serial.println("TEST");
         return EXECR_ERROR;
-    }; // 虚函数需要子类实现
+    }; 
 };
 
 #endif

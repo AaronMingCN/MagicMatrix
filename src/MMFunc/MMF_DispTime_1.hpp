@@ -16,17 +16,21 @@
 // 时间显示界面1
 class MMF_DispTime_1 : public MMFunc {
 public:
+    // 构造
     MMF_DispTime_1(uint16_t fid)
         : MMFunc(fid)
     {
     }
-    char buff[8] = {};
-    virtual uint16_t Exec()
+
+    // 执行功能
+    virtual MMFExecR_t Exec(InquireDelay *IDelay)
     {
-        RtcDateTime now;
+        char buff[8] = {};
+        Serial.println("Disp Time");
+        RtcDateTime now; // 读取当前时间
         mmhardware.matrix.setTextSize(1);
         int lastsec = -1;
-        for (int i = 0; i < 1000; ++i) {
+        while(IDelay->IDelay(100)) { // 等待并询问退出
             now = mmhardware.Rtc.GetDateTime();
             if (now.Second() != lastsec) {
                 lastsec = now.Second();
@@ -52,9 +56,7 @@ public:
                 mmhardware.matrix.print(':');
                 mmhardware.matrix.show();
             }
-            delay(10);
         }
-
         return EXECR_OK;
     }
 };

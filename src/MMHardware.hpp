@@ -42,6 +42,7 @@ public:
         irrecv.enableIRIn(); // 打开红外接收
         dht.begin(); // 温湿度传感器开始工作
         matrix.begin(); // 矩阵屏幕开始工作
+        matrix.setTextWrap(false); // 矩阵显示设置为不自动换行
         matrix.setBrightness(M_BRIGHT); // 设置矩阵屏幕亮度0~255
         // while (!matrix.availableForWrite()) delay(100); // 等待设备就绪
         // while (!irrecv.available()) delay(100);

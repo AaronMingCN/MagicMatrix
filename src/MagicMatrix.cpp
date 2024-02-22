@@ -12,7 +12,6 @@
 
 #include "MMFunc/MMFuncPool.hpp"
 
-
 void setup()
 {
     delay(1000); // 等待一秒bootloader
@@ -23,8 +22,7 @@ void setup()
 
 void loop()
 {
-    // 执行主循环
-    mmmain.MainLoop();
+
     if (mmhardware.GetPIRR())
         mmhardware.matrix.setBrightness(50);
     else
@@ -77,7 +75,7 @@ void loop()
     mmsd.DrawBitmap("pixil2.bmp");
     digitalWrite(PIN_LED_BUILTIN, LOW);
     mmscr.Update();
-    delay(1000);    
+    delay(1000);
 
     digitalWrite(PIN_LED_BUILTIN, HIGH);
     mmsd.DrawBitmap("pixil3.bmp");
@@ -90,4 +88,6 @@ void loop()
     digitalWrite(PIN_LED_BUILTIN, LOW);
     mmscr.Update();
     delay(1000);
+    // 执行主循环
+    mmmain.MainLoop();
 }

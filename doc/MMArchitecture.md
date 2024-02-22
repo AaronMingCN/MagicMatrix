@@ -4,6 +4,7 @@
 2. [屏幕使用类 MMScr (Magic Matrix Screen)](#屏幕使用类-mmscr-magic-matrix-screen)
 3. [功能池 MMFuncPool (Magic Matrix Function Pool)](#功能池-mmfuncpool-magic-matrix-function-pool)
 4. [功能块基础类 MMFunc (Magic Magic)](#功能块基础类-mmfunc-magic-magic)
+5. [InquireDelay 询问等待类，功能回调机制](#inquiredelay-询问等待类功能回调机制)
 
 ----
 
@@ -241,4 +242,29 @@
     ```cpp
     // 执行功能池中的矩阵测试功能
     FPool.ExecFunc(MMF_ID_MATRIXTEST);    
+    ```
+
+## InquireDelay 询问等待类，功能回调机制
+
++ InquireDelay 说明
+
+  功能在执行过程中需要询问当前系统，用于在不同的功能中进行切换
+
+    ```cpp
+    // 查询等待类型(接口),在执行过程中询问是否需继续执行当前功能,用于响应退出操作
+    // 传入的参数是等待的毫秒数,在功能块中应当使用IDelay替代delay()并对返回结果作出响应
+    // 询问等待的时间当不需要继续执行时可能不传入的时间短
+    // 返回为false是需要退出
+    class InquireDelay {
+    public:
+        virtual bool Inquire()
+        {
+            return true;
+        };
+        virtual bool IDelay(unsigned long ms)
+        {
+            delay(ms);
+            return Inquire();
+        };
+    };
     ```

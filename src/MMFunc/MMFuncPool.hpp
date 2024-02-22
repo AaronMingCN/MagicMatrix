@@ -16,7 +16,7 @@
 class MMFuncPool {
 private:
     // 功能块列表
-    std::vector<MMFunc*> items;
+    std::vector<MMFunc *> items;
 public:
     // MMFuncPool();
     // 析构,释放功能列表
@@ -24,7 +24,7 @@ public:
         this->items.clear();
     };
     // 将功能块加入到池中
-    void Append(MMFunc* mmf)
+    void Append(MMFunc *mmf)
     {
         mmf->FPool = this;
         this->items.push_back(mmf);
