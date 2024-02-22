@@ -22,6 +22,23 @@ typedef uint8_t MMFType_t;
 // 定义功能执行结果类型
 typedef uint16_t MMFExecR_t;
 
+// 查询等待类型(接口),在执行过程中询问是否需继续执行当前功能,用于响应退出操作
+// 传入的参数是等待的毫秒数,在功能块中应当使用IDelay替代delay()并对返回结果作出响应
+// 询问等待的时间当不需要继续执行时可能不传入的时间短
+// 返回为false是需要退出
+class InquireDelay {
+public:
+    virtual bool Inquire()
+    {
+        return true;
+    };
+    virtual bool IDelay(unsigned long ms)
+    {
+        delay(ms);
+        return Inquire();
+    };
+};
+
 // 功能基础类
 class MMFunc {
 public:
@@ -41,7 +58,12 @@ public:
         this->FType = ftype;
     }
     // virtual ~MMFunc(){};
-    virtual MMFExecR_t Exec() { return EXECR_ERROR; }; // 虚函数需要子类实现
+    virtual MMFExecR_t Exec(InquireDelay *IDelay)
+    {
+        if (IDelay->Inquire())
+            delay(1000);
+        return EXECR_ERROR;
+    }; // 虚函数需要子类实现
 };
 
 #endif

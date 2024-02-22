@@ -31,12 +31,12 @@ public:
     }
 
     // 根据功能块FID执行对应的功能
-    uint16_t ExecFunc(uint16_t fid)
+    uint16_t ExecFunc(uint16_t fid, InquireDelay *IDelay)
     {
         uint16_t r = EXECR_ERROR; // 定义返回结果,默认为错误
         for (auto i : items) {
             if (i->FID == fid) {
-                r = i->Exec();
+                r = i->Exec(IDelay);
                 break;
             }
         }

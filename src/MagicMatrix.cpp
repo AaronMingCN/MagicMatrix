@@ -60,7 +60,7 @@ void loop()
             mmfill.AlarmLamp();
             break;
         case IRK_7:
-            mmfuncpool.ExecFunc(MMF_ID_DISPTIME_1);
+            // mmfuncpool.ExecFunc(MMF_ID_DISPTIME_1);
             break;
             // case K_7: Rain(); break;
         }
