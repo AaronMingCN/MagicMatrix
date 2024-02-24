@@ -126,6 +126,8 @@ public:
     // 执行初始化
     bool Init()
     {
+        Serial.begin();
+        
         uint16_t r = 0;
         Serial.begin(9600); // 打开串口通信
 

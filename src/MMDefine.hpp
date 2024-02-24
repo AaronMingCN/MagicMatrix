@@ -120,6 +120,24 @@ Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(M_WIDTH, M_ROW, PIN_M,
 #define IRK_8 (82)
 #define IRK_9 (74)
 
+// 定义另一标注遥控器按键
+
+#define IRK_A IRK_CH_MINUS
+#define IRK_B IRK_CH
+#define IRK_C IRK_CH_PLUS
+
+#define IRK_D IRK_PRE
+#define IRK_UP IRK_NXT
+#define IRK_E IRK_PAUSE
+
+#define IRK_LEFT IRK_MINUS
+#define IRK_SET IRK_PLUS
+#define IRK_RIGHT IRK_EQ
+
+#define IRK_DOWN IRK_100
+#define IRK_F IRK_200
+
+
 // RGB颜色的结构体
 struct RGB {
     uint8_t R;

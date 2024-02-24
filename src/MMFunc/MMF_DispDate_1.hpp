@@ -31,7 +31,7 @@ public:
         RtcDateTime now; // 读取当前时间
         mmhardware.matrix.setTextSize(1);
         int lastday = -1;
-        while(IDelay->IDelay(100)) { // 等待并询问退出
+        do { // 等待并询问退出
             now = mmhardware.Rtc.GetDateTime();
             if (now.Day() != lastday) {
                 lastday = now.Day();
@@ -51,7 +51,7 @@ public:
 
                 mmhardware.matrix.show();
             }
-        }
+        } while(IDelay->IDelay(100));
         return EXECR_OK;
     }
 };

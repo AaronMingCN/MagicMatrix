@@ -19,6 +19,7 @@ public:
     MMF_MatrixTest(uint16_t fid)
         : MMFunc(fid)
     {
+        
     }
     virtual MMFExecR_t Exec(InquireDelay* IDelay)
     {

@@ -30,8 +30,7 @@ public:
         // 定义上一次的温度和湿度，避免冗余绘图
         int lastT = 100;
         int lastH = 100;
-
-        while (IDelay->IDelay(1000)) { // 等待并询问退出
+        do { 
             // 跟别定义温湿度状态实例，并从传感器读取
             sensors_event_t event_t;
             mmhardware.dht.temperature().getEvent(&event_t);
@@ -62,7 +61,7 @@ public:
 
                 mmhardware.matrix.show();
             }
-        }
+        } while (IDelay->IDelay(1000)); // 等待并询问退出
         return EXECR_OK;
     }
 };
