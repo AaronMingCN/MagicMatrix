@@ -26,7 +26,7 @@ public:
     virtual MMFExecR_t Exec(InquireDelay *IDelay)
     {
         char buff[8] = {};
-        Serial.println("Disp Time");
+        // Serial.println("Disp Time");
         RtcDateTime now; // 读取当前时间
         mmhardware.matrix.setTextSize(1);
         int lastsec = -1;

@@ -84,7 +84,12 @@ public:
     virtual bool Inquire()
     {
         int t = this->IRRVal(); // 读取红外数值
-        Serial.println(String(CurrMenuItem) + " " + String(NextMenuItem));
+        // Serial.println(String(CurrMenuItem) + " " + String(NextMenuItem));
+        while (Serial1.available()) {
+            // String s = Serial1.readString();
+            
+            Serial.print(char(Serial1.read()));
+        }
         if (t >= 0)
             NextMenuItem = t;
         return NextMenuItem == CurrMenuItem;
@@ -126,19 +131,17 @@ public:
     // 执行初始化
     bool Init()
     {
-        Serial.begin();
-        
+
         uint16_t r = 0;
         Serial.begin(9600); // 打开串口通信
-
+        Serial1.begin(9600); // 打开串口1，蓝牙蓝牙模块通信
+        Serial1.println("AT+NAME=MagicMatrix"); // 设置蓝牙名称
         mmhardware.Init(); // 执行硬件初始化
         mmhardware.Beep(true);
         delay(100);
         mmhardware.Beep(false);
         // 调用功能池初始化
         MMFPSetup();
-
-
 
         // 执行功能池中的矩阵测试功能
         // this->ExecMenu(0, 0);
@@ -155,7 +158,8 @@ void MMMain::MainLoop()
         if (mmm.ItemExists(this->CurrMenuCate, this->NextMenuItem)) {
             this->CurrMenuItem = this->NextMenuItem;
             this->ExecMenu(this->CurrMenuCate, this->CurrMenuItem); // 循环执行当前菜单功能
-        } else NextMenuItem = CurrMenuItem;
+        } else
+            NextMenuItem = CurrMenuItem;
         this->Inquire();
     }
 }

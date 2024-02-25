@@ -20,8 +20,13 @@
 #define C_RP2040 // 定义使用的芯片类型
 
 #ifdef C_RP2040
-#define PIN_M (1u) // 定义矩阵屏幕引脚
-#define PIN_IRR (0u) // 定义红外线接收引脚
+
+// 定义蓝牙使用串行数据引脚
+#define PIN_S1_TX SERIA L1_TX // #define PIN_SERIAL_TX (0ul) 系统默认
+#define PIN_S1_RX SERIAL1_RX // #define PIN_SERIAL_RX (1ul)
+
+#define PIN_IRR (2u) // 定义红外线接收引脚
+#define PIN_M (3u) // 定义矩阵屏幕引脚
 
 #define PIN_I2C_DAT PIN_WIRE_SDA // I2C数据引脚, 4
 #define PIN_I2C_CLK PIN_WIRE_SCL // I2C时钟引脚, 5
