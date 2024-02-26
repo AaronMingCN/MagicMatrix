@@ -1,10 +1,10 @@
 <map version="freeplane 1.11.5">
 <!--To view this file, download free mind mapping software Freeplane from https://www.freeplane.org -->
 <node TEXT="MagicMatrix菜单树" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1708909400160" NUMBERED="false" FORMAT="markdownPatternFormat">
-<hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
+<hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <hook NAME="MapStyle" background="#f9f9f8" zoom="1.301">
-    <properties fit_to_viewport="false" show_icon_for_attributes="true" show_note_icons="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" associatedTemplateLocation="template:/light_nord_template.mm"/>
+    <properties show_icon_for_attributes="true" fit_to_viewport="false" show_note_icons="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" associatedTemplateLocation="template:/light_nord_template.mm"/>
 
 <map_styles>
 <stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24 pt">
@@ -80,7 +80,7 @@
 </map_styles>
 </hook>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-<node TEXT="基本显示" POSITION="bottom_or_right" ID="ID_1420311245" CREATED="1708906913766" MODIFIED="1708909400160" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="A.基本显示" POSITION="bottom_or_right" ID="ID_1420311245" CREATED="1708906913766" MODIFIED="1708945033784" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <node TEXT="0.时钟" ID="ID_537966244" CREATED="1708906929245" MODIFIED="1708909400161" NUMBERED="false" FORMAT="markdownPatternFormat">
 <icon BUILTIN="button_ok"/>
@@ -95,7 +95,17 @@
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 </node>
 </node>
-<node TEXT="填充" POSITION="bottom_or_right" ID="ID_1326429327" CREATED="1708907030650" MODIFIED="1708909400162" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="B.图像显示" POSITION="bottom_or_right" ID="ID_1799667714" CREATED="1708907138472" MODIFIED="1708945122771" NUMBERED="false" FORMAT="markdownPatternFormat">
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+<node TEXT="0.静态图片循环显示" ID="ID_1109368198" CREATED="1708907145208" MODIFIED="1708909390749" NUMBERED="false" FORMAT="markdownPatternFormat"><richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
+<text>+ 将图片放置在SD卡的bmp文件夹下</text></richcontent>
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+</node>
+<node TEXT="1.动图显示" ID="ID_1504471942" CREATED="1708907170618" MODIFIED="1708909400165" NUMBERED="false" FORMAT="markdownPatternFormat">
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+</node>
+</node>
+<node TEXT="C.填充" POSITION="bottom_or_right" ID="ID_1326429327" CREATED="1708907030650" MODIFIED="1708945132570" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <node TEXT="0.行填充" ID="ID_925049962" CREATED="1708907041107" MODIFIED="1708909400163" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
@@ -110,17 +120,7 @@
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 </node>
 </node>
-<node TEXT="图像显示" POSITION="bottom_or_right" ID="ID_1799667714" CREATED="1708907138472" MODIFIED="1708909400165" NUMBERED="false" FORMAT="markdownPatternFormat">
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-<node TEXT="0.静态图片循环显示" ID="ID_1109368198" CREATED="1708907145208" MODIFIED="1708909390749" NUMBERED="false" FORMAT="markdownPatternFormat"><richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
-<text>+ 将图片放置在SD卡的bmp文件夹下</text></richcontent>
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-</node>
-<node TEXT="1.动图显示" ID="ID_1504471942" CREATED="1708907170618" MODIFIED="1708909400165" NUMBERED="false" FORMAT="markdownPatternFormat">
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-</node>
-</node>
-<node TEXT="游戏" POSITION="bottom_or_right" ID="ID_1794420965" CREATED="1708908236466" MODIFIED="1708909400165" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="D.游戏" FOLDED="true" POSITION="bottom_or_right" ID="ID_1794420965" CREATED="1708908236466" MODIFIED="1708945096857" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <node TEXT="0.记分牌" ID="ID_265575124" CREATED="1708908242100" MODIFIED="1708909400166" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>

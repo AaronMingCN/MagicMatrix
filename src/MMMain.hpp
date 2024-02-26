@@ -23,29 +23,51 @@
 
 // MagicMatrix 主程序类
 class MMMain : InquireDelay {
+    unsigned long LastPIRR = 0; // 最后检测到人体的时间
+
 public:
-    uint8_t CurrMenuCate; // 当前所在的菜单位置
-    uint8_t CurrMenuItem; // 当前所在的菜单位置
-    uint8_t NextMenuItem; // 下一个菜单位置
+    uint8_t CurrMenuCate = 0; // 当前所在的菜单类
+    uint8_t CurrMenuItem = 0; // 当前所在的菜单项目
+    uint8_t NextMenuCate = 0; // 下一个菜单类
+    uint8_t NextMenuItem = 0; // 下一个菜单位置
 
     // 定义菜单
     MMMenu mmm;
 
     // 构造
     MMMain()
-        : mmm(&mmfuncpool) {
-
-        };
+        : mmm(&mmfuncpool) {};
     // 析构
     ~MMMain() {
 
     };
 
+    // 根据人体检测设置亮度
+    void SetBrightness()
+    {
+        unsigned long mxlong = (0 - 1); // unsigned long 的最大值,用户环绕计算
+
+        if (mmhardware.GetPIRR())
+            this->LastPIRR = millis(); // 如果检测到人，记录当前上电时间
+        unsigned long pass = 0; // 点亮经过的时间
+        unsigned long mill = millis(); // 获得当前上电时间
+        if (mill >= this->LastPIRR)
+            pass = mill - this->LastPIRR; // 如果没出现环绕
+        else
+            pass = mxlong - this->LastPIRR + mill; // 如果出现环绕
+        // 根据检测到人体的情况修改屏幕亮度
+        if (pass < M_PIRR_DELAY) {
+            mmhardware.matrix.setBrightness(M_BRIGHT);
+        } else {
+            mmhardware.matrix.setBrightness(M_BIRGHT_STANDBY);
+        }
+    }
+
     // 将红外线收到的按键值转换为数值
-    int IRRVal()
+    int IRRVal(uint16_t IRRCode)
     {
         int r = -1;
-        switch (mmhardware.IRRCode()) {
+        switch (IRRCode) {
         case IRK_0:
             r = 0;
             break;
@@ -80,19 +102,50 @@ public:
         return r;
     }
 
+    // 设置当前菜单位置
+    void SetMenu()
+    {
+        uint16_t IRRCode = mmhardware.IRRCode();
+        switch (IRRCode) {
+        case IRK_A: // A类功能
+            this->NextMenuCate = 0;
+            this->NextMenuItem = 0;
+            break;
+        case IRK_B: // B类功能
+            this->NextMenuCate = 1;
+            this->NextMenuItem = 0;
+            break;
+        case IRK_C: // C类功能
+            this->NextMenuCate = 2;
+            this->NextMenuItem = 0;
+            break;
+        case IRK_D: // D类功能
+            this->NextMenuCate = 3;
+            this->NextMenuItem = 0;
+            break;
+        case IRK_E: // E类功能
+            this->NextMenuCate = 4;
+            this->NextMenuItem = 0;
+            break;
+        default:
+            int t = this->IRRVal(IRRCode); // 读取红外数值
+            // Serial.println(String(CurrMenuItem) + " " + String(NextMenuItem));
+            if (mmm.ItemExists(this->CurrMenuCate, t))
+                this->NextMenuItem = t;
+        }
+    }
+
     // 实现InquireDelay方法
     virtual bool Inquire()
     {
-        int t = this->IRRVal(); // 读取红外数值
-        // Serial.println(String(CurrMenuItem) + " " + String(NextMenuItem));
+        // 读取蓝牙
         while (Serial1.available()) {
             // String s = Serial1.readString();
-            
             Serial.print(char(Serial1.read()));
         }
-        if (t >= 0)
-            NextMenuItem = t;
-        return NextMenuItem == CurrMenuItem;
+        this->SetBrightness();
+        this->SetMenu();
+        return NextMenuItem == CurrMenuItem && NextMenuCate == CurrMenuCate;
     }
 
     // 实现IDelay方法
@@ -155,11 +208,15 @@ public:
 void MMMain::MainLoop()
 {
     for (;;) {
-        if (mmm.ItemExists(this->CurrMenuCate, this->NextMenuItem)) {
+        // 如果下一个位菜单置存在则更新当前菜单位置，否则将下一位置改为当前位置
+        if (mmm.ItemExists(this->NextMenuCate, this->NextMenuItem)) {
+            this->CurrMenuCate = this->NextMenuCate;
             this->CurrMenuItem = this->NextMenuItem;
             this->ExecMenu(this->CurrMenuCate, this->CurrMenuItem); // 循环执行当前菜单功能
-        } else
-            NextMenuItem = CurrMenuItem;
+        } else {
+            this->NextMenuCate = this->CurrMenuCate;
+            this->NextMenuItem = this->CurrMenuItem;
+        }
         this->Inquire();
     }
 }

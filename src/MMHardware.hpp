@@ -25,6 +25,8 @@ public:
     ThreeWire myWire; // 定义i2c通信模块
     RtcDS1302<ThreeWire> Rtc; // 定义rtc时钟模块
     Adafruit_NeoMatrix matrix;
+
+    uint16_t IRRLastTime; // 最后一次接收到红外线数据的事件，用于防止连击
     // 构造函数
     MMHardware()
         : irrecv(PIN_IRR) // 构造irrecv
@@ -53,10 +55,29 @@ public:
     // IRRCode红外线读取到的结果代码
     uint16_t IRRCode()
     {
+        // irLibrary.check();
         uint16_t r = IRK_NONE;
         if (this->irrecv.decode()) { // 如果红外线读取到数据
             r = this->irrecv.decodedIRData.command;
+            
             this->irrecv.resume();
+        }
+        while (this->irrecv.decode()) {
+            this->irrecv.resume();
+        }
+        return r;
+    }
+    // 如果读取到了数据，等待按键抬起，防止误操作
+    uint16_t IRRClickCode() {
+        uint16_t r = IRK_NONE;
+        unsigned long pass = 0; // 距离上次接收红外线的时间
+        uint16_t mill = millis(); // 获取当前开机时间
+        // 防止环绕的处理
+        if (mill >= this->IRRLastTime) pass = mill - this->IRRLastTime;
+        else pass = (unsigned long)(-1) - this->IRRLastTime + mill;
+        if (pass > IRR_WAIT) { // 如果逝去的时间超过了等待间隔
+            r = this->IRRCode(); // 获取红外代码
+            if (r != IRK_NONE) this->IRRLastTime = mill; // 如果获得成功更新最后获得时间
         }
         return r;
     }

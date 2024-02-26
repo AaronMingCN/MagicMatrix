@@ -30,14 +30,20 @@ public:
         // 定义上一次的温度和湿度，避免冗余绘图
         int lastT = 100;
         int lastH = 100;
-        do { 
-            // 跟别定义温湿度状态实例，并从传感器读取
+        mmhardware.dht.begin();
+        do {
+            // 定义温湿度状态实例，并从传感器读取
             sensors_event_t event_t;
             mmhardware.dht.temperature().getEvent(&event_t);
             int T = int(event_t.temperature);
+
             sensors_event_t event_h;
-            mmhardware.dht.humidity().getEvent(&event_h);
-            int H = int(event_h.relative_humidity);
+            int H = -1; // 避免读取失败的问题
+            while (H < 0 || H > 99){
+                mmhardware.dht.humidity().getEvent(&event_h);
+                H = int(event_h.relative_humidity);
+            }
+             
 
             if (lastT != T || lastH != H) { // 解决冗余绘图问题
                 lastT = T;
@@ -50,14 +56,16 @@ public:
                 mmhardware.matrix.setTextColor(RGB::Color(255, 255, 0));
                 mmhardware.matrix.print(buff);
 
-                sprintf(buff, "%-2d", H);
-                mmhardware.matrix.setCursor(0, 8);
-                mmhardware.matrix.setTextColor(RGB::Color(0, 255, 0));
-                mmhardware.matrix.print(buff);
+                if (0 <= H && H < 100) { // 避免错误绘图
+                    sprintf(buff, "%-2d", H);
+                    mmhardware.matrix.setCursor(0, 8);
+                    mmhardware.matrix.setTextColor(RGB::Color(0, 255, 0));
+                    mmhardware.matrix.print(buff);
 
-                mmhardware.matrix.setCursor(11, 8);
-                mmhardware.matrix.setTextColor(RGB::Color(0, 0, 255));
-                mmhardware.matrix.print('%');
+                    mmhardware.matrix.setCursor(11, 8);
+                    mmhardware.matrix.setTextColor(RGB::Color(0, 0, 255));
+                    mmhardware.matrix.print('%');
+                }
 
                 mmhardware.matrix.show();
             }

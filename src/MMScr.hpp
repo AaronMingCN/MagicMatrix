@@ -23,6 +23,7 @@ public:
     void Update()
     {
         mmhardware.matrix.show();
+        while(!mmhardware.matrix.canShow()); // 等待绘图结束
     }
 
     // 清空矩阵，并立刻显示

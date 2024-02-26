@@ -16,6 +16,8 @@
 #include "MMFunc/MMF_DispTime_1.hpp"
 #include "MMFunc/MMF_DispDate_1.hpp"
 #include "MMFunc/MMF_DispDHT_1.hpp"
+#include "MMFunc/MMF_DispBmpLoop.hpp"
+#include "MMFunc/MMF_FillRainbow.hpp"
 
 
 // 定义功能类型,为后期扩展作准备,目前默认只有0
@@ -37,6 +39,14 @@ MMF_DispDate_1 mmf_dispdate_1(MMF_ID_DISPDATE_1);
 #define MMF_ID_DISPDHT_1 (0x0003)
 MMF_DispDHT_1 mmf_dispdht_1(MMF_ID_DISPDHT_1);
 
+// 循环显示图片
+#define MMF_ID_DISPBMPLOOP (0x0004)
+MMF_DispBmpLoop mmf_dispbmploop(MMF_ID_DISPBMPLOOP);
+
+// 循环显示图片
+#define MMF_ID_FILLRAINBOW (0x0005)
+MMF_FillRainbow mmf_fillrainbow(MMF_ID_FILLRAINBOW);
+
 // 将功能模块加入功能池
 void MMFPSetup()
 {
@@ -44,6 +54,10 @@ void MMFPSetup()
     mmfuncpool.Append(&mmf_disptime_1);
     mmfuncpool.Append(&mmf_dispdate_1);    
     mmfuncpool.Append(&mmf_dispdht_1);    
+    mmfuncpool.Append(&mmf_dispbmploop);    
+    mmfuncpool.Append(&mmf_fillrainbow);    
+    
+    
 }
 
 #endif

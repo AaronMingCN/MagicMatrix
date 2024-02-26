@@ -39,7 +39,7 @@
 
 #define PIN_BUZZER (20u) // 蜂鸣器引脚
 
-#define PIN_PIRR (7u) // 人体红外传感器引脚
+#define PIN_PIRR (22u) // 人体红外传感器引脚
 
 // 定义SD访问相关的引脚
 #ifndef ARDUINO_ARCH_RP2040
@@ -92,7 +92,9 @@ Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(M_WIDTH, M_ROW, PIN_M,
 #endif
 
 #define M_PIXS (M_HEIGHT * M_WIDTH) // 定义矩阵像素数
-#define M_BRIGHT (30) // 屏幕亮度0~255
+#define M_BRIGHT (100u) // 屏幕亮度0~255
+#define M_BIRGHT_STANDBY (10u) // 工作亮度
+#define M_PIRR_DELAY (20000u) // 人体检测延迟，毫秒
 
 // 定义红外遥控器的按键
 #define IRK_NONE (0)
@@ -141,6 +143,9 @@ Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(M_WIDTH, M_ROW, PIN_M,
 
 #define IRK_DOWN IRK_100
 #define IRK_F IRK_200
+
+#define IRR_WAIT (1000u) // 遥控器等待间隔，防止连击毫秒
+
 
 
 // RGB颜色的结构体
