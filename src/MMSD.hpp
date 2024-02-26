@@ -33,30 +33,36 @@
 
 class MMSD {
 public:
-    // 将文件位图读取到矩阵
-    void DrawBitmap(String FName)
+    // 绘制位图
+    void DrawBitmap(File& F, bool AutoShow = true)
     {
-        if (!SD.begin(PIN_SD_SS)) { // 打开SD
-            Serial.println("SD Initialization failed!");
-            return;
-        }
-        // SD卡文件对象
-        File myFile = SD.open(FName, FILE_READ);
-        myFile.seek(54); // 跳过bmp文件的头部信息
+        F.seek(54); // 跳过bmp文件的头部信息
         uint8_t t[3]; // 颜色值的临时变量
-        for (uint16_t i = 1; i <= M_HEIGHT && myFile.available(); ++i) {
-            for (uint16_t j = 0; j < M_WIDTH && myFile.available(); ++j) {
+        for (uint16_t i = 1; i <= M_HEIGHT && F.available(); ++i) {
+            for (uint16_t j = 0; j < M_WIDTH && F.available(); ++j) {
                 // myFile.read(&t, sizeof(t)); // 读取一个像素的颜色值
-                myFile.read(&t, 3);
+                F.read(&t, 3);
 
                 // Serial.println(String(t.R) + ',' + String(t.G) + ',' + String(t.B) + ' ');
                 mmscr.SetPixel(j, M_HEIGHT - i, t[2], t[1], t[1]);
             }
-            // Serial.println("");
         }
-        // mmscr.Update();
-        myFile.close();
-        SD.end();
+        if (AutoShow) mmscr.Update();
+    }
+
+    // 将文件位图读取到矩阵
+    void DrawBitmap(String FName, bool AutoShow = true)
+    {
+        if (!SD.begin(PIN_SD_SS)) { // 打开SD
+            Serial.println("SD Initialization failed!");
+        } else {
+            // SD卡文件对象
+            File myFile = SD.open(FName, FILE_READ);
+            DrawBitmap(myFile, AutoShow);
+            // mmscr.Update();
+            myFile.close();
+            SD.end();
+        }
     }
 
 } mmsd;
