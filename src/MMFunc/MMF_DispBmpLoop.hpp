@@ -29,31 +29,7 @@ public:
             Serial.println("initialization done.");
             File dir = SD.open("/bmp/"); // 打开SD卡中的bmp文件夹
             do {
-                // digitalWrite(PIN_LED_BUILTIN, HIGH);
-                // mmsd.DrawBitmap("pixil1.bmp");
-                // digitalWrite(PIN_LED_BUILTIN, LOW);
-                // mmscr.Update();
-                // if (!(IDelay->IDelay(500))) break;
-
-                // digitalWrite(PIN_LED_BUILTIN, HIGH);
-                // mmsd.DrawBitmap("pixil2.bmp");
-                // digitalWrite(PIN_LED_BUILTIN, LOW);
-                // mmscr.Update();
-                // if (!(IDelay->IDelay(500))) break;
-
-                // digitalWrite(PIN_LED_BUILTIN, HIGH);
-                // mmsd.DrawBitmap("pixil3.bmp");
-                // digitalWrite(PIN_LED_BUILTIN, LOW);
-                // mmscr.Update();
-                // if (!(IDelay->IDelay(500))) break;
-
-                // digitalWrite(PIN_LED_BUILTIN, HIGH);
-                // mmsd.DrawBitmap("pixil4.bmp");
-                // digitalWrite(PIN_LED_BUILTIN, LOW);
-                // mmscr.Update();
-                // if (!(IDelay->IDelay(500)))
-                //     break;
-                for (;;) { // 以此读取文件夹下的bmp文件
+                for (;IDelay->IDelay(1000);) { // 以此读取文件夹下的bmp文件
                     File entry = dir.openNextFile();
                     if (entry) { // 如果文件打开成功
                         if (!entry.isDirectory()) { // 如果不是文件夹
@@ -64,7 +40,7 @@ public:
                         break;
                 }
                 dir.rewindDirectory(); // 返回到文件夹首位置
-            } while (IDelay->IDelay(1000));
+            } while (IDelay->Inquire());
             SD.end();
         }
         return EXECR_OK;
