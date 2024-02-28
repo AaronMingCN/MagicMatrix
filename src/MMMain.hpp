@@ -156,8 +156,8 @@ public:
             this->LastPIRR = millis();
             this->UpdateBrightness();
         }
+        Scheduler.yield(); // 释放资源
         return r;
-        Scheduler.yield();
     }
 
     // 实现IDelay方法

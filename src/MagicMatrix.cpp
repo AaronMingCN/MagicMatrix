@@ -18,7 +18,6 @@
 void EventLoop() {
     mmmain.SetMenu(); // 更新菜单情况
     mmmain.CheckPIRR(); // 更新屏幕亮度
-    
     Scheduler.yield(); // 释放资源
     delay(10);
 }
@@ -39,5 +38,6 @@ void loop()
 {
     // 执行主循环
     mmmain.MainLoop();
+
 }
 
