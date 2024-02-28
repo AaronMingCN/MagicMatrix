@@ -20,6 +20,7 @@
 #include "MMFunc/MMFuncPool.hpp"
 #include "MMHardware.hpp"
 #include "MMMenu.hpp"
+#include "Scheduler.h"
 
 // MagicMatrix 主程序类
 class MMMain : InquireDelay {
@@ -42,13 +43,9 @@ public:
 
     };
 
-    // 根据人体检测设置亮度
-    void SetBrightness()
+    void UpdateBrightness()
     {
         unsigned long mxlong = (0 - 1); // unsigned long 的最大值,用户环绕计算
-
-        if (mmhardware.GetPIRR())
-            this->LastPIRR = millis(); // 如果检测到人，记录当前上电时间
         unsigned long pass = 0; // 点亮经过的时间
         unsigned long mill = millis(); // 获得当前上电时间
         if (mill >= this->LastPIRR)
@@ -61,6 +58,14 @@ public:
         } else {
             mmhardware.matrix.setBrightness(M_BIRGHT_STANDBY);
         }
+    }
+
+    // 根据人体检测设置亮度
+    void CheckPIRR()
+    {
+        if (mmhardware.GetPIRR())
+            this->LastPIRR = millis(); // 如果检测到人，记录当前上电时间
+        this->UpdateBrightness();
     }
 
     // 将红外线收到的按键值转换为数值
@@ -143,9 +148,16 @@ public:
             // String s = Serial1.readString();
             Serial.print(char(Serial1.read()));
         }
-        this->SetBrightness();
-        this->SetMenu();
-        return NextMenuItem == CurrMenuItem && NextMenuCate == CurrMenuCate;
+        // this->CheckPIRR();  // 此部分已经改为多线程处理
+        // this->SetMenu();
+        // 菜单位置是否未变化
+        bool r = (NextMenuItem == CurrMenuItem && NextMenuCate == CurrMenuCate);
+        if (!r) {
+            this->LastPIRR = millis();
+            this->UpdateBrightness();
+        }
+        return r;
+        Scheduler.yield();
     }
 
     // 实现IDelay方法
@@ -196,9 +208,6 @@ public:
         // 调用功能池初始化
         MMFPSetup();
 
-        // 执行功能池中的矩阵测试功能
-        // this->ExecMenu(0, 0);
-        // 执行当前菜单
         return r;
     }
 
@@ -207,18 +216,18 @@ public:
 // 主循环
 void MMMain::MainLoop()
 {
-    for (;;) {
-        // 如果下一个位菜单置存在则更新当前菜单位置，否则将下一位置改为当前位置
-        if (mmm.ItemExists(this->NextMenuCate, this->NextMenuItem)) {
-            this->CurrMenuCate = this->NextMenuCate;
-            this->CurrMenuItem = this->NextMenuItem;
-            this->ExecMenu(this->CurrMenuCate, this->CurrMenuItem); // 循环执行当前菜单功能
-        } else {
-            this->NextMenuCate = this->CurrMenuCate;
-            this->NextMenuItem = this->CurrMenuItem;
-        }
-        this->Inquire();
+    // for (;;) {
+    //  如果下一个位菜单置存在则更新当前菜单位置，否则将下一位置改为当前位置
+    if (mmm.ItemExists(this->NextMenuCate, this->NextMenuItem)) {
+        this->CurrMenuCate = this->NextMenuCate;
+        this->CurrMenuItem = this->NextMenuItem;
+        this->ExecMenu(this->CurrMenuCate, this->CurrMenuItem); // 循环执行当前菜单功能
+    } else {
+        this->NextMenuCate = this->CurrMenuCate;
+        this->NextMenuItem = this->CurrMenuItem;
     }
+    this->Inquire();
+    //}
 }
 
 #endif

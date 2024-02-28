@@ -29,7 +29,7 @@ public:
             Serial.println("initialization done.");
             File dir = SD.open("/bmp/"); // 打开SD卡中的bmp文件夹
             do {
-                for (;IDelay->IDelay(1000);) { // 以此读取文件夹下的bmp文件
+                do { // 以此读取文件夹下的bmp文件
                     File entry = dir.openNextFile();
                     if (entry) { // 如果文件打开成功
                         if (!entry.isDirectory()) { // 如果不是文件夹
@@ -38,7 +38,7 @@ public:
                         entry.close(); // 关闭文件
                     } else
                         break;
-                }
+                } while (IDelay->IDelay(1000));
                 dir.rewindDirectory(); // 返回到文件夹首位置
             } while (IDelay->Inquire());
             SD.end();
