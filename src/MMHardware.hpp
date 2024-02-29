@@ -11,19 +11,33 @@
 
 #include "MMDefine.hpp"
 #include <IRremote.hpp>
-// #include <RtcDS1302.h>
+
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
 #include <DHT_U.h>
+
+// 定义选择时钟使用的芯片
+#define MM_RTCDS1302
+// #define MM_RTCDS1307
+#ifdef MM_RTCDS1302
+#include <RtcDS1302.h>
+#endif
+
+#ifdef MM_RTCDS1307
 #include <RtcDS1307.h>
+#endif
 
 class MMHardware {
 public:
     IRrecv irrecv; // 定义红外接收对象
     DHT_Unified dht; // 定义dht温湿度模块
-    // ThreeWire myWire; // 定义i2c通信模块
-    // RtcDS1302<ThreeWire> Rtc; // 定义rtc时钟模块
+#ifdef MM_RTCDS1302
+    ThreeWire myWire; // 定义i2c通信模块
+    RtcDS1302<ThreeWire> Rtc; // 定义rtc时钟模块
+#endif
+#ifdef MM_RTCDS1307
     RtcDS1307<TwoWire> Rtc;
+#endif
     Adafruit_NeoMatrix matrix;
 
     uint16_t IRRLastTime; // 最后一次接收到红外线数据的事件，用于防止连击
@@ -31,9 +45,13 @@ public:
     MMHardware()
         : irrecv(PIN_IRR) // 构造irrecv
         , dht(PIN_DHT, DHT11) // 构造dht温湿度模块
-        // , myWire(PIN_I2C_DAT, PIN_I2C_CLK, PIN_DS1302_CS) // 构造i2c通信
-        // , Rtc(myWire) // 构造rtc时钟模块
+#ifdef MM_RTCDS1302
+        , myWire(PIN_I2C_DAT, PIN_I2C_CLK, PIN_DS1302_CS) // 构造i2c通信
+        , Rtc(myWire) // 构造rtc时钟模块
+#endif
+#ifdef MM_RTCDS1307
         , Rtc(Wire) // 构造rtc时钟模块
+#endif
         , matrix(M_HEIGHT, M_WIDTH, PIN_M, M_MATRIXTYPE, M_LEDTYPE) {
             // Init(); // 放在main类中初始化，否则会引起系统异常
         };

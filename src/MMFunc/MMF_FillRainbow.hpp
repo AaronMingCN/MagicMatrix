@@ -23,23 +23,7 @@ public:
     virtual MMFExecR_t Exec(InquireDelay* IDelay)
     {
         do {
-            // mmscr.Update();
-            // for (int i = 0; i < M_HEIGHT; ++i) { // 行循环
-            //     if (i % 2)
-            //         for (int j = M_WIDTH - 1; j >= 0; --j) {
-            //             mmscr.SetPixel(j, i, 255, (i * 255 / M_HEIGHT), (j * 255 / M_WIDTH));
-            //             //mmhardware.matrix.endWrite();
-            //             if (!IDelay->IDelay(100)) break;
-            //             mmscr.Update();
-            //         }
-            //     else
-            //         for (int j = 0; j < M_WIDTH; ++j) {
-            //             mmscr.SetPixel(j, i, 255, (i * 255 / M_HEIGHT), (j * 255 / M_WIDTH));
-            //             if (!IDelay->IDelay(100)) break;
-            //             mmscr.Update();
-            //         }
-            // }
-            // mmscr.SetEmpty();
+
             for (int i = 0; i < M_HEIGHT; ++i) {
                 int r = i, c = 0;
                 while (r >= 0) {

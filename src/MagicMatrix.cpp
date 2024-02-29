@@ -29,7 +29,7 @@ void setup()
     // 系统初始化
     mmmain.Init();
     // 取消注释后会根据编译时间调整硬件时间
-    mmhardware.Rtc.SetDateTime(RtcDateTime(__DATE__, __TIME__));
+    // mmhardware.Rtc.SetDateTime(RtcDateTime(__DATE__, __TIME__));
     Scheduler.startLoop(EventLoop); // 开启读取红外线的循环
 }
 
@@ -37,7 +37,8 @@ void setup()
 void loop()
 {
     // 执行主循环
-    mmmain.MainLoop();
-
+    // mmmain.MainLoop();
+    mmdebug.TestDHT();
+    delay(2000);
 }
 
