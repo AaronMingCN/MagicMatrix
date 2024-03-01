@@ -61,15 +61,20 @@ public:
 
     // 载入菜单项
     void LoadItems() {
-
+        // 菜单分类0x00 
         this->Items.push_back({0x00, 0x00, MMF_ID_DISPTIME_1}); // 载入菜单功能 显示时间
         this->Items.push_back({0x00, 0x01, MMF_ID_DISPDATE_1}); // 载入菜单功能 显示日期
         this->Items.push_back({0x00, 0x02, MMF_ID_DISPDHT_1}); // 载入菜单功能 显示温湿度
         this->Items.push_back({0x00, 0x09, MMF_ID_MATRIXTEST}); // 载入菜单功能 测试矩阵
-
+        // 菜单分类0x01
         this->Items.push_back({0x01, 0x00, MMF_ID_DISPBMPLOOP});  // 循环显示位图
+        // 菜单分类0x02
+        this->Items.push_back({0x02, 0x00, MMF_ID_SCOREBOARD});  // 记分牌
+        // 菜单分类0x03
+        this->Items.push_back({0x03, 0x00, MMF_ID_FILLRAINBOW});  // 填充
 
-        this->Items.push_back({0x02, 0x00, MMF_ID_FILLRAINBOW});  // 循环显示位图
+        
+
     }
 
 };
