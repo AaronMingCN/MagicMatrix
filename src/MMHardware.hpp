@@ -12,6 +12,10 @@
 #include "MMDefine.hpp"
 #include <IRremote.hpp>
 
+#include <Adafruit_GFX.h>
+#include <Adafruit_NeoMatrix.h>
+#include <Adafruit_NeoPixel.h>
+
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
 #include <DHT_U.h>

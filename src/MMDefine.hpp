@@ -7,9 +7,7 @@
 #ifndef _MMDEF_HPP
 #define _MMDEF_HPP
 
-#include <Adafruit_GFX.h>
-#include <Adafruit_NeoMatrix.h>
-#include <Adafruit_NeoPixel.h>
+
 
 #include <pins_arduino.h>
 
