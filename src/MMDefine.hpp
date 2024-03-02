@@ -70,24 +70,12 @@
 
 #endif
 
-// #define M_8x8
-
-#ifdef M_8x8
-#define M_HEIGHT (8) // 定义矩阵屏幕行数
-#define M_WIDTH (8) // 定义矩阵屏幕列数
-// 定义RGB矩阵
-Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(M_WIDTH, M_ROW, PIN_M,
-    NEO_MATRIX_TOP + NEO_MATRIX_LEFT + NEO_MATRIX_COLUMNS + NEO_MATRIX_PROGRESSIVE,
-    NEO_GRB + NEO_KHZ800);
-#else
 #define M_HEIGHT (16) // 定义矩阵屏幕行数
 #define M_WIDTH (16) // 定义矩阵屏幕列数
 // 定义矩阵屏幕类型
 #define M_MATRIXTYPE (NEO_MATRIX_TOP + NEO_MATRIX_LEFT + NEO_MATRIX_COLUMNS + NEO_MATRIX_ZIGZAG)
 // 定义LED类型
 #define M_LEDTYPE (NEO_GRB + NEO_KHZ800)
-
-#endif
 
 #define M_PIXS (M_HEIGHT * M_WIDTH) // 定义矩阵像素数
 #define M_BRIGHT (100u) // 屏幕亮度0~255
