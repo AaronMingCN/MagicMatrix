@@ -46,9 +46,10 @@ public:
     // 根据设置像素RGB值
     void SetPixcel(uint16_t x, uint16_t y, uint8_t R, uint8_t G, uint8_t B)
     {
-        this->bmp[y * width + x].R = R;
-        this->bmp[y * width + x].G = G;
-        this->bmp[y * width + x].B = B;
+        RGB &pix = this->bmp[y * width + x];
+        pix.R = R;
+        pix.G = G;
+        pix.B = B;
     }
 
     // 根据RGB结构设置
