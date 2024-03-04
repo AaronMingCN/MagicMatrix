@@ -26,9 +26,9 @@ public:
         mmscr.Fill(0xFF, 0xFF, 0xFF); // 填充空白
         mmscr.Update();
         if  (!SD.begin(PIN_SD_SS)) {
-            Serial.println("initialization failed!");
+            UART_USB.println("initialization failed!");
         } else {
-            Serial.println("initialization done.");
+            UART_USB.println("initialization done.");
             File dir = SD.open("/bmp/"); // 打开SD卡中的bmp文件夹
             do {
                 do { // 以此读取文件夹下的bmp文件

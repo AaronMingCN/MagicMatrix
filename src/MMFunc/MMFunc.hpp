@@ -69,7 +69,7 @@ public:
     {
         // if (IDelay->Inquire())
         //     delay(1000);
-        //Serial.println("TEST");
+        //UART_USB.println("TEST");
         return EXECR_ERROR;
     }; 
 };

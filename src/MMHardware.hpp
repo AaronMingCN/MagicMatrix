@@ -16,7 +16,6 @@
 #include <Adafruit_NeoMatrix.h>
 #include <Adafruit_NeoPixel.h>
 
-#include <Adafruit_Sensor.h>
 #include <DHT.h>
 #include <DHT_U.h>
 
@@ -30,6 +29,10 @@
 #ifdef MM_RTCDS1307
 #include <RtcDS1307.h>
 #endif
+
+// 定义串口
+#define UART_USB _UART_USB_
+#define UART_BLE _UART1_
 
 class MMHardware {
 public:

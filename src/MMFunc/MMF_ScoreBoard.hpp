@@ -16,8 +16,8 @@
 // 记分牌功能
 class MMF_ScoreBoard : public MMFunc {
 public:
-    int CurrScoreA = -1; // 第一个分数
-    int CurrScoreB = -1; // 第二个分数
+    int CurrScoreA = 0; // 第一个分数
+    int CurrScoreB = 0; // 第二个分数
     int NextScoreA = 0; // 避免重复绘图
     int NextScoreB = 0;
     MMF_ScoreBoard(uint16_t fid)
@@ -30,8 +30,10 @@ public:
     {
         mmhardware.matrix.clear();
         mmhardware.matrix.setCursor(4, 0);
+        mmhardware.matrix.setTextColor(RGB::Color(255, 0, 0));
         mmhardware.matrix.print(CurrScoreA);
         mmhardware.matrix.setCursor(4, 8);
+        mmhardware.matrix.setTextColor(RGB::Color(0, 255, 0));
         mmhardware.matrix.print(CurrScoreB);
         mmhardware.matrix.show();
     }
@@ -47,19 +49,35 @@ public:
         }
     }
 
+    // 执行功能
     virtual MMFExecR_t Exec(InquireDelay* IDelay)
     {
         uint16_t irk = 0; // 定义红外线按键值
         this->DispScore();
         do {
-            mmhardware.IRRCode(irk); // 读取红外线值
-            if (irk == IRK_A)
-                IDelay->GoHome(); // 如果读取到A键返回home
-            else
-                this->DispScoreChange();
-            delay(10);
+            UART_USB.print(irk);
+            if (mmhardware.IRRCode(irk)) { // 读取红外线值
+                switch (irk) {
+                case IRK_UP:
+                    ++NextScoreA;
+                    break;
+                case IRK_DOWN:
+                    ++NextScoreB;
+                    break;
+                case IRK_LEFT:
+                    --NextScoreA;
+                    break;
+                case IRK_RIGHT:
+                    --NextScoreB;
+                    break;
 
-        } while (irk != IRK_A);
+                default:
+                    break;
+                }
+                this->DispScoreChange();
+                UART_USB.print(irk);
+            }
+        } while (IDelay->IDelay(100));
         return EXECR_OK;
     }
 };

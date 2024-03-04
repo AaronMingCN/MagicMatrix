@@ -20,7 +20,7 @@
 #ifdef C_RP2040
 
 // 定义蓝牙使用串行数据引脚
-#define PIN_S1_TX SERIA L1_TX // #define PIN_SERIAL_TX (0ul) 系统默认
+#define PIN_S1_TX SERIAL1_TX // #define PIN_SERIAL_TX (0ul) 系统默认
 #define PIN_S1_RX SERIAL1_RX // #define PIN_SERIAL_RX (1ul)
 
 #define PIN_IRR (2u) // 定义红外线接收引脚

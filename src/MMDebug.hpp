@@ -26,37 +26,37 @@ public:
         sprintf(buff, "%04d-%02d-%02d %02d:%02d:%02d",
             now.Year(), now.Month(), now.Day(),
             now.Hour(), now.Minute(), now.Second());
-        Serial.println(buff);
+        UART_USB.println(buff);
     }
 
     // 测试SD卡文件访问
     void TestSD()
     {
 #if defined(ARDUINO_ARCH_MBED)
-        Serial.print("Starting SD Card ReadWrite on MBED ");
+        UART_USB.print("Starting SD Card ReadWrite on MBED ");
 #else
-        Serial.print("Starting SD Card ReadWrite on ");
+        UART_USB.print("Starting SD Card ReadWrite on ");
 #endif
         // SD卡文件对象
         File myFile;
-        Serial.println(BOARD_NAME);
-        Serial.println(RP2040_SD_VERSION);
+        UART_USB.println(BOARD_NAME);
+        UART_USB.println(RP2040_SD_VERSION);
 
-        Serial.print("Initializing SD card with SS = ");
-        Serial.println(PIN_SD_SS);
-        Serial.print("SCK = ");
-        Serial.println(PIN_SD_SCK);
-        Serial.print("MOSI = ");
-        Serial.println(PIN_SD_MOSI);
-        Serial.print("MISO = ");
-        Serial.println(PIN_SD_MISO);
+        UART_USB.print("Initializing SD card with SS = ");
+        UART_USB.println(PIN_SD_SS);
+        UART_USB.print("SCK = ");
+        UART_USB.println(PIN_SD_SCK);
+        UART_USB.print("MOSI = ");
+        UART_USB.println(PIN_SD_MOSI);
+        UART_USB.print("MISO = ");
+        UART_USB.println(PIN_SD_MISO);
 
         if (!SD.begin(PIN_SD_SS)) {
-            Serial.println("SD Initialization failed!");
+            UART_USB.println("SD Initialization failed!");
             return;
         }
 
-        Serial.println("SD Initialization done.");
+        UART_USB.println("SD Initialization done.");
 
 #define fileName "newtest0.txt"
         char writeData[] = "Testing writing to " fileName;
@@ -67,108 +67,108 @@ public:
 
         // if the file opened okay, write to it:
         if (myFile) {
-            Serial.print("Writing to ");
-            Serial.print(fileName);
-            Serial.print(" ==> ");
-            Serial.println(writeData);
+            UART_USB.print("Writing to ");
+            UART_USB.print(fileName);
+            UART_USB.print(" ==> ");
+            UART_USB.println(writeData);
 
             myFile.println(writeData);
 
             // close the file:
             myFile.close();
-            Serial.println("done.");
+            UART_USB.println("done.");
         } else {
             // if the file didn't open, print an error:
-            Serial.print("Error opening ");
-            Serial.println(fileName);
+            UART_USB.print("Error opening ");
+            UART_USB.println(fileName);
         }
 
         // re-open the file for reading:
         myFile = SD.open(fileName, FILE_READ);
 
         if (myFile) {
-            Serial.print("Reading from ");
-            Serial.println(fileName);
-            Serial.println("===============");
+            UART_USB.print("Reading from ");
+            UART_USB.println(fileName);
+            UART_USB.println("===============");
 
             // read from the file until there's nothing else in it:
             // while (myFile.available())
             // {
-            Serial.write(myFile.read());
+            UART_USB.write(myFile.read());
             // }
 
             // close the file:
             myFile.close();
 
-            Serial.println("===============");
+            UART_USB.println("===============");
         } else {
             // if the file didn't open, print an error:
-            Serial.print("Error opening ");
-            Serial.println(fileName);
+            UART_USB.print("Error opening ");
+            UART_USB.println(fileName);
         }
     }
 
     void TestDHT()
     {
-        Serial.println(F("DHTxx Unified Sensor Example"));
+        UART_USB.println(F("DHTxx Unified Sensor Example"));
         // Print temperature sensor details.
         sensor_t sensor;
         mmhardware.dht.temperature().getSensor(&sensor);
-        Serial.println(F("------------------------------------"));
-        Serial.println(F("Temperature Sensor"));
-        Serial.print(F("Sensor Type: "));
-        Serial.println(sensor.name);
-        Serial.print(F("Driver Ver:  "));
-        Serial.println(sensor.version);
-        Serial.print(F("Unique ID:   "));
-        Serial.println(sensor.sensor_id);
-        Serial.print(F("Max Value:   "));
-        Serial.print(sensor.max_value);
-        Serial.println(F("°C"));
-        Serial.print(F("Min Value:   "));
-        Serial.print(sensor.min_value);
-        Serial.println(F("°C"));
-        Serial.print(F("Resolution:  "));
-        Serial.print(sensor.resolution);
-        Serial.println(F("°C"));
-        Serial.println(F("------------------------------------"));
+        UART_USB.println(F("------------------------------------"));
+        UART_USB.println(F("Temperature Sensor"));
+        UART_USB.print(F("Sensor Type: "));
+        UART_USB.println(sensor.name);
+        UART_USB.print(F("Driver Ver:  "));
+        UART_USB.println(sensor.version);
+        UART_USB.print(F("Unique ID:   "));
+        UART_USB.println(sensor.sensor_id);
+        UART_USB.print(F("Max Value:   "));
+        UART_USB.print(sensor.max_value);
+        UART_USB.println(F("°C"));
+        UART_USB.print(F("Min Value:   "));
+        UART_USB.print(sensor.min_value);
+        UART_USB.println(F("°C"));
+        UART_USB.print(F("Resolution:  "));
+        UART_USB.print(sensor.resolution);
+        UART_USB.println(F("°C"));
+        UART_USB.println(F("------------------------------------"));
         // Print humidity sensor details.
         mmhardware.dht.humidity().getSensor(&sensor);
-        Serial.println(F("Humidity Sensor"));
-        Serial.print(F("Sensor Type: "));
-        Serial.println(sensor.name);
-        Serial.print(F("Driver Ver:  "));
-        Serial.println(sensor.version);
-        Serial.print(F("Unique ID:   "));
-        Serial.println(sensor.sensor_id);
-        Serial.print(F("Max Value:   "));
-        Serial.print(sensor.max_value);
-        Serial.println(F("%"));
-        Serial.print(F("Min Value:   "));
-        Serial.print(sensor.min_value);
-        Serial.println(F("%"));
-        Serial.print(F("Resolution:  "));
-        Serial.print(sensor.resolution);
-        Serial.println(F("%"));
-        Serial.println(F("------------------------------------"));
+        UART_USB.println(F("Humidity Sensor"));
+        UART_USB.print(F("Sensor Type: "));
+        UART_USB.println(sensor.name);
+        UART_USB.print(F("Driver Ver:  "));
+        UART_USB.println(sensor.version);
+        UART_USB.print(F("Unique ID:   "));
+        UART_USB.println(sensor.sensor_id);
+        UART_USB.print(F("Max Value:   "));
+        UART_USB.print(sensor.max_value);
+        UART_USB.println(F("%"));
+        UART_USB.print(F("Min Value:   "));
+        UART_USB.print(sensor.min_value);
+        UART_USB.println(F("%"));
+        UART_USB.print(F("Resolution:  "));
+        UART_USB.print(sensor.resolution);
+        UART_USB.println(F("%"));
+        UART_USB.println(F("------------------------------------"));
         // Get temperature event and print its value.
         sensors_event_t event;
         mmhardware.dht.temperature().getEvent(&event);
         if (isnan(event.temperature)) {
-            Serial.println(F("Error reading temperature!"));
+            UART_USB.println(F("Error reading temperature!"));
         } else {
-            Serial.print(F("Temperature: "));
-            Serial.print(event.temperature);
-            Serial.println(F("°C"));
+            UART_USB.print(F("Temperature: "));
+            UART_USB.print(event.temperature);
+            UART_USB.println(F("°C"));
         }
         // Get humidity event and print its value.
         mmhardware.dht.humidity().getEvent(&event);
         if (isnan(event.relative_humidity)) {
-            Serial.println(F("Error reading humidity!"));
+            UART_USB.println(F("Error reading humidity!"));
         } else {
-            Serial.print(F("Humidity: "));
-            Serial.print(event.relative_humidity);
-            Serial.println(F("%"));
+            UART_USB.print(F("Humidity: "));
+            UART_USB.print(event.relative_humidity);
+            UART_USB.println(F("%"));
         }
     }
 

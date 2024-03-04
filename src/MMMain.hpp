@@ -20,7 +20,7 @@
 #include "MMFunc/MMFuncPool.hpp"
 #include "MMHardware.hpp"
 #include "MMMenu.hpp"
-#include "Scheduler.h"
+// #include "Scheduler.h"
 
 // MagicMatrix 主程序类
 class MMMain : InquireDelay {
@@ -39,9 +39,7 @@ public:
     MMMain()
         : mmm(&mmfuncpool) {};
     // 析构
-    ~MMMain() {
-
-    };
+    // ~MMMain() {    };
 
     void UpdateBrightness()
     {
@@ -135,7 +133,7 @@ public:
                 break;
             default:
                 int t = this->IRRVal(IRRCode); // 读取红外数值
-                // Serial.println(String(CurrMenuItem) + " " + String(NextMenuItem));
+                // UART_USB.println(String(CurrMenuItem) + " " + String(NextMenuItem));
                 if (mmm.ItemExists(this->CurrMenuCate, t))
                     this->NextMenuItem = t;
             }
@@ -146,19 +144,19 @@ public:
     virtual bool Inquire()
     {
         // 读取蓝牙
-        while (Serial1.available()) {
-            // String s = Serial1.readString();
-            Serial.print(char(Serial1.read()));
+        while (UART_BLE.available()) {
+            // String s = UART_USB1.readString();
+            UART_USB.print(char(UART_BLE.read()));
         }
-        // this->CheckPIRR();  // 此部分已经改为多线程处理
-        // this->SetMenu();
+        this->CheckPIRR();  // 由于功能块内部需要调用红外线数据，取消此部分多线程处理
+        this->SetMenu();
         // 菜单位置是否未变化
         bool r = (NextMenuItem == CurrMenuItem && NextMenuCate == CurrMenuCate);
         if (!r) {
             this->LastPIRR = millis();
             this->UpdateBrightness();
         }
-        Scheduler.yield(); // 释放资源
+        // Scheduler.yield(); // 释放资源
         return r;
     }
 
@@ -205,11 +203,10 @@ public:
     // 执行初始化
     bool Init()
     {
-
         uint16_t r = 0;
-        Serial.begin(9600); // 打开串口通信
-        Serial1.begin(9600); // 打开串口1，蓝牙蓝牙模块通信
-        Serial1.println("AT+NAME=MagicMatrix"); // 设置蓝牙名称
+        UART_USB.begin(9600); // 打开串口通信
+        UART_BLE.begin(9600); // 打开串口1，蓝牙蓝牙模块通信
+        UART_BLE.println("AT+NAME=MagicMatrix"); // 设置蓝牙名称
         mmhardware.Init(); // 执行硬件初始化
         mmhardware.Beep(true);
         delay(100);
@@ -225,6 +222,7 @@ public:
 // 主循环
 void MMMain::MainLoop()
 {
+
     // for (;;) {
     //  如果下一个位菜单置存在则更新当前菜单位置，否则将下一位置改为当前位置
     if (mmm.ItemExists(this->NextMenuCate, this->NextMenuItem)) {

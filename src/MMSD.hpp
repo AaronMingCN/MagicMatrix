@@ -43,7 +43,7 @@ public:
                 // myFile.read(&t, sizeof(t)); // 读取一个像素的颜色值
                 F.read(&t, 3);
 
-                // Serial.println(String(t.R) + ',' + String(t.G) + ',' + String(t.B) + ' ');
+                // UART_USB.println(String(t.R) + ',' + String(t.G) + ',' + String(t.B) + ' ');
                 mmscr.SetPixel(j, M_HEIGHT - i, t[2], t[1], t[1]);
             }
         }
@@ -54,7 +54,7 @@ public:
     void DrawBitmap(String FName, bool AutoShow = true)
     {
         if (!SD.begin(PIN_SD_SS)) { // 打开SD
-            Serial.println("SD Initialization failed!");
+            UART_USB.println("SD Initialization failed!");
         } else {
             // SD卡文件对象
             File myFile = SD.open(FName, FILE_READ);
