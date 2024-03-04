@@ -28,13 +28,16 @@ public:
     // 显示分数
     void DispScore()
     {
+        char buff[5] = {}; // 用于保存格式化后字符串的缓存
         mmhardware.matrix.clear();
-        mmhardware.matrix.setCursor(4, 0);
+        mmhardware.matrix.setCursor(-1, 0);
         mmhardware.matrix.setTextColor(RGB::Color(255, 0, 0));
-        mmhardware.matrix.print(CurrScoreA);
-        mmhardware.matrix.setCursor(4, 8);
+        sprintf(buff, "%3d", CurrScoreA);
+        mmhardware.matrix.print(buff);
+        mmhardware.matrix.setCursor(-1, 9);
         mmhardware.matrix.setTextColor(RGB::Color(0, 255, 0));
-        mmhardware.matrix.print(CurrScoreB);
+        sprintf(buff, "%3d", CurrScoreB);
+        mmhardware.matrix.print(buff);
         mmhardware.matrix.show();
     }
 
@@ -55,8 +58,10 @@ public:
         uint16_t irk = 0; // 定义红外线按键值
         this->DispScore();
         do {
-            UART_USB.print(irk);
-            if (mmhardware.IRRCode(irk)) { // 读取红外线值
+            // delay(1000);
+            //  等待红外线接收到数据
+            //  while (!mmhardware.irrecv.available()) delay(10);
+            if (mmhardware.IRRCode(irk, true)) { // 读取红外线值
                 switch (irk) {
                 case IRK_UP:
                     ++NextScoreA;
@@ -70,12 +75,28 @@ public:
                 case IRK_RIGHT:
                     --NextScoreB;
                     break;
-
+                case IRK_SET: // 长安Set键归零
+                {
+                    bool rset = true; // 默认重置
+                    for (int i = 0; i < 10; ++i) { // 等待按键
+                        // 如果仍然按着set键则等待
+                        if (mmhardware.IRRCode(irk, true) && irk == IRK_SET) {
+                            delay(100);
+                        } else {
+                            rset = false;
+                            break;
+                        }
+                    }
+                    if (rset) { // 如果需要重置分数
+                        this->NextScoreA = 0;
+                        this->NextScoreB = 0;
+                    }
+                } break;
                 default:
                     break;
                 }
+
                 this->DispScoreChange();
-                UART_USB.print(irk);
             }
         } while (IDelay->IDelay(100));
         return EXECR_OK;

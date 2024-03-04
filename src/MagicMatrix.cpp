@@ -36,9 +36,9 @@ void setup()
 void loop()
 {
     // 执行主循环
-    // mmmain.MainLoop();
-    mmdebug.TestDHT();
-    UART_USB.println("tttt");
-    delay(2000);
+    mmmain.MainLoop();
+    // mmdebug.TestDHT();
+
+    // delay(2000);
 }
 

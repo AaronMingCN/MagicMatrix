@@ -78,20 +78,21 @@ public:
         pinMode(PIN_PIRR, INPUT); // 设置人体红外探测器为输入
     }
 
-    // IRRCode红外线读取到的结果代码, WaitRelease 是否等待松开按键
-    bool IRRCode(uint16_t &Code,bool WaitRelease = false)
+    // IRRCode红外线读取到的结果代码, WaitData 是否等待数据
+    bool IRRCode(uint16_t &Code,bool WaitData = false)
     {
-        // irLibrary.check();
         uint16_t r = false;
         Code = IRK_NONE;
-        if (this->irrecv.decode()) { // 如果红外线读取到数据
+        // 如果需要等待数据
+        if (WaitData) {
+            while (!(this->irrecv.decode())) delay(10);
             r = true;
             Code = this->irrecv.decodedIRData.command;
-
             this->irrecv.resume();
-        }
-        if (r && WaitRelease) { // 如果需要等待抬起按键
-            while (this->irrecv.decode()) { // 等待红外遥控抬起按键
+        } else {
+            if (this->irrecv.decode()) { // 如果红外线读取到数据
+                r = true;
+                Code = this->irrecv.decodedIRData.command;
                 this->irrecv.resume();
             }
         }
