@@ -76,16 +76,18 @@ public:
     }
 
     // IRRCode红外线读取到的结果代码, WaitRelease 是否等待松开按键
-    uint16_t IRRCode(bool WaitRelease = false)
+    bool IRRCode(uint16_t &Code,bool WaitRelease = false)
     {
         // irLibrary.check();
-        uint16_t r = IRK_NONE;
+        uint16_t r = false;
+        Code = IRK_NONE;
         if (this->irrecv.decode()) { // 如果红外线读取到数据
-            r = this->irrecv.decodedIRData.command;
+            r = true;
+            Code = this->irrecv.decodedIRData.command;
 
             this->irrecv.resume();
         }
-        if (WaitRelease) { // 如果需要等待抬起按键
+        if (r && WaitRelease) { // 如果需要等待抬起按键
             while (this->irrecv.decode()) { // 等待红外遥控抬起按键
                 this->irrecv.resume();
             }
@@ -93,24 +95,6 @@ public:
         return r;
     }
 
-    // 如果读取到了数据，等待按键抬起，防止误操作
-    uint16_t IRRClickCode()
-    {
-        uint16_t r = IRK_NONE;
-        unsigned long pass = 0; // 距离上次接收红外线的时间
-        uint16_t mill = millis(); // 获取当前开机时间
-        // 防止环绕的处理
-        if (mill >= this->IRRLastTime)
-            pass = mill - this->IRRLastTime;
-        else
-            pass = (unsigned long)(-1) - this->IRRLastTime + mill;
-        if (pass > IRR_WAIT) { // 如果逝去的时间超过了等待间隔
-            r = this->IRRCode(); // 获取红外代码
-            if (r != IRK_NONE)
-                this->IRRLastTime = mill; // 如果获得成功更新最后获得时间
-        }
-        return r;
-    }
 
     // 设置蜂鸣器开关
     void Beep(bool val)

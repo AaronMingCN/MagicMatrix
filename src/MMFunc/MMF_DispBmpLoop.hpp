@@ -23,6 +23,8 @@ public:
     }
     virtual MMFExecR_t Exec(InquireDelay* IDelay)
     {
+        mmscr.Fill(0xFF, 0xFF, 0xFF); // 填充空白
+        mmscr.Update();
         if  (!SD.begin(PIN_SD_SS)) {
             Serial.println("initialization failed!");
         } else {
@@ -36,10 +38,9 @@ public:
                             mmsd.DrawBitmap(entry); // 则将文件绘制
                         }
                         entry.close(); // 关闭文件
-                        IDelay->IDelay(100);
                     } else
                         break;
-                } while (IDelay->Inquire());
+                } while (IDelay->IDelay(1000));
                 dir.rewindDirectory(); // 返回到文件夹首位置
             } while (IDelay->Inquire());
             SD.end();

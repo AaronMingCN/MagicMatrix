@@ -28,15 +28,22 @@ typedef uint16_t MMFExecR_t;
 // 返回为false是需要退出
 class InquireDelay {
 public:
+    // 询问当前是否已经切换菜单位置
     virtual bool Inquire()
     {
         return true;
     };
+    // 询问并等待
     virtual bool IDelay(unsigned long ms)
     {
         delay(ms);
         return Inquire();
     };
+    // 返回初始位置
+    // 注意这里只是将下一个菜单项设置为返回，需要功能自行退出
+    virtual void GoHome() {
+
+    }
 };
 
 // 功能基础类

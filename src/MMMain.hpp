@@ -110,33 +110,35 @@ public:
     // 设置当前菜单位置
     void SetMenu()
     {
-        uint16_t IRRCode = mmhardware.IRRCode();
-        switch (IRRCode) {
-        case IRK_A: // A类功能
-            this->NextMenuCate = 0;
-            this->NextMenuItem = 0;
-            break;
-        case IRK_B: // B类功能
-            this->NextMenuCate = 1;
-            this->NextMenuItem = 0;
-            break;
-        case IRK_C: // C类功能
-            this->NextMenuCate = 2;
-            this->NextMenuItem = 0;
-            break;
-        case IRK_D: // D类功能
-            this->NextMenuCate = 3;
-            this->NextMenuItem = 0;
-            break;
-        case IRK_E: // E类功能
-            this->NextMenuCate = 4;
-            this->NextMenuItem = 0;
-            break;
-        default:
-            int t = this->IRRVal(IRRCode); // 读取红外数值
-            // Serial.println(String(CurrMenuItem) + " " + String(NextMenuItem));
-            if (mmm.ItemExists(this->CurrMenuCate, t))
-                this->NextMenuItem = t;
+        uint16_t IRRCode;
+        if (mmhardware.IRRCode(IRRCode)) {
+            switch (IRRCode) {
+            case IRK_A: // A类功能
+                this->NextMenuCate = 0;
+                this->NextMenuItem = 0;
+                break;
+            case IRK_B: // B类功能
+                this->NextMenuCate = 1;
+                this->NextMenuItem = 0;
+                break;
+            case IRK_C: // C类功能
+                this->NextMenuCate = 2;
+                this->NextMenuItem = 0;
+                break;
+            case IRK_D: // D类功能
+                this->NextMenuCate = 3;
+                this->NextMenuItem = 0;
+                break;
+            case IRK_E: // E类功能
+                this->NextMenuCate = 4;
+                this->NextMenuItem = 0;
+                break;
+            default:
+                int t = this->IRRVal(IRRCode); // 读取红外数值
+                // Serial.println(String(CurrMenuItem) + " " + String(NextMenuItem));
+                if (mmm.ItemExists(this->CurrMenuCate, t))
+                    this->NextMenuItem = t;
+            }
         }
     }
 
@@ -182,6 +184,13 @@ public:
                 pass = (mxlong - startm) + nowm; // 如果出现环绕
         } while (pass < ms);
         return r;
+    }
+
+    // 返回初始位置，实现InquireDelay的方法
+    // 注意这里只是将下一个菜单项设置为返回，需要功能自行退出
+    virtual void GoHome() {
+        this->NextMenuCate = 0; // 返回0分类的0项
+        this->NextMenuItem = 0;
     }
 
     uint16_t ExecMenu(uint8_t CateID, uint8_t ItemID)
