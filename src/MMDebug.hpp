@@ -18,6 +18,14 @@
 
 class MMDebug {
 public:
+
+    // 测试红外线接收
+    void TestIRR()
+    {
+        UART_USB.println(mmhardware.IRRCode());
+        delay(100);
+    }
+
     // 测试RTC显示时间
     void TestRTC()
     {

@@ -64,6 +64,17 @@ public:
         };
     // ~MMHardware();
 
+    // 用于计算经过的时间，考虑环绕的情况，毫秒或者微妙
+    unsigned long TickPassed(unsigned long From, unsigned long To)
+    {
+        unsigned long r = 0;
+        if (To >= From)
+            r = (To - From); // 如果没有出现环绕
+        else
+            r = ((unsigned long)(-1) - From) + To; // 如果出现环绕
+        return r;
+    }
+
     void Init()
     {
         irrecv.enableIRIn(); // 打开红外接收
@@ -76,16 +87,18 @@ public:
         // while (!irrecv.available()) delay(100);
         pinMode(PIN_BUZZER, OUTPUT); // 设置蜂鸣器引脚
         pinMode(PIN_PIRR, INPUT); // 设置人体红外探测器为输入
+        // matrix.setRotation(3);
     }
 
     // IRRCode红外线读取到的结果代码, WaitData 是否等待数据
-    bool IRRCode(uint16_t &Code,bool WaitData = false)
+    bool IRRCode(uint16_t& Code, bool WaitData = false)
     {
         uint16_t r = false;
         Code = IRK_NONE;
         // 如果需要等待数据
         if (WaitData) {
-            while (!(this->irrecv.decode())) delay(10);
+            while (!(this->irrecv.decode()))
+                delay(10);
             r = true;
             Code = this->irrecv.decodedIRData.command;
             this->irrecv.resume();
@@ -99,6 +112,12 @@ public:
         return r;
     }
 
+    uint16_t IRRCode(bool WaitData = false)
+    {
+        uint16_t r;
+        this->IRRCode(r, WaitData);
+        return r;
+    }
 
     // 设置蜂鸣器开关
     void Beep(bool val)

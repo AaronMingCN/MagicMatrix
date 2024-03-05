@@ -19,6 +19,7 @@
 #include "MMFunc/MMF_DispBmpLoop.hpp"
 #include "MMFunc/MMF_FillRainbow.hpp"
 #include "MMFunc/MMF_ScoreBoard.hpp"
+#include "MMFunc/MMF_Dice.hpp"
 
 
 // 定义功能类型,为后期扩展作准备,目前默认只有0
@@ -51,6 +52,12 @@ MMF_FillRainbow mmf_fillrainbow(MMF_ID_FILLRAINBOW);
 // 记分牌
 #define MMF_ID_SCOREBOARD (0x0006)
 MMF_ScoreBoard mmf_scoreboard(MMF_ID_SCOREBOARD);
+
+// 投骰子
+#define MMF_ID_DICE (0x0007)
+MMF_Dice mmf_dice(MMF_ID_DICE);
+
+
 // 将功能模块加入功能池
 void MMFPSetup()
 {
@@ -61,6 +68,7 @@ void MMFPSetup()
     mmfuncpool.Append(&mmf_dispbmploop);    
     mmfuncpool.Append(&mmf_fillrainbow);    
     mmfuncpool.Append(&mmf_scoreboard);
+    mmfuncpool.Append(&mmf_dice);
     
 }
 

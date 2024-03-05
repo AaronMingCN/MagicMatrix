@@ -31,7 +31,8 @@ public:
     uint8_t CurrMenuItem = 0; // 当前所在的菜单项目
     uint8_t NextMenuCate = 0; // 下一个菜单类
     uint8_t NextMenuItem = 0; // 下一个菜单位置
-
+    uint8_t CurrBright = M_BRIGHT; // 当前亮度，避免重复刷新
+    uint8_t NextBright = M_BRIGHT; // 下一个亮度
     // 定义菜单
     MMMenu mmm;
 
@@ -43,18 +44,19 @@ public:
 
     void UpdateBrightness()
     {
-        unsigned long mxlong = (0 - 1); // unsigned long 的最大值,用户环绕计算
-        unsigned long pass = 0; // 点亮经过的时间
-        unsigned long mill = millis(); // 获得当前上电时间
-        if (mill >= this->LastPIRR)
-            pass = mill - this->LastPIRR; // 如果没出现环绕
-        else
-            pass = mxlong - this->LastPIRR + mill; // 如果出现环绕
+        // 获取距离上次点亮屏幕的时间
+        unsigned long pass = mmhardware.TickPassed(this->LastPIRR, millis());
         // 根据检测到人体的情况修改屏幕亮度
         if (pass < M_PIRR_DELAY) {
-            mmhardware.matrix.setBrightness(M_BRIGHT);
+            this->NextBright = M_BRIGHT;
         } else {
-            mmhardware.matrix.setBrightness(M_BIRGHT_STANDBY);
+            this->NextBright = M_BIRGHT_STANDBY;
+        }
+        // 如果需要改变亮度则更改并刷新
+        if (this->NextBright != this->CurrBright) {
+            this->CurrBright = this->NextBright;
+            mmhardware.matrix.setBrightness(this->CurrBright);
+            mmhardware.matrix.show();
         }
     }
 
@@ -163,11 +165,8 @@ public:
     // 实现IDelay方法
     virtual bool IDelay(unsigned long ms)
     {
-        unsigned long mxlong = (0 - 1); // unsigned long 的最大值,用户环绕计算
-
         bool r = true; // 默认结果为true
         unsigned long startm = millis(); // 记录函数开始时的运行毫秒数
-        unsigned long nowm = 0; //
         unsigned long pass = 0; // 逝去的毫秒数
         do {
             delay(10);
@@ -175,11 +174,8 @@ public:
                 r = false;
                 break;
             }
-            nowm = millis(); // 记录当前毫秒数
-            if (nowm > startm)
-                pass = (nowm - startm); // 如果没有出现环绕
-            else
-                pass = (mxlong - startm) + nowm; // 如果出现环绕
+            // 过去的时间
+            pass = mmhardware.TickPassed(startm, millis());
         } while (pass < ms);
         return r;
     }

@@ -58,9 +58,6 @@ public:
         uint16_t irk = 0; // 定义红外线按键值
         this->DispScore();
         do {
-            // delay(1000);
-            //  等待红外线接收到数据
-            //  while (!mmhardware.irrecv.available()) delay(10);
             if (mmhardware.IRRCode(irk, true)) { // 读取红外线值
                 switch (irk) {
                 case IRK_UP:

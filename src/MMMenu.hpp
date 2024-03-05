@@ -70,9 +70,10 @@ public:
         this->Items.push_back({0x01, 0x00, MMF_ID_DISPBMPLOOP});  // 循环显示位图
         // 菜单分类0x02
         this->Items.push_back({0x02, 0x00, MMF_ID_SCOREBOARD});  // 记分牌
+        this->Items.push_back({0x02, 0x01, MMF_ID_DICE});  // 投骰子
         // 菜单分类0x03
         this->Items.push_back({0x03, 0x00, MMF_ID_FILLRAINBOW});  // 填充
-
+        
         
 
     }
