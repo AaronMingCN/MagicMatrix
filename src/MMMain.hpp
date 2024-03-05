@@ -42,6 +42,19 @@ public:
     // 析构
     // ~MMMain() {    };
 
+    // 设置最后检测到时间
+    void RenewPIRR() {
+        this->LastPIRR = millis();
+    }
+
+    // 更新最后检测到人体时间
+    void UpdatePIRR()
+    {
+        if (mmhardware.GetPIRR())
+            this->RenewPIRR();
+    }
+
+    // 更新显示屏亮度
     void UpdateBrightness()
     {
         // 获取距离上次点亮屏幕的时间
@@ -63,8 +76,7 @@ public:
     // 根据人体检测设置亮度
     void CheckPIRR()
     {
-        if (mmhardware.GetPIRR())
-            this->LastPIRR = millis(); // 如果检测到人，记录当前上电时间
+        this->UpdatePIRR(); // 如果检测到人，记录当前上电时间
         this->UpdateBrightness();
     }
 
@@ -107,11 +119,14 @@ public:
         return r;
     }
 
-    // 设置当前菜单位置
-    void SetMenu()
+    // 接收并设置当前菜单位置
+    void CheckMenu()
     {
         uint16_t IRRCode;
         if (mmhardware.IRRCode(IRRCode)) {
+            this->RenewPIRR(); // 刷新检测到人体的时间
+            this->UpdateBrightness(); // 更新当前亮度
+
             switch (IRRCode) {
             case IRK_A: // A类功能
                 this->NextMenuCate = 0;
@@ -150,16 +165,16 @@ public:
             // String s = UART_USB1.readString();
             UART_USB.print(char(UART_BLE.read()));
         }
-        this->CheckPIRR();  // 由于功能块内部需要调用红外线数据，取消此部分多线程处理
-        this->SetMenu();
+        this->CheckPIRR(); // 由于功能块内部需要调用红外线数据，取消此部分多线程处理
+        this->CheckMenu();
         // 菜单位置是否未变化
-        bool r = (NextMenuItem == CurrMenuItem && NextMenuCate == CurrMenuCate);
-        if (!r) {
-            this->LastPIRR = millis();
-            this->UpdateBrightness();
-        }
+        // bool r = (NextMenuItem == CurrMenuItem && NextMenuCate == CurrMenuCate);
+        // if (!r) {
+        //     this->RenewPIRR(); // 刷新检测到人体的时间
+        //     this->UpdateBrightness(); // 更新当前亮度
+        // }
         // Scheduler.yield(); // 释放资源
-        return r;
+        return (NextMenuItem == CurrMenuItem && NextMenuCate == CurrMenuCate);
     }
 
     // 实现IDelay方法
@@ -182,7 +197,8 @@ public:
 
     // 返回初始位置，实现InquireDelay的方法
     // 注意这里只是将下一个菜单项设置为返回，需要功能自行退出
-    virtual void GoHome() {
+    virtual void GoHome()
+    {
         this->NextMenuCate = 0; // 返回0分类的0项
         this->NextMenuItem = 0;
     }

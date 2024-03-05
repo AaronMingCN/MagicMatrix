@@ -98,7 +98,7 @@ public:
 
         mmhardware.matrix.setTextColor(RGB::Color(255, 0, 255));        
         mmhardware.matrix.setCursor(9,9);
-        mmhardware.matrix.print(r2);        
+        mmhardware.matrix.print(r3);        
         
         mmhardware.matrix.show();
 
