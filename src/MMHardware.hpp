@@ -77,17 +77,19 @@ public:
 
     void Init()
     {
+
+
         irrecv.enableIRIn(); // 打开红外接收
         dht.begin(); // 温湿度传感器开始工作
         matrix.begin(); // 矩阵屏幕开始工作
         matrix.setTextWrap(false); // 矩阵显示设置为不自动换行
         matrix.setBrightness(M_BRIGHT); // 设置矩阵屏幕亮度0~255
         Rtc.Begin(); // 打开Rtc时间模块
-        // while (!matrix.availableForWrite()) delay(100); // 等待设备就绪
-        // while (!irrecv.available()) delay(100);
-        pinMode(PIN_BUZZER, OUTPUT); // 设置蜂鸣器引脚
+
+
         pinMode(PIN_PIRR, INPUT); // 设置人体红外探测器为输入
-        // matrix.setRotation(3);
+        // matrix.setRotation(3); // 设置屏幕旋转角度
+
     }
 
     // IRRCode红外线读取到的结果代码, WaitData 是否等待数据

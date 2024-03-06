@@ -215,17 +215,17 @@ public:
     // 执行初始化
     bool Init()
     {
-        uint16_t r = 0;
-        UART_USB.begin(9600); // 打开串口通信
-        UART_BLE.begin(9600); // 打开串口1，蓝牙蓝牙模块通信
-        UART_BLE.println("AT+NAME=MagicMatrix"); // 设置蓝牙名称
-        mmhardware.Init(); // 执行硬件初始化
+        pinMode(PIN_BUZZER, OUTPUT); // 设置蜂鸣器引脚
         mmhardware.Beep(true);
-        delay(100);
-        mmhardware.Beep(false);
+        uint16_t r = 0;
+        UART_USB.begin(115200); // 打开串口通信
+        UART_BLE.begin(9600); // 打开串口1，蓝牙蓝牙模块通信
+        UART_BLE.print("AT+NAME=MagicMatrix\r\n"); // 设置蓝牙名称
+        mmhardware.Init(); // 执行硬件初始化
+
         // 调用功能池初始化
         MMFPSetup();
-
+        mmhardware.Beep(false);
         return r;
     }
 

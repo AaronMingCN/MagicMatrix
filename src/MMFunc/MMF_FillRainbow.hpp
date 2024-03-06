@@ -32,6 +32,7 @@ public:
                 }
                 if (!IDelay->IDelay(100)) break;
                 mmscr.Update();
+                while (mmhardware.matrix.availableForWrite()) delay(10); // 等待设备就绪
             }
 
             for (int i = 0; i < M_WIDTH; ++i) {
@@ -42,6 +43,7 @@ public:
                 }
                 if (!IDelay->IDelay(100)) break;
                 mmscr.Update();
+                while (mmhardware.matrix.availableForWrite()) delay(10); // 等待设备就绪
             }
             mmscr.SetEmpty();
 

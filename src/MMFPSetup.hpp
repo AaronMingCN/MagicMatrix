@@ -20,6 +20,7 @@
 #include "MMFunc/MMF_FillRainbow.hpp"
 #include "MMFunc/MMF_ScoreBoard.hpp"
 #include "MMFunc/MMF_Dice.hpp"
+#include "MMFunc/MMF_CountDown.hpp"
 
 
 // 定义功能类型,为后期扩展作准备,目前默认只有0
@@ -57,6 +58,11 @@ MMF_ScoreBoard mmf_scoreboard(MMF_ID_SCOREBOARD);
 #define MMF_ID_DICE (0x0007)
 MMF_Dice mmf_dice(MMF_ID_DICE);
 
+// 倒计时
+#define MMF_ID_COUNTDOWN (0x0008)
+MMF_CountDown mmf_countdown(MMF_ID_COUNTDOWN);
+
+// 倒计时
 
 // 将功能模块加入功能池
 void MMFPSetup()
@@ -69,7 +75,7 @@ void MMFPSetup()
     mmfuncpool.Append(&mmf_fillrainbow);    
     mmfuncpool.Append(&mmf_scoreboard);
     mmfuncpool.Append(&mmf_dice);
-    
+    mmfuncpool.Append(&mmf_countdown);
 }
 
 #endif
