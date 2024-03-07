@@ -168,52 +168,32 @@
 				)
 			)
 		)
-		(symbol "LED:WS2812B"
+		(symbol "GNDREF_1"
+			(power)
+			(pin_numbers hide)
 			(pin_names
-				(offset 0.254)
-			)
+				(offset 0) hide)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "D"
-				(at 5.08 5.715 0)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify right bottom)
-				)
-			)
-			(property "Value" "WS2812B"
-				(at 1.27 -5.715 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-				)
-			)
-			(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-				(at 1.27 -7.62 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-				(at 2.54 -9.525 0)
+			(property "Value" "GNDREF"
+				(at 0 -3.81 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left top)
-					(hide yes)
 				)
 			)
-			(property "Description" "RGB LED with integrated controller"
+			(property "Footprint" ""
 				(at 0 0 0)
 				(effects
 					(font
@@ -222,7 +202,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "RGB LED NeoPixel addressable"
+			(property "Datasheet" ""
 				(at 0 0 0)
 				(effects
 					(font
@@ -231,7 +211,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "LED*WS2812*PLCC*5.0x5.0mm*P3.2mm*"
+			(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground"
 				(at 0 0 0)
 				(effects
 					(font
@@ -240,118 +220,70 @@
 					(hide yes)
 				)
 			)
-			(symbol "WS2812B_0_0"
-				(text "RGB"
-					(at 2.286 -4.191 0)
-					(effects
-						(font
-							(size 0.762 0.762)
-						)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "GNDREF_1_0_1"
+				(polyline
+					(pts
+						(xy -0.635 -1.905) (xy 0.635 -1.905)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.127 -2.54) (xy 0.127 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy 0 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -1.27) (xy -1.27 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
 					)
 				)
 			)
-			(symbol "WS2812B_0_1"
-				(polyline
-					(pts
-						(xy 1.27 -3.556) (xy 1.778 -3.556)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 -2.54) (xy 1.778 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 4.699 -3.556) (xy 2.667 -3.556)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.286 -2.54) (xy 1.27 -3.556) (xy 1.27 -3.048)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.286 -1.524) (xy 1.27 -2.54) (xy 1.27 -2.032)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 3.683 -1.016) (xy 3.683 -3.556) (xy 3.683 -4.064)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 4.699 -1.524) (xy 2.667 -1.524) (xy 3.683 -3.556) (xy 4.699 -1.524)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start 5.08 5.08)
-					(end -5.08 -5.08)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(symbol "WS2812B_1_1"
+			(symbol "GNDREF_1_1_1"
 				(pin power_in line
-					(at 0 7.62 270)
-					(length 2.54)
-					(name "VDD"
+					(at 0 0 270)
+					(length 0)
+					(name "~"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -359,60 +291,6 @@
 						)
 					)
 					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 7.62 0 180)
-					(length 2.54)
-					(name "DOUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 -7.62 90)
-					(length 2.54)
-					(name "VSS"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 0 0)
-					(length 2.54)
-					(name "DIN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1985,6 +1863,123 @@
 				)
 			)
 		)
+		(symbol "MagicMatrix:WS2812Matrix"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "WSM"
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "WS2812矩阵屏幕接口"
+				(at -1.27 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "WS2812Matrix_0_1"
+				(rectangle
+					(start -2.54 3.81)
+					(end 7.62 -3.81)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "WS2812Matrix_1_1"
+				(pin input line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "Data"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -5.08 -2.54 0)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -5.08 2.54 0)
+					(length 2.54)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Switch:SW_Push"
 			(pin_numbers hide)
 			(pin_names
@@ -2290,10 +2285,6 @@
 		(uuid "09a03dae-58c9-4751-b9dc-265a276236a1")
 	)
 	(no_connect
-		(at 213.36 40.64)
-		(uuid "113cffa8-1242-4253-8db6-da00f70f8996")
-	)
-	(no_connect
 		(at 62.23 48.26)
 		(uuid "1f3151dd-97b1-475a-9426-6e4f8ffac2b8")
 	)
@@ -2360,16 +2351,6 @@
 	(no_connect
 		(at 62.23 73.66)
 		(uuid "dd347e05-fc78-49cf-bb50-d127ea47167a")
-	)
-	(wire
-		(pts
-			(xy 189.23 40.64) (xy 198.12 40.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0252d5a5-396d-45f0-81bf-ed61fc57cee7")
 	)
 	(wire
 		(pts
@@ -2460,6 +2441,16 @@
 			(type default)
 		)
 		(uuid "62a001bf-6887-4c35-ac53-a14c430fecb8")
+	)
+	(wire
+		(pts
+			(xy 193.04 39.37) (xy 199.39 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6c2f154a-8cc6-41f3-95f7-d38bb8c46642")
 	)
 	(wire
 		(pts
@@ -2563,6 +2554,16 @@
 	)
 	(wire
 		(pts
+			(xy 193.04 34.29) (xy 199.39 34.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c7fb4c24-c979-4225-83a2-73f74547aba3")
+	)
+	(wire
+		(pts
 			(xy 229.87 35.56) (xy 240.03 35.56)
 		)
 		(stroke
@@ -2590,26 +2591,6 @@
 			(type default)
 		)
 		(uuid "de36f8a1-9dfe-415a-9487-b3d20ee51a15")
-	)
-	(wire
-		(pts
-			(xy 205.74 29.21) (xy 205.74 33.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f0dc0ac3-6a6c-4707-b6c6-6f5daf7faa21")
-	)
-	(wire
-		(pts
-			(xy 205.74 48.26) (xy 205.74 52.07)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f50eabb2-1b8f-4467-b69d-bbd7bae66af4")
 	)
 	(wire
 		(pts
@@ -2708,17 +2689,6 @@
 		)
 		(uuid "5335457e-a198-4598-a9d5-a9c903207a72")
 	)
-	(label "VSYS"
-		(at 205.74 29.21 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "58ab0644-5f59-4fb9-b589-910b311f6f43")
-	)
 	(label "GPIO7"
 		(at 101.6 76.2 0)
 		(fields_autoplaced yes)
@@ -2751,6 +2721,17 @@
 			(justify left bottom)
 		)
 		(uuid "a0b8d245-89f0-458d-9232-7c6bc12baf85")
+	)
+	(label "VSYS"
+		(at 193.04 34.29 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a48b3b5a-0136-487b-a286-8cef52cdab41")
 	)
 	(label "VSYS"
 		(at 101.6 71.12 0)
@@ -2795,17 +2776,6 @@
 			(justify left bottom)
 		)
 		(uuid "c9c7e59b-908f-44f2-939f-93eba40fc1da")
-	)
-	(label "GPIO2"
-		(at 189.23 40.64 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e3fc460c-e6e4-4286-a286-51b8d2615b06")
 	)
 	(label "GPIO22"
 		(at 67.31 58.42 0)
@@ -2885,6 +2855,146 @@
 			(project "MagicMatrix"
 				(path "/b8e9c7d0-a14a-432a-8356-23b1463ea8e9"
 					(reference "IRM_1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "GNDREF_1")
+		(lib_id "power:GNDREF")
+		(at 193.04 39.37 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "20c07668-7cae-41d6-8dca-769fef3ec158")
+		(property "Reference" "#PWR01"
+			(at 193.04 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GNDREF"
+			(at 193.04 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 193.04 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 193.04 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground"
+			(at 193.04 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cf76aed8-aa93-4d79-b132-e2e05dbb4dbc")
+		)
+		(instances
+			(project "MagicMatrix"
+				(path "/b8e9c7d0-a14a-432a-8356-23b1463ea8e9"
+					(reference "#PWR01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MagicMatrix:WS2812Matrix")
+		(at 204.47 36.83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "32d3991e-fea4-4c20-ab78-61f7ae9b2874")
+		(property "Reference" "WSM1"
+			(at 213.36 36.1949 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "~"
+			(at 213.36 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 204.47 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 204.47 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "WS2812矩阵屏幕接口"
+			(at 203.2 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "e2685030-b051-41cc-84a5-9f7d4e507ea3")
+		)
+		(pin ""
+			(uuid "0f7cff0c-ae9c-4d6e-9e88-30cb4d0abd8a")
+		)
+		(pin ""
+			(uuid "d1383b97-d6ea-4886-b421-4991dc483f2b")
+		)
+		(instances
+			(project "MagicMatrix"
+				(path "/b8e9c7d0-a14a-432a-8356-23b1463ea8e9"
+					(reference "WSM1")
 					(unit 1)
 				)
 			)
@@ -3166,72 +3276,6 @@
 			(project "MagicMatrix"
 				(path "/b8e9c7d0-a14a-432a-8356-23b1463ea8e9"
 					(reference "PIR1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GNDREF")
-		(at 205.74 52.07 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6df32676-7cf7-455d-9ac7-814ead33b4d8")
-		(property "Reference" "#PWR05"
-			(at 205.74 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GNDREF"
-			(at 205.74 57.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 205.74 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 205.74 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 205.74 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "83ef9d01-de69-4cce-bd37-288cc5fcbfd0")
-		)
-		(instances
-			(project "MagicMatrix"
-				(path "/b8e9c7d0-a14a-432a-8356-23b1463ea8e9"
-					(reference "#PWR05")
 					(unit 1)
 				)
 			)
@@ -3757,81 +3801,6 @@
 			(project "MagicMatrix"
 				(path "/b8e9c7d0-a14a-432a-8356-23b1463ea8e9"
 					(reference "#PWR04")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "LED:WS2812B")
-		(at 205.74 40.64 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "fb7f54f2-1030-4e01-b2ab-f418aa4f0d79")
-		(property "Reference" "WS2812B_1"
-			(at 218.44 34.29 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "RGB矩阵模块"
-			(at 218.44 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 207.01 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 208.28 50.165 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 205.74 40.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "fef4fa47-e8ef-4c7d-92d9-2aa15c539745")
-		)
-		(pin "3"
-			(uuid "66769149-d8d2-42d9-94be-74919cc67595")
-		)
-		(pin "2"
-			(uuid "55f42b91-7b82-4368-8ce7-ea7a5d6ffd9f")
-		)
-		(pin "4"
-			(uuid "1feda245-431d-4a2c-b41d-e530380cf8de")
-		)
-		(instances
-			(project "MagicMatrix"
-				(path "/b8e9c7d0-a14a-432a-8356-23b1463ea8e9"
-					(reference "WS2812B_1")
 					(unit 1)
 				)
 			)
