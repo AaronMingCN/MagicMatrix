@@ -3,8 +3,8 @@
 <node TEXT="MagicMatrix菜单树" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1709728425469" NUMBERED="false" FORMAT="markdownPatternFormat">
 <font BOLD="true"/>
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
-<hook NAME="MapStyle" background="#f9f9f8" zoom="1.301">
-    <properties fit_to_viewport="false" show_icon_for_attributes="true" show_note_icons="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" associatedTemplateLocation="template:/light_nord_template.mm"/>
+<hook NAME="MapStyle" background="#f9f9f8" zoom="1.075">
+    <properties show_icon_for_attributes="true" fit_to_viewport="false" show_note_icons="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" associatedTemplateLocation="template:/light_nord_template.mm"/>
 
 <map_styles>
 <stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24 pt">
@@ -110,7 +110,8 @@
 <node TEXT="D.填充" POSITION="bottom_or_right" ID="ID_1326429327" CREATED="1708907030650" MODIFIED="1709728425478" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-<node TEXT="0.对角线填充" ID="ID_1086317210" CREATED="1708907066039" MODIFIED="1709728425480" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="0.对角线填充" ID="ID_1086317210" CREATED="1708907066039" MODIFIED="1709808785427" NUMBERED="false" FORMAT="markdownPatternFormat">
+<icon BUILTIN="button_ok"/>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
@@ -145,21 +146,28 @@
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
-<node TEXT="3.倒计时" ID="ID_1957994263" CREATED="1708955538247" MODIFIED="1709728487761" FORMAT="markdownPatternFormat"><richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
+<node TEXT="3.倒计时" ID="ID_1957994263" CREATED="1708955538247" MODIFIED="1709808743219" FORMAT="markdownPatternFormat">
+<icon BUILTIN="button_ok"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
 <text>+ 向上+5分钟
 + 向左+1分钟
 + 向右-1分钟
-+ 向下-5分钟</text></richcontent>
++ 向下-5分钟
++ 按set键开始计时
++ 切换到其他功能时会暂停计时，时间不会清零
++ 暂停后从其他功能切换回来按set键开始继续计时
++ 将剩余分钟一直减少到0后会将剩余秒数清零</text></richcontent>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 </node>
 </node>
 <node TEXT="B.图像显示" POSITION="top_or_left" ID="ID_1799667714" CREATED="1708907138472" MODIFIED="1709728425488" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-<node TEXT="0.静态图片循环显示" ID="ID_1109368198" CREATED="1708907145208" MODIFIED="1709728425488" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="0.静态图片循环显示" ID="ID_1109368198" CREATED="1708907145208" MODIFIED="1709809332091" NUMBERED="false" FORMAT="markdownPatternFormat">
 <icon BUILTIN="button_ok"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
-<text>+ 将图片放置在SD卡的bmp文件夹下</text></richcontent>
+<text>+ 将图片放置在SD卡的bmp文件夹下
++ bmp文件必须为24位16x16分辨率图像</text></richcontent>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 </node>
 <node TEXT="1.动图显示" ID="ID_1504471942" CREATED="1708907170618" MODIFIED="1709728425491" NUMBERED="false" FORMAT="markdownPatternFormat">
