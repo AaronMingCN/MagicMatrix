@@ -4,8 +4,8 @@
  * @Vers :  1.0
  * @Desc :  相关定义
  */
-#ifndef _MMDEF_HPP
-#define _MMDEF_HPP
+#ifndef _MMDEFINE_HPP
+#define _MMDEFINE_HPP
 
 
 
@@ -131,7 +131,7 @@
 #define IRK_DOWN IRK_100
 #define IRK_F IRK_200
 
-#define IRR_WAIT (1000u) // 遥控器等待间隔，防止连击毫秒
+#define CFGFILE  
 
 
 

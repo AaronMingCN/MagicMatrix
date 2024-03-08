@@ -12,13 +12,15 @@
 #ifndef _MMDEBUG_HPP
 #define _MMDEBUG_HPP
 
+#include <ArduinoJson.h>
+
+#include "MMHardware.hpp"
 #include "MMRamBmp.hpp"
 #include "MMScr.hpp"
-#include "MMHardware.hpp"
+#include "MMSD.hpp"
 
 class MMDebug {
 public:
-
     // 测试红外线接收
     void TestIRR()
     {
@@ -194,6 +196,43 @@ public:
         }
         mmscr.Update();
         delay(1000);
+    }
+
+    // 测试json使用
+    void TestJSON()
+    {
+        // Allocate the JSON document
+        JsonDocument doc;
+
+        // Add values in the document
+        doc["sensor"] = "gps";
+        doc["time"] = 1351824120;
+
+        // Add an array
+        JsonArray data = doc["data"].to<JsonArray>();
+        data.add(48.756080);
+        data.add(2.302038);
+
+        // Generate the minified JSON and send it to the Serial port
+        serializeJson(doc, UART_USB);
+        // The above line prints:
+        // {"sensor":"gps","time":1351824120,"data":[48.756080,2.302038]}
+
+        // Start a new line
+        UART_USB.println();
+
+        // Generate the prettified JSON and send it to the Serial port
+        serializeJsonPretty(doc, UART_USB);
+        // The above line prints:
+        // {
+        //   "sensor": "gps",
+        //   "time": 1351824120,
+        //   "data": [
+        //     48.756080,
+        //     2.302038
+        //   ]
+        // }
+        mmsd.SaveJSON("111.jsn", doc);
     }
 
 } mmdebug;

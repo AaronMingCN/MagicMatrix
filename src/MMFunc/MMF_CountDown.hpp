@@ -62,10 +62,12 @@ public:
             if (this->RemainMill >= pass)
                 this->RemainMill -= pass;
             else {
-                this->Alert(IDelay);
                 this->RemainMill = 0;
+                this->Alert(IDelay);
             }
             this->PrepareTime();
+            // if (this->CurrRMinu == 0 && this->CurrRSec == 0)
+            //     this->Alert(IDelay);
             this->DispRemainChange();
         }
     }

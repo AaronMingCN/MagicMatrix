@@ -61,6 +61,9 @@ public:
         }
     }
 
+    // 从SD卡在录入图像
+    
+
 } mmscr;
 
 #endif

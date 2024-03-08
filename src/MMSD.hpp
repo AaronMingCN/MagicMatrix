@@ -9,6 +9,10 @@
 
 #include "MMDefine.hpp"
 #include "MMScr.hpp"
+
+#include <ArduinoJson.h>
+
+
 /*
   SD card connection
 
@@ -34,7 +38,7 @@
 class MMSD {
 public:
     // 绘制位图
-    void DrawBitmap(File& F, bool AutoShow = true)
+    void DrawBitmapFile(File& F, bool AutoShow = true)
     {
         F.seek(54); // 跳过bmp文件的头部信息
         uint8_t t[3]; // 颜色值的临时变量
@@ -51,18 +55,60 @@ public:
     }
 
     // 将文件位图读取到矩阵
-    void DrawBitmap(String FName, bool AutoShow = true)
+    void DrawBitmapFile(String FileName, bool AutoShow = true)
     {
         if (!SD.begin(PIN_SD_SS)) { // 打开SD
             UART_USB.println("SD Initialization failed!");
         } else {
             // SD卡文件对象
-            File myFile = SD.open(FName, FILE_READ);
-            DrawBitmap(myFile, AutoShow);
+            File myFile = SD.open(FileName, FILE_READ);
+            DrawBitmapFile(myFile, AutoShow);
             // mmscr.Update();
             myFile.close();
             SD.end();
         }
+    }
+    
+    // 将JSON文件保存到SD卡
+    void SaveJSON(String FileName, JsonDocument &Json) {
+        // if (!SD.begin(PIN_SD_SS)) { // 打开SD
+        //     UART_USB.println("SD Initialization failed!");
+        // } else {
+        //     // SD卡文件对象
+        //     // File myFile = SD.open(FileName, FILE_WRITE);
+        //     File myFile = SD.open("1111.json", FILE_WRITE);
+        //     // serializeJson(Json, myFile);
+        //     char writeData[] = "Testing writing to ";
+        //     myFile.println(writeData);
+        //     // myFile.flush();
+        //     myFile.close();
+        //     SD.end();
+        // }
+
+
+       
+        File myFile;
+        
+        if (!SD.begin(PIN_SD_SS)) {
+            UART_USB.println("SD Initialization failed!");
+            return;
+        }
+
+        myFile = SD.open(FileName, FILE_WRITE);
+
+        // if the file opened okay, write to it:
+        if (myFile) {
+
+            // myFile.println("writeData");
+            serializeJsonPretty(Json, myFile);
+            // close the file:
+            myFile.close();
+            // UART_USB.println("done.");
+        } else {
+            // if the file didn't open, print an error:
+            UART_USB.print("Error opening ");
+        }
+
     }
 
 } mmsd;

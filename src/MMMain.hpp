@@ -20,6 +20,7 @@
 #include "MMFunc/MMFuncPool.hpp"
 #include "MMHardware.hpp"
 #include "MMMenu.hpp"
+#include "MMConfig.hpp"
 // #include "Scheduler.h"
 
 // MagicMatrix 主程序类
@@ -240,6 +241,8 @@ void MMMain::MainLoop()
     if (mmm.ItemExists(this->NextMenuCate, this->NextMenuItem)) {
         this->CurrMenuCate = this->NextMenuCate;
         this->CurrMenuItem = this->NextMenuItem;
+        // mmconfig.Config.set("CurrMenuCate",this->CurrMenuCate);
+        // mmconfig.Config.set("CurrMenuItem",this->CurrMenuItem);
         this->ExecMenu(this->CurrMenuCate, this->CurrMenuItem); // 循环执行当前菜单功能
     } else {
         this->NextMenuCate = this->CurrMenuCate;

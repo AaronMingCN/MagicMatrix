@@ -35,7 +35,7 @@ public:
                     File entry = dir.openNextFile();
                     if (entry) { // 如果文件打开成功
                         if (!entry.isDirectory()) { // 如果不是文件夹
-                            mmsd.DrawBitmap(entry); // 则将文件绘制
+                            mmsd.DrawBitmapFile(entry); // 则将文件绘制
                         }
                         entry.close(); // 关闭文件
                     } else
