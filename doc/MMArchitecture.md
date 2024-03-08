@@ -4,7 +4,7 @@
 2. [屏幕使用类 MMScr (Magic Matrix Screen)](#屏幕使用类-mmscr-magic-matrix-screen)
 3. [功能池 MMFuncPool (Magic Matrix Function Pool)](#功能池-mmfuncpool-magic-matrix-function-pool)
 4. [功能块基础类 MMFunc (Magic Magic)](#功能块基础类-mmfunc-magic-magic)
-5. [InquireDelay 询问等待类，功能回调机制](#inquiredelay-询问等待类功能回调机制)
+5. [InquireDelay 询问等待类，事件回调机制](#inquiredelay-询问等待类事件回调机制)
 
 ----
 
@@ -244,12 +244,12 @@
     FPool.ExecFunc(MMF_ID_MATRIXTEST);    
     ```
 
-## InquireDelay 询问等待类，功能回调机制
+## InquireDelay 询问等待类，事件回调机制
 
 + InquireDelay 说明
 
-  功能在执行过程中需要询问当前系统，用于在不同的功能中进行切换
-
+  由于系统目前采用单线程模式，体统在功能之间切换时需要退出当前功能，功能在执行过程中需要询问当前系统，如果系统切换的功能块，用于在不同的功能中进行切换。
+  
     ```cpp
     // 查询等待类型(接口),在执行过程中询问是否需继续执行当前功能,用于响应退出操作
     // 传入的参数是等待的毫秒数,在功能块中应当使用IDelay替代delay()并对返回结果作出响应
@@ -268,3 +268,46 @@
         };
     };
     ```
+
++ main类实现InquireDelay
+  
+  ```cpp
+      // 实现InquireDelay方法
+    virtual bool Inquire()
+    {
+        // 读取蓝牙
+        while (UART_BLE.available()) {
+            // String s = UART_USB1.readString();
+            UART_USB.print(char(UART_BLE.read()));
+        }
+        this->CheckPIRR(); // 由于功能块内部需要调用红外线数据，取消此部分多线程处理
+        this->CheckMenu();
+        return (NextMenuItem == CurrMenuItem && NextMenuCate == CurrMenuCate);
+    }
+
+    // 实现IDelay方法
+    virtual bool IDelay(unsigned long ms)
+    {
+        bool r = true; // 默认结果为true
+        unsigned long startm = millis(); // 记录函数开始时的运行毫秒数
+        unsigned long pass = 0; // 逝去的毫秒数
+        do {
+            delay(10);
+            if (!Inquire()) {
+                r = false;
+                break;
+            }
+            // 过去的时间
+            pass = mmhardware.TickPassed(startm, millis());
+        } while (pass < ms);
+        return r;
+    }
+
+    // 返回初始位置，实现InquireDelay的方法
+    // 注意这里只是将下一个菜单项设置为返回，需要功能自行退出
+    virtual void GoHome()
+    {
+        this->NextMenuCate = 0; // 返回0分类的0项
+        this->NextMenuItem = 0;
+    }
+  ```
