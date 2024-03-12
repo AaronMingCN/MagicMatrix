@@ -23,6 +23,10 @@
 #include "MMConfig.hpp"
 // #include "Scheduler.h"
 
+
+#define CFG_MENUCATE "CurrMenuCate"
+#define CFG_MENUITEM "CurrMenuItem"
+
 // MagicMatrix 主程序类
 class MMMain : InquireDelay {
     unsigned long LastPIRR = 0; // 最后检测到人体的时间
@@ -223,6 +227,10 @@ public:
         UART_BLE.begin(9600); // 打开串口1，蓝牙蓝牙模块通信
         UART_BLE.print("AT+NAME=MagicMatrix\r\n"); // 设置蓝牙名称
         mmhardware.Init(); // 执行硬件初始化
+        mmconfig.Load(); // 读取配置信息
+        // 将当前设置菜单项读取
+        this->NextMenuCate = mmconfig.Config[CFG_MENUCATE];
+        this->NextMenuItem = mmconfig.Config[CFG_MENUITEM];
 
         // 调用功能池初始化
         MMFPSetup();
@@ -241,8 +249,9 @@ void MMMain::MainLoop()
     if (mmm.ItemExists(this->NextMenuCate, this->NextMenuItem)) {
         this->CurrMenuCate = this->NextMenuCate;
         this->CurrMenuItem = this->NextMenuItem;
-        // mmconfig.Config.set("CurrMenuCate",this->CurrMenuCate);
-        // mmconfig.Config.set("CurrMenuItem",this->CurrMenuItem);
+        // 将当前菜单位置保存到Config
+        mmconfig.Config[CFG_MENUCATE] = this->CurrMenuCate;
+        mmconfig.Config[CFG_MENUITEM] = this->CurrMenuItem;
         this->ExecMenu(this->CurrMenuCate, this->CurrMenuItem); // 循环执行当前菜单功能
     } else {
         this->NextMenuCate = this->CurrMenuCate;

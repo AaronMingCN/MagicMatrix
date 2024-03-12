@@ -9,8 +9,8 @@
 #ifndef _MMCONFIG_HPP
 #define _MMCONFIG_HPP
 
-#include <ArduinoJson.h>
 #include "MMSD.hpp"
+#include <ArduinoJson.h>
 
 class MMConfig {
 private:
@@ -22,6 +22,18 @@ public:
         : Config() {};
     // 析构
     ~MMConfig() {};
+
+    // 将文档保存
+    bool Save()
+    {
+        return mmsd.SaveJsonToFile(Config, CFG_FILENAME);
+    }
+    
+    // 读取
+    bool Load()
+    {
+        return mmsd.LoadJsonFromFile(Config, CFG_FILENAME);
+    }    
 
 } mmconfig;
 

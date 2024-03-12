@@ -70,8 +70,9 @@ public:
     }
 
     // 将JSON文件保存到SD卡
-    void SaveJsonToFile(JsonDocument& Json, const char *FileName = CFG_FILENAME)
+    bool SaveJsonToFile(JsonDocument& Json, const char *FileName)
     {
+        bool r = false; // 定义结果
         if (!SD.begin(PIN_SD_SS)) { // 
             UART_USB.println("SD Initialization failed!");
         } else {
@@ -84,17 +85,20 @@ public:
                 serializeJsonPretty(Json, myFile);
                 // close the file:
                 myFile.close();
+                r = true;
                 // UART_USB.println("done.");
             } else {
                 // if the file didn't open, print an error:
                 UART_USB.print("Error opening ");
             }
         }
+        return r;
     }
 
     // 从SD卡载入JSON
-    void LoadJsonFromFile(JsonDocument& Json, const char *FileName = CFG_FILENAME)
+    bool LoadJsonFromFile(JsonDocument& Json, const char *FileName)
     {
+        bool r = false; // 定义返回结果
         if (!SD.begin(PIN_SD_SS)) { // 
             UART_USB.println("SD Initialization failed!");
         } else {
@@ -107,12 +111,14 @@ public:
                 deserializeJson(Json, myFile);
                 // close the file:
                 myFile.close();
+                r = true;
                 // UART_USB.println("done.");
             } else {
                 // if the file didn't open, print an error:
                 UART_USB.print("Error opening ");
             }
         }
+        return r;
     }
 } mmsd;
 
