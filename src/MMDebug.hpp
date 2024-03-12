@@ -232,7 +232,7 @@ public:
         //     2.302038
         //   ]
         // }
-        mmsd.SaveJSON("111.jsn", doc);
+        mmsd.SaveJsonToFile(doc, "111.js");
     }
 
 } mmdebug;

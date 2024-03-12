@@ -36,9 +36,9 @@ void setup()
 void loop()
 {
     // 执行主循环
-    mmmain.MainLoop();
-    // mmdebug.TestJSON();
+    // mmmain.MainLoop();
+    mmdebug.TestJSON();
     // mmdebug.TestSD();
-    // delay(2000);
+    delay(2000);
 }
 

@@ -12,7 +12,6 @@
 
 #include <ArduinoJson.h>
 
-
 /*
   SD card connection
 
@@ -51,7 +50,8 @@ public:
                 mmscr.SetPixel(j, M_HEIGHT - i, t[2], t[1], t[1]);
             }
         }
-        if (AutoShow) mmscr.Update();
+        if (AutoShow)
+            mmscr.Update();
     }
 
     // 将文件位图读取到矩阵
@@ -68,49 +68,52 @@ public:
             SD.end();
         }
     }
-    
+
     // 将JSON文件保存到SD卡
-    void SaveJSON(String FileName, JsonDocument &Json) {
-        // if (!SD.begin(PIN_SD_SS)) { // 打开SD
-        //     UART_USB.println("SD Initialization failed!");
-        // } else {
-        //     // SD卡文件对象
-        //     // File myFile = SD.open(FileName, FILE_WRITE);
-        //     File myFile = SD.open("1111.json", FILE_WRITE);
-        //     // serializeJson(Json, myFile);
-        //     char writeData[] = "Testing writing to ";
-        //     myFile.println(writeData);
-        //     // myFile.flush();
-        //     myFile.close();
-        //     SD.end();
-        // }
-
-
-       
-        File myFile;
-        
-        if (!SD.begin(PIN_SD_SS)) {
+    void SaveJsonToFile(JsonDocument& Json, const char *FileName = CFG_FILENAME)
+    {
+        if (!SD.begin(PIN_SD_SS)) { // 
             UART_USB.println("SD Initialization failed!");
-            return;
-        }
-
-        myFile = SD.open(FileName, FILE_WRITE);
-
-        // if the file opened okay, write to it:
-        if (myFile) {
-
-            // myFile.println("writeData");
-            serializeJsonPretty(Json, myFile);
-            // close the file:
-            myFile.close();
-            // UART_USB.println("done.");
         } else {
-            // if the file didn't open, print an error:
-            UART_USB.print("Error opening ");
+            SD.remove(FileName); // 如果存在文件则先删除
+            File myFile; // 定义文件对象
+            myFile = SD.open(FileName, FILE_WRITE); // 创建写入
+            // if the file opened okay, write to it:
+            if (myFile) {
+                // myFile.println("writeData");
+                serializeJsonPretty(Json, myFile);
+                // close the file:
+                myFile.close();
+                // UART_USB.println("done.");
+            } else {
+                // if the file didn't open, print an error:
+                UART_USB.print("Error opening ");
+            }
         }
-
     }
 
+    // 从SD卡载入JSON
+    void LoadJsonFromFile(JsonDocument& Json, const char *FileName = CFG_FILENAME)
+    {
+        if (!SD.begin(PIN_SD_SS)) { // 
+            UART_USB.println("SD Initialization failed!");
+        } else {
+            File myFile; // 定义文件对象
+            // myFile = SD.open(FileName, FILE_WRITE);
+            myFile = SD.open(FileName, FILE_READ); // 创建写入
+            // if the file opened okay, write to it:
+            if (myFile) {
+                // serializeJsonPretty(Json, myFile);
+                deserializeJson(Json, myFile);
+                // close the file:
+                myFile.close();
+                // UART_USB.println("done.");
+            } else {
+                // if the file didn't open, print an error:
+                UART_USB.print("Error opening ");
+            }
+        }
+    }
 } mmsd;
 
 #endif

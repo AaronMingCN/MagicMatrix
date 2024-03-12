@@ -131,7 +131,8 @@
 #define IRK_DOWN IRK_100
 #define IRK_F IRK_200
 
-#define CFGFILE  
+// 配置文件名称，保存的格式位JSON格式，由于FAT文件系统不支持4个字符的扩展名，所以这里用js
+#define CFG_FILENAME "./MMCFG.js"
 
 
 
