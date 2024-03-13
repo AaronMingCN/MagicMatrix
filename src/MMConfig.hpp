@@ -17,6 +17,7 @@ private:
 public:
     JsonDocument Config; // 定义配置json
     bool Loaded = false; // 是否已经载入
+    bool NeedSave = false; // 是否需要保存，
     // 构造
     MMConfig()
         : Config() {};
@@ -26,7 +27,11 @@ public:
     // 将文档保存
     bool Save()
     {
-        return mmsd.SaveJsonToFile(Config, CFG_FILENAME);
+        bool r = false; // 定义结果
+        if (mmsd.SaveJsonToFile(Config, CFG_FILENAME)) {
+            NeedSave = false; // 如果保存成功则将需要保存设置为false
+        }
+        return r;
     }
     
     // 读取
@@ -35,6 +40,11 @@ public:
         this->Loaded = mmsd.LoadJsonFromFile(Config, CFG_FILENAME);
         return this->Loaded;
     }    
+
+    // 如果需要保存则进行保存
+    void SaveIfNeeded() {
+        if (this->NeedSave) this->Save();
+    }
 
 } mmconfig;
 

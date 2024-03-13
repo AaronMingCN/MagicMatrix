@@ -36,6 +36,9 @@
 
 class MMSD {
 public:
+    ~MMSD() {
+        SD.end();
+    }
     // 绘制位图
     void DrawBitmapFile(File& F, bool AutoShow = true)
     {
@@ -65,7 +68,7 @@ public:
             DrawBitmapFile(myFile, AutoShow);
             // mmscr.Update();
             myFile.close();
-            SD.end();
+            // SD.end(); // 关闭SD卡访问
         }
     }
 

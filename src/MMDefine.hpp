@@ -79,8 +79,8 @@
 #define M_LEDTYPE (NEO_GRB + NEO_KHZ800)
 
 #define M_PIXS (M_HEIGHT * M_WIDTH) // 定义矩阵像素数
-#define M_BRIGHT (100u) // 屏幕亮度0~255
-#define M_BIRGHT_STANDBY (10u) // 工作亮度
+#define M_BRIGHT (20) // 屏幕亮度0~255
+#define M_BIRGHT_STANDBY (1u) // 工作亮度
 #define M_PIRR_DELAY (20000u) // 人体检测延迟，毫秒
 
 // 定义红外遥控器的按键
@@ -132,7 +132,7 @@
 #define IRK_F IRK_200
 
 // 配置文件名称，保存的格式位JSON格式，由于FAT文件系统不支持4个字符的扩展名，所以这里用js
-#define CFG_FILENAME "./MMCFG.js"
+#define CFG_FILENAME "MMCFG.js"
 
 
 

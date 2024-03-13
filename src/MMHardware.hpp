@@ -19,9 +19,12 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
+// 使用互斥避免线程中资源访问冲突
+#include <mutex>
+
 // 定义选择时钟使用的芯片
-#define MM_RTCDS1302
-// #define MM_RTCDS1307
+// #define MM_RTCDS1302
+#define MM_RTCDS1307
 #ifdef MM_RTCDS1302
 #include <RtcDS1302.h>
 #endif
@@ -45,7 +48,9 @@ public:
 #ifdef MM_RTCDS1307
     RtcDS1307<TwoWire> Rtc;
 #endif
-    Adafruit_NeoMatrix matrix;
+    Adafruit_NeoMatrix matrix; // 矩阵模块
+
+    std::recursive_mutex SDMutex; // sd访问的互斥
 
     uint16_t IRRLastTime; // 最后一次接收到红外线数据的事件，用于防止连击
     // 构造函数

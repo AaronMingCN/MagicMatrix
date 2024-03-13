@@ -27,6 +27,7 @@ public:
         mmscr.Update();
         if  (!SD.begin(PIN_SD_SS)) {
             UART_USB.println("initialization failed!");
+            while (IDelay->IDelay(1000)); // 如果打开失败则等待
         } else {
             UART_USB.println("initialization done.");
             File dir = SD.open("/bmp/"); // 打开SD卡中的bmp文件夹

@@ -21,7 +21,7 @@
 #include "MMHardware.hpp"
 #include "MMMenu.hpp"
 #include "MMConfig.hpp"
-// #include "Scheduler.h"
+#include "Scheduler.h"
 
 
 #define CFG_MENUCATE "CurrMenuCate"
@@ -252,6 +252,8 @@ void MMMain::MainLoop()
         // 将当前菜单位置保存到Config
         mmconfig.Config[CFG_MENUCATE] = this->CurrMenuCate;
         mmconfig.Config[CFG_MENUITEM] = this->CurrMenuItem;
+        mmconfig.NeedSave = true;
+        // mmconfig.Save(); // 将当前配置保存
         this->ExecMenu(this->CurrMenuCate, this->CurrMenuItem); // 循环执行当前菜单功能
     } else {
         this->NextMenuCate = this->CurrMenuCate;
