@@ -16,7 +16,7 @@ class MMConfig {
 private:
 public:
     JsonDocument Config; // 定义配置json
-
+    bool Loaded = false; // 是否已经载入
     // 构造
     MMConfig()
         : Config() {};
@@ -32,7 +32,8 @@ public:
     // 读取
     bool Load()
     {
-        return mmsd.LoadJsonFromFile(Config, CFG_FILENAME);
+        this->Loaded = mmsd.LoadJsonFromFile(Config, CFG_FILENAME);
+        return this->Loaded;
     }    
 
 } mmconfig;
