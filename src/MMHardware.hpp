@@ -19,8 +19,6 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
-// 使用互斥避免线程中资源访问冲突
-#include <mutex>
 
 // 定义选择时钟使用的芯片
 // #define MM_RTCDS1302
@@ -38,6 +36,8 @@
 #define UART_BLE _UART1_
 
 class MMHardware {
+private:
+    bool _SDIsBusy = false; // SD是否忙碌中, 用于多线程中的访问, 互斥
 public:
     IRrecv irrecv; // 定义红外接收对象
     DHT_Unified dht; // 定义dht温湿度模块
@@ -49,8 +49,6 @@ public:
     RtcDS1307<TwoWire> Rtc;
 #endif
     Adafruit_NeoMatrix matrix; // 矩阵模块
-
-    std::recursive_mutex SDMutex; // sd访问的互斥
 
     uint16_t IRRLastTime; // 最后一次接收到红外线数据的事件，用于防止连击
     // 构造函数
@@ -137,6 +135,18 @@ public:
     {
         return digitalRead(PIN_PIRR);
     }
+
+    // 获得SD访问权
+    void GetLockSD(){
+        while(this->_SDIsBusy) delay(10);
+        this->_SDIsBusy = true;
+    }
+
+    // 释放SD
+    void ReleaseSD(){
+        this->_SDIsBusy = false;
+    }
+
 } mmhardware;
 
 #endif
