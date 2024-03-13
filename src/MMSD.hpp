@@ -35,10 +35,24 @@
 // PROGMEM prog_uint32_t m[0xFFF] = {};
 
 class MMSD {
+private:
+    bool _SDIsBusy = false; // SD是否忙碌中, 用于多线程中的访问, 互斥
 public:
     ~MMSD() {
         SD.end();
     }
+
+    // 获得SD访问权
+    void GetLockSD(){
+        while(this->_SDIsBusy) yield(); // 如果被占用则等待
+        this->_SDIsBusy = true;
+    }
+
+    // 释放SD
+    void ReleaseSD(){
+        this->_SDIsBusy = false;
+    }
+
     // 绘制位图
     void DrawBitmapFile(File& F, bool AutoShow = true)
     {
@@ -60,6 +74,7 @@ public:
     // 将文件位图读取到矩阵
     void DrawBitmapFile(String FileName, bool AutoShow = true)
     {
+        this->GetLockSD(); // 获得SD访问权
         if (!SD.begin(PIN_SD_SS)) { // 打开SD
             UART_USB.println("SD Initialization failed!");
         } else {
@@ -70,12 +85,14 @@ public:
             myFile.close();
             // SD.end(); // 关闭SD卡访问
         }
+        this->ReleaseSD(); // 释放SD访问权
     }
 
     // 将JSON文件保存到SD卡
     bool SaveJsonToFile(JsonDocument& Json, const char *FileName)
     {
         bool r = false; // 定义结果
+        this->GetLockSD(); // 获得SD访问权        
         if (!SD.begin(PIN_SD_SS)) { // 
             UART_USB.println("SD Initialization failed!");
         } else {
@@ -95,6 +112,7 @@ public:
                 UART_USB.print("Error opening ");
             }
         }
+        this->ReleaseSD(); // 释放SD访问权        
         return r;
     }
 
@@ -102,6 +120,7 @@ public:
     bool LoadJsonFromFile(JsonDocument& Json, const char *FileName)
     {
         bool r = false; // 定义返回结果
+        this->GetLockSD(); // 获得SD访问权           
         if (!SD.begin(PIN_SD_SS)) { // 
             UART_USB.println("SD Initialization failed!");
         } else {
@@ -121,6 +140,7 @@ public:
                 UART_USB.print("Error opening ");
             }
         }
+        this->ReleaseSD(); // 释放SD访问权          
         return r;
     }
 } mmsd;

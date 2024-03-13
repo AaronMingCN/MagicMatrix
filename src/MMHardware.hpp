@@ -36,8 +36,7 @@
 #define UART_BLE _UART1_
 
 class MMHardware {
-private:
-    bool _SDIsBusy = false; // SD是否忙碌中, 用于多线程中的访问, 互斥
+
 public:
     IRrecv irrecv; // 定义红外接收对象
     DHT_Unified dht; // 定义dht温湿度模块
@@ -136,16 +135,6 @@ public:
         return digitalRead(PIN_PIRR);
     }
 
-    // 获得SD访问权
-    void GetLockSD(){
-        while(this->_SDIsBusy) delay(10);
-        this->_SDIsBusy = true;
-    }
-
-    // 释放SD
-    void ReleaseSD(){
-        this->_SDIsBusy = false;
-    }
 
 } mmhardware;
 
