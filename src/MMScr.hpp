@@ -55,7 +55,7 @@ public:
         for (uint8_t r = 0; r < M_HEIGHT; ++r) { // 将所有颜色清空
             for (uint8_t c = 0; c < M_WIDTH; ++c) {
                 RGB t;
-                rb.GetPixcel(c, r, t); // 定义临时像素并从RamBmp读取
+                rb.GetPixel(c, r, t); // 定义临时像素并从RamBmp读取
                 mmhardware.matrix.drawPixel(c, r, t.Color()); // 将像素绘制到矩阵屏幕
             }
         }

@@ -28,7 +28,7 @@ public:
     bool Save()
     {
         bool r = false; // 定义结果
-        if (mmsd.SaveJsonToFile(Config, CFG_FILENAME)) {
+        if (mmsd.SaveJsonToFile(Config, FILENAME_CFG)) {
             NeedSave = false; // 如果保存成功则将需要保存设置为false
         }
         return r;
@@ -37,7 +37,7 @@ public:
     // 读取
     bool Load()
     {
-        this->Loaded = mmsd.LoadJsonFromFile(Config, CFG_FILENAME);
+        this->Loaded = mmsd.LoadJsonFromFile(Config, FILENAME_CFG);
         return this->Loaded;
     }    
 

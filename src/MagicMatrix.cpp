@@ -13,6 +13,7 @@
 #include "MMConfig.hpp"
 
 #include "Scheduler.h"
+#include "MMGrap.hpp"
 
 
 // // 由于功能块内部需要调用红外线数据，取消此部分多线程处理，
@@ -22,15 +23,16 @@ void EventLoop() {
     // mmmain.CheckPIRR(); // 更新屏幕亮度
     mmconfig.SaveIfNeeded(); // 如果设置需要保存则保存
     Scheduler.yield(); // 释放资源
-    delay(100);
 }
 
 // 初始化
 void setup()
 {
     delay(1000); // 等待一秒bootloader
+    // mmgrap.DispLOGO();
     // 系统初始化
     mmmain.Init();
+        
     // 取消注释后会根据编译时间调整硬件时间
     // mmhardware.Rtc.SetDateTime(RtcDateTime(__DATE__, __TIME__));
     Scheduler.startLoop(EventLoop); // 开启事件循环
@@ -39,6 +41,7 @@ void setup()
 // 主循环
 void loop()
 {
+    mmgrap.DispLOGO();
     // 执行主循环
     mmmain.MainLoop();
     // mmdebug.TestJSON();

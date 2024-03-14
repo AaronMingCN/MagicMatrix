@@ -190,7 +190,7 @@ public:
         for (uint16_t i = 0; i < M_HEIGHT; i++) {
             for (uint16_t j = 0; j < M_WIDTH; j++) {
                 if (j == i)
-                    rb.SetPixcel(j, i, 255, 0, 0);
+                    rb.SetPixel(j, i, 255, 0, 0);
                 mmscr.DrawRamBmp(rb);
             }
         }

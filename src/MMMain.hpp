@@ -16,13 +16,12 @@
 #include "MMRamBmp.hpp"
 #include "MMSD.hpp"
 
+#include "MMConfig.hpp"
 #include "MMFPSetup.hpp"
 #include "MMFunc/MMFuncPool.hpp"
 #include "MMHardware.hpp"
 #include "MMMenu.hpp"
-#include "MMConfig.hpp"
 #include "Scheduler.h"
-
 
 #define CFG_MENUCATE "CurrMenuCate"
 #define CFG_MENUITEM "CurrMenuItem"
@@ -48,7 +47,8 @@ public:
     // ~MMMain() {    };
 
     // 设置最后检测到时间
-    void RenewPIRR() {
+    void RenewPIRR()
+    {
         this->LastPIRR = millis();
     }
 
@@ -244,23 +244,23 @@ public:
 void MMMain::MainLoop()
 {
 
-    // for (;;) {
-    //  如果下一个位菜单置存在则更新当前菜单位置，否则将下一位置改为当前位置
-    if (mmm.ItemExists(this->NextMenuCate, this->NextMenuItem)) {
-        this->CurrMenuCate = this->NextMenuCate;
-        this->CurrMenuItem = this->NextMenuItem;
-        // 将当前菜单位置保存到Config
-        mmconfig.Config[CFG_MENUCATE] = this->CurrMenuCate;
-        mmconfig.Config[CFG_MENUITEM] = this->CurrMenuItem;
-        mmconfig.NeedSave = true;
-        // mmconfig.Save(); // 将当前配置保存
-        this->ExecMenu(this->CurrMenuCate, this->CurrMenuItem); // 循环执行当前菜单功能
-    } else {
-        this->NextMenuCate = this->CurrMenuCate;
-        this->NextMenuItem = this->CurrMenuItem;
+    for (;;) {
+        //  如果下一个位菜单置存在则更新当前菜单位置，否则将下一位置改为当前位置
+        if (mmm.ItemExists(this->NextMenuCate, this->NextMenuItem)) {
+            this->CurrMenuCate = this->NextMenuCate;
+            this->CurrMenuItem = this->NextMenuItem;
+            // 将当前菜单位置保存到Config
+            mmconfig.Config[CFG_MENUCATE] = this->CurrMenuCate;
+            mmconfig.Config[CFG_MENUITEM] = this->CurrMenuItem;
+            mmconfig.NeedSave = true;
+            // mmconfig.Save(); // 将当前配置保存
+            this->ExecMenu(this->CurrMenuCate, this->CurrMenuItem); // 循环执行当前菜单功能
+        } else {
+            this->NextMenuCate = this->CurrMenuCate;
+            this->NextMenuItem = this->CurrMenuItem;
+        }
+        this->Inquire();
     }
-    this->Inquire();
-    //}
 }
 
 #endif

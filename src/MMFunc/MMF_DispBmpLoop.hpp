@@ -13,6 +13,7 @@
 #include "MMFunc.hpp"
 #include "MMSD.hpp"
 #include "MMScr.hpp"
+#include "../MMConfig.hpp"
 
 // 矩阵屏幕测试类，测试RGB显示
 class MMF_DispBmpLoop : public MMFunc {
@@ -23,8 +24,10 @@ public:
     }
     virtual MMFExecR_t Exec(InquireDelay* IDelay)
     {
+        mmconfig.SaveIfNeeded(); // 避免因为DS卡访问导致保存当前菜单位置不成功的问题
         mmscr.Fill(0xFF, 0xFF, 0xFF); // 填充空白
         mmscr.Update();
+        mmsd.GetLockSD(); // 获得SD锁
         if  (!SD.begin(PIN_SD_SS)) {
             UART_USB.println("initialization failed!");
             while (IDelay->IDelay(1000)); // 如果打开失败则等待
@@ -44,8 +47,9 @@ public:
                 } while (IDelay->IDelay(1000));
                 dir.rewindDirectory(); // 返回到文件夹首位置
             } while (IDelay->Inquire());
-            SD.end();
+            // SD.end();
         }
+        mmsd.ReleaseSD(); // 释放SD锁
         return EXECR_OK;
     }
 };

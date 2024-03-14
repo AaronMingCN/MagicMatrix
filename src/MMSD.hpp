@@ -8,6 +8,7 @@
 #define _MMSD_HPP
 
 #include "MMDefine.hpp"
+#include "MMRamBmp.hpp"
 #include "MMScr.hpp"
 
 #include <ArduinoJson.h>
@@ -38,18 +39,22 @@ class MMSD {
 private:
     bool _SDIsBusy = false; // SD是否忙碌中, 用于多线程中的访问, 互斥
 public:
-    ~MMSD() {
+    ~MMSD()
+    {
         SD.end();
     }
 
     // 获得SD访问权
-    void GetLockSD(){
-        while(this->_SDIsBusy) yield(); // 如果被占用则等待
+    void GetLockSD()
+    {
+        while (this->_SDIsBusy)
+            yield(); // 如果被占用则等待
         this->_SDIsBusy = true;
     }
 
     // 释放SD
-    void ReleaseSD(){
+    void ReleaseSD()
+    {
         this->_SDIsBusy = false;
     }
 
@@ -64,7 +69,7 @@ public:
                 F.read(&t, 3);
 
                 // UART_USB.println(String(t.R) + ',' + String(t.G) + ',' + String(t.B) + ' ');
-                mmscr.SetPixel(j, M_HEIGHT - i, t[2], t[1], t[1]);
+                mmscr.SetPixel(j, M_HEIGHT - i, t[2], t[1], t[0]);
             }
         }
         if (AutoShow)
@@ -72,8 +77,9 @@ public:
     }
 
     // 将文件位图读取到矩阵
-    void DrawBitmapFile(String FileName, bool AutoShow = true)
+    bool DrawBitmapFile(String FileName, bool AutoShow = true)
     {
+        bool r = false;
         this->GetLockSD(); // 获得SD访问权
         if (!SD.begin(PIN_SD_SS)) { // 打开SD
             UART_USB.println("SD Initialization failed!");
@@ -81,19 +87,56 @@ public:
             // SD卡文件对象
             File myFile = SD.open(FileName, FILE_READ);
             DrawBitmapFile(myFile, AutoShow);
-            // mmscr.Update();
             myFile.close();
+            r = true;
             // SD.end(); // 关闭SD卡访问
         }
         this->ReleaseSD(); // 释放SD访问权
+        return r;
+    }
+
+
+    void LoadBitmapToRamBmp(File& F, MMRamBmp& RamBmp)
+    {
+        F.seek(54); // 跳过bmp文件的头部信息
+        uint8_t t[3]; // 颜色值的临时变量
+        for (uint16_t i = 1; i <= M_HEIGHT && F.available(); ++i) {
+            for (uint16_t j = 0; j < M_WIDTH && F.available(); ++j) {
+                // myFile.read(&t, sizeof(t)); // 读取一个像素的颜色值
+                F.read(&t, 3);
+                RamBmp.SetPixel(j, M_HEIGHT - i, t[2], t[1], t[0]);
+            }
+        }
+    }
+
+
+    // 将文件保存到MMRamBmp
+    bool LoadBitmapToRamBmp(String FileName, MMRamBmp& RamBmp)
+    {
+        bool r = false;
+        this->GetLockSD(); // 获得SD访问权
+        if (!SD.begin(PIN_SD_SS)) { // 打开SD
+            UART_USB.println("SD Initialization failed!");
+        } else {
+            // SD卡文件对象
+            if (SD.exists(FileName)) {
+                File myFile = SD.open(FileName, FILE_READ);
+                this->LoadBitmapToRamBmp(myFile, RamBmp);
+                myFile.close();
+                r = true;
+            }
+            // SD.end(); // 关闭SD卡访问
+        }
+        this->ReleaseSD(); // 释放SD访问权
+        return r;
     }
 
     // 将JSON文件保存到SD卡
-    bool SaveJsonToFile(JsonDocument& Json, const char *FileName)
+    bool SaveJsonToFile(JsonDocument& Json, const char* FileName)
     {
         bool r = false; // 定义结果
-        this->GetLockSD(); // 获得SD访问权        
-        if (!SD.begin(PIN_SD_SS)) { // 
+        this->GetLockSD(); // 获得SD访问权
+        if (!SD.begin(PIN_SD_SS)) { //
             UART_USB.println("SD Initialization failed!");
         } else {
             SD.remove(FileName); // 如果存在文件则先删除
@@ -112,16 +155,16 @@ public:
                 UART_USB.print("Error opening ");
             }
         }
-        this->ReleaseSD(); // 释放SD访问权        
+        this->ReleaseSD(); // 释放SD访问权
         return r;
     }
 
     // 从SD卡载入JSON
-    bool LoadJsonFromFile(JsonDocument& Json, const char *FileName)
+    bool LoadJsonFromFile(JsonDocument& Json, const char* FileName)
     {
         bool r = false; // 定义返回结果
-        this->GetLockSD(); // 获得SD访问权           
-        if (!SD.begin(PIN_SD_SS)) { // 
+        this->GetLockSD(); // 获得SD访问权
+        if (!SD.begin(PIN_SD_SS)) { //
             UART_USB.println("SD Initialization failed!");
         } else {
             File myFile; // 定义文件对象
@@ -140,7 +183,7 @@ public:
                 UART_USB.print("Error opening ");
             }
         }
-        this->ReleaseSD(); // 释放SD访问权          
+        this->ReleaseSD(); // 释放SD访问权
         return r;
     }
 } mmsd;

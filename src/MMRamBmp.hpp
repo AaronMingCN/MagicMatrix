@@ -38,13 +38,13 @@ public:
     }
 
     // 获得RGB值设置像素
-    void GetPixcel(uint16_t x, uint16_t y, RGB& Pix)
+    void GetPixel(uint16_t x, uint16_t y, RGB& Pix)
     {
         Pix = this->bmp[y * width + x];
     }
 
     // 根据设置像素RGB值
-    void SetPixcel(uint16_t x, uint16_t y, uint8_t R, uint8_t G, uint8_t B)
+    void SetPixel(uint16_t x, uint16_t y, uint8_t R, uint8_t G, uint8_t B)
     {
         RGB &pix = this->bmp[y * width + x];
         pix.R = R;
@@ -53,9 +53,9 @@ public:
     }
 
     // 根据RGB结构设置
-    void SetPixcel(uint16_t x, uint16_t y, RGB& Pix)
+    void SetPixel(uint16_t x, uint16_t y, RGB& Pix)
     {
-        this->SetPixcel(x, y, Pix.R, Pix.G, Pix.B);
+        this->SetPixel(x, y, Pix.R, Pix.G, Pix.B);
     }
 };
 
