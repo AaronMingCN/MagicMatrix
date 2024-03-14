@@ -22,6 +22,7 @@
 #include "MMHardware.hpp"
 #include "MMMenu.hpp"
 #include "Scheduler.h"
+#include "MMCommand.hpp"
 
 #define CFG_MENUCATE "CurrMenuCate"
 #define CFG_MENUITEM "CurrMenuItem"
@@ -166,9 +167,13 @@ public:
     virtual bool Inquire()
     {
         // 读取蓝牙
-        while (UART_BLE.available()) {
-            // String s = UART_USB1.readString();
-            UART_USB.print(char(UART_BLE.read()));
+        if (UART_BLE.available()) {
+            // while (UART_BLE.available()) {
+            //     // String s = UART_USB1.readString();
+            //     UART_USB.print(char(UART_BLE.read()));
+            // }
+            String cmd = UART_BLE.readString();
+            mmcommand.Exec(cmd);
         }
         this->CheckPIRR(); // 由于功能块内部需要调用红外线数据，取消此部分多线程处理
         this->CheckMenu();

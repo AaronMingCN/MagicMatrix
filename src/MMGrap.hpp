@@ -9,7 +9,6 @@
 #define _MMGRAP_HPP
 
 #include "MMDefine.hpp"
-#include "MMLOGO.hpp"
 #include "MMScr.hpp"
 #include "MMRamBmp.hpp"
 #include "MMSD.hpp"

@@ -67,6 +67,7 @@ MMF_CountDown mmf_countdown(MMF_ID_COUNTDOWN);
 // 将功能模块加入功能池
 void MMFPSetup()
 {
+    mmfuncpool.Clear();
     mmfuncpool.Append(&mmf_matrixtest);
     mmfuncpool.Append(&mmf_disptime_1);
     mmfuncpool.Append(&mmf_dispdate_1);    

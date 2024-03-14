@@ -61,6 +61,7 @@ public:
 
     // 载入菜单项
     void LoadItems() {
+        this->Items.clear();
         // 菜单分类0x00 
         this->Items.push_back({0x00, 0x00, MMF_ID_DISPTIME_1}); // 载入菜单功能 显示时间
         this->Items.push_back({0x00, 0x01, MMF_ID_DISPDATE_1}); // 载入菜单功能 显示日期

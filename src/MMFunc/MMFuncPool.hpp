@@ -23,6 +23,11 @@ public:
     ~MMFuncPool() {
         this->items.clear();
     };
+
+    // 清空功能池
+    void Clear() {
+        this->items.clear();
+    }
     // 将功能块加入到池中
     void Append(MMFunc *mmf)
     {
