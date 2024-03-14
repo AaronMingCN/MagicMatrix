@@ -21,7 +21,7 @@ public:
     {
         String t;
         for (auto c : CMDString) {
-            if (c == ' ' || c == '\0') { // 如果遇到空格或字符串结束
+            if (c == ' ' || c == '\0' || c == '\n' || c == '\r') { // 如果遇到空格或字符串结束
                 t.trim(); // 去掉多余的空格
                 if (t.length())
                     vcmd.push_back(t);
@@ -36,6 +36,9 @@ public:
     {
         std::vector<String> vcmd; // 定义分割后的命令
         this->SplitCMD(CMDString, vcmd);
+        for (auto c: vcmd) {
+            UART_USB.println("->" + c);
+        }
     }
 } mmcommand;
 

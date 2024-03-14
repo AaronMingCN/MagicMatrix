@@ -16,13 +16,13 @@
 #include "MMRamBmp.hpp"
 #include "MMSD.hpp"
 
+#include "MMCommand.hpp"
 #include "MMConfig.hpp"
 #include "MMFPSetup.hpp"
 #include "MMFunc/MMFuncPool.hpp"
 #include "MMHardware.hpp"
 #include "MMMenu.hpp"
 #include "Scheduler.h"
-#include "MMCommand.hpp"
 
 #define CFG_MENUCATE "CurrMenuCate"
 #define CFG_MENUITEM "CurrMenuItem"
@@ -163,27 +163,26 @@ public:
         }
     }
 
+    // 处理USB串口信息
+    void ProcUART(UART& uart)
+    {
+        // 如果串口收到数据
+        if (uart.available()) {
+            String cmd = "";
+            while (uart.available()) {
+                cmd += char(uart.read());
+            }
+            mmcommand.Exec(cmd);
+        }
+    }
+
     // 实现InquireDelay方法
     virtual bool Inquire()
     {
-        // 读取蓝牙
-        if (UART_BLE.available()) {
-            // while (UART_BLE.available()) {
-            //     // String s = UART_USB1.readString();
-            //     UART_USB.print(char(UART_BLE.read()));
-            // }
-            String cmd = UART_BLE.readString();
-            mmcommand.Exec(cmd);
-        }
+        this->ProcUART(UART_USB); // 处理USB串口
         this->CheckPIRR(); // 由于功能块内部需要调用红外线数据，取消此部分多线程处理
         this->CheckMenu();
-        // 菜单位置是否未变化
-        // bool r = (NextMenuItem == CurrMenuItem && NextMenuCate == CurrMenuCate);
-        // if (!r) {
-        //     this->RenewPIRR(); // 刷新检测到人体的时间
-        //     this->UpdateBrightness(); // 更新当前亮度
-        // }
-        // Scheduler.yield(); // 释放资源
+        yield(); // 释放资源
         return (NextMenuItem == CurrMenuItem && NextMenuCate == CurrMenuCate);
     }
 

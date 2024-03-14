@@ -44,6 +44,7 @@ void loop()
     mmgrap.DispLOGO();
     // 执行主循环
     mmmain.MainLoop();
+    // mmmain.Inquire();
     // mmdebug.TestJSON();
     // mmdebug.TestSD();
     // delay(2000);
