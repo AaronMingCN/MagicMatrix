@@ -24,26 +24,18 @@
 #include "MMMenu.hpp"
 #include "Scheduler.h"
 
-#define CFG_MENUCATE "CurrMenuCate"
-#define CFG_MENUITEM "CurrMenuItem"
+
 
 // MagicMatrix 主程序类
 class MMMain : InquireDelay {
     unsigned long LastPIRR = 0; // 最后检测到人体的时间
 
 public:
-    uint8_t CurrMenuCate = 0; // 当前所在的菜单类
-    uint8_t CurrMenuItem = 0; // 当前所在的菜单项目
-    uint8_t NextMenuCate = 0; // 下一个菜单类
-    uint8_t NextMenuItem = 0; // 下一个菜单位置
     uint8_t CurrBright = M_BRIGHT; // 当前亮度，避免重复刷新
     uint8_t NextBright = M_BRIGHT; // 下一个亮度
-    // 定义菜单
-    MMMenu mmm;
 
     // 构造
-    MMMain()
-        : mmm(&mmfuncpool) {};
+    MMMain() {};
     // 析构
     // ~MMMain() {    };
 
@@ -56,8 +48,10 @@ public:
     // 更新最后检测到人体时间
     void UpdatePIRR()
     {
-        if (mmhardware.GetPIRR())
+        if (mmhardware.GetPIRR()) {
             this->RenewPIRR();
+            // UART_USB.println("Got");
+        }
     }
 
     // 更新显示屏亮度
@@ -135,30 +129,30 @@ public:
 
             switch (IRRCode) {
             case IRK_A: // A类功能
-                this->NextMenuCate = 0;
-                this->NextMenuItem = 0;
+                mmmenu.NextMenuCate = 0;
+                mmmenu.NextMenuItem = 0;
                 break;
             case IRK_B: // B类功能
-                this->NextMenuCate = 1;
-                this->NextMenuItem = 0;
+                mmmenu.NextMenuCate = 1;
+                mmmenu.NextMenuItem = 0;
                 break;
             case IRK_C: // C类功能
-                this->NextMenuCate = 2;
-                this->NextMenuItem = 0;
+                mmmenu.NextMenuCate = 2;
+                mmmenu.NextMenuItem = 0;
                 break;
             case IRK_D: // D类功能
-                this->NextMenuCate = 3;
-                this->NextMenuItem = 0;
+                mmmenu.NextMenuCate = 3;
+                mmmenu.NextMenuItem = 0;
                 break;
             case IRK_E: // E类功能
-                this->NextMenuCate = 4;
-                this->NextMenuItem = 0;
+                mmmenu.NextMenuCate = 4;
+                mmmenu.NextMenuItem = 0;
                 break;
             default:
                 int t = this->IRRVal(IRRCode); // 读取红外数值
                 // UART_USB.println(String(CurrMenuItem) + " " + String(NextMenuItem));
-                if (mmm.ItemExists(this->CurrMenuCate, t))
-                    this->NextMenuItem = t;
+                if (mmmenu.ItemExists(mmmenu.CurrMenuCate, t))
+                    mmmenu.NextMenuItem = t;
             }
         }
     }
@@ -180,10 +174,10 @@ public:
     virtual bool Inquire()
     {
         this->ProcUART(UART_USB); // 处理USB串口
-        this->CheckPIRR(); // 由于功能块内部需要调用红外线数据，取消此部分多线程处理
+        // this->CheckPIRR(); // 由于功能块内部需要调用红外线数据，取消此部分多线程处理
         this->CheckMenu();
         yield(); // 释放资源
-        return (NextMenuItem == CurrMenuItem && NextMenuCate == CurrMenuCate);
+        return (mmmenu.NextMenuItem == mmmenu.CurrMenuItem && mmmenu.NextMenuCate == mmmenu.CurrMenuCate);
     }
 
     // 实现IDelay方法
@@ -204,17 +198,10 @@ public:
         return r;
     }
 
-    // 返回初始位置，实现InquireDelay的方法
-    // 注意这里只是将下一个菜单项设置为返回，需要功能自行退出
-    virtual void GoHome()
-    {
-        this->NextMenuCate = 0; // 返回0分类的0项
-        this->NextMenuItem = 0;
-    }
 
     uint16_t ExecMenu(uint8_t CateID, uint8_t ItemID)
     {
-        return this->mmm.ExecItem(CateID, ItemID, this);
+        return mmmenu.ExecItem(CateID, ItemID, this);
     }
 
     // 主循环
@@ -233,8 +220,8 @@ public:
         mmhardware.Init(); // 执行硬件初始化
         mmconfig.Load(); // 读取配置信息
         // 将当前设置菜单项读取
-        this->NextMenuCate = mmconfig.Config[CFG_MENUCATE];
-        this->NextMenuItem = mmconfig.Config[CFG_MENUITEM];
+        mmmenu.NextMenuCate = mmconfig.Config[CFG_MENUCATE];
+        mmmenu.NextMenuItem = mmconfig.Config[CFG_MENUITEM];
 
         // 调用功能池初始化
         MMFPSetup();
@@ -249,20 +236,8 @@ void MMMain::MainLoop()
 {
 
     for (;;) {
-        //  如果下一个位菜单置存在则更新当前菜单位置，否则将下一位置改为当前位置
-        if (mmm.ItemExists(this->NextMenuCate, this->NextMenuItem)) {
-            this->CurrMenuCate = this->NextMenuCate;
-            this->CurrMenuItem = this->NextMenuItem;
-            // 将当前菜单位置保存到Config
-            mmconfig.Config[CFG_MENUCATE] = this->CurrMenuCate;
-            mmconfig.Config[CFG_MENUITEM] = this->CurrMenuItem;
-            mmconfig.NeedSave = true;
-            // mmconfig.Save(); // 将当前配置保存
-            this->ExecMenu(this->CurrMenuCate, this->CurrMenuItem); // 循环执行当前菜单功能
-        } else {
-            this->NextMenuCate = this->CurrMenuCate;
-            this->NextMenuItem = this->CurrMenuItem;
-        }
+        // 切换菜单
+        mmmenu.Switch(this);
         this->Inquire();
     }
 }

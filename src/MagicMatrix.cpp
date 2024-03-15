@@ -20,7 +20,7 @@
 // // 事件循环
 void EventLoop() {
     // mmmain.SetMenu(); // 更新菜单情况
-    // mmmain.CheckPIRR(); // 更新屏幕亮度
+    mmmain.CheckPIRR(); // 更新屏幕亮度
     mmconfig.SaveIfNeeded(); // 如果设置需要保存则保存
     Scheduler.yield(); // 释放资源
 }

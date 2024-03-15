@@ -10,6 +10,7 @@
 #define _MMCOMMAND_HPP
 
 #include <vector>
+#include "MMMenu.hpp"
 
 // 命令执行类，根据命令字符串执行对应命令
 // 命令格式：命令 参数1 参数2 ...
@@ -32,14 +33,27 @@ public:
     }
 
     // 执行命令行
-    void Exec(String CMDString)
-    {
-        std::vector<String> vcmd; // 定义分割后的命令
-        this->SplitCMD(CMDString, vcmd);
+    void Exec(String CMDString);
+} mmcommand;
+
+
+
+// 执行命令
+void MMCommand::Exec(String CMDString)
+{
+    std::vector<String> vcmd; // 定义分割后的命令
+    this->SplitCMD(CMDString, vcmd);
+    if (vcmd.size()) {
+        if (vcmd[0] == "MM") {
+            if (vcmd[1] == "MENU") {
+                mmmenu.NextMenuCate = vcmd[2].toInt();
+                mmmenu.NextMenuItem = vcmd[3].toInt();
+            }
+        }
         for (auto c: vcmd) {
             UART_USB.println("->" + c);
         }
     }
-} mmcommand;
+}
 
 #endif

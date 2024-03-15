@@ -135,6 +135,9 @@
 #define FILENAME_CFG "MMCFG.js"
 #define FILENAME_LOGO "LOGO.bmp"
 
+// 定义设置项名称
+#define CFG_MENUCATE "CurrMenuCate"
+#define CFG_MENUITEM "CurrMenuItem"
 
 // RGB颜色的结构体
 struct RGB {
