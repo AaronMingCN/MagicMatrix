@@ -44,9 +44,9 @@ void loop()
     mmgrap.DispLOGO();
     // 执行主循环
     mmmain.MainLoop();
-    // mmmain.Inquire();
-    // mmdebug.TestJSON();
-    // mmdebug.TestSD();
+
+    // UART_USB.println(__DATE__);
+    // UART_USB.println(__TIME__);
     // delay(2000);
 }
 

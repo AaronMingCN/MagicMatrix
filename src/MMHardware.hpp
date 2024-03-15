@@ -19,7 +19,6 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
-
 // 定义选择时钟使用的芯片
 // #define MM_RTCDS1302
 #define MM_RTCDS1307
@@ -80,7 +79,6 @@ public:
     void Init()
     {
 
-
         irrecv.enableIRIn(); // 打开红外接收
         dht.begin(); // 温湿度传感器开始工作
         matrix.begin(); // 矩阵屏幕开始工作
@@ -88,10 +86,8 @@ public:
         matrix.setBrightness(M_BRIGHT); // 设置矩阵屏幕亮度0~255
         Rtc.Begin(); // 打开Rtc时间模块
 
-
         pinMode(PIN_PIRR, INPUT); // 设置人体红外探测器为输入
         // matrix.setRotation(3); // 设置屏幕旋转角度
-
     }
 
     // IRRCode红外线读取到的结果代码, WaitData 是否等待数据
@@ -133,6 +129,23 @@ public:
     bool GetPIRR()
     {
         return digitalRead(PIN_PIRR);
+    }
+
+    // 设置日期时间
+    void SetDateTime(uint16_t year,
+        uint8_t month,
+        uint8_t dayOfMonth,
+        uint8_t hour,
+        uint8_t minute,
+        uint8_t second)
+    {
+        this->Rtc.SetDateTime(RtcDateTime(year, month, dayOfMonth, hour, minute, second));
+    }
+
+    // 设置日期时间
+    void SetDateTime(const char* date, const char* time)
+    {
+        this->Rtc.SetDateTime(RtcDateTime(date, time));
     }
 
 

@@ -9,8 +9,9 @@
 #ifndef _MMCOMMAND_HPP
 #define _MMCOMMAND_HPP
 
-#include <vector>
+#include "MMHardware.hpp"
 #include "MMMenu.hpp"
+#include <vector>
 
 // 命令执行类，根据命令字符串执行对应命令
 // 命令格式：命令 参数1 参数2 ...
@@ -36,8 +37,6 @@ public:
     void Exec(String CMDString);
 } mmcommand;
 
-
-
 // 执行命令
 void MMCommand::Exec(String CMDString)
 {
@@ -45,12 +44,14 @@ void MMCommand::Exec(String CMDString)
     this->SplitCMD(CMDString, vcmd);
     if (vcmd.size()) {
         if (vcmd[0] == "MM") {
-            if (vcmd[1] == "MENU") {
+            if (vcmd[1] == "MENU") { // 设置菜单位置格式: MM MENU 0 0
                 mmmenu.NextMenuCate = vcmd[2].toInt();
                 mmmenu.NextMenuItem = vcmd[3].toInt();
+            } else if (vcmd[1] == "SDT") { // 设置时间格式: MM SDT 03/15/2024 00:00:00
+                mmhardware.SetDateTime(vcmd[2].c_str(), vcmd[3].c_str());
             }
         }
-        for (auto c: vcmd) {
+        for (auto c : vcmd) {
             UART_USB.println("->" + c);
         }
     }
