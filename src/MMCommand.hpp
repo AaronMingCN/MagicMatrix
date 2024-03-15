@@ -47,8 +47,9 @@ void MMCommand::Exec(String CMDString)
             if (vcmd[1] == "MENU") { // 设置菜单位置格式: MM MENU 0 0
                 mmmenu.NextMenuCate = vcmd[2].toInt();
                 mmmenu.NextMenuItem = vcmd[3].toInt();
-            } else if (vcmd[1] == "SDT") { // 设置时间格式: MM SDT 03/15/2024 00:00:00
-                mmhardware.SetDateTime(vcmd[2].c_str(), vcmd[3].c_str());
+            } else if (vcmd[1] == "SDT") { // 设置时间格式: MM SDT 2024 03 15 00 00 00
+                mmhardware.SetDateTime(vcmd[2].toInt(), vcmd[3].toInt(), vcmd[4].toInt(), 
+                                       vcmd[5].toInt(), vcmd[6].toInt(), vcmd[7].toInt());
             }
         }
         for (auto c : vcmd) {
