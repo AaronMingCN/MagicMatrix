@@ -33,12 +33,27 @@ public:
     {
         return true;
     };
+
+    // 询问当前是否已经切换菜单位置, 以引用方式返回红外线接收值
+    virtual bool Inquire(uint16_t &IRRCode)
+    {
+        return true;
+    };
+
     // 询问并等待
     virtual bool IDelay(unsigned long ms)
     {
         delay(ms);
         return Inquire();
     };
+
+
+    // 询问并等待， 以引用方式返回红外线接收值
+    virtual bool IDelay(unsigned long ms, uint16_t &IRRCode)
+    {
+        delay(ms);
+        return Inquire(IRRCode);
+    };    
     // 返回初始位置
     // 注意这里只是将下一个菜单项设置为返回，需要功能自行退出
     virtual void GoHome() {

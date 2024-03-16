@@ -42,14 +42,17 @@ public:
     }
 
     // 如果改变了则绘制
-    void DispScoreChange()
+    bool DispScoreChange()
     {
+        bool r = false;
         // 如果分数发生改变则开始绘图
         if ((CurrScoreA != NextScoreA) || (CurrScoreB != NextScoreB)) {
             CurrScoreA = NextScoreA;
             CurrScoreB = NextScoreB;
+            r = true;
             this->DispScore();
         }
+        return r;
     }
 
     // 执行功能
@@ -57,45 +60,46 @@ public:
     {
         uint16_t irk = 0; // 定义红外线按键值
         this->DispScore();
-        do {
-            if (mmhardware.IRRCode(irk, true)) { // 读取红外线值
-                switch (irk) {
-                case IRK_UP:
-                    ++NextScoreA;
-                    break;
-                case IRK_DOWN:
-                    ++NextScoreB;
-                    break;
-                case IRK_LEFT:
-                    --NextScoreA;
-                    break;
-                case IRK_RIGHT:
-                    --NextScoreB;
-                    break;
-                case IRK_SET: // 长安Set键归零
-                {
-                    bool rset = true; // 默认重置
-                    for (int i = 0; i < 10; ++i) { // 等待按键
-                        // 如果仍然按着set键则等待
-                        if (mmhardware.IRRCode(irk, true) && irk == IRK_SET) {
-                            delay(100);
-                        } else {
-                            rset = false;
-                            break;
-                        }
+        while (IDelay->Inquire(irk)) {
+            switch (irk) {
+            case IRK_UP:
+                ++NextScoreA;
+                break;
+            case IRK_DOWN:
+                ++NextScoreB;
+                break;
+            case IRK_LEFT:
+                --NextScoreA;
+                break;
+            case IRK_RIGHT:
+                --NextScoreB;
+                break;
+            case IRK_SET: // 长安Set键归零
+            {
+                bool rset = true; // 默认重置
+                for (int i = 0; i < 10; ++i) { // 等待按键
+                    // 如果仍然按着set键则等待
+                    if (mmhardware.IRRCode(irk, true) && irk == IRK_SET) {
+                        delay(100);
+                    } else {
+                        rset = false;
+                        break;
                     }
-                    if (rset) { // 如果需要重置分数
-                        this->NextScoreA = 0;
-                        this->NextScoreB = 0;
-                    }
-                } break;
-                default:
-                    break;
                 }
-
-                this->DispScoreChange();
+                if (rset) { // 如果需要重置分数
+                    this->NextScoreA = 0;
+                    this->NextScoreB = 0;
+                }
+            } break;
+            default:
+                break;
             }
-        } while (IDelay->IDelay(100));
+            // 如果修改了分数则更新显示并等待
+            if (this->DispScoreChange()) {
+                IDelay->IDelay(200, irk);
+            }
+        }
+
         return EXECR_OK;
     }
 };

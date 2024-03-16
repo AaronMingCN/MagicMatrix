@@ -24,8 +24,6 @@
 #include "MMMenu.hpp"
 #include "Scheduler.h"
 
-
-
 // MagicMatrix 主程序类
 class MMMain : InquireDelay {
     unsigned long LastPIRR = 0; // 最后检测到人体的时间
@@ -119,10 +117,10 @@ public:
         return r;
     }
 
-    // 接收并设置当前菜单位置
-    void CheckMenu()
+    // 接收并设置当前菜单位置，返回红外线值
+    bool IRRSetMenu(uint16_t& IRRCode)
     {
-        uint16_t IRRCode;
+        bool r = false;
         if (mmhardware.IRRCode(IRRCode)) {
             this->RenewPIRR(); // 刷新检测到人体的时间
             this->UpdateBrightness(); // 更新当前亮度
@@ -131,30 +129,38 @@ public:
             case IRK_A: // A类功能
                 mmmenu.NextMenuCate = 0;
                 mmmenu.NextMenuItem = 0;
+                r = true;
                 break;
             case IRK_B: // B类功能
                 mmmenu.NextMenuCate = 1;
                 mmmenu.NextMenuItem = 0;
+                r = true;
                 break;
             case IRK_C: // C类功能
                 mmmenu.NextMenuCate = 2;
                 mmmenu.NextMenuItem = 0;
+                r = true;
                 break;
             case IRK_D: // D类功能
                 mmmenu.NextMenuCate = 3;
                 mmmenu.NextMenuItem = 0;
+                r = true;
                 break;
             case IRK_E: // E类功能
                 mmmenu.NextMenuCate = 4;
                 mmmenu.NextMenuItem = 0;
+                r = true;
                 break;
             default:
-                int t = this->IRRVal(IRRCode); // 读取红外数值
+                int t = this->IRRVal(IRRCode); // 将IRRCode专函为具体的数字
                 // UART_USB.println(String(CurrMenuItem) + " " + String(NextMenuItem));
-                if (mmmenu.ItemExists(mmmenu.CurrMenuCate, t))
+                if (mmmenu.ItemExists(mmmenu.CurrMenuCate, t)) {
                     mmmenu.NextMenuItem = t;
+                    r = true;
+                }
             }
         }
+        return r;
     }
 
     // 处理USB串口信息
@@ -171,24 +177,31 @@ public:
     }
 
     // 实现InquireDelay方法
-    virtual bool Inquire()
+    virtual bool Inquire(uint16_t& IRRCode)
     {
         this->ProcUART(UART_USB); // 处理USB串口
         // this->CheckPIRR(); // 由于功能块内部需要调用红外线数据，取消此部分多线程处理
-        this->CheckMenu();
+        this->IRRSetMenu(IRRCode);
         yield(); // 释放资源
         return (mmmenu.NextMenuItem == mmmenu.CurrMenuItem && mmmenu.NextMenuCate == mmmenu.CurrMenuCate);
     }
 
+    // 实现InquireDelay方法
+    virtual bool Inquire()
+    {
+        uint16_t IRRCode;
+        return Inquire(IRRCode);
+    }
+
     // 实现IDelay方法
-    virtual bool IDelay(unsigned long ms)
+    virtual bool IDelay(unsigned long ms, uint16_t& IRRCode)
     {
         bool r = true; // 默认结果为true
         unsigned long startm = millis(); // 记录函数开始时的运行毫秒数
         unsigned long pass = 0; // 逝去的毫秒数
         do {
             delay(10);
-            if (!Inquire()) {
+            if (!Inquire(IRRCode)) {
                 r = false;
                 break;
             }
@@ -198,6 +211,12 @@ public:
         return r;
     }
 
+    // 实现IDelay方法
+    virtual bool IDelay(unsigned long ms)
+    {
+        uint16_t IRRCode;
+        return this->IDelay(ms, IRRCode);
+    }
 
     uint16_t ExecMenu(uint8_t CateID, uint8_t ItemID)
     {

@@ -73,14 +73,17 @@ public:
     }
 
     // 如果改变了则绘制
-    void DispRemainChange()
+    bool DispRemainChange()
     {
+        bool r = false;
         // 如果分数发生改变则开始绘图
         if ((CurrRMinu != NextRMinu) || (CurrRSec != NextRSec)) {
             CurrRMinu = NextRMinu;
             CurrRSec = NextRSec;
             this->DispRemain();
+            r = true;
         }
+        return r;
     }
 
     // 准备剩余时间
@@ -94,42 +97,44 @@ public:
     {
         this->DispRemain();
         uint16_t irk = 0; // 定义红外线按键值
-        do {
-            if (mmhardware.IRRCode(irk, true)) { // 读取红外线值
-                switch (irk) {
-                case IRK_UP:
-                    if (NextRMinu <= 94)
-                        NextRMinu += 5;
-                    break;
-                case IRK_DOWN:
-                    if (NextRMinu >= 5)
-                        NextRMinu -= 5;
-                    else
-                        NextRSec = 0; // 如果分钟已经无法再减少了则将秒置零
-                    break;
-                case IRK_RIGHT:
-                    if (NextRMinu <= 98)
-                        ++NextRMinu;
-                    break;
-                case IRK_LEFT:
-                    if (NextRMinu >= 1)
-                        --NextRMinu;
-                    else
-                        NextRSec = 0; // 如果分钟已经无法再减少了则将秒置零
-                    break;
-                case IRK_SET: // 按set键开始
-                    this->CalRemainMill();
-                    if (this->RemainMill > 0) { // 如果计数的时间大于0则开始倒数
-                        this->CountDown(IDelay);
-                    }
-                    break;
-                default:
-                    break;
+        while (IDelay->Inquire(irk)) {
+            switch (irk) {
+            case IRK_UP:
+                if (NextRMinu <= 94) {
+                    NextRMinu += 5;
                 }
-
-                this->DispRemainChange(); // 如果剩余时间改变则显示
+                break;
+            case IRK_DOWN:
+                if (NextRMinu >= 5) {
+                    NextRMinu -= 5;
+                } else
+                    NextRSec = 0; // 如果分钟已经无法再减少了则将秒置零
+                break;
+            case IRK_RIGHT:
+                if (NextRMinu <= 98) {
+                    ++NextRMinu;
+                }
+                break;
+            case IRK_LEFT:
+                if (NextRMinu >= 1) {
+                    --NextRMinu;
+                } else
+                    NextRSec = 0; // 如果分钟已经无法再减少了则将秒置零
+                break;
+            case IRK_SET: // 按set键开始
+                this->CalRemainMill();
+                if (this->RemainMill > 0) { // 如果计数的时间大于0则开始倒数
+                    this->CountDown(IDelay);
+                }
+                break;
+            default:
+                break;
             }
-        } while (IDelay->IDelay(100));
+            // 如果剩余时间改变则显示并等待
+            if (this->DispRemainChange()) {
+                IDelay->IDelay(200, irk);
+            }
+        }
         mmhardware.Beep(false);
         return EXECR_OK;
     }

@@ -20,8 +20,9 @@
 #include <DHT_U.h>
 
 // 定义选择时钟使用的芯片
-// #define MM_RTCDS1302
-#define MM_RTCDS1307
+#define MM_RTCDS1302
+// #define MM_RTCDS1307
+
 #ifdef MM_RTCDS1302
 #include <RtcDS1302.h>
 #endif
