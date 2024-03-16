@@ -169,9 +169,10 @@ public:
         // 如果串口收到数据
         if (uart.available()) {
             String cmd = "";
-            while (uart.available()) {
-                cmd += char(uart.read());
-            }
+            // while (uart.available()) {
+            //     cmd += char(uart.read());
+            // }
+            cmd = uart.readString();
             mmcommand.Exec(cmd);
         }
     }
@@ -180,6 +181,8 @@ public:
     virtual bool Inquire(uint16_t& IRRCode)
     {
         this->ProcUART(UART_USB); // 处理USB串口
+        this->ProcUART(UART_BLE); // 处理BLE串口
+        
         // this->CheckPIRR(); // 由于功能块内部需要调用红外线数据，取消此部分多线程处理
         this->IRRSetMenu(IRRCode);
         yield(); // 释放资源
