@@ -45,8 +45,13 @@ void MMCommand::Exec(String CMDString)
     std::vector<String> vcmd; // 定义分割后的命令
     this->SplitCMD(CMDString, vcmd);
     if (vcmd.size()) {
-        if (vcmd[0] == "MM") {
-            if (vcmd.size() >= 4 && vcmd[1] == "MENU") { // 设置菜单位置格式: MM MENU 0 0
+        if (vcmd[0] == "MM" && vcmd[1] == "HELP") {
+            if (vcmd.size() >= 2) {
+                UART_USB.println("---------- samples ----------");
+                UART_USB.println("MM MENU 0 0");
+                UART_USB.println("MM SDT 2024 03 15 00 00 00");
+                UART_USB.println("-----------------------------");
+            } else if (vcmd.size() >= 4 && vcmd[1] == "MENU") { // 设置菜单位置格式: MM MENU 0 0
                 mmmenu.NextMenuCate = vcmd[2].toInt();
                 mmmenu.NextMenuItem = vcmd[3].toInt();
             } else if (vcmd.size() >= 8 && vcmd[1] == "SDT") { // 设置时间格式: MM SDT 2024 03 15 00 00 00

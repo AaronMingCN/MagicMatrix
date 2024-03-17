@@ -230,6 +230,16 @@ public:
     // 左右选择大项,数字键用来选择子项目,一个大项目下面最多包含10个子项目
     void MainLoop();
 
+    void SetBLEName() {
+        // UART_BLE.print("AT+NAME=MagicMatrix\r\n"); // 设置蓝牙名称
+        UART_BLE.print("AT+MAC?\r\n"); // 先获得蓝牙的硬件地址
+        String s = UART_BLE.readString();
+        UART_USB.println(s.substring(13));
+        // 将蓝牙的硬件地址追加并修改该蓝牙名称
+        UART_BLE.print("AT+NAME=MagicMatrix" + s.substring(13) + "\r\n");
+        UART_USB.println(UART_BLE.readString());
+    }
+
     // 执行初始化
     bool Init()
     {
@@ -237,8 +247,11 @@ public:
         mmhardware.Beep(true);
         uint16_t r = 0;
         UART_USB.begin(115200); // 打开串口通信
+        UART_USB.setTimeout(10); // 设置串口读取超时
         UART_BLE.begin(9600); // 打开串口1，蓝牙蓝牙模块通信
-        UART_BLE.print("AT+NAME=MagicMatrix\r\n"); // 设置蓝牙名称
+        UART_BLE.setTimeout(10);
+        // while(!UART_BLE);
+        this->SetBLEName();
         mmhardware.Init(); // 执行硬件初始化
         mmconfig.Load(); // 读取配置信息
         // 将当前设置菜单项读取

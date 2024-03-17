@@ -45,8 +45,10 @@ void loop()
     // 执行主循环
     mmmain.MainLoop();
 
+    // delay(2000);
+
     // UART_USB.println(__DATE__);
     // UART_USB.println(__TIME__);
-    // delay(2000);
+    
 }
 
