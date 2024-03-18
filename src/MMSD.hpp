@@ -108,6 +108,26 @@ public:
         }
     }
 
+    // 根据文件顺序打开文件夹下的文件,下标从0开始
+    // 如果到达结尾返回false
+    bool MoveToFileByOrder(File& dir, uint16_t Order)
+    {
+        bool r = true;
+        if (dir && dir.isDirectory()) {
+            dir.rewindDirectory(); // 返回文件开始位置
+            while (Order--) {
+                File f = dir.openNextFile(); // 打开下一个文件
+                if (f) { // 如果已经到末尾则跳出循环
+                    f.close();
+                } else {
+                    r = false;
+                    break;
+                }
+            }
+        }
+        return r;
+    }
+
     // 统计文件夹下的文件数量, IncludeFolders是否包含文件夹
     uint16_t FileCount(File& dir, bool IncludeFolders = false)
     {
