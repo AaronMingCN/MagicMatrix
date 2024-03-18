@@ -144,6 +144,7 @@ public:
     }
 
     // 设置日期时间
+    // sample input: date = "Dec 06 2009", time = "12:34:56"
     void SetDateTime(const char* date, const char* time)
     {
         this->Rtc.SetDateTime(RtcDateTime(date, time));

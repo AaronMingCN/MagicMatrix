@@ -15,16 +15,17 @@
 #include "MMScr.hpp"
 #include "../MMConfig.hpp"
 
-// 矩阵屏幕测试类，测试RGB显示
+// 循环显示bmp静态图片
 class MMF_DispBmpLoop : public MMFunc {
 public:
     MMF_DispBmpLoop(uint16_t fid)
         : MMFunc(fid)
     {
     }
+
+
     virtual MMFExecR_t Exec(InquireDelay* IDelay)
     {
-        mmconfig.SaveIfNeeded(); // 避免因为DS卡访问导致保存当前菜单位置不成功的问题
         mmscr.Fill(0xFF, 0xFF, 0xFF); // 填充空白
         mmscr.Update();
         mmsd.GetLockSD(); // 获得SD锁

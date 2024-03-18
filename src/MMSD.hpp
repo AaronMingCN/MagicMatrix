@@ -95,7 +95,6 @@ public:
         return r;
     }
 
-
     void LoadBitmapToRamBmp(File& F, MMRamBmp& RamBmp)
     {
         F.seek(54); // 跳过bmp文件的头部信息
@@ -109,6 +108,29 @@ public:
         }
     }
 
+    // 统计文件夹下的文件数量, IncludeFolders是否包含文件夹
+    uint16_t FileCount(File& dir, bool IncludeFolders = false)
+    {
+        uint16_t r = 0; // 定义返回结果
+        if (dir && dir.isDirectory()) {
+            dir.rewindDirectory(); // 返回文件开始位置
+            File entry; // 定义文件入口
+            for (;;) {
+                entry = dir.openNextFile();
+                if (entry) { // 如果文件打开成功
+                    if (entry.isDirectory() && IncludeFolders) { // 如果是文件夹,并且需要计数
+                        ++r;
+                    } else {
+                        ++r;
+                    }
+                    entry.close(); // 关闭文件
+                } else
+                    break;
+            }
+            dir.rewindDirectory(); // 返回文件夹开始位置
+        }
+        return r;
+    }
 
     // 将文件保存到MMRamBmp
     bool LoadBitmapToRamBmp(String FileName, MMRamBmp& RamBmp)

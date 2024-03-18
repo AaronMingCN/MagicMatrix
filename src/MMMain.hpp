@@ -236,7 +236,7 @@ public:
         String s = UART_BLE.readString();
         UART_USB.println(s.substring(13));
         // 将蓝牙的硬件地址追加并修改该蓝牙名称
-        UART_BLE.print("AT+NAME=MagicMatri_" + s.substring(13) + "\r\n");
+        UART_BLE.print("AT+NAME=MagicMatrix_" + s.substring(13) + "\r\n");
         UART_USB.println(UART_BLE.readString());
     }
 
@@ -247,7 +247,7 @@ public:
         mmhardware.Beep(true);
         uint16_t r = 0;
         UART_USB.begin(115200); // 打开串口通信
-        UART_USB.setTimeout(10); // 设置串口读取超时
+        // UART_USB.setTimeout(10); // 设置串口读取超时
         UART_BLE.begin(9600); // 打开串口1，蓝牙蓝牙模块通信
         UART_BLE.setTimeout(100);
         // while(!UART_BLE);
