@@ -196,8 +196,8 @@ public:
         return Inquire(IRRCode);
     }
 
-    // 实现IDelay方法
-    virtual bool IDelay(unsigned long ms, uint16_t& IRRCode)
+    // 实现IDelay方法,如果红外线解码成功则返回ReturnWhenDecode = false
+    virtual bool IDelay(unsigned long ms, uint16_t& IRRCode, bool ReturnWhenDecode = false)
     {
         bool r = true; // 默认结果为true
         unsigned long startm = millis(); // 记录函数开始时的运行毫秒数
@@ -207,7 +207,8 @@ public:
             if (!Inquire(IRRCode)) {
                 r = false;
                 break;
-            }
+            } 
+            if (IRRCode && ReturnWhenDecode) break;
             // 过去的时间
             pass = mmhardware.TickPassed(startm, millis());
         } while (pass < ms);

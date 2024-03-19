@@ -49,7 +49,7 @@ public:
 
 
     // 询问并等待， 以引用方式返回红外线接收值
-    virtual bool IDelay(unsigned long ms, uint16_t &IRRCode)
+    virtual bool IDelay(unsigned long ms, uint16_t& IRRCode, bool ReturnWhenDecode = false)
     {
         delay(ms);
         return Inquire(IRRCode);
