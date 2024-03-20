@@ -22,9 +22,9 @@
 #include "MMFunc/MMFuncPool.hpp"
 #include "MMHardware.hpp"
 #include "MMMenu.hpp"
-#include "Scheduler.h"
+#include <Scheduler.h>
 
-// MagicMatrix 主程序类
+/// @brief MagicMatrix 主程序类
 class MMMain : InquireDelay {
     unsigned long LastPIRR = 0; // 最后检测到人体的时间
 
@@ -185,7 +185,7 @@ public:
         
         // this->CheckPIRR(); // 由于功能块内部需要调用红外线数据，取消此部分多线程处理
         this->IRRSetMenu(IRRCode);
-        yield(); // 释放资源
+        Scheduler.yield(); // 释放资源
         return (mmmenu.NextMenuItem == mmmenu.CurrMenuItem && mmmenu.NextMenuCate == mmmenu.CurrMenuCate);
     }
 

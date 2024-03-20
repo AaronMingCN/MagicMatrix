@@ -67,15 +67,16 @@
     ```txt
     通过手机蓝牙APP发送指令可以对设备时间进行矫正
     发送指令格式：MM SDT 2024 03 15 00 00 00
-    含义为：MagicMatrix SetDateTime 2024-03-15 00:00:00
+    含义：MagicMatrix SetDateTime 2024-03-15 00:00:00
     ```
 
 + 手机切换当前功能
   
-  ```txt
-  通过手机蓝牙APP可切换设备当前正在执行的功能
-  发送指令格式：MM MENU 0 0
-  ```
+    ```txt
+    通过手机蓝牙APP可切换设备当前正在执行的功能
+    发送指令格式：MM MENU 0 0
+    含义：MagicMatrix Menu 0 0
+    ```
 
 ## 后期扩展功能
 

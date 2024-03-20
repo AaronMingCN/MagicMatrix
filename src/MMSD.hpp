@@ -4,12 +4,14 @@
  * @Vers :  1.0
  * @Desc :  SD卡访问相关的封装
  */
+
 #ifndef _MMSD_HPP
 #define _MMSD_HPP
 
 #include "MMDefine.hpp"
 #include "MMRamBmp.hpp"
 #include "MMScr.hpp"
+#include <Scheduler.h>
 
 #include <ArduinoJson.h>
 
@@ -32,9 +34,9 @@
    ** SCK  - pin 2
 */
 
-// 将图片保存在flash中不占用ram空间
-// PROGMEM prog_uint32_t m[0xFFF] = {};
 
+/// @brief MagicMatrix SD卡功能类，提供SD卡相关的功能
+///        
 class MMSD {
 private:
     bool _SDIsBusy = false; // SD是否忙碌中, 用于多线程中的访问, 互斥
@@ -44,21 +46,23 @@ public:
         SD.end();
     }
 
-    // 获得SD访问权
+    /// @brief 获得SD访问锁
     void GetLockSD()
     {
         while (this->_SDIsBusy)
-            yield(); // 如果被占用则等待
+            Scheduler.yield(); // 如果被占用则等待
         this->_SDIsBusy = true;
     }
 
-    // 释放SD
+    /// @brief 释放SD访问锁
     void ReleaseSD()
     {
         this->_SDIsBusy = false;
     }
 
-    // 绘制位图
+    /// @brief 绘制位图
+    /// @param F 文件对象
+    /// @param AutoShow 绘制后是否自动显示
     void DrawBitmapFile(File& F, bool AutoShow = true)
     {
         F.seek(54); // 跳过bmp文件的头部信息
@@ -76,7 +80,10 @@ public:
             mmscr.Update();
     }
 
-    // 将文件位图读取到矩阵
+    /// @brief 将文件位图读取到矩阵
+    /// @param FileName : 文件名
+    /// @param AutoShow : 绘制完成后是否自动显示
+    /// @return 是否绘制成功
     bool DrawBitmapFile(String FileName, bool AutoShow = true)
     {
         bool r = false;
@@ -108,8 +115,10 @@ public:
         }
     }
 
-    // 根据文件顺序打开文件夹下的文件,下标从0开始
-    // 如果到达结尾返回false
+    /// @brief 根据文件顺序打开文件夹下的文件,下标从0开始
+    /// @param dir : 文件路径对象
+    /// @param Order : 文件顺序
+    /// @return 是否打开成功
     bool MoveToFileByOrder(File& dir, uint16_t Order)
     {
         bool r = true;
@@ -128,7 +137,10 @@ public:
         return r;
     }
 
-    // 统计文件夹下的文件数量, IncludeFolders是否包含文件夹
+    /// @brief 统计文件夹下的文件数量, IncludeFolders是否包含文件夹
+    /// @param dir : 文件路径对象
+    /// @param IncludeFolders : 统计时是否包括文件夹
+    /// @return 数量
     uint16_t FileCount(File& dir, bool IncludeFolders = false)
     {
         uint16_t r = 0; // 定义返回结果
@@ -209,20 +221,22 @@ public:
         if (!SD.begin(PIN_SD_SS)) { //
             UART_USB.println("SD Initialization failed!");
         } else {
-            File myFile; // 定义文件对象
-            // myFile = SD.open(FileName, FILE_WRITE);
-            myFile = SD.open(FileName, FILE_READ); // 创建写入
-            // if the file opened okay, write to it:
-            if (myFile) {
-                // serializeJsonPretty(Json, myFile);
-                deserializeJson(Json, myFile);
-                // close the file:
-                myFile.close();
-                r = true;
-                // UART_USB.println("done.");
-            } else {
-                // if the file didn't open, print an error:
-                UART_USB.print("Error opening ");
+            if (SD.exists(FileName)) { // 如果文件存在
+                File myFile; // 定义文件对象
+                // myFile = SD.open(FileName, FILE_WRITE);
+                myFile = SD.open(FileName, FILE_READ); // 创建写入
+                // if the file opened okay, write to it:
+                if (myFile) {
+                    // serializeJsonPretty(Json, myFile);
+                    deserializeJson(Json, myFile);
+                    // close the file:
+                    myFile.close();
+                    r = true;
+                    // UART_USB.println("done.");
+                } else {
+                    // if the file didn't open, print an error:
+                    UART_USB.print("Error opening ");
+                }
             }
         }
         this->ReleaseSD(); // 释放SD访问权

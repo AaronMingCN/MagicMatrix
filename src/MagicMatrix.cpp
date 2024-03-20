@@ -12,9 +12,8 @@
 #include "MMFunc/MMFuncPool.hpp"
 #include "MMConfig.hpp"
 
-#include "Scheduler.h"
+#include <Scheduler.h>
 #include "MMGrap.hpp"
-
 
 // // 由于功能块内部需要调用红外线数据，取消此部分多线程处理，
 // // 事件循环

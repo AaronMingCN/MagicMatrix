@@ -18,26 +18,32 @@
 // 菜单分类ID和菜单项ID都是8位无符号数,共可表示256 * 256个项目
 
 // 菜单条目的结构体
+
+/// @brief 菜单条目
 struct MMMenuItem {
-    uint8_t CateID; // 所属的分类ID
-    uint8_t ItemID; // 条目ID
-    uint16_t FuncID; // 对应的功能ID
+    /// @brief 所属的分类ID
+    uint8_t CateID;
+    /// @brief 条目ID
+    uint8_t ItemID; 
+    /// @brief 对应的功能ID
+    uint16_t FuncID;
 };
 
 // 菜单类
 class MMMenu {
 public:
-
     uint8_t CurrMenuCate = 0; // 当前所在的菜单类
     uint8_t CurrMenuItem = 0; // 当前所在的菜单项目
     uint8_t NextMenuCate = 0; // 下一个菜单类
     uint8_t NextMenuItem = 0; // 下一个菜单位置
 
 
-    // 菜单条目,菜单条目不进行重复检查，执行时只针对符合key值的第一条
+    /// @brief 菜单条目,菜单条目不进行重复检查，执行时只针对符合key值的第一条
     std::vector<MMMenuItem> Items;
     MMFuncPool *FPool; // 功能池
-    // 构造，根位置的Fid
+
+    /// @brief 构造函数
+    /// @param fp : 根位置的Fid
     MMMenu(MMFuncPool *fp){
         this->FPool = fp;
         LoadItems();
