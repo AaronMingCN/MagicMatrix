@@ -15,13 +15,13 @@
 #define EXECR_OK (0x0000)
 #define EXECR_ERROR (0x0001) /// @brief 执行结果 ERROR
 
-// 定义功能ID类型
+/// @brief 定义功能ID类型
 typedef uint16_t MMFID_t;
 
-// 定义功能type类型
+/// @brief 定义功能type类型
 typedef uint8_t MMFType_t;
 
-// 定义功能执行结果类型
+/// @brief 定义功能执行结果类型
 typedef uint16_t MMFExecR_t;
 
 /// @brief 查询等待类型(接口)

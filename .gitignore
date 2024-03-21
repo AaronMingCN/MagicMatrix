@@ -13,3 +13,5 @@ cad/MagicMatrix/MagicMatrix.bak
 cad/MagicMatrix/fp-info-cache
 cad/MagicMatrix/fp-info-cache
 .VSCodeCounter/*
+doc/DoxygenOUT/*
+doc/MagicMatrix.pdf
