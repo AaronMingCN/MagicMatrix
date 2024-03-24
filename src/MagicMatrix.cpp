@@ -1,8 +1,10 @@
-/*
- * @File :  MagicMatrix.cpp
- * @Time :  2024/02/13 10:32:36
- * @Vers :  1.0
- * @Desc :  MagicMatrix魔法矩阵,主程序
+/**
+ * @file MagicMatrix.cpp
+ * @date 2024/02/13 10:32:36
+ * @version 1.0
+ * @author Aaron Ming
+ * @brief 主程序
+ * @details MagicMatrix魔法矩阵,系统入口程序
  */
 #include "MMDebug.hpp"
 

@@ -1,10 +1,13 @@
-/*
- * @File :  MMF_CountDown.hpp
- * @Time :  2024/03/06 19:44:55
- * @Auth :
- * @Vers :  1.0
- * @Desc :  倒计时功能模块
- */
+/**
+ * @file MMF_CountDown.hpp
+ * @date 2024/03/06 19:44:55
+ * @author Aaron Ming 
+ * @version 1.0
+ * @brief 倒计时功能模块
+ * @details 设定倒计时时间，开始倒计时，计时为0时响铃提醒
+ ***/
+
+
 
 #ifndef _MMF_COUTNDOWN_HPP
 #define _MMF_COUTNDOWN_HPP
@@ -13,24 +16,32 @@
 #include "MMFunc.hpp"
 #include "MMScr.hpp"
 
-// 倒计时模块
+
+/// @brief 倒计时模块 
 class MMF_CountDown : public MMFunc {
 public:
+
+    /// @brief 构造函数
+    /// @param fid : 功能块ID
     MMF_CountDown(uint16_t fid)
         : MMFunc(fid)
     {
     }
-    unsigned long RemainMill = 0; // 剩余的毫秒数
-    unsigned long StartMill = 0; // 开始计时的开机毫秒数
-    unsigned long PauseMill = 0; // 暂停时的开机毫秒数
-    unsigned long LastCount = 0; // 最后计数的时间
+    /// @brief 剩余的毫秒数
+    unsigned long RemainMill = 0;
+    /// @brief 开始计时的开机毫秒数 
+    unsigned long StartMill = 0; 
+    /// @brief 暂停时的开机毫秒数
+    unsigned long PauseMill = 0; 
+    /// @brief 最后计数的时间
+    unsigned long LastCount = 0; 
 
-    uint16_t CurrRMinu = 0; // 剩余分钟
-    uint16_t CurrRSec = 0; // 剩余秒钟
-    uint16_t NextRMinu = 0; // 下一个剩余分钟，避免重复绘图
-    uint16_t NextRSec = 0; // 下一个剩余秒钟
+    uint16_t CurrRMinu = 0; /// @brief 剩余分钟
+    uint16_t CurrRSec = 0; /// @brief 剩余秒钟
+    uint16_t NextRMinu = 0; /// @brief 下一个剩余分钟，避免重复绘图
+    uint16_t NextRSec = 0; /// @brief 下一个剩余秒钟
 
-    // 显示剩余时间
+    /// @brief 显示剩余时间
     void DispRemain()
     {
         char buff[6] = {}; // 用于保存格式化后字符串的缓存
@@ -46,13 +57,17 @@ public:
         mmhardware.matrix.show();
     }
 
-    // 准备好显示的时间数据
+
+    /// @brief 准备好显示的时间数据 
     void PrepareTime()
     {
         this->NextRMinu = this->RemainMill / 60000;
         this->NextRSec = (this->RemainMill / 1000) % 60;
     }
-    // 倒计时
+    
+
+    /// @brief 执行倒计时
+    /// @param IDelay : 传入询问等待接口用于相应功能切换
     void CountDown(InquireDelay* IDelay)
     {
         while (IDelay->IDelay(100)) {
@@ -72,7 +87,9 @@ public:
         }
     }
 
-    // 如果改变了则绘制
+
+    /// @brief 如果改变了则绘制，避免重复绘图
+    /// @return 是否完成了绘制
     bool DispRemainChange()
     {
         bool r = false;
@@ -86,13 +103,17 @@ public:
         return r;
     }
 
-    // 准备剩余时间
+
+    /// @brief 计算剩余时间
     void CalRemainMill()
     {
         this->RemainMill = NextRMinu * 60000 + NextRSec * 1000;
         this->LastCount = millis();
     }
 
+    /// @brief 执行功能块
+    /// @param IDelay : 询问等待接口
+    /// @return 执行结果
     virtual MMFExecR_t Exec(InquireDelay* IDelay)
     {
         this->DispRemain();
@@ -139,7 +160,8 @@ public:
         return EXECR_OK;
     }
 
-    // 响铃
+    /// @brief 响铃
+    /// @param IDelay : 询问等待接口 
     void Alert(InquireDelay* IDelay)
     {
         do {
