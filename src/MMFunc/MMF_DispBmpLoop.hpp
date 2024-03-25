@@ -1,9 +1,10 @@
-/*
- * @File :  MMF_DispBmpLoop.hpp
- * @Time :  2024/02/26 13:39:43
- * @Auth :
- * @Vers :  1.0
- * @Desc :  循环播放bmp图片
+/**
+ * @file MMF_DispBmpLoop.hpp
+ * @date 2024/02/26 13:39:43
+ * @author
+ * @version 1.0
+ * @brief 循环播放bmp图片
+ * @details 将bmp文件保存在sd卡中的bmp文件夹下循环播放
  */
 
 #ifndef _MMF_DISPBMPLOOP_HPP
@@ -15,21 +16,27 @@
 #include "MMSD.hpp"
 #include "MMScr.hpp"
 
-// 显示周期最短时间
+/// @brief 显示周期最短时间
 #define MMF_DBL_INTER_MIN 500
 
-// 循环显示bmp静态图片
+/// @brief 循环显示bmp静态图片
 class MMF_DispBmpLoop : public MMFunc {
 public:
-    unsigned long Interval = 500; // 显示周期
-    bool pause = false; // 是否暂停中
+    /// @brief 显示周期
+    unsigned long Interval = 500;
+    /// @brief 是否暂停中
+    bool pause = false;
 
+    /// @brief 构造函数
+    /// @param fid 功能块ID
     MMF_DispBmpLoop(uint16_t fid)
         : MMFunc(fid)
     {
     }
 
-    // 根据序号显示图片
+    /// @brief 根据序号显示图片
+    /// @param dir 路径
+    /// @param Order 图片在路径中的序号
     void DrawBMPByOrder(File& dir, uint16_t Order)
     {
         mmsd.MoveToFileByOrder(dir, Order); // 跳转到文件位置
@@ -42,6 +49,9 @@ public:
         }
     }
 
+    /// @brief 执行功能
+    /// @param IDelay 等待询问接口
+    /// @return 执行结果
     virtual MMFExecR_t Exec(InquireDelay* IDelay)
     {
         mmconfig.SaveIfNeeded(); // 避免显示时占用sd卡无法保存设置
