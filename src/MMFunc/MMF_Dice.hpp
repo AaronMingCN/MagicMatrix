@@ -1,9 +1,10 @@
-/*
- * @File :  MMF_Dice.hpp
- * @Time :  2024/03/05 14:30:13
- * @Auth :
- * @Vers :  1.0
- * @Desc :  投骰子
+/**
+ * @file MMF_Dice.hpp
+ * @date 2024/03/05 14:30:13
+ * @author Aaron Ming
+ * @version 1.0
+ * @brief 投骰子
+ * @details 通过按键实现同时投1~4个骰子的功能
  */
 
 #ifndef _MMF_DICE_HPP
@@ -13,17 +14,20 @@
 #include "MMFunc.hpp"
 #include "MMScr.hpp"
 
-// 投骰子游戏
-// 向上1个，向左2两个，向下三个，向右4个
+/// @brief 投骰子游戏
+/// @details 向上1个，向左2两个，向下三个，向右4个
 class MMF_Dice : public MMFunc {
 public:
+
+    /// @brief 构造函数
+    /// @param fid 功能块ID
     MMF_Dice(uint16_t fid)
         : MMFunc(fid)
     {
         randomSeed(analogRead(0)); // 初始化随机种子
     }
 
-    // 投1个骰子
+    /// @brief 投1个骰子
     void Dice_1()
     {
         uint8_t r = random(1, 7); // 取1~6的随机数
@@ -36,7 +40,7 @@ public:
         mmhardware.matrix.setTextSize(1);
     }
 
-    // 投2个骰子
+    /// @brief 投2个骰子
     void Dice_2()
     {
         uint8_t r = random(1, 7); // 取1~6的随机数
@@ -54,7 +58,7 @@ public:
         mmhardware.matrix.show();
     }
 
-    // 投3个骰子
+    /// @brief 投3个骰子
     void Dice_3()
     {
         uint8_t r = random(1, 7); // 取1~6的随机数
@@ -77,7 +81,7 @@ public:
         mmhardware.matrix.show();
     }
 
-    // 投3个骰子
+    /// @brief 投4个骰子
     void Dice_4()
     {
         uint8_t r = random(1, 7); // 取1~6的随机数
