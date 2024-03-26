@@ -1,9 +1,10 @@
-/*
- * @File :  MMF_FillRainbow.hpp
- * @Time :  2024/02/26 16:59:45
- * @Auth :
- * @Vers :  1.0
- * @Desc :  彩虹填充
+/**
+ * @file MMF_FillRainbow.hpp
+ * @date 2024/02/26 16:59:45
+ * @author Aaron Ming
+ * @version 1.0
+ * @brief 彩虹填充
+ * @details
  */
 
 #ifndef _MMF_FILLRAINBOW_HPP
@@ -14,12 +15,20 @@
 #include "MMScr.hpp"
 
 // 矩阵屏幕测试类，测试RGB显示
+
+/// @brief 彩虹填充
 class MMF_FillRainbow : public MMFunc {
 public:
+    /// @brief 构造函数
+    /// @param fid 当前功能ID
     MMF_FillRainbow(uint16_t fid)
         : MMFunc(fid)
     {
     }
+
+    /// @brief 执行功能
+    /// @param IDelay 询问等待接口
+    /// @return 执行结果
     virtual MMFExecR_t Exec(InquireDelay* IDelay)
     {
         do {
@@ -30,9 +39,11 @@ public:
                     mmscr.SetPixel(c, r, 255, (r * 255 / M_HEIGHT), (c * 255 / M_WIDTH));
                     --r, ++c;
                 }
-                if (!IDelay->IDelay(100)) break;
+                if (!IDelay->IDelay(100))
+                    break;
                 mmscr.Update();
-                while (mmhardware.matrix.availableForWrite()) delay(10); // 等待设备就绪
+                while (mmhardware.matrix.availableForWrite())
+                    delay(10); // 等待设备就绪
             }
 
             for (int i = 0; i < M_WIDTH; ++i) {
@@ -41,9 +52,11 @@ public:
                     mmscr.SetPixel(c, r, 255, (r * 255 / M_HEIGHT), (c * 255 / M_WIDTH));
                     --r, ++c;
                 }
-                if (!IDelay->IDelay(100)) break;
+                if (!IDelay->IDelay(100))
+                    break;
                 mmscr.Update();
-                while (mmhardware.matrix.availableForWrite()) delay(10); // 等待设备就绪
+                while (mmhardware.matrix.availableForWrite())
+                    delay(10); // 等待设备就绪
             }
             mmscr.SetEmpty();
 

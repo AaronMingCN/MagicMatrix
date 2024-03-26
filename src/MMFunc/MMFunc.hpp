@@ -1,19 +1,23 @@
-/*
- * @File :  MMFunc.hpp
- * @Time :  2024/02/14 22:52:50
- * @Auth :
- * @Vers :  1.0
- * @Desc :  功能块的基础类用于派生功能
+/**
+ * @file MMFunc.hpp
+ * @date 2024/02/14 22:52:50
+ * @author Aaron Ming 
+ * @version 1.0
+ * @brief 功能块的基础类
+ * @details 所有功能块类需要从此类派生由功能池统一调用
  */
+
 
 #ifndef _MMFUNC_HPP
 #define _MMFUNC_HPP
 
-// 定义处理的结果默认为两个字节
+
 
 /// @brief 执行结果 OK
+/// @details 定义处理的结果默认为两个字节
 #define EXECR_OK (0x0000)
-#define EXECR_ERROR (0x0001) /// @brief 执行结果 ERROR
+/// @brief 执行结果 ERROR
+#define EXECR_ERROR (0x0001) 
 
 /// @brief 定义功能ID类型
 typedef uint16_t MMFID_t;

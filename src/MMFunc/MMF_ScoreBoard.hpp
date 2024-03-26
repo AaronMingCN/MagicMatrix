@@ -1,10 +1,12 @@
-/*
- * @File :  MMF_ScoreBoard.hpp
- * @Time :  2024/02/29 22:45:38
- * @Auth :
- * @Vers :  1.0
- * @Desc :  记分牌
+/**
+ * @file MMF_ScoreBoard.hpp
+ * @date 2024/02/29 22:45:38
+ * @author Aaron Ming 
+ * @version 1.0
+ * @brief 记分牌
+ * @details 
  */
+
 
 #ifndef _MMF_SCOREBOARD_HPP
 #define _MMF_SCOREBOARD_HPP
@@ -13,19 +15,28 @@
 #include "MMFunc.hpp"
 #include "MMScr.hpp"
 
-// 记分牌功能
+
+/// @brief 记分牌功能
 class MMF_ScoreBoard : public MMFunc {
 public:
-    int CurrScoreA = 0; // 第一个分数
-    int CurrScoreB = 0; // 第二个分数
-    int NextScoreA = 0; // 避免重复绘图
+    /// @brief 当前分数A
+    /// @details 避免重复绘制分数消耗资源
+    int CurrScoreA = 0; 
+    /// @brief 当前分数B
+    int CurrScoreB = 0;
+    /// @brief 下一个分数A
+    int NextScoreA = 0; 
+    /// @brief 下一个分数B
     int NextScoreB = 0;
+
+    /// @brief 构造函数
+    /// @param fid 当前功能ID    
     MMF_ScoreBoard(uint16_t fid)
         : MMFunc(fid)
     {
     }
 
-    // 显示分数
+    /// @brief 显示分数
     void DispScore()
     {
         char buff[5] = {}; // 用于保存格式化后字符串的缓存
@@ -41,7 +52,9 @@ public:
         mmhardware.matrix.show();
     }
 
-    // 如果改变了则绘制
+
+    /// @brief 如果改变了则绘制
+    /// @return 是否完成了绘制
     bool DispScoreChange()
     {
         bool r = false;
@@ -55,7 +68,9 @@ public:
         return r;
     }
 
-    // 执行功能
+    /// @brief 执行功能
+    /// @param IDelay 询问等待接口
+    /// @return 执行结果   
     virtual MMFExecR_t Exec(InquireDelay* IDelay)
     {
         uint16_t irk = 0; // 定义红外线按键值
