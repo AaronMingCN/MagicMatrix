@@ -1,29 +1,39 @@
-/*
- * @File :  MMScr.hpp
- * @Time :  2024/02/13 10:33:34
- * @Vers :  1.0
- * @Desc :  矩阵显示功能封装
+/**
+ * @file MMScr.hpp
+ * @date 2024/02/13 10:33:34
+ * @author Aaron Ming
+ * @version 1.0
+ * @brief 矩阵屏幕功能相关封装
+ * @details 将矩阵屏幕相关的功能进行封装
  */
+
 #ifndef _MMSCR_HPP
 #define _MMSCR_HPP
 
 #include "MMDefine.hpp"
-#include "MMRamBmp.hpp"
 #include "MMHardware.hpp"
+#include "MMRamBmp.hpp"
 
+/// @brief 矩阵屏幕类
 class MMScr {
 public:
-    // 清空但是不刷新
+    unsigned long LastPIRR = 0; ///< 最后检测到人体的时间
+    uint8_t CurrBright = M_BRIGHT; ///< 当前亮度，避免重复刷新
+    uint8_t NextBright = M_BRIGHT; ///< 下一个亮度
+
+    /// @brief 清空屏幕
+    /// @note 需要手动重新绘制屏幕
     void SetEmpty()
     {
         mmhardware.matrix.clear();
     }
 
-    // 更新矩阵
+    /// @brief 更新矩阵重新绘制
     void Update()
     {
         mmhardware.matrix.show();
-        while(!mmhardware.matrix.canShow()); // 等待绘图结束
+        while (!mmhardware.matrix.canShow())
+            ; // 等待绘图结束
     }
 
     // 清空矩阵，并立刻显示
@@ -61,8 +71,30 @@ public:
         }
     }
 
-    // 从SD卡在录入图像
-    
+    // 更新显示屏亮度
+    void UpdateBrightness()
+    {
+        // 获取距离上次点亮屏幕的时间
+        unsigned long pass = mmhardware.TickPassed(this->LastPIRR, millis());
+        // 根据检测到人体的情况修改屏幕亮度
+        if (pass < M_PIRR_DELAY) {
+            this->NextBright = M_BRIGHT;
+        } else {
+            this->NextBright = M_BIRGHT_STANDBY;
+        }
+        // 如果需要改变亮度则更改并刷新
+        if (this->NextBright != this->CurrBright) {
+            this->CurrBright = this->NextBright;
+            mmhardware.matrix.setBrightness(this->CurrBright);
+            mmhardware.matrix.show();
+        }
+    }
+
+    // 设置最后检测到时间
+    void RenewPIRR()
+    {
+        this->LastPIRR = millis();
+    }
 
 } mmscr;
 

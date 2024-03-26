@@ -1,9 +1,12 @@
-/*
- * @File :  MMDebug.hpp
- * @Time :  2024/02/13 10:31:50
- * @Vers :  1.0
- * @Desc :  调试相关功能
+/**
+ * @file MMDebug.hpp
+ * @date 2024/02/13 10:31:50
+ * @author Aaron Ming 
+ * @version 1.0
+ * @brief 调试相关功能
+ * @details 设备相关的调试
  */
+
 
 #include "MMDefine.hpp"
 
@@ -19,16 +22,18 @@
 #include "MMScr.hpp"
 #include "MMSD.hpp"
 
+/// @brief 调试相关功能类
 class MMDebug {
 public:
-    // 测试红外线接收
+    /// @brief 测试红外线接收 
     void TestIRR()
     {
         UART_USB.println(mmhardware.IRRCode());
         delay(100);
     }
 
-    // 测试RTC显示时间
+    
+    /// @brief 测试RTC显示时间 
     void TestRTC()
     {
         char buff[26] = {};
@@ -39,7 +44,7 @@ public:
         UART_USB.println(buff);
     }
 
-    // 测试SD卡文件访问
+    /// @brief 测试SD卡文件访问 
     void TestSD()
     {
 #if defined(ARDUINO_ARCH_MBED)
@@ -118,6 +123,7 @@ public:
         }
     }
 
+    /// @brief 测试温湿度显示
     void TestDHT()
     {
         UART_USB.println(F("DHTxx Unified Sensor Example"));
@@ -182,7 +188,8 @@ public:
         }
     }
 
-    // 测试RamBmp使用
+    
+    /// @brief 测试RamBmp使用 
     void TestMMRamBmp()
     {
         MMRamBmp rb;
@@ -198,7 +205,7 @@ public:
         delay(1000);
     }
 
-    // 测试json使用
+    /// @brief 测试json使用
     void TestJSON()
     {
         // Allocate the JSON document

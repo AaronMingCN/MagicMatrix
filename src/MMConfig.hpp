@@ -1,9 +1,10 @@
-/*
- * @File :  MMConfig.hpp
- * @Time :  2024/03/08 13:10:15
- * @Auth :
- * @Vers :  1.0
- * @Desc :  MagicMatrix设置类
+/**
+ * @file MMConfig.hpp
+ * @date 2024/03/08 13:10:15
+ * @author Aaron Ming
+ * @version 1.0
+ * @brief 设置类
+ * @details 统一管理设置项，包括保存和载入
  */
 
 #ifndef _MMCONFIG_HPP
@@ -12,19 +13,23 @@
 #include "MMSD.hpp"
 #include <ArduinoJson.h>
 
+/// @brief 设置类
 class MMConfig {
 private:
 public:
-    JsonDocument Config; // 定义配置json
-    bool Loaded = false; // 是否已经载入
+    /// @brief 定义配置json
+    JsonDocument Config;
+    /// @brief 是否已经载入
+    bool Loaded = false;
+    /// @brief 是否需要保存
     bool NeedSave = false; // 是否需要保存，
-    // 构造
+    /// @brief 构造
     MMConfig()
         : Config() {};
-    // 析构
+    /// @brief 析构
     ~MMConfig() {};
 
-    // 将文档保存
+    /// @brief 将设置保存
     bool Save()
     {
         bool r = false; // 定义结果
@@ -33,17 +38,19 @@ public:
         }
         return r;
     }
-    
-    // 读取
+
+    /// @brief 载入配置
     bool Load()
     {
         this->Loaded = mmsd.LoadJsonFromFile(Config, FILENAME_CFG);
         return this->Loaded;
-    }    
+    }
 
-    // 如果需要保存则进行保存
-    void SaveIfNeeded() {
-        if (this->NeedSave) this->Save();
+    /// @brief 如果需要保存则进行保存
+    void SaveIfNeeded()
+    {
+        if (this->NeedSave)
+            this->Save();
     }
 
 } mmconfig;

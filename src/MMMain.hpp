@@ -26,56 +26,33 @@
 
 /// @brief MagicMatrix 主程序类
 class MMMain : InquireDelay {
-    unsigned long LastPIRR = 0; // 最后检测到人体的时间
+
 
 public:
-    uint8_t CurrBright = M_BRIGHT; // 当前亮度，避免重复刷新
-    uint8_t NextBright = M_BRIGHT; // 下一个亮度
+
 
     // 构造
     MMMain() {};
     // 析构
     // ~MMMain() {    };
 
-    // 设置最后检测到时间
-    void RenewPIRR()
-    {
-        this->LastPIRR = millis();
-    }
+
 
     // 更新最后检测到人体时间
     void UpdatePIRR()
     {
         if (mmhardware.GetPIRR()) {
-            this->RenewPIRR();
+            mmscr.RenewPIRR();
             // UART_USB.println("Got");
         }
     }
 
-    // 更新显示屏亮度
-    void UpdateBrightness()
-    {
-        // 获取距离上次点亮屏幕的时间
-        unsigned long pass = mmhardware.TickPassed(this->LastPIRR, millis());
-        // 根据检测到人体的情况修改屏幕亮度
-        if (pass < M_PIRR_DELAY) {
-            this->NextBright = M_BRIGHT;
-        } else {
-            this->NextBright = M_BIRGHT_STANDBY;
-        }
-        // 如果需要改变亮度则更改并刷新
-        if (this->NextBright != this->CurrBright) {
-            this->CurrBright = this->NextBright;
-            mmhardware.matrix.setBrightness(this->CurrBright);
-            mmhardware.matrix.show();
-        }
-    }
 
     // 根据人体检测设置亮度
     void CheckPIRR()
     {
         this->UpdatePIRR(); // 如果检测到人，记录当前上电时间
-        this->UpdateBrightness();
+        mmscr.UpdateBrightness(); // 更新屏幕亮度
     }
 
     // 将红外线收到的按键值转换为数值
@@ -122,8 +99,8 @@ public:
     {
         bool r = false;
         if (mmhardware.IRRCode(IRRCode)) {
-            this->RenewPIRR(); // 刷新检测到人体的时间
-            this->UpdateBrightness(); // 更新当前亮度
+            mmscr.RenewPIRR(); // 刷新检测到人体的时间
+            mmscr.UpdateBrightness(); // 更新当前亮度
 
             switch (IRRCode) {
             case IRK_A: // A类功能

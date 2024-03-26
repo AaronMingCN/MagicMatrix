@@ -1,9 +1,10 @@
-/*
- * @File :  MMCommand.hpp
- * @Time :  2024/03/14 23:25:45
- * @Auth :
- * @Vers :  1.0
- * @Desc :  命令执行类
+/**
+ * @file MMCommand.hpp
+ * @date 2024/03/14 23:25:45
+ * @author Aaron Ming
+ * @version 1.0
+ * @brief 命令执行类
+ * @details 用于执行通过串口或蓝牙传入的命令
  */
 
 #ifndef _MMCOMMAND_HPP
@@ -13,8 +14,9 @@
 #include "MMMenu.hpp"
 #include <vector>
 
-// 命令执行类，根据命令字符串执行对应命令
-// 命令格式：命令 参数1 参数2 ...
+/// @brief 命令执行类
+/// @details 根据命令字符串执行对应命令 \n
+/// 命令格式：命令 参数1 参数2 ...
 class MMCommand {
 private:
 public:
@@ -36,11 +38,16 @@ public:
             vcmd.push_back(t);
     }
 
-    // 执行命令行
+    /// @brief 执行命令
+    /// @param CMDString 命令行字符串
+    /// @note 命令示例：\n
+    /// MM MENU 0 0 \n
+    /// MM SDT 2024 03 15 00 00 00
     void Exec(String CMDString);
 } mmcommand;
 
-// 执行命令
+/// @brief 执行命令
+/// @param CMDString 命令行字符串
 void MMCommand::Exec(String CMDString)
 {
     std::vector<String> vcmd; // 定义分割后的命令
@@ -60,12 +67,12 @@ void MMCommand::Exec(String CMDString)
                     vcmd[5].toInt(), vcmd[6].toInt(), vcmd[7].toInt());
             }
         }
-        #ifdef MMDEBUG
+#ifdef MMDEBUG
         UART_USB.println("------------------");
         for (auto c : vcmd) {
             UART_USB.println("->" + c);
         }
-        #endif
+#endif
     }
 }
 
