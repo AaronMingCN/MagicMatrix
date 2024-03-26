@@ -18,7 +18,6 @@
 /// @details 向上1个，向左2两个，向下三个，向右4个
 class MMF_Dice : public MMFunc {
 public:
-
     /// @brief 构造函数
     /// @param fid 功能块ID
     MMF_Dice(uint16_t fid)
@@ -109,6 +108,9 @@ public:
         mmhardware.matrix.show();
     }
 
+    /// @brief 执行功能
+    /// @param IDelay 等待询问接口
+    /// @return 执行结果
     virtual MMFExecR_t Exec(InquireDelay* IDelay)
     {
         uint16_t irk = 0; // 定义红外线按键值
