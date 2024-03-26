@@ -43,37 +43,37 @@ public:
     /// @note 命令示例：\n
     /// MM MENU 0 0 \n
     /// MM SDT 2024 03 15 00 00 00
-    void Exec(String CMDString);
+    void Exec(String CMDString)
+    {
+        std::vector<String> vcmd; // 定义分割后的命令
+        this->SplitCMD(CMDString, vcmd);
+        if (vcmd.size()) {
+            if (vcmd[0] == "MM") {
+                if (vcmd.size() > 1 && vcmd[1] == "HELP") { // 显示命令帮助
+                    UART_USB.println("---------- samples ----------");
+                    UART_USB.println("MM MENU 0 0");
+                    UART_USB.println("MM SDT 2024 03 15 00 00 00");
+                    UART_USB.println("-----------------------------");
+                } else if (vcmd.size() > 3 && vcmd[1] == "MENU") { // 设置菜单位置格式: MM MENU 0 0
+                    mmmenu.NextMenuCate = vcmd[2].toInt();
+                    mmmenu.NextMenuItem = vcmd[3].toInt();
+                } else if (vcmd.size() > 7 && vcmd[1] == "SDT") { // 设置时间格式: MM SDT 2024 03 15 00 00 00
+                    mmhardware.SetDateTime(vcmd[2].toInt(), vcmd[3].toInt(), vcmd[4].toInt(),
+                        vcmd[5].toInt(), vcmd[6].toInt(), vcmd[7].toInt());
+                }
+            }
+#ifdef MMDEBUG
+            UART_USB.println("------------------");
+            for (auto c : vcmd) {
+                UART_USB.println("->" + c);
+            }
+#endif
+        }
+    }
+
 } mmcommand;
 
 /// @brief 执行命令
 /// @param CMDString 命令行字符串
-void MMCommand::Exec(String CMDString)
-{
-    std::vector<String> vcmd; // 定义分割后的命令
-    this->SplitCMD(CMDString, vcmd);
-    if (vcmd.size()) {
-        if (vcmd[0] == "MM") {
-            if (vcmd.size() > 1 && vcmd[1] == "HELP") { // 显示命令帮助
-                UART_USB.println("---------- samples ----------");
-                UART_USB.println("MM MENU 0 0");
-                UART_USB.println("MM SDT 2024 03 15 00 00 00");
-                UART_USB.println("-----------------------------");
-            } else if (vcmd.size() > 3 && vcmd[1] == "MENU") { // 设置菜单位置格式: MM MENU 0 0
-                mmmenu.NextMenuCate = vcmd[2].toInt();
-                mmmenu.NextMenuItem = vcmd[3].toInt();
-            } else if (vcmd.size() > 7 && vcmd[1] == "SDT") { // 设置时间格式: MM SDT 2024 03 15 00 00 00
-                mmhardware.SetDateTime(vcmd[2].toInt(), vcmd[3].toInt(), vcmd[4].toInt(),
-                    vcmd[5].toInt(), vcmd[6].toInt(), vcmd[7].toInt());
-            }
-        }
-#ifdef MMDEBUG
-        UART_USB.println("------------------");
-        for (auto c : vcmd) {
-            UART_USB.println("->" + c);
-        }
-#endif
-    }
-}
 
 #endif

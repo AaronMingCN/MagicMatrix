@@ -1,9 +1,10 @@
-/*
- * @File :  MMHardware.hpp
- * @Time :  2024/02/15 20:55:12
- * @Auth :
- * @Vers :  1.0
- * @Desc :  MagicMatrix硬件访问类
+/**
+ * @file MMHardware.hpp
+ * @date 2024/02/15 20:55:12
+ * @author Aaron Ming
+ * @version 1.0
+ * @brief 硬件访问
+ * @details 将硬件统一管理
  */
 
 #ifndef _MM_HARDWARE_HPP
@@ -19,7 +20,7 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
-// 定义选择时钟使用的芯片
+/// 定义选择时钟使用的芯片
 #define MM_RTCDS1302
 // #define MM_RTCDS1307
 
@@ -31,26 +32,27 @@
 #include <RtcDS1307.h>
 #endif
 
-// 定义串口
+/// 定义USB串口
 #define UART_USB _UART_USB_
+/// 定义蓝牙串口
 #define UART_BLE _UART1_
 
+/// @brief 硬件类
 class MMHardware {
 
 public:
-    IRrecv irrecv; // 定义红外接收对象
-    DHT_Unified dht; // 定义dht温湿度模块
+    IRrecv irrecv; ///< 定义红外接收对象
+    DHT_Unified dht; ///< 定义dht温湿度模块
 #ifdef MM_RTCDS1302
-    ThreeWire myWire; // 定义i2c通信模块
-    RtcDS1302<ThreeWire> Rtc; // 定义rtc时钟模块
+    ThreeWire myWire; ///< 定义i2c通信模块
+    RtcDS1302<ThreeWire> Rtc; ///< 定义rtc时钟模块
 #endif
 #ifdef MM_RTCDS1307
     RtcDS1307<TwoWire> Rtc;
 #endif
-    Adafruit_NeoMatrix matrix; // 矩阵模块
+    Adafruit_NeoMatrix matrix; ///< 矩阵模块
 
-    uint16_t IRRLastTime; // 最后一次接收到红外线数据的事件，用于防止连击
-    // 构造函数
+    /// @brief 构造函数
     MMHardware()
         : irrecv(PIN_IRR) // 构造irrecv
         , dht(PIN_DHT, DHT11) // 构造dht温湿度模块
@@ -66,7 +68,11 @@ public:
         };
     // ~MMHardware();
 
-    // 用于计算经过的时间，考虑环绕的情况，毫秒或者微妙
+    /// @brief 计算经过的时间
+    /// @param From 开始时间
+    /// @param To 结束时间
+    /// @return 经过的时间
+    /// @details 计算经过的时间，考虑环绕的情况，毫秒或者微妙
     unsigned long TickPassed(unsigned long From, unsigned long To)
     {
         unsigned long r = 0;
@@ -77,6 +83,7 @@ public:
         return r;
     }
 
+    /// @brief 初始化硬件
     void Init()
     {
 
@@ -91,7 +98,10 @@ public:
         // matrix.setRotation(3); // 设置屏幕旋转角度
     }
 
-    // IRRCode红外线读取到的结果代码, WaitData 是否等待数据
+    /// @brief 读取红外遥控编码
+    /// @param[out] Code 读取到的编码
+    /// @param WaitData 是否等待接收到编码
+    /// @return 是否收到编码
     bool IRRCode(uint16_t& Code, bool WaitData = false)
     {
         uint16_t r = false;
@@ -113,6 +123,9 @@ public:
         return r;
     }
 
+    /// @brief 读取红外遥控编码
+    /// @param WaitData 是否等待接收编码
+    /// @return 接收到的编码
     uint16_t IRRCode(bool WaitData = false)
     {
         uint16_t r;
@@ -120,19 +133,26 @@ public:
         return r;
     }
 
-    // 设置蜂鸣器开关
+    /// @brief 设置蜂鸣器状态
+    /// @param val 状态:true 打开，false 关闭
     void Beep(bool val)
     {
         digitalWrite(PIN_BUZZER, val);
     }
 
-    // 读取人体红外探测器状态
+    /// @brief 读取人体红外探测器状态
     bool GetPIRR()
     {
         return digitalRead(PIN_PIRR);
     }
 
-    // 设置日期时间
+    /// @brief 设置日期时间
+    /// @param year 年
+    /// @param month 月
+    /// @param dayOfMonth 日
+    /// @param hour 时
+    /// @param minute 分
+    /// @param second 秒
     void SetDateTime(uint16_t year,
         uint8_t month,
         uint8_t dayOfMonth,
@@ -143,13 +163,14 @@ public:
         this->Rtc.SetDateTime(RtcDateTime(year, month, dayOfMonth, hour, minute, second));
     }
 
-    // 设置日期时间
-    // sample input: date = "Dec 06 2009", time = "12:34:56"
+    /// @brief 设置日期时间
+    /// @param date 日期
+    /// @param time 时间
+    /// @note sample input: date = "Dec 06 2009", time = "12:34:56"
     void SetDateTime(const char* date, const char* time)
     {
         this->Rtc.SetDateTime(RtcDateTime(date, time));
     }
-
 
 } mmhardware;
 

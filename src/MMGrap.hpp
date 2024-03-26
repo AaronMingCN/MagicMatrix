@@ -1,10 +1,12 @@
-/*
- * @File :  MMGrap.hpp
- * @Time :  2024/02/13 10:36:51
- * @Auth :  
- * @Vers :  1.0
- * @Desc :  图像相关的定义
+/**
+ * @file MMGrap.hpp
+ * @date 2024/02/13 10:36:51
+ * @author Aaron Ming 
+ * @version 1.0
+ * @brief 图像相关的定义
+ * @details 
  */
+
 #ifndef _MMGRAP_HPP
 #define _MMGRAP_HPP
 
@@ -14,10 +16,11 @@
 #include "MMSD.hpp"
 #include "MMHardware.hpp"
 
-// MagicMatrix图像相关定义
+
+/// @brief 图像相关共功能类
 class MMGrap {
 public:
-    // 显示LOGO
+    /// @brief 显示LOGO
     void DispLOGO() {
         MMRamBmp rb;
         mmsd.LoadBitmapToRamBmp(FILENAME_LOGO, rb);

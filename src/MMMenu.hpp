@@ -1,10 +1,12 @@
-/*
- * @File :  MMMenu.hpp
- * @Time :  2024/02/20 13:23:22
- * @Auth :
- * @Vers :  1.0
- * @Desc :  菜单相关的内容和操作
+/**
+ * @file MMMenu.hpp
+ * @date 2024/02/20 13:23:22
+ * @author Aaron Ming 
+ * @version 1.0
+ * @brief 菜单相关的内容和操作
+ * @details 
  */
+
 
 #ifndef _MMMENU_HPP
 #define _MMMENU_HPP
@@ -14,28 +16,31 @@
 #include "MMFPSetup.hpp"
 #include "MMDefine.hpp"
 
-// 考虑到系统的功能层级简单,不采用树形菜单结构,这里采用单层菜单分类加菜单项的方法
-// 菜单分类ID和菜单项ID都是8位无符号数,共可表示256 * 256个项目
+// 
 
-// 菜单条目的结构体
 
-/// @brief 菜单条目
+
+/// @brief 菜单条目的结构体
+/// @note 
+/// 考虑到系统的功能层级简单,不采用树形菜单结构,这里采用单层菜单分类加菜单项的方法 \n 
+/// 菜单分类ID和菜单项ID都是8位无符号数,共可表示256 * 256个项目
 struct MMMenuItem {
-    /// @brief 所属的分类ID
+    /// 所属的分类ID
     uint8_t CateID;
-    /// @brief 条目ID
+    /// 条目ID
     uint8_t ItemID; 
-    /// @brief 对应的功能ID
+    /// 对应的功能ID
     uint16_t FuncID;
 };
 
-// 菜单类
+
+/// @brief 菜单类
 class MMMenu {
 public:
-    uint8_t CurrMenuCate = 0; // 当前所在的菜单类
-    uint8_t CurrMenuItem = 0; // 当前所在的菜单项目
-    uint8_t NextMenuCate = 0; // 下一个菜单类
-    uint8_t NextMenuItem = 0; // 下一个菜单位置
+    uint8_t CurrMenuCate = 0; ///< 当前所在的菜单类
+    uint8_t CurrMenuItem = 0; ///< 当前所在的菜单项目
+    uint8_t NextMenuCate = 0; ///< 下一个菜单类
+    uint8_t NextMenuItem = 0; ///< 下一个菜单位置
 
 
     /// @brief 菜单条目,菜单条目不进行重复检查，执行时只针对符合key值的第一条
@@ -49,14 +54,19 @@ public:
         LoadItems();
     };
 
-    // 返回最初位置
+    /// @brief 返回最初位置
     void GoHome()
     {
         this->NextMenuCate = 0; // 返回0分类的0项
-        this->NextMenuItem = 0;
+        this->NextMenuItem = 0; // 返回0分类的0项
     }
 
-    // 执行条目对应功能
+
+    /// @brief 执行条目对应功能
+    /// @param CateID 分类ID
+    /// @param ItemID 条目ID
+    /// @param IDelay 询问等待接口
+    /// @return 执行结果
     MMFExecR_t ExecItem(uint8_t CateID, uint8_t ItemID, InquireDelay *IDelay) {
         MMFExecR_t r = EXECR_ERROR; // 定义菜单执行结果，默认为EXECR_ERROR
         for (auto it : Items) {
@@ -68,7 +78,12 @@ public:
         return r;
     }
 
-    // 条目是否存在
+
+
+    /// @brief 条目是否存在
+    /// @param CateID 分类ID
+    /// @param ItemID 条目ID
+    /// @return 是否存在
     bool ItemExists(uint8_t CateID, uint8_t ItemID) {
         bool r = false;
         for (auto it : Items) {
@@ -80,7 +95,8 @@ public:
         return r;
     }
 
-    // 载入菜单项
+
+    /// @brief 载入菜单项
     void LoadItems() {
         this->Items.clear();
         // 菜单分类0x00 
@@ -98,7 +114,14 @@ public:
         this->Items.push_back({0x03, 0x00, MMF_ID_FILLRAINBOW});  // 填充
     }
 
-    // 切换位置
+
+
+    /// @brief 切换菜单位置
+    /// @param IDelay 询问等待接口
+    /// @return 切换结果
+    /// @note 
+    /// 切换菜单位置时需要前一个功能响应InquireDelay的退出请求 \n
+    /// 前一个功能退出后由主循环执行当前方法来进行功能切换
     bool Switch(InquireDelay *IDelay) {
         bool r = false;
         //  如果下一个位菜单置存在则更新当前菜单位置，否则将下一位置改为当前位置

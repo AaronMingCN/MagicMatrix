@@ -1,8 +1,9 @@
-/*
- * @File :  MMSD.hpp
- * @Time :  2024/02/13 10:34:14
- * @Vers :  1.0
- * @Desc :  SD卡访问相关的封装
+/**
+ * @file MMSD.hpp
+ * @date 2024/02/13 10:34:14
+ * @author Aaron Ming 
+ * @version 1.0
+ * @brief SD卡访问相关的封装
  */
 
 #ifndef _MMSD_HPP
@@ -35,12 +36,13 @@
 */
 
 
-/// @brief MagicMatrix SD卡功能类，提供SD卡相关的功能
-///        
+/// @brief SD卡功能类
+/// @details 提供SD卡相关的功能
 class MMSD {
 private:
-    bool _SDIsBusy = false; // SD是否忙碌中, 用于多线程中的访问, 互斥
+    bool _SDIsBusy = false; ///< SD是否忙碌中, 用于多线程中的访问, 互斥
 public:
+    /// @brief 构造
     ~MMSD()
     {
         SD.end();
@@ -102,6 +104,9 @@ public:
         return r;
     }
 
+    /// @brief 位图文件载入内存位图
+    /// @param F 位图文件对象
+    /// @param[out] RamBmp 内存位图对象
     void LoadBitmapToRamBmp(File& F, MMRamBmp& RamBmp)
     {
         F.seek(54); // 跳过bmp文件的头部信息
@@ -164,7 +169,11 @@ public:
         return r;
     }
 
-    // 将文件保存到MMRamBmp
+
+    /// @brief 将文件保存到MMRamBmp
+    /// @param FileName 文件名 
+    /// @param RamBmp 内存位图对象
+    /// @return 是否成功
     bool LoadBitmapToRamBmp(String FileName, MMRamBmp& RamBmp)
     {
         bool r = false;
@@ -185,7 +194,11 @@ public:
         return r;
     }
 
-    // 将JSON文件保存到SD卡
+
+    /// @brief 将JSON文件保存到SD卡
+    /// @param Json JSON文件对象
+    /// @param FileName 文件名
+    /// @return 是否成功
     bool SaveJsonToFile(JsonDocument& Json, const char* FileName)
     {
         bool r = false; // 定义结果
@@ -213,7 +226,11 @@ public:
         return r;
     }
 
-    // 从SD卡载入JSON
+
+    /// @brief 从SD卡载入JSON
+    /// @param Json JSON对象
+    /// @param FileName JSON文件名
+    /// @return 是否成功
     bool LoadJsonFromFile(JsonDocument& Json, const char* FileName)
     {
         bool r = false; // 定义返回结果

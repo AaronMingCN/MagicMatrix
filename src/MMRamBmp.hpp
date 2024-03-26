@@ -1,22 +1,28 @@
-/*
- * @File :  RamBmp.hpp
- * @Time :  2024/02/13 10:30:27
- * @Vers :  1.0
- * @Desc :  内存bmp位图,将位图文件保存在ram中
+/**
+ * @file MMRamBmp.hpp
+ * @date 2024/02/13 10:30:27
+ * @author Aaron Ming 
+ * @version 1.0
+ * @brief 内存bmp位图,将位图文件保存在ram中
  */
+
+
 #ifndef _MMRAMBMP_HPP
 #define _MMRAMBMP_HPP
 
 #include "MMDefine.hpp"
 
-// 内存bmp图片
+/// @brief 内存图片类
 class MMRamBmp {
 public:
-    uint16_t width = 0;
-    uint16_t height = 0;
+    uint16_t width = 0; ///< 宽度
+    uint16_t height = 0; ///< 高度
 
-    RGB* bmp = NULL; // 定义一个RGB数组
-    // 构造函数
+    RGB* bmp = NULL; ///< 定义一个RGB数组
+
+    /// @brief 构造函数
+    /// @param Width 高度
+    /// @param Height 宽度
     MMRamBmp(uint16_t Width = M_WIDTH, uint16_t Height = M_HEIGHT)
     {
         this->width = Width;
@@ -25,25 +31,36 @@ public:
         this->Clear();
     };
 
-    // 析构函数
+    /// @brief 析构函数
     ~MMRamBmp()
     {
         delete[] bmp; // 析构释放RBG数组
     };
 
-    // 清空所有像素
+    /// @brief 清空所有像素
     void Clear()
     {
         memset(bmp, 0, height * width * (sizeof(RGB)));
     }
 
-    // 获得RGB值设置像素
+
+    /// @brief 获得RGB值设置像素
+    /// @param x 横坐标
+    /// @param y 纵坐标
+    /// @param[out] Pix 返回的像素rgb 
     void GetPixel(uint16_t x, uint16_t y, RGB& Pix)
     {
         Pix = this->bmp[y * width + x];
     }
 
-    // 根据设置像素RGB值
+
+
+    /// @brief 根据设置像素RGB值
+    /// @param x 横坐标
+    /// @param y 纵坐标
+    /// @param R 红色值
+    /// @param G 绿色值
+    /// @param B 蓝色值
     void SetPixel(uint16_t x, uint16_t y, uint8_t R, uint8_t G, uint8_t B)
     {
         RGB &pix = this->bmp[y * width + x];
@@ -52,7 +69,10 @@ public:
         pix.B = B;
     }
 
-    // 根据RGB结构设置
+    /// @brief 设置像素RGB值
+    /// @param x 横坐标
+    /// @param y 纵坐标
+    /// @param Pix 像素RGB值
     void SetPixel(uint16_t x, uint16_t y, RGB& Pix)
     {
         this->SetPixel(x, y, Pix.R, Pix.G, Pix.B);

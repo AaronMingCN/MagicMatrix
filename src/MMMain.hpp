@@ -1,9 +1,10 @@
-/*
- * @File :  MMMain.hpp
- * @Time :  2024/02/20 16:10:24
- * @Auth :
- * @Vers :  1.0
- * @Desc :  MagicMatrix 主程序类
+/**
+ * @file MMMain.hpp
+ * @date 2024/02/20 16:10:24
+ * @author Aaron Ming
+ * @version 1.0
+ * @brief 主程序类
+ * @details
  */
 
 #ifndef _MMMAIN_HPP
@@ -27,18 +28,13 @@
 /// @brief MagicMatrix 主程序类
 class MMMain : InquireDelay {
 
-
 public:
-
-
-    // 构造
+    /// @brief 构造
     MMMain() {};
     // 析构
     // ~MMMain() {    };
 
-
-
-    // 更新最后检测到人体时间
+    /// @brief 更新最后检测到人体时间
     void UpdatePIRR()
     {
         if (mmhardware.GetPIRR()) {
@@ -47,15 +43,16 @@ public:
         }
     }
 
-
-    // 根据人体检测设置亮度
+    /// @brief 根据人体检测设置亮度
     void CheckPIRR()
     {
         this->UpdatePIRR(); // 如果检测到人，记录当前上电时间
         mmscr.UpdateBrightness(); // 更新屏幕亮度
     }
 
-    // 将红外线收到的按键值转换为数值
+    /// @brief 将红外线收到的按键值转换为数值
+    /// @param IRRCode
+    /// @return 对应整数，转换失败返回-1
     int IRRVal(uint16_t IRRCode)
     {
         int r = -1;
@@ -94,7 +91,9 @@ public:
         return r;
     }
 
-    // 接收并设置当前菜单位置，返回红外线值
+    /// @brief 接收并设置当前菜单位置
+    /// @param[out] IRRCode 返回红外线值
+    /// @return 是否切换了菜单位置
     bool IRRSetMenu(uint16_t& IRRCode)
     {
         bool r = false;
@@ -140,7 +139,8 @@ public:
         return r;
     }
 
-    // 处理USB串口信息
+    /// @brief 处理串口信息
+    /// @param[in] uart 串口
     void ProcUART(UART& uart)
     {
         // 如果串口收到数据
@@ -154,26 +154,33 @@ public:
         }
     }
 
-    // 实现InquireDelay方法
+    /// @brief 实现InquireDelay方法
+    /// @param[out] IRRCode 读取到的红外线编码
+    /// @return 询问结果
     virtual bool Inquire(uint16_t& IRRCode)
     {
         this->ProcUART(UART_USB); // 处理USB串口
         this->ProcUART(UART_BLE); // 处理BLE串口
-        
+
         // this->CheckPIRR(); // 由于功能块内部需要调用红外线数据，取消此部分多线程处理
         this->IRRSetMenu(IRRCode);
         Scheduler.yield(); // 释放资源
         return (mmmenu.NextMenuItem == mmmenu.CurrMenuItem && mmmenu.NextMenuCate == mmmenu.CurrMenuCate);
     }
 
-    // 实现InquireDelay方法
+    /// @brief 实现InquireDelay方法
     virtual bool Inquire()
     {
         uint16_t IRRCode;
         return Inquire(IRRCode);
     }
 
-    // 实现IDelay方法,如果红外线解码成功则返回ReturnWhenDecode = false
+
+    /// @brief 实现IDelay方法
+    /// @param ms 等待时间
+    /// @param[out] IRRCode 读取到的红外编码 
+    /// @param ReturnWhenDecode 当读取到红外编码是否立刻返回，默认false
+    /// @return 询问结果
     virtual bool IDelay(unsigned long ms, uint16_t& IRRCode, bool ReturnWhenDecode = false)
     {
         bool r = true; // 默认结果为true
@@ -184,21 +191,29 @@ public:
             if (!Inquire(IRRCode)) {
                 r = false;
                 break;
-            } 
-            if (IRRCode && ReturnWhenDecode) break;
+            }
+            if (IRRCode && ReturnWhenDecode)
+                break;
             // 过去的时间
             pass = mmhardware.TickPassed(startm, millis());
         } while (pass < ms);
         return r;
     }
 
-    // 实现IDelay方法
+
+    /// @brief 实现IDelay方法
+    /// @param ms 等待时间
+    /// @return 询问结果
     virtual bool IDelay(unsigned long ms)
     {
         uint16_t IRRCode;
         return this->IDelay(ms, IRRCode);
     }
 
+    /// @brief 执行菜单项
+    /// @param CateID 分类ID
+    /// @param ItemID 项目ID
+    /// @return 执行结果
     uint16_t ExecMenu(uint8_t CateID, uint8_t ItemID)
     {
         return mmmenu.ExecItem(CateID, ItemID, this);
@@ -206,9 +221,18 @@ public:
 
     // 主循环
     // 左右选择大项,数字键用来选择子项目,一个大项目下面最多包含10个子项目
-    void MainLoop();
+    void MainLoop()
+    {
 
-    void SetBLEName() {
+        for (;;) {
+            // 切换菜单
+            mmmenu.Switch(this);
+            this->Inquire();
+        }
+    }
+
+    void SetBLEName()
+    {
         // UART_BLE.print("AT+NAME=MagicMatrix\r\n"); // 设置蓝牙名称
         UART_BLE.print("AT+MAC?\r\n"); // 先获得蓝牙的硬件地址
         String s = UART_BLE.readString();
@@ -243,16 +267,5 @@ public:
     }
 
 } mmmain;
-
-// 主循环
-void MMMain::MainLoop()
-{
-
-    for (;;) {
-        // 切换菜单
-        mmmenu.Switch(this);
-        this->Inquire();
-    }
-}
 
 #endif
