@@ -18,6 +18,8 @@
 #include "MMCharDefine.hpp"
 #include "MMCanvas.hpp"
 
+/// @brief 定义在绘制MM字符时的回调事件
+typedef void (*OnDrawChar)(int16_t x, int16_t y, RGB& rgb);
 
 /// @brief 图像相关共功能类
 class MMGrap {
@@ -52,13 +54,15 @@ public:
 /// @param y 纵向值
 /// @param c 绘制的MM字符
 /// @param Canvas 目标画布 
-/// @param rgb RGB值
-void DrawChar(int16_t x, int16_t y, uint16_t c, MMCanvas *Canvas, RGB rgb) {
+/// @param cb 在绘制时的回调
+void DrawChar(int16_t x, int16_t y, uint16_t c, MMCanvas *Canvas,OnDrawChar cb = NULL) {
+    RGB rgb = {255, 0, 0};
 	for (int16_t i = 0; i < 5; ++i) {
 		for (int16_t j = 0; j < 3; ++j) {
 			c <<= 1;
 			if (c & 0b1000000000000000) {
 				// a[i + y][j + x] = true;
+                if (cb) (*cb)(j + x, i + y, rgb); // 如果定义了绘图时的回调则先调用
                 Canvas->SetPixel(j + x, i + y, rgb);
 			}
 		}
