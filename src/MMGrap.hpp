@@ -15,6 +15,8 @@
 #include "MMRamBmp.hpp"
 #include "MMSD.hpp"
 #include "MMHardware.hpp"
+#include "MMCharDefine.hpp"
+#include "MMCanvas.hpp"
 
 
 /// @brief 图像相关共功能类
@@ -43,6 +45,25 @@ public:
         mmhardware.matrix.setBrightness(M_BRIGHT);        
 
     }
+
+
+/// @brief 在MMCanvas指定位置绘制MM字符
+/// @param x 横向值
+/// @param y 纵向值
+/// @param c 绘制的MM字符
+/// @param Canvas 目标画布 
+/// @param rgb RGB值
+void DrawChar(int16_t x, int16_t y, uint16_t c, MMCanvas *Canvas, RGB rgb) {
+	for (int16_t i = 0; i < 5; ++i) {
+		for (int16_t j = 0; j < 3; ++j) {
+			c <<= 1;
+			if (c & 0b1000000000000000) {
+				// a[i + y][j + x] = true;
+                Canvas->SetPixel(j + x, i + y, rgb);
+			}
+		}
+	}
+}    
 } mmgrap;
 
 #endif
