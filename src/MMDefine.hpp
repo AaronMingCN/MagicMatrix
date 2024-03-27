@@ -140,22 +140,22 @@ struct RGB {
     uint8_t G; ///< 绿色值 0~255
     uint8_t B; ///< 蓝色值 0~255
     
-    /// @brief 将RGB值合成为32位数值
-    /// @param r 红色值 0~255
-    /// @param g 绿色值 0~255
-    /// @param b 蓝色值 0~255
-    /// @return 合成后的32位颜色值
-    static uint32_t Color(uint8_t r, uint8_t g, uint8_t b)
-    { // 返回由RGB组成的颜色
-        return ((uint16_t)(r & 0xF8) << 8) | ((uint16_t)(g & 0xFC) << 3) | (b >> 3);
-    }
+    // /// @brief 将RGB值合成为32位数值
+    // /// @param r 红色值 0~255
+    // /// @param g 绿色值 0~255
+    // /// @param b 蓝色值 0~255
+    // /// @return 合成后的32位颜色值
+    // static uint32_t Color(uint8_t r, uint8_t g, uint8_t b)
+    // { // 返回由RGB组成的颜色
+    //     return ((uint16_t)(r & 0xF8) << 8) | ((uint16_t)(g & 0xFC) << 3) | (b >> 3);
+    // }
 
-    /// @brief 将颜色合成位32位颜色值
-    /// @return 合成后的32位颜色值
-    uint32_t Color()
-    {
-        return Color(R, G, B);
-    }
+    // /// @brief 将颜色合成位32位颜色值
+    // /// @return 合成后的32位颜色值
+    // uint32_t Color()
+    // {
+    //     return Color(R, G, B);
+    // }
 };
 
 

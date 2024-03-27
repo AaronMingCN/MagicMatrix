@@ -55,7 +55,7 @@ public:
     virtual MMFExecR_t Exec(InquireDelay* IDelay)
     {
         mmconfig.SaveIfNeeded(); // 避免显示时占用sd卡无法保存设置
-        mmscr.Fill(0xFF, 0xFF, 0xFF); // 填充空白
+        mmscr.FillAll(0xFF, 0xFF, 0xFF); // 填充空白
         mmscr.Update();
         mmsd.GetLockSD(); // 获得SD锁
         if (!SD.begin(PIN_SD_SS)) {

@@ -31,14 +31,14 @@ public:
     virtual MMFExecR_t Exec(InquireDelay* IDelay)
     {
         if (IDelay->Inquire()) {
-            mmscr.Fill(255, 0, 0);
+            mmscr.FillAll(255, 0, 0);
             mmscr.Update();
             if (IDelay->IDelay(500)) {
-                mmscr.Fill(0, 255, 0);
+                mmscr.FillAll(0, 255, 0);
                 mmscr.Update();
             }
             if (IDelay->IDelay(500)) {
-                mmscr.Fill(0, 0, 255);
+                mmscr.FillAll(0, 0, 255);
                 mmscr.Update();
             }
             if (IDelay->IDelay(500)) {

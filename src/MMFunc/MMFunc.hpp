@@ -39,18 +39,12 @@ class InquireDelay {
 public:
     /// @brief 询问是否继续执行
     /// @return true允许，false不允许
-    virtual bool Inquire()
-    {
-        return true;
-    };
+    virtual bool Inquire() = 0;
 
     /// @brief 询问是否继续执行
     /// @param IRRCode : 以引用方式返回红外线接收值
     /// @return true允许，false不允许
-    virtual bool Inquire(uint16_t& IRRCode)
-    {
-        return true;
-    };
+    virtual bool Inquire(uint16_t& IRRCode) = 0;
 
 
     /// @brief 询问并等待

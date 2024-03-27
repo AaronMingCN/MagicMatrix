@@ -56,17 +56,17 @@ public:
                 sprintf(buff, "%3d", T);
                 // sprintf(buff, "%3d", int(-11));
                 mmhardware.matrix.setCursor(-1, 0);
-                mmhardware.matrix.setTextColor(RGB::Color(255, 255, 0));
+                mmhardware.matrix.setTextColor(mmhardware.matrix.Color(255, 255, 0));
                 mmhardware.matrix.print(buff);
 
                 if (0 <= H && H < 100) { // 避免错误绘图
                     sprintf(buff, "%-2d", H);
                     mmhardware.matrix.setCursor(0, 8);
-                    mmhardware.matrix.setTextColor(RGB::Color(0, 255, 0));
+                    mmhardware.matrix.setTextColor(mmhardware.matrix.Color(0, 255, 0));
                     mmhardware.matrix.print(buff);
 
                     mmhardware.matrix.setCursor(11, 8);
-                    mmhardware.matrix.setTextColor(RGB::Color(0, 0, 255));
+                    mmhardware.matrix.setTextColor(mmhardware.matrix.Color(0, 0, 255));
                     mmhardware.matrix.print('%');
                 }
 

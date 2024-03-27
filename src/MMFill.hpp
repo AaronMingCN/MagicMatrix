@@ -163,13 +163,13 @@ public:
     /// @brief 测试矩阵
     void MatrixTest()
     {
-        mmscr.Fill(255, 0, 0);
+        mmscr.FillAll(255, 0, 0);
         mmscr.Update();
         delay(500);
-        mmscr.Fill(0, 255, 0);
+        mmscr.FillAll(0, 255, 0);
         mmscr.Update();
         delay(500);
-        mmscr.Fill(0, 0, 255);
+        mmscr.FillAll(0, 0, 255);
         mmscr.Update();
         delay(500);
         mmscr.SetEmpty();
@@ -180,10 +180,10 @@ public:
     void AlarmLamp()
     {
         for (uint8_t i = 0; i < 10; ++i) {
-            mmscr.Fill(255, 0, 0);
+            mmscr.FillAll(255, 0, 0);
             mmscr.Update();
             delay(100);
-            mmscr.Fill(0, 0, 255);
+            mmscr.FillAll(0, 0, 255);
             mmscr.Update();
             delay(100);
         }

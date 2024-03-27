@@ -43,19 +43,19 @@ public:
                 mmhardware.matrix.clear();
                 sprintf(buff, "%02d", now.Hour());
                 mmhardware.matrix.setCursor(4, 0);
-                mmhardware.matrix.setTextColor(RGB::Color(255, 0, 255));
+                mmhardware.matrix.setTextColor(mmhardware.matrix.Color(255, 0, 255));
                 mmhardware.matrix.print(buff);
 
                 if (now.Second() % 2) {
                     mmhardware.matrix.setCursor(0, 8);
-                    mmhardware.matrix.setTextColor(RGB::Color(0, 255, 255));
+                    mmhardware.matrix.setTextColor(mmhardware.matrix.Color(0, 255, 255));
                     mmhardware.matrix.print(':');
                 } else
                     mmhardware.matrix.print(' ');
 
                 sprintf(buff, "%02d", now.Minute());
                 mmhardware.matrix.setCursor(4, 8);
-                mmhardware.matrix.setTextColor(RGB::Color(255, 255, 0));
+                mmhardware.matrix.setTextColor(mmhardware.matrix.Color(255, 255, 0));
                 mmhardware.matrix.print(buff);
 
                 // mmhardware.matrix.setCursor(10, 1);

@@ -12,7 +12,7 @@
 
 #include "../MMFill.hpp"
 #include "MMFunc.hpp"
-#include "MMScr.hpp"
+// #include "MMScr.hpp"
 
 /// @brief 倒计时模块
 class MMF_CountDown : public MMFunc {
@@ -47,11 +47,11 @@ public:
         char buff[6] = {}; // 用于保存格式化后字符串的缓存
         mmhardware.matrix.clear();
         mmhardware.matrix.setCursor(2, 0);
-        mmhardware.matrix.setTextColor(RGB::Color(255, 255, 0));
+        mmhardware.matrix.setTextColor(mmhardware.matrix.Color(255, 255, 0));
         sprintf(buff, "%02d", CurrRMinu);
         mmhardware.matrix.print(buff);
         mmhardware.matrix.setCursor(2, 9);
-        mmhardware.matrix.setTextColor(RGB::Color(0, 255, 255));
+        mmhardware.matrix.setTextColor(mmhardware.matrix.Color(0, 255, 255));
         sprintf(buff, "%02d", CurrRSec);
         mmhardware.matrix.print(buff);
         mmhardware.matrix.show();

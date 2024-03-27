@@ -12,7 +12,7 @@
 
 #include "../MMFill.hpp"
 #include "MMFunc.hpp"
-#include "MMScr.hpp"
+// #include "MMScr.hpp"
 
 /// @brief 投骰子游戏
 /// @details 向上1个，向左2两个，向下三个，向右4个
@@ -32,7 +32,7 @@ public:
         uint8_t r = random(1, 7); // 取1~6的随机数
         mmhardware.matrix.clear();
         mmhardware.matrix.setTextSize(2);
-        mmhardware.matrix.setTextColor(RGB::Color(0, 255, 255));
+        mmhardware.matrix.setTextColor(mmhardware.matrix.Color(0, 255, 255));
         mmhardware.matrix.setCursor(3, 1);
         mmhardware.matrix.print(r);
         mmhardware.matrix.show();
@@ -46,11 +46,11 @@ public:
         uint8_t r1 = random(1, 7); // 取1~6的随机数
         mmhardware.matrix.clear();
         mmhardware.matrix.setTextSize(1);
-        mmhardware.matrix.setTextColor(RGB::Color(255, 255, 0));
+        mmhardware.matrix.setTextColor(mmhardware.matrix.Color(255, 255, 0));
         mmhardware.matrix.setCursor(3, 0);
         mmhardware.matrix.print(r);
 
-        mmhardware.matrix.setTextColor(RGB::Color(255, 0, 255));
+        mmhardware.matrix.setTextColor(mmhardware.matrix.Color(255, 0, 255));
         mmhardware.matrix.setCursor(8, 9);
         mmhardware.matrix.print(r1);
 
@@ -65,15 +65,15 @@ public:
         uint8_t r2 = random(1, 7); // 取1~6的随机数
         mmhardware.matrix.clear();
         mmhardware.matrix.setTextSize(1);
-        mmhardware.matrix.setTextColor(RGB::Color(255, 0, 0));
+        mmhardware.matrix.setTextColor(mmhardware.matrix.Color(255, 0, 0));
         mmhardware.matrix.setCursor(5, 0);
         mmhardware.matrix.print(r);
 
-        mmhardware.matrix.setTextColor(RGB::Color(0, 255, 0));
+        mmhardware.matrix.setTextColor(mmhardware.matrix.Color(0, 255, 0));
         mmhardware.matrix.setCursor(2, 9);
         mmhardware.matrix.print(r1);
 
-        mmhardware.matrix.setTextColor(RGB::Color(0, 0, 255));
+        mmhardware.matrix.setTextColor(mmhardware.matrix.Color(0, 0, 255));
         mmhardware.matrix.setCursor(9, 9);
         mmhardware.matrix.print(r2);
 
@@ -89,19 +89,19 @@ public:
         uint8_t r3 = random(1, 7); // 取1~6的随机数
         mmhardware.matrix.clear();
         mmhardware.matrix.setTextSize(1);
-        mmhardware.matrix.setTextColor(RGB::Color(255, 255, 0));
+        mmhardware.matrix.setTextColor(mmhardware.matrix.Color(255, 255, 0));
         mmhardware.matrix.setCursor(2, 0);
         mmhardware.matrix.print(r);
 
-        mmhardware.matrix.setTextColor(RGB::Color(0, 255, 255));
+        mmhardware.matrix.setTextColor(mmhardware.matrix.Color(0, 255, 255));
         mmhardware.matrix.setCursor(9, 0);
         mmhardware.matrix.print(r1);
 
-        mmhardware.matrix.setTextColor(RGB::Color(0, 0, 255));
+        mmhardware.matrix.setTextColor(mmhardware.matrix.Color(0, 0, 255));
         mmhardware.matrix.setCursor(2, 9);
         mmhardware.matrix.print(r2);
 
-        mmhardware.matrix.setTextColor(RGB::Color(255, 0, 255));
+        mmhardware.matrix.setTextColor(mmhardware.matrix.Color(255, 0, 255));
         mmhardware.matrix.setCursor(9, 9);
         mmhardware.matrix.print(r3);
 
