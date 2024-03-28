@@ -10,6 +10,42 @@
 #ifndef _MMCHARDEFINE_HPP
 #define _MMCHARDEFINE_HPP
 
+#define MMCHAR_WIDTH (3) ///< 定义字符的宽度
+#define MMCHAR_HEIGHT (5) ///< 定义字符的高度
+
+/// @brief 定义在绘制MM字符时的回调事件
+/// @param x 相对横向值
+/// @param y 相对纵向值
+/// @param abx 绝对横向值
+/// @param aby 绝对纵向值
+/// @param rgb 用于绘制的颜色
+typedef void (*OnDrawChar)(int16_t x, int16_t y, int16_t abx, int16_t aby, RGB& rgb);
+
+/// @brief MMChar的字符样式类
+class MMCStyle {
+public:
+    /// @brief 实现OnDrawChar
+    static void MMCS_1(int16_t x, int16_t y, int16_t abx, int16_t aby, RGB& rgb)
+    {
+        rgb.R = 255 - (y * 256 / MMCHAR_HEIGHT);
+        rgb.G = (y * 256 / MMCHAR_HEIGHT);
+        rgb.B = 255;
+    }
+
+    /// @brief 实现OnDrawChar
+    static void MMCS_2(int16_t x, int16_t y, int16_t abx, int16_t aby, RGB& rgb)
+    {
+        rgb.R = 255 - (y * 256 / MMCHAR_HEIGHT);
+        rgb.G = 255;
+        rgb.B = (y * 256 / MMCHAR_HEIGHT);
+    }
+
+    static OnDrawChar Styles[];
+};
+
+/// 初始化样式列表，将样式添加到列表中
+OnDrawChar MMCStyle::Styles[] = { MMCS_1, MMCS_2 };
+
 /// 定义字符空格的字符显示
 #define CHAR_SPAC (0b0\
 000\
