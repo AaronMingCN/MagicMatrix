@@ -48,9 +48,15 @@ public:
     /// @param x 横坐标
     /// @param y 纵坐标
     /// @param[out] Pix 返回的像素rgb
-    void GetPixel(uint16_t x, uint16_t y, RGB& Pix)
+    /// @return 获取结果
+    bool GetPixel(int16_t x, int16_t y, RGB& Pix)
     {
-        Pix = this->bmp[y * width + x];
+        bool r = false;
+        if (x >= 0 && x < this->width && y >= 0 && y < this->height) { // 边界检查
+            Pix = this->bmp[y * width + x];
+            r = true;
+        }
+        return r;
     }
 
     /// @brief 设置一个像素点
@@ -62,10 +68,12 @@ public:
     /// @note 实现MMCanvas方法
     virtual void SetPixel(int16_t x, int16_t y, uint8_t R, uint8_t G, uint8_t B)
     {
-        RGB& pix = this->bmp[y * width + x];
-        pix.R = R;
-        pix.G = G;
-        pix.B = B;
+        if (x >= 0 && x < this->width && y >= 0 && y < this->height) { // 边界检查
+            RGB& pix = this->bmp[y * width + x];
+            pix.R = R;
+            pix.G = G;
+            pix.B = B;
+        }
     }
 };
 
