@@ -47,12 +47,17 @@ void setup()
 /// @brief 主循环
 void loop()
 {
-    mmgrap.DispLOGO();
-    // 执行主循环
-    mmmain.MainLoop();
+    // mmgrap.DispLOGO();
+    // // 执行主循环
+    // mmmain.MainLoop();
+
+    mmdebug.TestDispMMChar();
+    delay(1000);
+
+    mmscr.Clear();
+    delay(1000);
+    mmscr.Update();
 
     // delay(2000);
 
-    // UART_USB.println(__DATE__);
-    // UART_USB.println(__TIME__);
 }

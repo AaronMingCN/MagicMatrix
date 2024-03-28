@@ -78,52 +78,56 @@
 #define M_PIRR_DELAY (20000u) ///< 人体检测延迟，毫秒
 
 // 定义红外遥控器的按键
-#define IRK_NONE (0)
 
-#define IRK_CH_MINUS (69)
-#define IRK_CH (70)
-#define IRK_CH_PLUS (71)
+#define IRK_NONE (0) ///< 空
 
-#define IRK_PRE (68)
-#define IRK_NXT (64)
-#define IRK_PAUSE (67)
+#define IRK_CH_MINUS (69) ///< CH+
+#define IRK_CH (70) ///< CH
+#define IRK_CH_PLUS (71) ///< CH-
 
-#define IRK_MINUS (7)
-#define IRK_PLUS (21)
-#define IRK_EQ (9)
+#define IRK_PRE (68) ///< 上一曲
+#define IRK_NXT (64) ///< 下一曲
+#define IRK_PAUSE (67) ///< 暂停
 
-#define IRK_0 (22)
-#define IRK_100 (25)
-#define IRK_200 (13)
+#define IRK_MINUS (7) ///< Minus
+#define IRK_PLUS (21) ///< Plus
+#define IRK_EQ (9) ///< EQ
 
-#define IRK_1 (12)
-#define IRK_2 (24)
-#define IRK_3 (94)
+#define IRK_0 (22) ///< 0
+#define IRK_100 (25) ///< 100
+#define IRK_200 (13) ///< 200
 
-#define IRK_4 (8)
-#define IRK_5 (28)
-#define IRK_6 (90)
+#define IRK_1 (12) ///< 1
+#define IRK_2 (24) ///< 2
+#define IRK_3 (94) ///< 3
 
-#define IRK_7 (66)
-#define IRK_8 (82)
-#define IRK_9 (74)
+#define IRK_4 (8) ///< 4
+#define IRK_5 (28) ///< 5
+#define IRK_6 (90) ///< 6
 
-// 定义另一标注遥控器按键
+#define IRK_7 (66) ///< 7
+#define IRK_8 (82) ///< 8
+#define IRK_9 (74) ///< 9
 
-#define IRK_A IRK_CH_MINUS
-#define IRK_B IRK_CH
-#define IRK_C IRK_CH_PLUS
 
-#define IRK_D IRK_PRE
-#define IRK_UP IRK_NXT
-#define IRK_E IRK_PAUSE
 
-#define IRK_LEFT IRK_MINUS
-#define IRK_SET IRK_PLUS
-#define IRK_RIGHT IRK_EQ
+// 定义另一种标注红外遥控器的按键 
 
-#define IRK_DOWN IRK_100
-#define IRK_F IRK_200
+#define IRK_A IRK_CH_MINUS ///< A
+#define IRK_B IRK_CH ///< B
+#define IRK_C IRK_CH_PLUS ///< C
+
+#define IRK_D IRK_PRE ///< D
+#define IRK_UP IRK_NXT ///< Up
+#define IRK_E IRK_PAUSE ///< E
+
+#define IRK_LEFT IRK_MINUS ///< Left
+#define IRK_SET IRK_PLUS ///< Set
+#define IRK_RIGHT IRK_EQ ///< Right
+
+#define IRK_DOWN IRK_100 ///< Down
+#define IRK_F IRK_200 ///< F
+
 
 /// @brief 配置文件名称
 /// @note 保存的格式位JSON格式，由于FAT文件系统不支持4个字符的扩展名，所以这里用js
@@ -133,13 +137,12 @@
 #define CFG_MENUCATE "CurrMenuCate" ///< 配置文件中菜单分类的名称
 #define CFG_MENUITEM "CurrMenuItem" ///< 配置文件中菜单项的名称
 
-
-/// @brief RGB颜色的结构体 
+/// @brief RGB颜色的结构体
 struct RGB {
     uint8_t R; ///< 红色值 0~255
     uint8_t G; ///< 绿色值 0~255
     uint8_t B; ///< 蓝色值 0~255
-    
+
     // /// @brief 将RGB值合成为32位数值
     // /// @param r 红色值 0~255
     // /// @param g 绿色值 0~255
@@ -157,6 +160,5 @@ struct RGB {
     //     return Color(R, G, B);
     // }
 };
-
 
 #endif

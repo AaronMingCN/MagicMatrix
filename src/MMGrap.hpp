@@ -19,7 +19,12 @@
 #include "MMCanvas.hpp"
 
 /// @brief 定义在绘制MM字符时的回调事件
-typedef void (*OnDrawChar)(int16_t x, int16_t y, RGB& rgb);
+/// @param x 相对横向值
+/// @param y 相对纵向值
+/// @param abx 绝对横向值
+/// @param aby 绝对纵向值
+/// @param rgb 用于绘制的颜色
+typedef void (*OnDrawChar)(int16_t x, int16_t y,int16_t abx, int16_t aby, RGB& rgb);
 
 /// @brief 图像相关共功能类
 class MMGrap {

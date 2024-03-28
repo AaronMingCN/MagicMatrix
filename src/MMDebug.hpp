@@ -21,6 +21,7 @@
 #include "MMRamBmp.hpp"
 #include "MMScr.hpp"
 #include "MMSD.hpp"
+#include "MMGrap.hpp"
 
 /// @brief 调试相关功能类
 class MMDebug {
@@ -240,6 +241,21 @@ public:
         //   ]
         // }
         mmsd.SaveJsonToFile(doc, "111.js");
+    }
+
+    /// @brief 测试绘制mm字符
+    void TestDispMMChar() {
+        mmgrap.DrawChar(0,0, CHAR_0, &mmscr);
+        mmgrap.DrawChar(4,0, CHAR_1, &mmscr);
+        mmgrap.DrawChar(8,0, CHAR_2, &mmscr);
+        mmgrap.DrawChar(12,0, CHAR_3, &mmscr); 
+
+        mmgrap.DrawChar(0,6, CHAR_5, &mmscr);
+        mmgrap.DrawChar(4,6, CHAR_6, &mmscr);
+        mmgrap.DrawChar(8,6, CHAR_7, &mmscr);
+        mmgrap.DrawChar(12,6, CHAR_8, &mmscr);     
+
+        mmscr.Update();
     }
 
 } mmdebug;
