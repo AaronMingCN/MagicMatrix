@@ -67,7 +67,7 @@ void DrawChar(int16_t x, int16_t y, uint16_t c, MMCanvas *Canvas,OnDrawChar cb =
 			c <<= 1;
 			if (c & 0b1000000000000000) {
 				// a[i + y][j + x] = true;
-                if (cb) (*cb)(j + x, i + y, rgb); // 如果定义了绘图时的回调则先调用
+                if (cb) (*cb)(j, i, j + x, i + y, rgb); // 如果定义了绘图时的回调则先调用
                 Canvas->SetPixel(j + x, i + y, rgb);
 			}
 		}

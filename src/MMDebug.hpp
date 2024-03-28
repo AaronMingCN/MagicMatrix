@@ -243,17 +243,31 @@ public:
         mmsd.SaveJsonToFile(doc, "111.js");
     }
 
+    /// @brief 测试绘制mm字符回调事件
+    static void OnDrawChar(int16_t x, int16_t y,int16_t abx, int16_t aby, RGB& rgb) {
+        rgb.R = 255 - (y * 256 / 5);   
+        rgb.G = (y * 256 / 5); 
+        rgb.B = 255; 
+    }
+
+
+    /// @brief 测试绘制mm字符回调事件
+    static void OnDrawChar1(int16_t x, int16_t y,int16_t abx, int16_t aby, RGB& rgb) {
+        rgb.R = 255 - (y * 256 / 5);   
+        rgb.G = 255; 
+        rgb.B = (y * 256 / 5); 
+    }
     /// @brief 测试绘制mm字符
     void TestDispMMChar() {
-        mmgrap.DrawChar(0,0, CHAR_0, &mmscr);
-        mmgrap.DrawChar(4,0, CHAR_1, &mmscr);
-        mmgrap.DrawChar(8,0, CHAR_2, &mmscr);
-        mmgrap.DrawChar(12,0, CHAR_3, &mmscr); 
+        mmgrap.DrawChar(0,0, CHAR_0, &mmscr, OnDrawChar);
+        mmgrap.DrawChar(4,0, CHAR_1, &mmscr, OnDrawChar);
+        mmgrap.DrawChar(8,0, CHAR_2, &mmscr, OnDrawChar);
+        mmgrap.DrawChar(12,0, CHAR_3, &mmscr, OnDrawChar); 
 
-        mmgrap.DrawChar(0,6, CHAR_5, &mmscr);
-        mmgrap.DrawChar(4,6, CHAR_6, &mmscr);
-        mmgrap.DrawChar(8,6, CHAR_7, &mmscr);
-        mmgrap.DrawChar(12,6, CHAR_8, &mmscr);     
+        mmgrap.DrawChar(0,6, CHAR_5, &mmscr, OnDrawChar1);
+        mmgrap.DrawChar(4,6, CHAR_6, &mmscr, OnDrawChar1);
+        mmgrap.DrawChar(8,6, CHAR_7, &mmscr, OnDrawChar1);
+        mmgrap.DrawChar(12,6, CHAR_8, &mmscr, OnDrawChar1);     
 
         mmscr.Update();
     }
