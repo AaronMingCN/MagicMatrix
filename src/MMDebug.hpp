@@ -244,14 +244,14 @@ public:
     void TestDispMMChar()
     {
         mmgrap.DrawChar(0, 0, CHAR_0, &mmscr, MMCStyle::Styles[0]);
-        mmgrap.DrawChar(4, 0, CHAR_1, &mmscr, MMCStyle::Styles[0]);
-        mmgrap.DrawChar(8, 0, CHAR_2, &mmscr, MMCStyle::Styles[0]);
-        mmgrap.DrawChar(12, 0, CHAR_3, &mmscr, MMCStyle::Styles[0]);
+        mmgrap.DrawChar(4, 0, CHAR_1, &mmscr, MMCStyle::Styles[1]);
+        mmgrap.DrawChar(8, 0, CHAR_2, &mmscr, MMCStyle::Styles[2]);
+        mmgrap.DrawChar(12, 0, CHAR_3, &mmscr, MMCStyle::Styles[3]);
 
-        mmgrap.DrawChar(0, 6, CHAR_5, &mmscr, MMCStyle::Styles[1]);
-        mmgrap.DrawChar(4, 6, CHAR_6, &mmscr, MMCStyle::Styles[1]);
-        mmgrap.DrawChar(8, 6, CHAR_7, &mmscr, MMCStyle::Styles[1]);
-        mmgrap.DrawChar(12, 6, CHAR_8, &mmscr, MMCStyle::Styles[1]);
+        mmgrap.DrawChar(0, 6, CHAR_5, &mmscr, MMCStyle::Styles[0]);
+        mmgrap.DrawChar(4, 6, CHAR_6, &mmscr, MMCStyle::Styles[0]);
+        mmgrap.DrawChar(8, 6, CHAR_7, &mmscr, MMCStyle::Styles[0]);
+        mmgrap.DrawChar(12, 6, CHAR_8, &mmscr, MMCStyle::Styles[0]);
 
         mmscr.Update();
     }

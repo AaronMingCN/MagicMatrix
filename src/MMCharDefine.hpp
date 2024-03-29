@@ -40,11 +40,26 @@ public:
         rgb.B = (y * 256 / MMCHAR_HEIGHT);
     }
 
+    /// @brief 实现OnDrawChar
+    static void MMCS_3(int16_t x, int16_t y, int16_t abx, int16_t aby, RGB& rgb)
+    {
+        rgb.R = 255;
+        rgb.G = 255 - (y * 256 / MMCHAR_HEIGHT);
+        rgb.B = (y * 256 / MMCHAR_HEIGHT);
+    }
+
+    /// @brief 实现OnDrawChar
+    static void MMCS_4(int16_t x, int16_t y, int16_t abx, int16_t aby, RGB& rgb)
+    {
+        rgb.R = (y * 256 / MMCHAR_HEIGHT);
+        rgb.G = 255;
+        rgb.B = 255 - (y * 256 / MMCHAR_HEIGHT);
+    }    
     static OnDrawChar Styles[];
 };
 
 /// 初始化样式列表，将样式添加到列表中
-OnDrawChar MMCStyle::Styles[] = { MMCS_1, MMCS_2 };
+OnDrawChar MMCStyle::Styles[] = { MMCS_1, MMCS_2, MMCS_3, MMCS_4 };
 
 /// 定义字符空格的字符显示
 #define CHAR_SPAC (0b0\
