@@ -243,15 +243,15 @@ public:
     /// @brief 测试绘制mm字符
     void TestDispMMChar()
     {
-        mmgrap.DrawChar(0, 0, CHAR_0, &mmscr, NULL, MMCStyle::Styles[0]);
-        mmgrap.DrawChar(4, 0, CHAR_1, &mmscr, NULL, MMCStyle::Styles[1]);
-        mmgrap.DrawChar(8, 0, CHAR_2, &mmscr, NULL, MMCStyle::Styles[2]);
-        mmgrap.DrawChar(12, 0, CHAR_3, &mmscr, NULL, MMCStyle::Styles[3]);
+        mmgrap.DrawChar(0, 0, CHAR_0, &mmscr,false , NULL, MMCStyle::Styles[0]);
+        mmgrap.DrawChar(4, 0, CHAR_1, &mmscr,false , NULL, MMCStyle::Styles[1]);
+        mmgrap.DrawChar(8, 0, CHAR_2, &mmscr,false , NULL, MMCStyle::Styles[2]);
+        mmgrap.DrawChar(12, 0, CHAR_3, &mmscr,false , NULL, MMCStyle::Styles[3]);
 
-        mmgrap.DrawChar(0, 6, CHAR_5, &mmscr, NULL, MMCStyle::Styles[0]);
-        mmgrap.DrawChar(4, 6, CHAR_6, &mmscr, NULL, MMCStyle::Styles[0]);
-        mmgrap.DrawChar(8, 6, CHAR_7, &mmscr, NULL, MMCStyle::Styles[0]);
-        mmgrap.DrawChar(12, 6, CHAR_8, &mmscr, NULL, MMCStyle::Styles[0]);
+        mmgrap.DrawChar(0, 6, CHAR_5, &mmscr,false , NULL, MMCStyle::Styles[0]);
+        mmgrap.DrawChar(4, 6, CHAR_6, &mmscr,false , NULL, MMCStyle::Styles[0]);
+        mmgrap.DrawChar(8, 6, CHAR_7, &mmscr,false , NULL, MMCStyle::Styles[0]);
+        mmgrap.DrawChar(12, 6, CHAR_8, &mmscr,false , NULL, MMCStyle::Styles[0]);
 
         mmscr.Update();
     }
