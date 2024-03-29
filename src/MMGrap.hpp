@@ -51,17 +51,21 @@ public:
 /// @brief 在MMCanvas指定位置绘制MM字符
 /// @param x 横向值
 /// @param y 纵向值
-/// @param c 绘制的MM字符
+/// @param mmc 绘制的MM字符
+/// @param color 用于绘制的颜色的地址,为空时默认使用红色
 /// @param Canvas 目标画布 
-/// @param cb 在绘制时的回调
-void DrawChar(int16_t x, int16_t y, uint16_t c, MMCanvas *Canvas,OnDrawChar cb = NULL) {
-    RGB rgb = {255, 0, 0};
+/// @param ondraw 在绘制时的回调
+void DrawChar(int16_t x, int16_t y, uint16_t mmc, MMCanvas *Canvas, RGB *color = NULL,OnDrawChar ondraw = NULL) {
+    RGB rgb = {};
+    if (color) rgb = *color;
+    else rgb = {255, 0, 0};
+
 	for (int16_t i = 0; i < MMCHAR_HEIGHT; ++i) {
 		for (int16_t j = 0; j < MMCHAR_WIDTH; ++j) {
-			c <<= 1;
-			if (c & 0b1000000000000000) {
+			mmc <<= 1;
+			if (mmc & 0b1000000000000000) {
 				// a[i + y][j + x] = true;
-                if (cb) (*cb)(j, i, j + x, i + y, rgb); // 如果定义了绘图时的回调则先调用
+                if (ondraw) (*ondraw)(j, i, j + x, i + y, rgb); // 如果定义了绘图时的回调则先调用
                 Canvas->SetPixel(j + x, i + y, rgb);
 			}
 		}
