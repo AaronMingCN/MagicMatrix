@@ -88,16 +88,21 @@ public:
                             switch (IRRCode) {
                             case IRK_UP: // 如果是上键增加等待500毫秒
                                 this->Interval += 500;
+                                delay(100);
                                 break;
+                                
                             case IRK_DOWN: // 如果是下键减少等待500毫秒
                                 if (this->Interval > 500)
                                     this->Interval -= 500;
+                                delay(100);
                                 break;
                             case IRK_SET: // 如果是Set键切换暂停状态
                                 this->pause = !this->pause;
+                                delay(100);
                                 break;
                             default:
                                 // IDelay->IDelay(Interval, IRRCode, true);
+                                delay(100);
                                 break;
                             }
                         } else
