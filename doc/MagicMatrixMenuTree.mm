@@ -4,7 +4,7 @@
 <font BOLD="true"/>
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <hook NAME="MapStyle" background="#f9f9f8" zoom="1.075">
-    <properties show_icon_for_attributes="true" fit_to_viewport="false" show_note_icons="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" associatedTemplateLocation="template:/light_nord_template.mm"/>
+    <properties fit_to_viewport="false" show_icon_for_attributes="true" show_note_icons="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" associatedTemplateLocation="template:/light_nord_template.mm"/>
 
 <map_styles>
 <stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24 pt">
@@ -163,11 +163,13 @@
 <node TEXT="B.图像显示" POSITION="top_or_left" ID="ID_1799667714" CREATED="1708907138472" MODIFIED="1709728425488" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-<node TEXT="0.静态图片循环显示" ID="ID_1109368198" CREATED="1708907145208" MODIFIED="1709809332091" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="0.静态图片循环显示" ID="ID_1109368198" CREATED="1708907145208" MODIFIED="1711847739094" NUMBERED="false" FORMAT="markdownPatternFormat">
 <icon BUILTIN="button_ok"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
 <text>+ 将图片放置在SD卡的bmp文件夹下
-+ bmp文件必须为24位16x16分辨率图像</text></richcontent>
++ bmp文件必须为24位16x16分辨率图像
++ 向上增减显示间隔500毫秒
++ 向下减少显示间隔500毫秒，最小间隔500毫秒</text></richcontent>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 </node>
 <node TEXT="1.动图显示" ID="ID_1504471942" CREATED="1708907170618" MODIFIED="1709728425491" NUMBERED="false" FORMAT="markdownPatternFormat">

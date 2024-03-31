@@ -24,6 +24,15 @@ typedef void (*OnDrawChar)(int16_t x, int16_t y, int16_t abx, int16_t aby, RGB& 
 /// @brief MMChar的字符样式类
 class MMCStyle {
 public:
+
+    /// @brief 实现OnDrawChar
+    static void MMCS_0(int16_t x, int16_t y, int16_t abx, int16_t aby, RGB& rgb)
+    {
+        rgb.R = 255;
+        rgb.G = (y * 256 / MMCHAR_HEIGHT);
+        rgb.B = 0;
+    }  
+
     /// @brief 实现OnDrawChar
     static void MMCS_1(int16_t x, int16_t y, int16_t abx, int16_t aby, RGB& rgb)
     {
@@ -55,11 +64,19 @@ public:
         rgb.G = 255;
         rgb.B = 255 - (y * 256 / MMCHAR_HEIGHT);
     }    
+    /// @brief 实现OnDrawChar
+    static void MMCS_5(int16_t x, int16_t y, int16_t abx, int16_t aby, RGB& rgb)
+    {
+        rgb.R = 255;
+        rgb.G = 255 - (y * 256 / MMCHAR_HEIGHT);
+        rgb.B = 0;
+    }      
     static OnDrawChar Styles[];
 };
 
-/// 初始化样式列表，将样式添加到列表中
-OnDrawChar MMCStyle::Styles[] = { MMCS_1, MMCS_2, MMCS_3, MMCS_4 };
+/// @brief 初始化样式列表，将样式添加到列表中
+/// @details 使用时通过下标获得函数指针，然后将参数传递给MMGrap的绘制方法使用
+OnDrawChar MMCStyle::Styles[] = {MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5 };
 
 /// 定义字符空格的字符显示
 #define CHAR_SPAC (0b0\

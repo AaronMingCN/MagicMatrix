@@ -248,10 +248,10 @@ public:
         mmgrap.DrawChar(8, 0, CHAR_2, &mmscr,false , NULL, MMCStyle::Styles[2]);
         mmgrap.DrawChar(12, 0, CHAR_3, &mmscr,false , NULL, MMCStyle::Styles[3]);
 
-        mmgrap.DrawChar(0, 6, CHAR_5, &mmscr,false , NULL, MMCStyle::Styles[0]);
-        mmgrap.DrawChar(4, 6, CHAR_6, &mmscr,false , NULL, MMCStyle::Styles[0]);
-        mmgrap.DrawChar(8, 6, CHAR_7, &mmscr,false , NULL, MMCStyle::Styles[0]);
-        mmgrap.DrawChar(12, 6, CHAR_8, &mmscr,false , NULL, MMCStyle::Styles[0]);
+        mmgrap.DrawChar(0, 6, CHAR_4, &mmscr,false , NULL, MMCStyle::Styles[4]);
+        mmgrap.DrawChar(4, 6, CHAR_5, &mmscr,false , NULL, MMCStyle::Styles[5]);
+        mmgrap.DrawChar(8, 6, CHAR_6, &mmscr,false , NULL, MMCStyle::Styles[0]);
+        mmgrap.DrawChar(12, 6, CHAR_7, &mmscr,false , NULL, MMCStyle::Styles[0]);
 
         mmscr.Update();
     }
