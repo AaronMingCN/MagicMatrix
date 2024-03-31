@@ -1,5 +1,9 @@
 # MagicMatrix 魔法矩阵
 
+## 菜单树
+
+![菜单树](./MagicMatrixMenuTree.svg "菜单树")
+
 ## 功能
 
 ### 基础功能
@@ -79,10 +83,6 @@
     发送指令格式：MM MENU 0 0
     含义：MagicMatrix Menu 0 0
     ```
-
-## 菜单树
-
-![菜单树](./MagicMatrixMenuTree.svg "菜单树")
 
 ## 后期扩展功能
 
