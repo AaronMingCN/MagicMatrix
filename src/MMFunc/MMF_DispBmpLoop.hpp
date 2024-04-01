@@ -64,7 +64,7 @@ public:
                 ; // 如果打开失败则等待
         } else {
             UART_USB.println("initialization done.");
-            File dir = SD.open("/bmp/"); // 打开SD卡中的bmp文件夹
+            File dir = SD.open(DIR_BMPLOOP); // 打开SD卡中的bmp文件夹
             if (dir)
                 do {
 

@@ -96,6 +96,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 111\
 111)
 
+
 /// 定义字符0的字符显示
 #define CHAR_0 (0b0\
 111\

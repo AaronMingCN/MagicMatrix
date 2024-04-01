@@ -134,6 +134,9 @@
 #define FILENAME_CFG "MMCFG.js"
 #define FILENAME_LOGO "LOGO.bmp" ///< 定义LOGO在SD卡中的文件名
 
+#define DIR_BMPLOOP "/bmp/" ///< 定义循环显示的BMP文件夹
+#define DIR_BMPSTATIC "/BMPStatic/" ///< 定义静态显示的BMP图片文件夹
+
 #define CFG_MENUCATE "CurrMenuCate" ///< 配置文件中菜单分类的名称
 #define CFG_MENUITEM "CurrMenuItem" ///< 配置文件中菜单项的名称
 

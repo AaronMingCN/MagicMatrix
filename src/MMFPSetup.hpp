@@ -12,6 +12,7 @@
 
 #include "MMDefine.hpp"
 
+#include "MMFunc/MMFuncPool.hpp"
 #include "MMFunc/MMF_CountDown.hpp"
 #include "MMFunc/MMF_Dice.hpp"
 #include "MMFunc/MMF_DispBmpLoop.hpp"
@@ -21,7 +22,7 @@
 #include "MMFunc/MMF_FillRainbow.hpp"
 #include "MMFunc/MMF_MatrixTest.hpp"
 #include "MMFunc/MMF_ScoreBoard.hpp"
-#include "MMFunc/MMFuncPool.hpp"
+#include "MMFunc/MMF_DispBmpStatic.hpp"
 
 /// 定义功能类型,为后期扩展作准备,目前默认只有0
 #define MMF_TYPE_0 (0x00)
@@ -53,6 +54,10 @@ MMF_Dice mmf_dice(MMF_ID_DICE); ///< 投骰子功能块实例
 #define MMF_ID_COUNTDOWN (0x0008) ///< 倒计时功能块ID
 MMF_CountDown mmf_countdown(MMF_ID_COUNTDOWN); ///< 倒计时功能块实例
 
+#define MMF_ID_DISPBMPSTATIC (0x0009) ///< 显示BMP静止图片ID
+MMF_DispBmpStatic mmf_dispbmpstatic(MMF_ID_DISPBMPSTATIC); ///< 显示BMP静止功能
+
+
 /// @brief 将功能模块加入功能池
 void MMFPSetup()
 {
@@ -66,6 +71,7 @@ void MMFPSetup()
     mmfuncpool.Append(&mmf_scoreboard);
     mmfuncpool.Append(&mmf_dice);
     mmfuncpool.Append(&mmf_countdown);
+    mmfuncpool.Append(&mmf_dispbmpstatic);
 }
 
 #endif
