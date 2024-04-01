@@ -10,6 +10,9 @@
 #ifndef _MMCHARDEFINE_HPP
 #define _MMCHARDEFINE_HPP
 
+#include <map>
+#include <vector>
+
 #define MMCHAR_WIDTH (3) ///< 定义字符的宽度
 #define MMCHAR_HEIGHT (5) ///< 定义字符的高度
 
@@ -24,14 +27,13 @@ typedef void (*OnDrawChar)(int16_t x, int16_t y, int16_t abx, int16_t aby, RGB& 
 /// @brief MMChar的字符样式类
 class MMCStyle {
 public:
-
     /// @brief 实现OnDrawChar
     static void MMCS_0(int16_t x, int16_t y, int16_t abx, int16_t aby, RGB& rgb)
     {
         rgb.R = 255;
         rgb.G = (y * 256 / MMCHAR_HEIGHT);
         rgb.B = 0;
-    }  
+    }
 
     /// @brief 实现OnDrawChar
     static void MMCS_1(int16_t x, int16_t y, int16_t abx, int16_t aby, RGB& rgb)
@@ -63,20 +65,20 @@ public:
         rgb.R = (y * 256 / MMCHAR_HEIGHT);
         rgb.G = 255;
         rgb.B = 255 - (y * 256 / MMCHAR_HEIGHT);
-    }    
+    }
     /// @brief 实现OnDrawChar
     static void MMCS_5(int16_t x, int16_t y, int16_t abx, int16_t aby, RGB& rgb)
     {
         rgb.R = 255;
         rgb.G = 255 - (y * 256 / MMCHAR_HEIGHT);
         rgb.B = 0;
-    }      
+    }
     static OnDrawChar Styles[];
 };
 
 /// @brief 初始化样式列表，将样式添加到列表中
 /// @details 使用时通过下标获得函数指针，然后将参数传递给MMGrap的绘制方法使用
-OnDrawChar MMCStyle::Styles[] = {MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5 };
+OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5 };
 
 /// 定义字符空格的字符显示
 #define CHAR_SPAC (0b0\
@@ -255,7 +257,7 @@ OnDrawChar MMCStyle::Styles[] = {MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5 
 111)
 
 /// 定义字符H的字符显示
-#define CHAR_G (0b0\
+#define CHAR_H (0b0\
 101\
 101\
 111\
@@ -285,5 +287,64 @@ OnDrawChar MMCStyle::Styles[] = {MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5 
 010\
 100\
 101)
+
+/// @brief 字符集类
+class MMCharset {
+public:
+    /// @brief 定义字符集，通过值获得
+    std::map<char, uint16_t> Items;
+    /// @brief 构造函数，将字符像素值加入字符集
+    MMCharset()
+    {
+        SetVal(' ', CHAR_SPAC); // 加入空格
+        SetVal(0, CHAR_FILL); // 加入填充，ascii值为0时
+        SetVal('0', CHAR_0);
+        SetVal('1', CHAR_1);
+        SetVal('2', CHAR_2);
+        SetVal('3', CHAR_3);
+        SetVal('4', CHAR_4);
+        SetVal('5', CHAR_5);
+        SetVal('6', CHAR_6);
+        SetVal('7', CHAR_7);
+        SetVal('8', CHAR_8);
+        SetVal('9', CHAR_9);
+        SetVal('.', CHAR_DOT);
+        SetVal('+', CHAR_PLUS);
+        SetVal('-', CHAR_MINU);
+        SetVal('A', CHAR_A);
+        SetVal('B', CHAR_B);
+        SetVal('C', CHAR_C);
+        SetVal('D', CHAR_D);
+        SetVal('E', CHAR_E);
+        SetVal('F', CHAR_F);
+        SetVal('G', CHAR_G);
+        SetVal('H', CHAR_I);
+        SetVal('P', CHAR_P);
+        SetVal('%', CHAR_PERC);
+    }
+
+    /// @brief 设置字符值
+    /// @param c 字符
+    /// @param val 值
+    void SetVal(char c, uint16_t val)
+    {
+        // this->Items.insert(std::pair<char, uint16_t>(c, val));
+        this->Items[c] = val;
+    }
+
+    /// @brief 获得字符值
+    /// @param c 字符
+    /// @param Default 默认值，如果没有找到则返回该值
+    /// @return 如果存在则返回字符值，否则返回
+    uint16_t GetVal(char c, uint16_t Default = CHAR_FILL)
+    {
+        uint16_t r = Default; // 默认为全部填充
+        std::map<char, uint16_t>::iterator it = this->Items.find(c);
+        if (it != this->Items.end()) {
+            r = it->second;
+        }
+        return r;
+    }
+} mmcharset;
 
 #endif
