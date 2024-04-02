@@ -23,6 +23,8 @@
 #include "MMFunc/MMF_MatrixTest.hpp"
 #include "MMFunc/MMF_ScoreBoard.hpp"
 #include "MMFunc/MMF_DispBmpStatic.hpp"
+#include "MMFunc/MMF_DispDateTime.hpp"
+
 
 /// 定义功能类型,为后期扩展作准备,目前默认只有0
 #define MMF_TYPE_0 (0x00)
@@ -57,6 +59,9 @@ MMF_CountDown mmf_countdown(MMF_ID_COUNTDOWN); ///< 倒计时功能块实例
 #define MMF_ID_DISPBMPSTATIC (0x0009) ///< 显示BMP静止图片ID
 MMF_DispBmpStatic mmf_dispbmpstatic(MMF_ID_DISPBMPSTATIC); ///< 显示BMP静止功能
 
+#define MMF_ID_DISPDATETIME (0x000A) ///< 显示日期时间ID
+MMF_DispDateTime mmf_dispdatetime(MMF_ID_DISPDATETIME); ///< 显示日期时间功能实例
+
 
 /// @brief 将功能模块加入功能池
 void MMFPSetup()
@@ -72,6 +77,7 @@ void MMFPSetup()
     mmfuncpool.Append(&mmf_dice);
     mmfuncpool.Append(&mmf_countdown);
     mmfuncpool.Append(&mmf_dispbmpstatic);
+    mmfuncpool.Append(&mmf_dispdatetime);
 }
 
 #endif

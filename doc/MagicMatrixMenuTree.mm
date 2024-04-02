@@ -3,8 +3,8 @@
 <node TEXT="MagicMatrix菜单树" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1709728425469" NUMBERED="false" FORMAT="markdownPatternFormat">
 <font BOLD="true"/>
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
-<hook NAME="MapStyle" background="#f9f9f8" zoom="1.332">
-    <properties fit_to_viewport="false" show_icon_for_attributes="true" show_note_icons="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" associatedTemplateLocation="template:/light_nord_template.mm"/>
+<hook NAME="MapStyle" background="#f9f9f8" zoom="0.788">
+    <properties show_icon_for_attributes="true" fit_to_viewport="false" show_note_icons="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" associatedTemplateLocation="template:/light_nord_template.mm"/>
 
 <map_styles>
 <stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24 pt">

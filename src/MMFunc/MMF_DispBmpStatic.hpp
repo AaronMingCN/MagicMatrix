@@ -28,7 +28,6 @@ public:
     }
 
     /// @brief 根据序号显示图片
-    /// @param dir 路径
     /// @param Order 图片在路径中的序号
     /// @return 是否绘制成功
     bool DrawBMPByOrder(uint16_t Order)
