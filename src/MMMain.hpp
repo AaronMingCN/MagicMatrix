@@ -97,6 +97,7 @@ public:
     bool IRRSetMenu(uint16_t& IRRCode)
     {
         bool r = false;
+        IRRCode = IRK_NONE;
         if (mmhardware.IRRCode(IRRCode)) {
             mmscr.RenewPIRR(); // 刷新检测到人体的时间
             mmscr.UpdateBrightness(); // 更新当前亮度
@@ -175,10 +176,9 @@ public:
         return Inquire(IRRCode);
     }
 
-
     /// @brief 实现IDelay方法
     /// @param ms 等待时间
-    /// @param[out] IRRCode 读取到的红外编码 
+    /// @param[out] IRRCode 读取到的红外编码
     /// @param ReturnWhenDecode 当读取到红外编码是否立刻返回，默认false
     /// @return 询问结果
     virtual bool IDelay(unsigned long ms, uint16_t& IRRCode, bool ReturnWhenDecode = false)
@@ -186,8 +186,9 @@ public:
         bool r = true; // 默认结果为true
         unsigned long startm = millis(); // 记录函数开始时的运行毫秒数
         unsigned long pass = 0; // 逝去的毫秒数
+        IRRCode = IRK_NONE;
         do {
-            delay(10);
+            delay(100);
             if (!Inquire(IRRCode)) {
                 r = false;
                 break;
@@ -199,7 +200,6 @@ public:
         } while (pass < ms);
         return r;
     }
-
 
     /// @brief 实现IDelay方法
     /// @param ms 等待时间
@@ -219,11 +219,9 @@ public:
         return mmmenu.ExecItem(CateID, ItemID, this);
     }
 
-    // 主循环
-    // 左右选择大项,数字键用来选择子项目,一个大项目下面最多包含10个子项目
+    /// @brief 主循环
     void MainLoop()
     {
-
         for (;;) {
             // 切换菜单
             mmmenu.Switch(this);
@@ -231,6 +229,7 @@ public:
         }
     }
 
+    /// @brief 设置蓝牙名称
     void SetBLEName()
     {
         // UART_BLE.print("AT+NAME=MagicMatrix\r\n"); // 设置蓝牙名称
@@ -242,7 +241,23 @@ public:
         UART_USB.println(UART_BLE.readString());
     }
 
-    // 执行初始化
+    /// @brief 读取设置项目
+    bool LoadCfg()
+    {
+        bool r = mmconfig.Load(); // 读取配置信息
+        if (r) {
+            // 将当前设置菜单项读取
+            mmmenu.NextMenuCate = mmconfig.Config[CFG_MENUCATE];
+            mmmenu.NextMenuItem = mmconfig.Config[CFG_MENUITEM];
+            // 读取当前循环静态图片的序号
+            mmf_dispbmpstatic.NextOrder = mmconfig.Config[CFG_DISPBMPIDX];
+            mmf_dispbmpstatic.CurrOrder = mmconfig.Config[CFG_DISPBMPIDX];
+        }
+        return r;
+    }
+
+    /// @brief 执行初始化
+    /// @return 执行结果
     bool Init()
     {
         pinMode(PIN_BUZZER, OUTPUT); // 设置蜂鸣器引脚
@@ -255,11 +270,7 @@ public:
         // while(!UART_BLE);
         this->SetBLEName();
         mmhardware.Init(); // 执行硬件初始化
-        mmconfig.Load(); // 读取配置信息
-        // 将当前设置菜单项读取
-        mmmenu.NextMenuCate = mmconfig.Config[CFG_MENUCATE];
-        mmmenu.NextMenuItem = mmconfig.Config[CFG_MENUITEM];
-
+        this->LoadCfg();
         // 调用功能池初始化
         MMFPSetup();
         mmhardware.Beep(false);

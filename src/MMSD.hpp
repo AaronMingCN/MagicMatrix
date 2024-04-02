@@ -1,7 +1,7 @@
 /**
  * @file MMSD.hpp
  * @date 2024/02/13 10:34:14
- * @author Aaron Ming 
+ * @author Aaron Ming
  * @version 1.0
  * @brief SD卡访问相关的封装
  */
@@ -35,7 +35,6 @@
    ** SCK  - pin 2
 */
 
-
 /// @brief SD卡功能类
 /// @details 提供SD卡相关的功能
 class MMSD {
@@ -65,21 +64,26 @@ public:
     /// @brief 绘制位图
     /// @param F 文件对象
     /// @param AutoShow 绘制后是否自动显示
-    void DrawBitmapFile(File& F, bool AutoShow = true)
+    /// @return 是否绘制成功
+    bool DrawBitmapFile(File& F, bool AutoShow = true)
     {
-        F.seek(54); // 跳过bmp文件的头部信息
-        uint8_t t[3]; // 颜色值的临时变量
-        for (uint16_t i = 1; i <= M_HEIGHT && F.available(); ++i) {
-            for (uint16_t j = 0; j < M_WIDTH && F.available(); ++j) {
-                // myFile.read(&t, sizeof(t)); // 读取一个像素的颜色值
-                F.read(&t, 3);
+        bool r = false;
+        if (F && !(F.isDirectory())) {
+            F.seek(54); // 跳过bmp文件的头部信息
+            uint8_t t[3]; // 颜色值的临时变量
+            for (uint16_t i = 1; i <= M_HEIGHT && F.available(); ++i) {
+                for (uint16_t j = 0; j < M_WIDTH && F.available(); ++j) {
+                    // myFile.read(&t, sizeof(t)); // 读取一个像素的颜色值
+                    F.read(&t, 3);
 
-                // UART_USB.println(String(t.R) + ',' + String(t.G) + ',' + String(t.B) + ' ');
-                mmscr.SetPixel(j, M_HEIGHT - i, t[2], t[1], t[0]);
+                    // UART_USB.println(String(t.R) + ',' + String(t.G) + ',' + String(t.B) + ' ');
+                    mmscr.SetPixel(j, M_HEIGHT - i, t[2], t[1], t[0]);
+                }
             }
+            if (AutoShow)
+                mmscr.Update();
         }
-        if (AutoShow)
-            mmscr.Update();
+        return r;
     }
 
     /// @brief 将文件位图读取到矩阵
@@ -169,9 +173,8 @@ public:
         return r;
     }
 
-
     /// @brief 将文件保存到MMRamBmp
-    /// @param FileName 文件名 
+    /// @param FileName 文件名
     /// @param RamBmp 内存位图对象
     /// @return 是否成功
     bool LoadBitmapToRamBmp(String FileName, MMRamBmp& RamBmp)
@@ -193,7 +196,6 @@ public:
         this->ReleaseSD(); // 释放SD访问权
         return r;
     }
-
 
     /// @brief 将JSON文件保存到SD卡
     /// @param Json JSON文件对象
@@ -225,7 +227,6 @@ public:
         this->ReleaseSD(); // 释放SD访问权
         return r;
     }
-
 
     /// @brief 从SD卡载入JSON
     /// @param Json JSON对象

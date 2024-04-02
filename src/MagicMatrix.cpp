@@ -35,7 +35,6 @@ void EventLoop()
 void setup()
 {
     delay(1000); // 等待一秒bootloader
-    // mmgrap.DispLOGO();
     // 系统初始化
     mmmain.Init();
 
@@ -47,16 +46,17 @@ void setup()
 /// @brief 主循环
 void loop()
 {
-    // mmgrap.DispLOGO();
+    mmgrap.DispLOGO(); // 显示LOGO    
     // // 执行主循环
-    // mmmain.MainLoop();
 
-    mmdebug.TestDispMMChar();
-    delay(1000);
+    mmmain.MainLoop();
 
-    mmscr.Clear();
-    delay(1000);
-    mmscr.Update();
+    // mmdebug.TestDispMMChar();
+    // delay(1000);
+
+    // mmscr.Clear();
+    // delay(1000);
+    // mmscr.Update();
 
     // delay(2000);
 

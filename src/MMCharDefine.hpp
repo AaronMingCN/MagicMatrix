@@ -289,6 +289,14 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 100\
 101)
 
+/// 定义字符:的字符显示
+#define CHAR_COLON (0b0\
+000\
+100\
+000\
+100\
+000)
+
 /// @brief 字符集类
 class MMCharset {
 public:
@@ -322,6 +330,7 @@ public:
         SetVal('H', CHAR_I);
         SetVal('P', CHAR_P);
         SetVal('%', CHAR_PERC);
+        SetVal(':', CHAR_COLON);
     }
 
     /// @brief 设置字符值

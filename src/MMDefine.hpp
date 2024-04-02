@@ -128,6 +128,9 @@
 #define IRK_DOWN IRK_100 ///< Down
 #define IRK_F IRK_200 ///< F
 
+/// 当按键识别后的等待抬起的时长，毫秒
+#define IRR_WAITKEYTUP 500 
+
 
 /// @brief 配置文件名称
 /// @note 保存的格式位JSON格式，由于FAT文件系统不支持4个字符的扩展名，所以这里用js
@@ -135,10 +138,12 @@
 #define FILENAME_LOGO "LOGO.bmp" ///< 定义LOGO在SD卡中的文件名
 
 #define DIR_BMPLOOP "/bmp/" ///< 定义循环显示的BMP文件夹
-#define DIR_BMPSTATIC "/BMPStatic/" ///< 定义静态显示的BMP图片文件夹
+#define DIR_BMPSTATIC "/BMPSta/" ///< 定义静态显示的BMP图片文件夹
 
 #define CFG_MENUCATE "CurrMenuCate" ///< 配置文件中菜单分类的名称
 #define CFG_MENUITEM "CurrMenuItem" ///< 配置文件中菜单项的名称
+
+#define CFG_DISPBMPIDX "CurrBmpIdx" ///< BMP静态显示当前的序号
 
 /// @brief RGB颜色的结构体
 struct RGB {

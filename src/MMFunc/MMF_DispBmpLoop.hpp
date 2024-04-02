@@ -24,8 +24,6 @@ class MMF_DispBmpLoop : public MMFunc {
 public:
     /// @brief 显示周期
     unsigned long Interval = 500;
-    /// @brief 是否暂停中
-    bool pause = false;
 
     /// @brief 构造函数
     /// @param fid 功能块ID
@@ -33,8 +31,6 @@ public:
         : MMFunc(fid)
     {
     }
-
-
 
     /// @brief 执行功能
     /// @param IDelay 等待询问接口
@@ -52,51 +48,37 @@ public:
         } else {
             UART_USB.println("initialization done.");
             File dir = SD.open(DIR_BMPLOOP); // 打开SD卡中的bmp文件夹
-            if (dir)
-                do {
-
-                    // this->DrawBMPByOrder(dir, 3);
-                    // delay(3000);
-                    // dir.rewindDirectory();
-
-                    for (;;) { // 以此读取文件夹下的bmp文件
-                        if (!this->pause) { // 如果没有暂停则显示下一个图片
-                            File entry = dir.openNextFile();
-                            if (entry) { // 如果文件打开成功
-                                if (!entry.isDirectory()) { // 如果不是文件夹
-                                    mmsd.DrawBitmapFile(entry); // 则将文件绘制
-                                }
-                                entry.close(); // 关闭文件
-                            } else
-                                break;
+            uint16_t IRRCode; // 如果读取到按键信息则
+            if (dir) {
+                while (IDelay->Inquire(IRRCode)) { // 以此读取文件夹下的bmp文件
+                    File entry = dir.openNextFile();
+                    if (entry) { // 如果文件打开成功
+                        if (!entry.isDirectory()) { // 如果不是文件夹
+                            mmsd.DrawBitmapFile(entry); // 则将文件绘制
                         }
-                        uint16_t IRRCode; // 如果读取到按键信息则
-                        if (IDelay->IDelay(Interval, IRRCode, true)) {
-                            switch (IRRCode) {
-                            case IRK_UP: // 如果是上键增加等待500毫秒
-                                this->Interval += 500;
-                                delay(100);
-                                break;
-                                
-                            case IRK_DOWN: // 如果是下键减少等待500毫秒
-                                if (this->Interval > 500)
-                                    this->Interval -= 500;
-                                delay(100);
-                                break;
-                            case IRK_SET: // 如果是Set键切换暂停状态
-                                this->pause = !this->pause;
-                                delay(100);
-                                break;
-                            default:
-                                // IDelay->IDelay(Interval, IRRCode, true);
-                                delay(100);
-                                break;
-                            }
-                        } else
+                        entry.close(); // 关闭文件
+                    } else
+                        break;
+
+                    if (IDelay->IDelay(Interval, IRRCode, true)) {
+                        switch (IRRCode) {
+                        case IRK_UP: // 如果是上键增加等待500毫秒
+                            this->Interval += 500;
+                            delay(IRR_WAITKEYTUP);
                             break;
-                    }
-                    dir.rewindDirectory(); // 返回到文件夹首位置
-                } while (IDelay->Inquire());
+
+                        case IRK_DOWN: // 如果是下键减少等待500毫秒
+                            if (this->Interval > 500)
+                                this->Interval -= 500;
+                            delay(IRR_WAITKEYTUP);
+                            break;
+                        }
+                        IRRCode = IRK_NONE; // 接受完毕后必须重置IRRCode
+                    } else
+                        dir.rewindDirectory(); // 返回到文件夹首位置
+                }
+                dir.close();
+            }
             // SD.end();
         }
         mmsd.ReleaseSD(); // 释放SD锁
