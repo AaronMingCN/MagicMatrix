@@ -34,20 +34,7 @@ public:
     {
     }
 
-    /// @brief 根据序号显示图片
-    /// @param dir 路径
-    /// @param Order 图片在路径中的序号
-    void DrawBMPByOrder(File& dir, uint16_t Order)
-    {
-        mmsd.MoveToFileByOrder(dir, Order); // 跳转到文件位置
-        File f = dir.openNextFile();
-        if (f) {
-            if (!f.isDirectory()) { // 如果不是文件夹
-                mmsd.DrawBitmapFile(f); // 则将文件绘制
-            }
-            f.close();
-        }
-    }
+
 
     /// @brief 执行功能
     /// @param IDelay 等待询问接口
