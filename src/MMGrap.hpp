@@ -51,7 +51,7 @@ public:
     /// @param Erase 是否擦除之前的内容
     /// @param color 用于绘制的颜色的地址,为空时默认使用红色
     /// @param ondraw 在绘制时的回调
-    void DrawChar(int16_t x, int16_t y, uint16_t mmc, MMCanvas* Canvas, bool Erase = true, RGB* color = NULL, OnDrawChar ondraw = NULL)
+    void DrawMMChar(int16_t x, int16_t y, uint16_t mmc, MMCanvas* Canvas, bool Erase = true, RGB* color = NULL, OnDrawChar ondraw = NULL)
     {
         RGB rgb = {};
         if (color)
@@ -67,11 +67,30 @@ public:
                     if (ondraw)
                         (*ondraw)(j, i, j + x, i + y, rgb); // 如果定义了绘图时的回调则先调用
                     Canvas->SetPixel(j + x, i + y, rgb);
-                } else if (Erase) 
+                } else if (Erase)
                     Canvas->SetPixel(j + x, i + y, 0, 0, 0);
             }
         }
     }
+
+    /// @brief 根据字符串绘制MMChar
+    /// @param x 横坐标
+    /// @param y 纵坐标
+    /// @param s 字符串
+    /// @param Canvas 画布
+    /// @param Erase 是否清除之前内容
+    /// @param color 颜色
+    /// @param ondraw 绘制回调事件
+    void DrawMMStr(int16_t x, int16_t y, String s, MMCanvas* Canvas, bool Erase = true, RGB* color = NULL, OnDrawChar ondraw = NULL)
+    {
+        UART_USB.println(s);
+        for (char c: s) {
+            UART_USB.println(c);
+            this->DrawMMChar(x, y, mmcharset.GetVal(c), Canvas, Erase, color, ondraw);
+            x += 4;
+        }
+    }
+
 } mmgrap;
 
 #endif

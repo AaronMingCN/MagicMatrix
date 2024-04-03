@@ -46,17 +46,18 @@ void setup()
 /// @brief 主循环
 void loop()
 {
-    mmgrap.DispLOGO(); // 显示LOGO    
+    // mmgrap.DispLOGO(); // 显示LOGO    
     // // 执行主循环
 
-    mmmain.MainLoop();
+    // mmmain.MainLoop();
 
     // mmdebug.TestDispMMChar();
-    // delay(1000);
+    mmdebug.TestDispMMStr();
+    delay(1000);
 
-    // mmscr.Clear();
-    // delay(1000);
-    // mmscr.Update();
+    mmscr.Clear();
+    delay(1000);
+    mmscr.Update();
 
     // delay(2000);
 

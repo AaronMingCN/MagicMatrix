@@ -243,17 +243,26 @@ public:
     /// @brief 测试绘制mm字符
     void TestDispMMChar()
     {
-        mmgrap.DrawChar(0, 0, CHAR_0, &mmscr,false , NULL, MMCStyle::Styles[0]);
-        mmgrap.DrawChar(4, 0, CHAR_1, &mmscr,false , NULL, MMCStyle::Styles[1]);
-        mmgrap.DrawChar(8, 0, CHAR_2, &mmscr,false , NULL, MMCStyle::Styles[2]);
-        mmgrap.DrawChar(12, 0, CHAR_3, &mmscr,false , NULL, MMCStyle::Styles[3]);
+        mmgrap.DrawMMChar(0, 0, mmcharset.GetVal('A'), &mmscr, false, NULL, MMCStyle::Styles[0]);
+        mmgrap.DrawMMChar(4, 0, MMCHAR_F, &mmscr, false, NULL, MMCStyle::Styles[1]);
+        mmgrap.DrawMMChar(8, 0, MMCHAR_G, &mmscr, false, NULL, MMCStyle::Styles[2]);
+        mmgrap.DrawMMChar(12, 0, MMCHAR_H, &mmscr, false, NULL, MMCStyle::Styles[3]);
 
-        mmgrap.DrawChar(0, 6, CHAR_4, &mmscr,false , NULL, MMCStyle::Styles[4]);
-        mmgrap.DrawChar(4, 6, CHAR_5, &mmscr,false , NULL, MMCStyle::Styles[5]);
-        mmgrap.DrawChar(8, 6, CHAR_6, &mmscr,false , NULL, MMCStyle::Styles[0]);
-        mmgrap.DrawChar(12, 6, CHAR_7, &mmscr,false , NULL, MMCStyle::Styles[0]);
+        mmgrap.DrawMMChar(0, 6, MMCHAR_FILL, &mmscr, false, NULL, MMCStyle::Styles[4]);
+        mmgrap.DrawMMChar(4, 6, MMCHAR_PLUS, &mmscr, false, NULL, MMCStyle::Styles[5]);
+        mmgrap.DrawMMChar(8, 6, MMCHAR_COLON, &mmscr, false, NULL, MMCStyle::Styles[0]);
+        mmgrap.DrawMMChar(12, 6, MMCHAR_PERC, &mmscr, false, NULL, MMCStyle::Styles[0]);
 
         mmscr.Update();
+    }
+    /// @brief 测试绘制mm字符串
+    void TestDispMMStr()
+    {
+        String s = "ABCD";
+        mmgrap.DrawMMStr(0, 0, s, &mmscr, false, NULL, MMCStyle::Styles[0]);
+        mmgrap.DrawMMStr(0, 6, "KLMP", &mmscr, false, NULL, MMCStyle::Styles[1]);
+        mmscr.Update();
+
     }
 
 } mmdebug;

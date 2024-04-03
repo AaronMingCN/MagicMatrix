@@ -81,7 +81,7 @@ public:
 OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5 };
 
 /// 定义字符空格的字符显示
-#define CHAR_SPAC (0b0\
+#define MMCHAR_SPAC (0b0\
 000\
 000\
 000\
@@ -89,16 +89,15 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 000)
 
 /// 定义字符填充的字符显示
-#define CHAR_FILL (0b0\
+#define MMCHAR_FILL (0b0\
 111\
 111\
 111\
 111\
 111)
 
-
 /// 定义字符0的字符显示
-#define CHAR_0 (0b0\
+#define MMCHAR_0 (0b0\
 111\
 101\
 101\
@@ -106,7 +105,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 111)
 
 /// 定义字符1的字符显示
-#define CHAR_1 (0b0\
+#define MMCHAR_1 (0b0\
 001\
 001\
 001\
@@ -114,7 +113,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 001)
 
 /// 定义字符2的字符显示
-#define CHAR_2 (0b0\
+#define MMCHAR_2 (0b0\
 111\
 001\
 111\
@@ -122,7 +121,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 111)
 
 /// 定义字符3的字符显示
-#define CHAR_3 (0b0\
+#define MMCHAR_3 (0b0\
 111\
 001\
 111\
@@ -130,7 +129,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 111)
 
 /// 定义字符4的字符显示
-#define CHAR_4 (0b0\
+#define MMCHAR_4 (0b0\
 101\
 101\
 111\
@@ -138,7 +137,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 001)
 
 /// 定义字符5的字符显示
-#define CHAR_5 (0b0\
+#define MMCHAR_5 (0b0\
 111\
 100\
 111\
@@ -146,7 +145,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 111)
 
 /// 定义字符6的字符显示
-#define CHAR_6 (0b0\
+#define MMCHAR_6 (0b0\
 111\
 100\
 111\
@@ -154,7 +153,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 111)
 
 /// 定义字符7的字符显示
-#define CHAR_7 (0b0\
+#define MMCHAR_7 (0b0\
 111\
 001\
 001\
@@ -162,7 +161,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 001)
 
 /// 定义字符8的字符显示
-#define CHAR_8 (0b0\
+#define MMCHAR_8 (0b0\
 111\
 101\
 111\
@@ -170,7 +169,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 111)
 
 /// 定义字符9的字符显示
-#define CHAR_9 (0b0\
+#define MMCHAR_9 (0b0\
 111\
 101\
 111\
@@ -178,7 +177,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 111)
 
 /// 定义字符.的字符显示
-#define CHAR_DOT (0b0\
+#define MMCHAR_DOT (0b0\
 000\
 000\
 000\
@@ -186,7 +185,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 100)
 
 /// 定义字符+的字符显示
-#define CHAR_PLUS (0b0\
+#define MMCHAR_PLUS (0b0\
 000\
 010\
 111\
@@ -194,7 +193,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 000)
 
 /// 定义字符-的字符显示
-#define CHAR_MINU (0b0\
+#define MMCHAR_MINU (0b0\
 000\
 000\
 111\
@@ -202,39 +201,39 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 000)
 
 /// 定义字符A的字符显示
-#define CHAR_A (0b0\
-111\
+#define MMCHAR_A (0b0\
+010\
 101\
 111\
 101\
 101)
 
 /// 定义字符B的字符显示
-#define CHAR_B (0b0\
-100\
-100\
-111\
+#define MMCHAR_B (0b0\
+110\
 101\
-111)
+110\
+101\
+110)
 
 /// 定义字符C的字符显示
-#define CHAR_C (0b0\
-111\
+#define MMCHAR_C (0b0\
+011\
 100\
 100\
 100\
-111)
+011)
 
 /// 定义字符D的字符显示
-#define CHAR_D (0b0\
-001\
-001\
-111\
+#define MMCHAR_D (0b0\
+110\
 101\
-111)
+101\
+101\
+110)
 
 /// 定义字符E的字符显示
-#define CHAR_E (0b0\
+#define MMCHAR_E (0b0\
 111\
 100\
 111\
@@ -242,7 +241,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 111)
 
 /// 定义字符F的字符显示
-#define CHAR_F (0b0\
+#define MMCHAR_F (0b0\
 111\
 100\
 111\
@@ -250,15 +249,15 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 100)
 
 /// 定义字符G的字符显示
-#define CHAR_G (0b0\
-111\
+#define MMCHAR_G (0b0\
+011\
+100\
 100\
 101\
-101\
-111)
+011)
 
 /// 定义字符H的字符显示
-#define CHAR_H (0b0\
+#define MMCHAR_H (0b0\
 101\
 101\
 111\
@@ -266,15 +265,39 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 101)
 
 /// 定义字符I的字符显示
-#define CHAR_I (0b0\
+#define MMCHAR_I (0b0\
 111\
 010\
 010\
 010\
 111)
 
+/// 定义字符I的字符显示
+#define MMCHAR_J (0b0\
+001\
+001\
+001\
+101\
+010)
+
+/// 定义字符I的字符显示
+#define MMCHAR_K (0b0\
+100\
+101\
+110\
+110\
+101)
+
+/// 定义字符L的字符显示
+#define MMCHAR_L (0b0\
+100\
+100\
+100\
+100\
+111)
+
 /// 定义字符P的字符显示
-#define CHAR_P (0b0\
+#define MMCHAR_P (0b0\
 111\
 101\
 111\
@@ -282,7 +305,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 100)
 
 /// 定义字符%的字符显示
-#define CHAR_PERC (0b0\
+#define MMCHAR_PERC (0b0\
 101\
 001\
 010\
@@ -290,7 +313,7 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 101)
 
 /// 定义字符:的字符显示
-#define CHAR_COLON (0b0\
+#define MMCHAR_COLON (0b0\
 000\
 100\
 000\
@@ -305,32 +328,36 @@ public:
     /// @brief 构造函数，将字符像素值加入字符集
     MMCharset()
     {
-        SetVal(' ', CHAR_SPAC); // 加入空格
-        SetVal(0, CHAR_FILL); // 加入填充，ascii值为0时
-        SetVal('0', CHAR_0);
-        SetVal('1', CHAR_1);
-        SetVal('2', CHAR_2);
-        SetVal('3', CHAR_3);
-        SetVal('4', CHAR_4);
-        SetVal('5', CHAR_5);
-        SetVal('6', CHAR_6);
-        SetVal('7', CHAR_7);
-        SetVal('8', CHAR_8);
-        SetVal('9', CHAR_9);
-        SetVal('.', CHAR_DOT);
-        SetVal('+', CHAR_PLUS);
-        SetVal('-', CHAR_MINU);
-        SetVal('A', CHAR_A);
-        SetVal('B', CHAR_B);
-        SetVal('C', CHAR_C);
-        SetVal('D', CHAR_D);
-        SetVal('E', CHAR_E);
-        SetVal('F', CHAR_F);
-        SetVal('G', CHAR_G);
-        SetVal('H', CHAR_I);
-        SetVal('P', CHAR_P);
-        SetVal('%', CHAR_PERC);
-        SetVal(':', CHAR_COLON);
+        SetVal(' ', MMCHAR_SPAC); // 加入空格
+        SetVal(0, MMCHAR_FILL); // 加入填充，ascii值为0时
+        SetVal('0', MMCHAR_0);
+        SetVal('1', MMCHAR_1);
+        SetVal('2', MMCHAR_2);
+        SetVal('3', MMCHAR_3);
+        SetVal('4', MMCHAR_4);
+        SetVal('5', MMCHAR_5);
+        SetVal('6', MMCHAR_6);
+        SetVal('7', MMCHAR_7);
+        SetVal('8', MMCHAR_8);
+        SetVal('9', MMCHAR_9);
+        SetVal('.', MMCHAR_DOT);
+        SetVal('+', MMCHAR_PLUS);
+        SetVal('-', MMCHAR_MINU);
+        SetVal('A', MMCHAR_A);
+        SetVal('B', MMCHAR_B);
+        SetVal('C', MMCHAR_C);
+        SetVal('D', MMCHAR_D);
+        SetVal('E', MMCHAR_E);
+        SetVal('F', MMCHAR_F);
+        SetVal('G', MMCHAR_G);
+        SetVal('H', MMCHAR_H);
+        SetVal('I', MMCHAR_I);
+        SetVal('J', MMCHAR_J);
+        SetVal('K', MMCHAR_K);
+        SetVal('L', MMCHAR_L);
+        SetVal('P', MMCHAR_P);
+        SetVal('%', MMCHAR_PERC);
+        SetVal(':', MMCHAR_COLON);
     }
 
     /// @brief 设置字符值
@@ -346,7 +373,7 @@ public:
     /// @param c 字符
     /// @param Default 默认值，如果没有找到则返回该值
     /// @return 如果存在则返回字符值，否则返回
-    uint16_t GetVal(char c, uint16_t Default = CHAR_FILL)
+    uint16_t GetVal(char c, uint16_t Default = MMCHAR_FILL)
     {
         uint16_t r = Default; // 默认为全部填充
         std::map<char, uint16_t>::iterator it = this->Items.find(c);
