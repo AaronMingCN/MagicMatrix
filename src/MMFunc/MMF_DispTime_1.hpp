@@ -46,8 +46,8 @@ public:
                 mmhardware.matrix.setTextColor(mmhardware.matrix.Color(255, 0, 255));
                 mmhardware.matrix.print(buff);
 
+                mmhardware.matrix.setCursor(0, 8);
                 if (now.Second() % 2) {
-                    mmhardware.matrix.setCursor(0, 8);
                     mmhardware.matrix.setTextColor(mmhardware.matrix.Color(0, 255, 255));
                     mmhardware.matrix.print(':');
                 } else
@@ -59,7 +59,7 @@ public:
                 mmhardware.matrix.print(buff);
 
                 // mmhardware.matrix.setCursor(10, 1);
-                mmhardware.matrix.print(':');
+                // mmhardware.matrix.print(':');
                 mmhardware.matrix.show();
             }
         } while(IDelay->IDelay(100));

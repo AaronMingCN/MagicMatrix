@@ -73,6 +73,19 @@ public:
         }
     }
 
+    /// @brief 在MMCanvas指定位置绘制ASCII字符
+    /// @param x 横向值
+    /// @param y 纵向值
+    /// @param c 绘制的ASCII字符
+    /// @param Canvas 目标画布
+    /// @param Erase 是否擦除之前的内容
+    /// @param color 用于绘制的颜色的地址,为空时默认使用红色
+    /// @param ondraw 在绘制时的回调
+    void DrawChar(int16_t x, int16_t y, char c, MMCanvas* Canvas, bool Erase = true, RGB* color = NULL, OnDrawChar ondraw = NULL)
+    {
+        this->DrawMMChar(x, y, mmcharset.GetVal(c), Canvas, Erase, color, ondraw);
+    }
+
     /// @brief 根据字符串绘制MMChar
     /// @param x 横坐标
     /// @param y 纵坐标
@@ -86,7 +99,7 @@ public:
         UART_USB.println(s);
         for (char c: s) {
             UART_USB.println(c);
-            this->DrawMMChar(x, y, mmcharset.GetVal(c), Canvas, Erase, color, ondraw);
+            this->DrawChar(x, y, c, Canvas, Erase, color, ondraw);
             x += 4;
         }
     }
