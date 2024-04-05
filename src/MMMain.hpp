@@ -188,7 +188,7 @@ public:
         unsigned long pass = 0; // 逝去的毫秒数
         IRRCode = IRK_NONE;
         do {
-            delay(100);
+            delay(10);
             if (!Inquire(IRRCode)) {
                 r = false;
                 break;
