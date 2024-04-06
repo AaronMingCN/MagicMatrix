@@ -139,8 +139,10 @@ public:
             case IRK_DOWN:
                 if (NextRMinu >= 5) {
                     NextRMinu -= 5;
-                } else
+                } else {
                     NextRSec = 0; // 如果分钟已经无法再减少了则将秒置零
+                    NextR100M = 0;
+                }
                 break;
             case IRK_RIGHT:
                 if (NextRMinu < MAX_MINU) {
@@ -150,8 +152,10 @@ public:
             case IRK_LEFT:
                 if (NextRMinu >= 1) {
                     --NextRMinu;
-                } else
+                } else {
                     NextRSec = 0; // 如果分钟已经无法再减少了则将秒置零
+                    NextR100M = 0;
+                }
                 break;
             case IRK_SET: // 按set键开始
                 this->CalRemainMill();

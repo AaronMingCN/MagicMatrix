@@ -45,9 +45,10 @@ public:
                 mmhardware.matrix.clear();
 
                 sprintf(buff, "%2d", now.Month());
-                mmgrap.DrawMMStr(0, y1, String(buff), &mmscr, false, NULL, MMCStyle::Styles[2]);
+                mmgrap.DrawMMStr(-2, y1, String(buff), &mmscr, false, NULL, MMCStyle::Styles[2]);
+                mmgrap.DrawChar(8, y2, ':', &mmscr, false, &white);
                 sprintf(buff, "%-2d", now.Day());
-                mmgrap.DrawMMStr(9, y1, String(buff), &mmscr, false, NULL, MMCStyle::Styles[2]);
+                mmgrap.DrawMMStr(12, y1, String(buff), &mmscr, false, NULL, MMCStyle::Styles[2]);
 
                 sprintf(buff, "%02d", now.Hour());
                 mmgrap.DrawMMStr(0, y2, String(buff), &mmscr, false, NULL, MMCStyle::Styles[3]);
