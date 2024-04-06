@@ -50,13 +50,20 @@ public:
     {
         const uint8_t y1 = 2; // 第一行的y值
         const uint8_t y2 = 9; // 第二行的y值
+        RGB white = { 255, 255, 255 };
+        mmscr.SetEmpty();
         char buff[6] = {}; // 用于保存格式化后字符串的缓存
         sprintf(buff, "%03d", CurrRMinu);
-        mmgrap.DrawMMStr(0, y1, String(buff), &mmscr, false, NULL, MMCStyle::Styles[2]);
+        mmgrap.DrawMMStr(1, y1, String(buff), &mmscr, false, NULL, MMCStyle::Styles[0]);
         sprintf(buff, "%02d", CurrRSec);
-        mmgrap.DrawMMStr(0, y2, String(buff), &mmscr, false, NULL, MMCStyle::Styles[3]);
+
+        if (this->CurrRSec % 2)
+            mmgrap.DrawChar(13, y1, ':', &mmscr, false, &white, NULL);
+
+        mmgrap.DrawMMStr(1, y2, String(buff), &mmscr, false, NULL, MMCStyle::Styles[4]);
+        mmgrap.DrawChar(9, y2, '.', &mmscr, false, &white, NULL);
         sprintf(buff, "%1d", CurrR100M);
-        mmgrap.DrawMMStr(0, y2, String(buff), &mmscr, false, NULL, MMCStyle::Styles[3]);        
+        mmgrap.DrawMMStr(11, y2, String(buff), &mmscr, false, NULL, MMCStyle::Styles[3]);
         mmhardware.matrix.show();
     }
 
@@ -75,7 +82,7 @@ public:
     /// @param IDelay : 传入询问等待接口用于相应功能切换
     void CountDown(InquireDelay* IDelay)
     {
-        while (IDelay->IDelay(10)) {
+        while (IDelay->IDelay(80)) {
             unsigned long now = millis(); // 取当前开机时间
             unsigned long pass = mmhardware.TickPassed(this->LastCount, now); // 计算距离上次计数的时间
             this->LastCount = now;
@@ -119,13 +126,15 @@ public:
     virtual MMFExecR_t Exec(InquireDelay* IDelay)
     {
         this->DispRemain();
+        const uint32_t MAX_MINU = 999;
         uint16_t irk = 0; // 定义红外线按键值
         while (IDelay->Inquire(irk)) {
             switch (irk) {
             case IRK_UP:
-                if (NextRMinu <= 94) {
+                if (NextRMinu < MAX_MINU - 5) {
                     NextRMinu += 5;
-                }
+                } else
+                    NextRMinu = MAX_MINU;
                 break;
             case IRK_DOWN:
                 if (NextRMinu >= 5) {
@@ -134,7 +143,7 @@ public:
                     NextRSec = 0; // 如果分钟已经无法再减少了则将秒置零
                 break;
             case IRK_RIGHT:
-                if (NextRMinu <= 98) {
+                if (NextRMinu < MAX_MINU) {
                     ++NextRMinu;
                 }
                 break;
