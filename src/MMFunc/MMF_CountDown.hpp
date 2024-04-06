@@ -36,24 +36,27 @@ public:
     uint16_t CurrRMinu = 0;
     /// @brief 剩余秒钟
     uint16_t CurrRSec = 0;
+    /// @brief 剩余的100毫秒数
+    uint16_t CurrR100M = 0;
     /// @brief 下一个剩余分钟，避免重复绘图
     uint16_t NextRMinu = 0;
     /// @brief 下一个剩余秒钟
     uint16_t NextRSec = 0;
+    /// @brief 下一个100毫秒数
+    uint16_t NextR100M = 0;
 
     /// @brief 显示剩余时间
     void DispRemain()
     {
+        const uint8_t y1 = 2; // 第一行的y值
+        const uint8_t y2 = 9; // 第二行的y值
         char buff[6] = {}; // 用于保存格式化后字符串的缓存
-        mmhardware.matrix.clear();
-        mmhardware.matrix.setCursor(2, 0);
-        mmhardware.matrix.setTextColor(mmhardware.matrix.Color(255, 255, 0));
-        sprintf(buff, "%02d", CurrRMinu);
-        mmhardware.matrix.print(buff);
-        mmhardware.matrix.setCursor(2, 9);
-        mmhardware.matrix.setTextColor(mmhardware.matrix.Color(0, 255, 255));
+        sprintf(buff, "%03d", CurrRMinu);
+        mmgrap.DrawMMStr(0, y1, String(buff), &mmscr, false, NULL, MMCStyle::Styles[2]);
         sprintf(buff, "%02d", CurrRSec);
-        mmhardware.matrix.print(buff);
+        mmgrap.DrawMMStr(0, y2, String(buff), &mmscr, false, NULL, MMCStyle::Styles[3]);
+        sprintf(buff, "%1d", CurrR100M);
+        mmgrap.DrawMMStr(0, y2, String(buff), &mmscr, false, NULL, MMCStyle::Styles[3]);        
         mmhardware.matrix.show();
     }
 
@@ -64,13 +67,15 @@ public:
         this->NextRMinu = this->RemainMill / 60000;
         // 剩余毫秒数除以1000得到秒数，然后对60取模得到秒数
         this->NextRSec = (this->RemainMill / 1000) % 60;
+        // 剩余的100毫秒数,先对1000取模然后再整除100
+        this->NextR100M = (this->RemainMill % 1000) / 100;
     }
 
     /// @brief 执行倒计时
     /// @param IDelay : 传入询问等待接口用于相应功能切换
     void CountDown(InquireDelay* IDelay)
     {
-        while (IDelay->IDelay(100)) {
+        while (IDelay->IDelay(10)) {
             unsigned long now = millis(); // 取当前开机时间
             unsigned long pass = mmhardware.TickPassed(this->LastCount, now); // 计算距离上次计数的时间
             this->LastCount = now;
@@ -80,10 +85,8 @@ public:
                 this->RemainMill = 0;
                 this->Alert(IDelay);
             }
-            this->PrepareTime();
-            // if (this->CurrRMinu == 0 && this->CurrRSec == 0)
-            //     this->Alert(IDelay);
-            this->DispRemainChange();
+            this->PrepareTime(); // 准备需要显示的时间
+            this->DispRemainChange(); // 显示时间更改
         }
     }
 
@@ -92,10 +95,11 @@ public:
     bool DispRemainChange()
     {
         bool r = false;
-        // 如果分数发生改变则开始绘图
-        if ((CurrRMinu != NextRMinu) || (CurrRSec != NextRSec)) {
-            CurrRMinu = NextRMinu;
+        // 如果时间发生改变则开始绘图
+        if ((CurrRMinu != NextRMinu) || (CurrRSec != NextRSec) || (CurrR100M != NextR100M)) {
+            CurrRMinu = NextRMinu; // 将新的时间更新，并重新绘制
             CurrRSec = NextRSec;
+            CurrR100M = NextR100M;
             this->DispRemain();
             r = true;
         }
@@ -105,8 +109,8 @@ public:
     /// @brief 计算剩余时间
     void CalRemainMill()
     {
-        this->RemainMill = NextRMinu * 60000 + NextRSec * 1000;
-        this->LastCount = millis();
+        this->RemainMill = NextRMinu * 60000 + NextRSec * 1000; // 计算剩余的毫秒数
+        this->LastCount = millis(); // 记录开始计时的系统毫秒数
     }
 
     /// @brief 执行功能块
