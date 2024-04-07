@@ -24,6 +24,7 @@
 #include "MMFunc/MMF_ScoreBoard.hpp"
 #include "MMFunc/MMF_DispBmpStatic.hpp"
 #include "MMFunc/MMF_DispDateTime.hpp"
+#include "MMFunc/MMF_DispTimeDHT.hpp"
 
 
 /// 定义功能类型,为后期扩展作准备,目前默认只有0
@@ -62,6 +63,10 @@ MMF_DispBmpStatic mmf_dispbmpstatic(MMF_ID_DISPBMPSTATIC); ///< 显示BMP静止�
 #define MMF_ID_DISPDATETIME (0x000A) ///< 显示日期时间ID
 MMF_DispDateTime mmf_dispdatetime(MMF_ID_DISPDATETIME); ///< 显示日期时间功能实例
 
+#define MMF_ID_DISPTIMEDHT (0x000B) ///< 显示时间空气温湿度ID
+MMF_DispTimeDHT mmf_disptimedht(MMF_ID_DISPTIMEDHT); ///< 显示时间DHT功能实例
+
+
 
 /// @brief 将功能模块加入功能池
 void MMFPSetup()
@@ -78,6 +83,7 @@ void MMFPSetup()
     mmfuncpool.Append(&mmf_countdown);
     mmfuncpool.Append(&mmf_dispbmpstatic);
     mmfuncpool.Append(&mmf_dispdatetime);
+    mmfuncpool.Append(&mmf_disptimedht);
 }
 
 #endif

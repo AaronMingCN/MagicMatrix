@@ -73,12 +73,20 @@ public:
         rgb.G = 255 - (y * 256 / MMCHAR_HEIGHT);
         rgb.B = 0;
     }
+
+    /// @brief 实现OnDrawChar
+    static void MMCS_6(int16_t x, int16_t y, int16_t abx, int16_t aby, RGB& rgb)
+    {
+        rgb.R = 255 - (y * 256 / MMCHAR_HEIGHT);
+        rgb.G = 255;
+        rgb.B = (y * 256 / MMCHAR_HEIGHT);
+    }
     static OnDrawChar Styles[];
 };
 
 /// @brief 初始化样式列表，将样式添加到列表中
 /// @details 使用时通过下标获得函数指针，然后将参数传递给MMGrap的绘制方法使用
-OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5 };
+OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5, MMCS_6 };
 
 /// 定义字符空格的字符显示
 #define MMCHAR_SPAC (0b0\
@@ -298,11 +306,43 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 
 /// 定义字符P的字符显示
 #define MMCHAR_P (0b0\
-111\
+110\
 101\
-111\
+110\
 100\
 100)
+
+/// 定义字符Q的字符显示
+#define MMCHAR_Q (0b0\
+010\
+101\
+101\
+010\
+001)
+
+/// 定义字符R的字符显示
+#define MMCHAR_R (0b0\
+110\
+101\
+110\
+110\
+101)
+
+/// 定义字符S的字符显示
+#define MMCHAR_S (0b0\
+011\
+100\
+010\
+001\
+110)
+
+/// 定义字符T的字符显示
+#define MMCHAR_T (0b0\
+111\
+010\
+010\
+010\
+010)
 
 /// 定义字符%的字符显示
 #define MMCHAR_PERC (0b0\
@@ -318,6 +358,38 @@ OnDrawChar MMCStyle::Styles[] = { MMCS_0, MMCS_1, MMCS_2, MMCS_3, MMCS_4, MMCS_5
 100\
 000\
 100\
+000)
+
+/// 定义两点横线
+#define MMCHAR_SHORTMINUS (0b0\
+000\
+000\
+110\
+000\
+000)
+
+/// 定义>字符
+#define MMCHAR_MORE (0b0\
+100\
+010\
+001\
+010\
+100)
+
+/// 定义<字符
+#define MMCHAR_LESS (0b0\
+001\
+010\
+100\
+010\
+001)
+
+/// 定义=字符
+#define MMCHAR_EQUAL (0b0\
+000\
+111\
+000\
+111\
 000)
 
 /// @brief 字符集类
@@ -356,8 +428,15 @@ public:
         SetVal('K', MMCHAR_K);
         SetVal('L', MMCHAR_L);
         SetVal('P', MMCHAR_P);
+        SetVal('Q', MMCHAR_Q);
+        SetVal('R', MMCHAR_R);
+        SetVal('S', MMCHAR_S);
+        SetVal('T', MMCHAR_T);        
         SetVal('%', MMCHAR_PERC);
         SetVal(':', MMCHAR_COLON);
+        SetVal('>', MMCHAR_MORE);
+        SetVal('<', MMCHAR_LESS);
+        SetVal('=', MMCHAR_EQUAL);
     }
 
     /// @brief 设置字符值
