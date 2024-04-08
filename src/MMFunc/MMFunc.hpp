@@ -11,6 +11,7 @@
 #ifndef _MMFUNC_HPP
 #define _MMFUNC_HPP
 
+#include "../MMDefine.hpp"
 
 
 /// @brief 执行结果 OK

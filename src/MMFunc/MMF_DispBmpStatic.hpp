@@ -12,7 +12,7 @@
 
 #include "../MMSD.hpp"
 
-/// @brief 矩阵屏幕测试类，测试RGB显示
+/// @brief 静态显示BMP图片
 class MMF_DispBmpStatic : public MMFunc {
 public:
     /// @brief 当前显示的图片顺序

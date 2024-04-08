@@ -25,7 +25,7 @@
 #include "MMFunc/MMF_DispBmpStatic.hpp"
 #include "MMFunc/MMF_DispDateTime.hpp"
 #include "MMFunc/MMF_DispTimeDHT.hpp"
-
+#include "MMFunc/MMF_StopWatch.hpp"
 
 /// 定义功能类型,为后期扩展作准备,目前默认只有0
 #define MMF_TYPE_0 (0x00)
@@ -66,6 +66,8 @@ MMF_DispDateTime mmf_dispdatetime(MMF_ID_DISPDATETIME); ///< 显示日期时间�
 #define MMF_ID_DISPTIMEDHT (0x000B) ///< 显示时间空气温湿度ID
 MMF_DispTimeDHT mmf_disptimedht(MMF_ID_DISPTIMEDHT); ///< 显示时间DHT功能实例
 
+#define MMF_ID_STOPWATCH (0x000C) ///< 定义计时器模块ID
+MMF_StopWatch mmf_stopwatch(MMF_ID_STOPWATCH);
 
 
 /// @brief 将功能模块加入功能池
@@ -84,6 +86,7 @@ void MMFPSetup()
     mmfuncpool.Append(&mmf_dispbmpstatic);
     mmfuncpool.Append(&mmf_dispdatetime);
     mmfuncpool.Append(&mmf_disptimedht);
+    mmfuncpool.Append(&mmf_stopwatch);
 }
 
 #endif

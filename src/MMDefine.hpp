@@ -145,6 +145,10 @@
 
 #define CFG_DISPBMPIDX "CurrBmpIdx" ///< BMP静态显示当前的序号
 
+/// @brief 定义时钟计数的类型
+// typedef unsigned long unsigned long;
+
+
 /// @brief RGB颜色的结构体
 struct RGB {
     uint8_t R; ///< 红色值 0~255

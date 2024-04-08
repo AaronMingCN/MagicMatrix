@@ -50,14 +50,14 @@ public:
                 mmhardware.matrix.clear();
 
                 sprintf(buff, "%02d", now.Hour());
-                mmgrap.DrawMMStr(0, y1, String(buff), &mmscr, false, NULL, MMCStyle::Styles[6]);
+                mmgrap.DrawMMStr(0, y1, String(buff), &mmscr, false, NULL, MMCStyle::Styles[3]);
                 if (now.Second() % 2) {
                     mmgrap.DrawChar(8, y1, ':', &mmscr, false, &white);
                 } else
                     mmgrap.DrawChar(8, y1, ' ', &mmscr, false, &white);
 
                 sprintf(buff, "%02d", now.Minute());
-                mmgrap.DrawMMStr(9, y1, String(buff), &mmscr, false, NULL, MMCStyle::Styles[6]);
+                mmgrap.DrawMMStr(9, y1, String(buff), &mmscr, false, NULL, MMCStyle::Styles[3]);
 
                 // 定义温湿度状态实例，并从传感器读取
                 sensors_event_t event_t;
@@ -74,12 +74,12 @@ public:
 
                 sprintf(buff, "%3d", T);
                 mmgrap.DrawMMStr(0, y2, String(buff), &mmscr, false, &clT, NULL);
-                mmgrap.DrawChar(13, y2, 'C', &mmscr, false, NULL, MMCStyle::Styles[3]);
+                mmgrap.DrawChar(13, y2, 'C', &mmscr, false, NULL, MMCStyle::Styles[0]);
 
                 if (0 <= H && H < 100) { // 避免错误绘图
                     sprintf(buff, "%3d", H);
                     mmgrap.DrawMMStr(0, y3, String(buff), &mmscr, false, &clH);
-                    mmgrap.DrawChar(13, y3, 'P', &mmscr, false, NULL, MMCStyle::Styles[4]);
+                    mmgrap.DrawChar(13, y3, 'P', &mmscr, false, NULL, MMCStyle::Styles[2]);
                 }
 
                 mmhardware.matrix.show();

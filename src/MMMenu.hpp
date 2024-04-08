@@ -106,6 +106,7 @@ public:
         this->Items.push_back({0x00, 0x03, MMF_ID_COUNTDOWN}); // 倒计时
         this->Items.push_back({0x00, 0x04, MMF_ID_DISPDATETIME}); // 显示日期时间
         this->Items.push_back({0x00, 0x05, MMF_ID_DISPTIMEDHT}); // 显示时间温湿度
+        this->Items.push_back({0x00, 0x06, MMF_ID_STOPWATCH}); // 计时器
         
         this->Items.push_back({0x00, 0x09, MMF_ID_MATRIXTEST}); // 载入菜单功能 测试矩阵
         // 菜单分类0x01

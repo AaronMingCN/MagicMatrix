@@ -4,7 +4,7 @@
 <font BOLD="true"/>
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <hook NAME="MapStyle" background="#f9f9f8" zoom="0.788">
-    <properties fit_to_viewport="false" show_icon_for_attributes="true" show_note_icons="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" associatedTemplateLocation="template:/light_nord_template.mm"/>
+    <properties show_icon_for_attributes="true" fit_to_viewport="false" show_note_icons="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" associatedTemplateLocation="template:/light_nord_template.mm"/>
 
 <map_styles>
 <stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24 pt">
@@ -81,7 +81,54 @@
 </hook>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-<node TEXT="A.基本显示" POSITION="bottom_or_right" ID="ID_1420311245" CREATED="1708906913766" MODIFIED="1709728425483" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="B.图像显示" POSITION="bottom_or_right" ID="ID_1799667714" CREATED="1708907138472" MODIFIED="1709728425488" NUMBERED="false" FORMAT="markdownPatternFormat">
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+<node TEXT="0.BMP位图循环显示" ID="ID_1109368198" CREATED="1708907145208" MODIFIED="1712018327913" NUMBERED="false" FORMAT="markdownPatternFormat">
+<icon BUILTIN="button_ok"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
+<text>+ 将图片放置在SD卡的bmp文件夹下
++ bmp文件必须为24位16x16分辨率图像
++ 向上增减显示间隔500毫秒
++ 向下减少显示间隔500毫秒，最小间隔500毫秒</text></richcontent>
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+</node>
+<node TEXT="1.BMP位图固定显示" ID="ID_1948499533" CREATED="1712018094931" MODIFIED="1712065831461" FORMAT="markdownPatternFormat">
+<icon BUILTIN="button_ok"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
+<text>+ 将图片放置在SD卡的BMPStatic文件夹下
++ bmp文件必须为24位16x16分辨率图像
++ 向左切换前一幅图
++ 向右切换下一幅图</text></richcontent>
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+</node>
+<node TEXT="2.动图显示" ID="ID_1504471942" CREATED="1708907170618" MODIFIED="1712065846674" NUMBERED="false" FORMAT="markdownPatternFormat">
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+</node>
+</node>
+<node TEXT="D.填充" POSITION="bottom_or_right" ID="ID_1326429327" CREATED="1708907030650" MODIFIED="1709728425478" NUMBERED="false" FORMAT="markdownPatternFormat">
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+<node TEXT="0.对角线填充" ID="ID_1086317210" CREATED="1708907066039" MODIFIED="1709808785427" NUMBERED="false" FORMAT="markdownPatternFormat">
+<icon BUILTIN="button_ok"/>
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+</node>
+<node TEXT="1.行填充" ID="ID_925049962" CREATED="1708907041107" MODIFIED="1709728425481" NUMBERED="false" FORMAT="markdownPatternFormat">
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+</node>
+<node TEXT="2.列填充" ID="ID_581850488" CREATED="1708907059835" MODIFIED="1709728425482" NUMBERED="false" FORMAT="markdownPatternFormat">
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+</node>
+<node TEXT="3.蛇形填充" ID="ID_1789984015" CREATED="1708907075957" MODIFIED="1709728425482" NUMBERED="false" FORMAT="markdownPatternFormat">
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+</node>
+</node>
+<node TEXT="A.基本显示" POSITION="top_or_left" ID="ID_1420311245" CREATED="1708906913766" MODIFIED="1709728425483" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 <node TEXT="0.时钟" ID="ID_537966244" CREATED="1708906929245" MODIFIED="1709728425484" NUMBERED="false" FORMAT="markdownPatternFormat">
@@ -130,37 +177,10 @@
       测试矩阵屏幕，循环显示Red、Green、Bule三种颜色
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
-<node TEXT="B.图像显示" POSITION="bottom_or_right" ID="ID_1799667714" CREATED="1708907138472" MODIFIED="1709728425488" NUMBERED="false" FORMAT="markdownPatternFormat">
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-<node TEXT="0.BMP位图循环显示" ID="ID_1109368198" CREATED="1708907145208" MODIFIED="1712018327913" NUMBERED="false" FORMAT="markdownPatternFormat">
-<icon BUILTIN="button_ok"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
-<text>+ 将图片放置在SD卡的bmp文件夹下
-+ bmp文件必须为24位16x16分辨率图像
-+ 向上增减显示间隔500毫秒
-+ 向下减少显示间隔500毫秒，最小间隔500毫秒</text></richcontent>
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-</node>
-<node TEXT="1.BMP位图固定显示" ID="ID_1948499533" CREATED="1712018094931" MODIFIED="1712065831461" FORMAT="markdownPatternFormat">
-<icon BUILTIN="button_ok"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
-<text>+ 将图片放置在SD卡的BMPStatic文件夹下
-+ bmp文件必须为24位16x16分辨率图像
-+ 向左切换前一幅图
-+ 向右切换下一幅图</text></richcontent>
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-</node>
-<node TEXT="2.动图显示" ID="ID_1504471942" CREATED="1708907170618" MODIFIED="1712065846674" NUMBERED="false" FORMAT="markdownPatternFormat">
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-</node>
-</node>
-<node TEXT="C.扩展功能" POSITION="bottom_or_right" ID="ID_1794420965" CREATED="1708908236466" MODIFIED="1709728425470" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="C.扩展功能" POSITION="top_or_left" ID="ID_1794420965" CREATED="1708908236466" MODIFIED="1709728425470" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 <node TEXT="0.记分牌" ID="ID_265575124" CREATED="1708908242100" MODIFIED="1709728425471" NUMBERED="false" FORMAT="markdownPatternFormat">
@@ -182,27 +202,6 @@
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
 <node TEXT="3.贪食蛇" ID="ID_730534882" CREATED="1708908286255" MODIFIED="1709728425477" NUMBERED="false" FORMAT="markdownPatternFormat">
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-</node>
-</node>
-<node TEXT="D.填充" POSITION="bottom_or_right" ID="ID_1326429327" CREATED="1708907030650" MODIFIED="1709728425478" NUMBERED="false" FORMAT="markdownPatternFormat">
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-<node TEXT="0.对角线填充" ID="ID_1086317210" CREATED="1708907066039" MODIFIED="1709808785427" NUMBERED="false" FORMAT="markdownPatternFormat">
-<icon BUILTIN="button_ok"/>
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-</node>
-<node TEXT="1.行填充" ID="ID_925049962" CREATED="1708907041107" MODIFIED="1709728425481" NUMBERED="false" FORMAT="markdownPatternFormat">
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-</node>
-<node TEXT="2.列填充" ID="ID_581850488" CREATED="1708907059835" MODIFIED="1709728425482" NUMBERED="false" FORMAT="markdownPatternFormat">
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-</node>
-<node TEXT="3.蛇形填充" ID="ID_1789984015" CREATED="1708907075957" MODIFIED="1709728425482" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
