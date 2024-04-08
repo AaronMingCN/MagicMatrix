@@ -1,7 +1,7 @@
 /**
  * @file MMF_FillRainbow.hpp
  * @date 2024/02/26 16:59:45
- * @author Aaron Ming
+ * @author  
  * @version 1.0
  * @brief 彩虹填充
  * @details

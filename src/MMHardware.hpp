@@ -1,7 +1,7 @@
 /**
  * @file MMHardware.hpp
  * @date 2024/02/15 20:55:12
- * @author Aaron Ming
+ * @author  
  * @version 1.0
  * @brief 硬件访问
  * @details 将硬件统一管理

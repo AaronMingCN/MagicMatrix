@@ -1,7 +1,7 @@
 /**
  * @file MMDefine.hpp
  * @date 2024/02/13 10:35:10
- * @author Aaron Ming
+ * @author  
  * @version 1.0
  * @brief 系统相关定义
  * @details

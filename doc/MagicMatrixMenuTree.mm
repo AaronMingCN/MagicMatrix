@@ -4,7 +4,7 @@
 <font BOLD="true"/>
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <hook NAME="MapStyle" background="#f9f9f8" zoom="0.788">
-    <properties show_icon_for_attributes="true" fit_to_viewport="false" show_note_icons="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" associatedTemplateLocation="template:/light_nord_template.mm"/>
+    <properties fit_to_viewport="false" show_icon_for_attributes="true" show_note_icons="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" associatedTemplateLocation="template:/light_nord_template.mm"/>
 
 <map_styles>
 <stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24 pt">
@@ -81,6 +81,85 @@
 </hook>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+<node TEXT="A.基本显示" POSITION="bottom_or_right" ID="ID_1420311245" CREATED="1708906913766" MODIFIED="1709728425483" NUMBERED="false" FORMAT="markdownPatternFormat">
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+<node TEXT="0.时钟" ID="ID_537966244" CREATED="1708906929245" MODIFIED="1709728425484" NUMBERED="false" FORMAT="markdownPatternFormat">
+<icon BUILTIN="button_ok"/>
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+</node>
+<node TEXT="1.日期" ID="ID_1756253142" CREATED="1708906934777" MODIFIED="1709728425485" NUMBERED="false" FORMAT="markdownPatternFormat">
+<icon BUILTIN="button_ok"/>
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+</node>
+<node TEXT="2.环境温湿度" ID="ID_1525847969" CREATED="1708906937496" MODIFIED="1709728425487" NUMBERED="false" FORMAT="markdownPatternFormat">
+<icon BUILTIN="button_ok"/>
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+</node>
+<node TEXT="3.倒计时" ID="ID_1957994263" CREATED="1708955538247" MODIFIED="1709808743219" FORMAT="markdownPatternFormat">
+<icon BUILTIN="button_ok"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
+<text>+ 向上+5分钟
++ 向左+1分钟
++ 向右-1分钟
++ 向下-5分钟
++ 按set键开始计时
++ 切换到其他功能时会暂停计时，时间不会清零
++ 暂停后从其他功能切换回来按set键开始继续计时
++ 将剩余分钟一直减少到0后会将剩余秒数清零</text></richcontent>
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+</node>
+<node TEXT="4.显示时间日期" ID="ID_1936529504" CREATED="1712547887560" MODIFIED="1712547916236">
+<icon BUILTIN="button_ok"/>
+</node>
+<node TEXT="5.显示时间温湿度" ID="ID_906135966" CREATED="1712547900651" MODIFIED="1712547918675">
+<icon BUILTIN="button_ok"/>
+</node>
+<node TEXT="9.矩阵屏幕测试" ID="ID_303186403" CREATED="1712549547173" MODIFIED="1712549663455">
+<icon BUILTIN="button_ok"/>
+<richcontent TYPE="DETAILS">
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      测试矩阵屏幕，循环显示Red、Green、Bule三种颜色
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+</node>
+<node TEXT="B.图像显示" POSITION="bottom_or_right" ID="ID_1799667714" CREATED="1708907138472" MODIFIED="1709728425488" NUMBERED="false" FORMAT="markdownPatternFormat">
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+<node TEXT="0.BMP位图循环显示" ID="ID_1109368198" CREATED="1708907145208" MODIFIED="1712018327913" NUMBERED="false" FORMAT="markdownPatternFormat">
+<icon BUILTIN="button_ok"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
+<text>+ 将图片放置在SD卡的bmp文件夹下
++ bmp文件必须为24位16x16分辨率图像
++ 向上增减显示间隔500毫秒
++ 向下减少显示间隔500毫秒，最小间隔500毫秒</text></richcontent>
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+</node>
+<node TEXT="1.BMP位图固定显示" ID="ID_1948499533" CREATED="1712018094931" MODIFIED="1712065831461" FORMAT="markdownPatternFormat">
+<icon BUILTIN="button_ok"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
+<text>+ 将图片放置在SD卡的BMPStatic文件夹下
++ bmp文件必须为24位16x16分辨率图像
++ 向左切换前一幅图
++ 向右切换下一幅图</text></richcontent>
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+</node>
+<node TEXT="2.动图显示" ID="ID_1504471942" CREATED="1708907170618" MODIFIED="1712065846674" NUMBERED="false" FORMAT="markdownPatternFormat">
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+</node>
+</node>
 <node TEXT="C.扩展功能" POSITION="bottom_or_right" ID="ID_1794420965" CREATED="1708908236466" MODIFIED="1709728425470" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
@@ -124,64 +203,6 @@
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
 <node TEXT="3.蛇形填充" ID="ID_1789984015" CREATED="1708907075957" MODIFIED="1709728425482" NUMBERED="false" FORMAT="markdownPatternFormat">
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-</node>
-</node>
-<node TEXT="A.基本显示" POSITION="top_or_left" ID="ID_1420311245" CREATED="1708906913766" MODIFIED="1709728425483" NUMBERED="false" FORMAT="markdownPatternFormat">
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-<node TEXT="0.时钟" ID="ID_537966244" CREATED="1708906929245" MODIFIED="1709728425484" NUMBERED="false" FORMAT="markdownPatternFormat">
-<icon BUILTIN="button_ok"/>
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-</node>
-<node TEXT="1.日期" ID="ID_1756253142" CREATED="1708906934777" MODIFIED="1709728425485" NUMBERED="false" FORMAT="markdownPatternFormat">
-<icon BUILTIN="button_ok"/>
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-</node>
-<node TEXT="2.环境温湿度" ID="ID_1525847969" CREATED="1708906937496" MODIFIED="1709728425487" NUMBERED="false" FORMAT="markdownPatternFormat">
-<icon BUILTIN="button_ok"/>
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-</node>
-<node TEXT="3.倒计时" ID="ID_1957994263" CREATED="1708955538247" MODIFIED="1709808743219" FORMAT="markdownPatternFormat">
-<icon BUILTIN="button_ok"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
-<text>+ 向上+5分钟
-+ 向左+1分钟
-+ 向右-1分钟
-+ 向下-5分钟
-+ 按set键开始计时
-+ 切换到其他功能时会暂停计时，时间不会清零
-+ 暂停后从其他功能切换回来按set键开始继续计时
-+ 将剩余分钟一直减少到0后会将剩余秒数清零</text></richcontent>
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-</node>
-</node>
-<node TEXT="B.图像显示" POSITION="top_or_left" ID="ID_1799667714" CREATED="1708907138472" MODIFIED="1709728425488" NUMBERED="false" FORMAT="markdownPatternFormat">
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-<node TEXT="0.BMP位图循环显示" ID="ID_1109368198" CREATED="1708907145208" MODIFIED="1712018327913" NUMBERED="false" FORMAT="markdownPatternFormat">
-<icon BUILTIN="button_ok"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
-<text>+ 将图片放置在SD卡的bmp文件夹下
-+ bmp文件必须为24位16x16分辨率图像
-+ 向上增减显示间隔500毫秒
-+ 向下减少显示间隔500毫秒，最小间隔500毫秒</text></richcontent>
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-</node>
-<node TEXT="1.BMP位图固定显示" ID="ID_1948499533" CREATED="1712018094931" MODIFIED="1712065831461" FORMAT="markdownPatternFormat">
-<icon BUILTIN="button_ok"/>
-<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
-<text>+ 将图片放置在SD卡的BMPStatic文件夹下
-+ bmp文件必须为24位16x16分辨率图像
-+ 向左切换前一幅图
-+ 向右切换下一幅图</text></richcontent>
-<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
-</node>
-<node TEXT="2.动图显示" ID="ID_1504471942" CREATED="1708907170618" MODIFIED="1712065846674" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>

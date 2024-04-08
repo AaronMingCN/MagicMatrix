@@ -1,7 +1,7 @@
 /**
  * @file MMCharDefine.hpp
  * @date 2024/03/27 19:56:53
- * @author Aaron Ming
+ * @author  
  * @version 1.0
  * @brief 字符点阵定义
  * @details 采用5x3的矩阵来显示字符

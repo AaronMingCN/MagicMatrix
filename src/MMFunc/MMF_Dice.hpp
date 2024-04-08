@@ -1,7 +1,7 @@
 /**
  * @file MMF_Dice.hpp
  * @date 2024/03/05 14:30:13
- * @author Aaron Ming
+ * @author  
  * @version 1.0
  * @brief 投骰子
  * @details 通过按键实现同时投1~4个骰子的功能

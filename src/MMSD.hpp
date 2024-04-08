@@ -1,7 +1,7 @@
 /**
  * @file MMSD.hpp
  * @date 2024/02/13 10:34:14
- * @author Aaron Ming
+ * @author  
  * @version 1.0
  * @brief SD卡访问相关的封装
  */

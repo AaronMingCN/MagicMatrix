@@ -1,7 +1,7 @@
 /**
  * @file MMFunc.hpp
  * @date 2024/02/14 22:52:50
- * @author Aaron Ming 
+ * @author   
  * @version 1.0
  * @brief 功能块的基础类
  * @details 所有功能块类需要从此类派生由功能池统一调用
@@ -67,8 +67,9 @@ public:
         delay(ms);
         return Inquire(IRRCode);
     };
-    // 返回初始位置
-    // 注意这里只是将下一个菜单项设置为返回，需要功能自行退出
+    
+    /// @brief 返回初始位置
+    /// @note 注意这里只是将下一个菜单项设置为返回，需要功能自行退出
     virtual void GoHome()
     {
     }

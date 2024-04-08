@@ -1,7 +1,7 @@
 /**
  * @file MMCanvas.hpp
  * @date 2024/03/27 06:17:26
- * @author Aaron Ming
+ * @author  
  * @version 1.0
  * @brief 画布接口
  * @details 实现画布接口用于在不同的设备绘图，内存或矩阵屏

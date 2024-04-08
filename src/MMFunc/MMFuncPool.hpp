@@ -1,7 +1,7 @@
 /**
  * @file MMFuncPool.hpp
  * @date 2024/02/14 22:50:10
- * @author Aaron Ming
+ * @author  
  * @version 1.0
  * @brief 功能池
  * @details 用于集中管理和调用功能块

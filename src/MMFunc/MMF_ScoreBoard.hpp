@@ -1,7 +1,7 @@
 /**
  * @file MMF_ScoreBoard.hpp
  * @date 2024/02/29 22:45:38
- * @author Aaron Ming 
+ * @author   
  * @version 1.0
  * @brief 记分牌
  * @details 

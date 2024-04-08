@@ -1,7 +1,7 @@
 /**
  * @file MMCommand.hpp
  * @date 2024/03/14 23:25:45
- * @author Aaron Ming
+ * @author  
  * @version 1.0
  * @brief 命令执行类
  * @details 用于执行通过串口或蓝牙传入的命令

@@ -1,7 +1,7 @@
 /**
  * @file MMScr.hpp
  * @date 2024/02/13 10:33:34
- * @author Aaron Ming
+ * @author  
  * @version 1.0
  * @brief 矩阵屏幕功能相关封装
  * @details 将矩阵屏幕相关的功能进行封装

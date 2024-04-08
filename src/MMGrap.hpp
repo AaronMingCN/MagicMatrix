@@ -1,7 +1,7 @@
 /**
  * @file MMGrap.hpp
  * @date 2024/02/13 10:36:51
- * @author Aaron Ming
+ * @author  
  * @version 1.0
  * @brief 图像相关的定义
  * @details

@@ -2,7 +2,7 @@
  * @file MagicMatrix.cpp
  * @date 2024/02/13 10:32:36
  * @version 1.0
- * @author Aaron Ming
+ * @author  
  * @brief 主程序
  * @details MagicMatrix魔法矩阵,系统入口程序
  */
@@ -21,7 +21,7 @@
 // // 事件循环
 
 /// @brief 事件循环
-/// @note 此函数用于响应红外设备等事件一级保存设置等事件，在主循环外的线程中执行
+/// @note 此函数用于响应红外设备等事件以及保存设置等事件，在主循环外的线程中执行
 /// @attention 多线程执行，需要考虑线程同步问题
 void EventLoop()
 {

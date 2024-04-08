@@ -1,7 +1,7 @@
 /**
  * @file MMMain.hpp
  * @date 2024/02/20 16:10:24
- * @author Aaron Ming
+ * @author  
  * @version 1.0
  * @brief 主程序类
  * @details

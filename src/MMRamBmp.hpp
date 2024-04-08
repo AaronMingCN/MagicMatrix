@@ -1,7 +1,7 @@
 /**
  * @file MMRamBmp.hpp
  * @date 2024/02/13 10:30:27
- * @author Aaron Ming
+ * @author  
  * @version 1.0
  * @brief 内存bmp位图,将位图文件保存在ram中
  */

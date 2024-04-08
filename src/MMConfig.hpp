@@ -1,7 +1,7 @@
 /**
  * @file MMConfig.hpp
  * @date 2024/03/08 13:10:15
- * @author Aaron Ming
+ * @author  
  * @version 1.0
  * @brief 设置类
  * @details 统一管理设置项，包括保存和载入
