@@ -1,6 +1,6 @@
 <map version="freeplane 1.11.5">
 <!--To view this file, download free mind mapping software Freeplane from https://www.freeplane.org -->
-<node TEXT="MagicMatrix菜单树" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1709728425469" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="MagicMatrix菜单树" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1712661351486" NUMBERED="false" FORMAT="markdownPatternFormat">
 <font BOLD="true"/>
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <hook NAME="MapStyle" background="#f9f9f8" zoom="0.788">
@@ -81,10 +81,10 @@
 </hook>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-<node TEXT="B.图像显示" POSITION="bottom_or_right" ID="ID_1799667714" CREATED="1708907138472" MODIFIED="1709728425488" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="B.图像显示" POSITION="bottom_or_right" ID="ID_1799667714" CREATED="1708907138472" MODIFIED="1712661351487" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-<node TEXT="0.BMP位图循环显示" ID="ID_1109368198" CREATED="1708907145208" MODIFIED="1712018327913" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="0.BMP位图循环显示" ID="ID_1109368198" CREATED="1708907145208" MODIFIED="1712661351489" NUMBERED="false" FORMAT="markdownPatternFormat">
 <icon BUILTIN="button_ok"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
 <text>+ 将图片放置在SD卡的bmp文件夹下
@@ -93,7 +93,7 @@
 + 向下减少显示间隔500毫秒，最小间隔500毫秒</text></richcontent>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 </node>
-<node TEXT="1.BMP位图固定显示" ID="ID_1948499533" CREATED="1712018094931" MODIFIED="1712065831461" FORMAT="markdownPatternFormat">
+<node TEXT="1.BMP位图固定显示" ID="ID_1948499533" CREATED="1712018094931" MODIFIED="1712661351490" FORMAT="markdownPatternFormat">
 <icon BUILTIN="button_ok"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
 <text>+ 将图片放置在SD卡的BMPStatic文件夹下
@@ -102,51 +102,51 @@
 + 向右切换下一幅图</text></richcontent>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 </node>
-<node TEXT="2.动图显示" ID="ID_1504471942" CREATED="1708907170618" MODIFIED="1712065846674" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="2.动图显示" ID="ID_1504471942" CREATED="1708907170618" MODIFIED="1712661351492" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
 </node>
-<node TEXT="D.填充" POSITION="bottom_or_right" ID="ID_1326429327" CREATED="1708907030650" MODIFIED="1709728425478" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="D.填充" POSITION="bottom_or_right" ID="ID_1326429327" CREATED="1708907030650" MODIFIED="1712661351494" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-<node TEXT="0.对角线填充" ID="ID_1086317210" CREATED="1708907066039" MODIFIED="1709808785427" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="0.对角线填充" ID="ID_1086317210" CREATED="1708907066039" MODIFIED="1712661351495" NUMBERED="false" FORMAT="markdownPatternFormat">
 <icon BUILTIN="button_ok"/>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
-<node TEXT="1.行填充" ID="ID_925049962" CREATED="1708907041107" MODIFIED="1709728425481" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="1.行填充" ID="ID_925049962" CREATED="1708907041107" MODIFIED="1712661351497" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
-<node TEXT="2.列填充" ID="ID_581850488" CREATED="1708907059835" MODIFIED="1709728425482" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="2.列填充" ID="ID_581850488" CREATED="1708907059835" MODIFIED="1712661351499" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
-<node TEXT="3.蛇形填充" ID="ID_1789984015" CREATED="1708907075957" MODIFIED="1709728425482" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="3.蛇形填充" ID="ID_1789984015" CREATED="1708907075957" MODIFIED="1712661351500" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
 </node>
-<node TEXT="A.基本显示" POSITION="top_or_left" ID="ID_1420311245" CREATED="1708906913766" MODIFIED="1709728425483" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="A.基本显示" POSITION="top_or_left" ID="ID_1420311245" CREATED="1708906913766" MODIFIED="1712661351501" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-<node TEXT="0.时钟" ID="ID_537966244" CREATED="1708906929245" MODIFIED="1709728425484" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="0.时钟" ID="ID_537966244" CREATED="1708906929245" MODIFIED="1712661351502" NUMBERED="false" FORMAT="markdownPatternFormat">
 <icon BUILTIN="button_ok"/>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
-<node TEXT="1.日期" ID="ID_1756253142" CREATED="1708906934777" MODIFIED="1709728425485" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="1.日期" ID="ID_1756253142" CREATED="1708906934777" MODIFIED="1712661351505" NUMBERED="false" FORMAT="markdownPatternFormat">
 <icon BUILTIN="button_ok"/>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
-<node TEXT="2.环境温湿度" ID="ID_1525847969" CREATED="1708906937496" MODIFIED="1709728425487" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="2.环境温湿度" ID="ID_1525847969" CREATED="1708906937496" MODIFIED="1712661351510" NUMBERED="false" FORMAT="markdownPatternFormat">
 <icon BUILTIN="button_ok"/>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
-<node TEXT="3.倒计时" ID="ID_1957994263" CREATED="1708955538247" MODIFIED="1709808743219" FORMAT="markdownPatternFormat">
+<node TEXT="3.倒计时" ID="ID_1957994263" CREATED="1708955538247" MODIFIED="1712661351512" FORMAT="markdownPatternFormat">
 <icon BUILTIN="button_ok"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
 <text>+ 向上+5分钟
@@ -159,15 +159,27 @@
 + 将剩余分钟一直减少到0后会将剩余秒数清零</text></richcontent>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 </node>
-<node TEXT="4.显示时间日期" ID="ID_1936529504" CREATED="1712547887560" MODIFIED="1712547916236">
+<node TEXT="4.显示时间日期" ID="ID_1936529504" CREATED="1712547887560" MODIFIED="1712661360398" FORMAT="markdownPatternFormat">
 <icon BUILTIN="button_ok"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 </node>
-<node TEXT="5.显示时间温湿度" ID="ID_906135966" CREATED="1712547900651" MODIFIED="1712547918675">
+<node TEXT="5.显示时间温湿度" ID="ID_906135966" CREATED="1712547900651" MODIFIED="1712661360400" FORMAT="markdownPatternFormat">
 <icon BUILTIN="button_ok"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 </node>
-<node TEXT="9.矩阵屏幕测试" ID="ID_303186403" CREATED="1712549547173" MODIFIED="1712549663455">
+<node TEXT="6.计时器" ID="ID_47360924" CREATED="1712650125288" MODIFIED="1712661820462" FORMAT="markdownPatternFormat">
 <icon BUILTIN="button_ok"/>
-<richcontent TYPE="DETAILS">
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
+<text>+ 向右开始计时
++ 向左停止计时
++ 向下在停止状态下将计时清零</text></richcontent>
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
+</node>
+<node TEXT="9.矩阵屏幕测试" ID="ID_303186403" CREATED="1712549547173" MODIFIED="1712661360401" FORMAT="markdownPatternFormat">
+<icon BUILTIN="button_ok"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="xml/markdown">
 <html>
   <head>
     
@@ -178,17 +190,18 @@
     </p>
   </body>
 </html></richcontent>
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 </node>
 </node>
-<node TEXT="C.扩展功能" POSITION="top_or_left" ID="ID_1794420965" CREATED="1708908236466" MODIFIED="1709728425470" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="C.扩展功能" POSITION="top_or_left" ID="ID_1794420965" CREATED="1708908236466" MODIFIED="1712661351526" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
-<node TEXT="0.记分牌" ID="ID_265575124" CREATED="1708908242100" MODIFIED="1709728425471" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="0.记分牌" ID="ID_265575124" CREATED="1708908242100" MODIFIED="1712661351527" NUMBERED="false" FORMAT="markdownPatternFormat">
 <icon BUILTIN="button_ok"/>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
-<node TEXT="1.随机数抽取" ID="ID_1703852976" CREATED="1708908251296" MODIFIED="1709728425472" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="1.随机数抽取" ID="ID_1703852976" CREATED="1708908251296" MODIFIED="1712661351529" NUMBERED="false" FORMAT="markdownPatternFormat">
 <icon BUILTIN="button_ok"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown">
 <text>+ 按向上1个骰子
@@ -197,11 +210,11 @@
 + 按向右4个骰子</text></richcontent>
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 </node>
-<node TEXT="2.五子棋" ID="ID_833928992" CREATED="1708908260606" MODIFIED="1709728425476" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="2.五子棋" ID="ID_833928992" CREATED="1708908260606" MODIFIED="1712661351530" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
-<node TEXT="3.贪食蛇" ID="ID_730534882" CREATED="1708908286255" MODIFIED="1709728425477" NUMBERED="false" FORMAT="markdownPatternFormat">
+<node TEXT="3.贪食蛇" ID="ID_730534882" CREATED="1708908286255" MODIFIED="1712661351531" NUMBERED="false" FORMAT="markdownPatternFormat">
 <richcontent TYPE="NOTE" CONTENT-TYPE="plain/markdown"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/markdown"/>
 </node>
