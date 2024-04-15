@@ -140,6 +140,14 @@ public:
         digitalWrite(PIN_BUZZER, val);
     }
 
+    /// @brief 响铃等待
+    /// @param ms 等待的毫秒数，默认100毫秒
+    void BeepDelay(unsigned long ms = 100) {
+        this->Beep(true);
+        delay(ms);
+        this->Beep(false);
+    }
+
     /// @brief 读取人体红外探测器状态
     bool GetPIRR()
     {

@@ -47,8 +47,8 @@ void setup()
 void loop()
 {
     mmgrap.DispLOGO(); // 显示LOGO    
+    
     // 执行主循环
-
     mmmain.MainLoop();
 
     // // mmdebug.TestDispMMChar();

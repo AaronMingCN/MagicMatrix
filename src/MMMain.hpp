@@ -222,6 +222,7 @@ public:
     /// @brief 主循环
     void MainLoop()
     {
+        mmhardware.BeepDelay(20);
         for (;;) {
             // 切换菜单
             mmmenu.Switch(this);
@@ -261,7 +262,7 @@ public:
     bool Init()
     {
         pinMode(PIN_BUZZER, OUTPUT); // 设置蜂鸣器引脚
-        mmhardware.Beep(true);
+        mmhardware.BeepDelay(20);
         uint16_t r = 0;
         UART_USB.begin(115200); // 打开串口通信
         // UART_USB.setTimeout(10); // 设置串口读取超时
@@ -273,7 +274,7 @@ public:
         this->LoadCfg();
         // 调用功能池初始化
         MMFPSetup();
-        mmhardware.Beep(false);
+
         return r;
     }
 
