@@ -32,11 +32,7 @@ public:
     /// @brief 将设置保存
     bool Save()
     {
-        bool r = false; // 定义结果
-        if (mmsd.SaveJsonToFile(Config, FILENAME_CFG)) {
-            NeedSave = false; // 如果保存成功则将需要保存设置为false
-        }
-        return r;
+        return mmsd.SaveJsonToFile(Config, FILENAME_CFG);
     }
 
     /// @brief 载入配置
@@ -50,7 +46,7 @@ public:
     void SaveIfNeeded()
     {
         if (this->NeedSave)
-            this->Save();
+            this->NeedSave = this->Save();
     }
 
 } mmconfig;
